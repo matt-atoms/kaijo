@@ -2,6 +2,7 @@ import { article } from "./documents/article";
 import { articleCategory } from "./documents/article-category";
 import { contactFormSubmission } from "./documents/contact-form-submission";
 import { page } from "./documents/page";
+import { project } from "./documents/project";
 import { redirect } from "./documents/redirect";
 import { site } from "./documents/site";
 import { appColor } from "./fields/app-color";
@@ -17,6 +18,7 @@ export const schemaTypes = [
   site,
   redirect,
   page,
+  project,
   contactFormSubmission,
   article,
   articleCategory,

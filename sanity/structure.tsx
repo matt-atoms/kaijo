@@ -68,6 +68,18 @@ export function buildStructure(S: StructureBuilder) {
 
       S.divider(),
 
+      // Projects
+      S.listItem()
+        .title("Projects")
+        .icon(() => <>📷</>)
+        .child(
+          S.documentTypeList("project")
+            .title("Projects")
+            .defaultOrdering([{ field: "date", direction: "asc" }])
+        ),
+
+      S.divider(),
+
       // Articles
       S.listItem()
         .title("Articles")

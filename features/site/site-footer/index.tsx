@@ -1,6 +1,6 @@
 import { sanityFetch } from "~/features/sanity/client";
+import { SanityLink } from "~/features/sanity/link";
 import { SiteFooterQ } from "~/features/site/site-footer/query";
-import { SiteNavLink } from "~/features/site/site-nav-link";
 import { SANITY_SINGLETON_SITE_ID } from "~/sanity/constants";
 import type { SiteFooterQResult } from "~/sanity/types";
 
@@ -10,28 +10,22 @@ export async function SiteFooter() {
     options: { next: { tags: [SANITY_SINGLETON_SITE_ID] } },
   });
 
-  if (!siteFooter?.footer?.links) {
+  const links = [...(siteFooter?.footer?.links ?? []), ...(siteFooter?.footer?.legalLinks ?? [])];
+
+  if (links.length === 0) {
     return null;
   }
 
-  const { name, footer } = siteFooter;
-  const year = new Date().getFullYear();
-
   return (
-    <footer>
-      <div className="mx-auto flex max-w-1200 flex-col gap-16 px-16 py-48 lg:flex-row lg:items-center lg:justify-between lg:px-48">
-        <p className="text-body-10">
-          © {year} {name}
-        </p>
-        <nav>
-          <ul className="flex gap-24">
-            {[...(footer.links ?? []), ...(footer.legalLinks ?? [])].map((link, i) => (
-              <li key={link.key}>
-                <SiteNavLink link={link} animationDelay={i * 0.1} viewport={{ margin: "0px" }} />
-              </li>
-            ))}
-          </ul>
-        </nav>
+    <footer className="footer">
+      <div className="container">
+        <div className="footer_inner-wrapper">
+          {links.map((link) => (
+            <SanityLink key={link.key} link={link} className="footer_link w-inline-block">
+              <div className="footer_link-text">{link.text}</div>
+            </SanityLink>
+          ))}
+        </div>
       </div>
     </footer>
   );

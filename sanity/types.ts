@@ -308,6 +308,30 @@ export type MediaLottieDimensions = {
   height?: number;
 };
 
+export type PortfolioGridSection = {
+  _type: "portfolioGridSection";
+  note?: string;
+};
+
+export type AboutSection = {
+  _type: "aboutSection";
+  title?: string;
+  text?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  secondText?: string;
+};
+
+export type ProjectHeroSection = {
+  _type: "projectHeroSection";
+  note?: string;
+};
+
 export type ContactFormSection = {
   _type: "contactFormSection";
   headline?: string;
@@ -590,6 +614,24 @@ export type Article = {
           _type: "contactFormSectionField";
           _key: string;
         }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: ProjectHeroSection;
+          _type: "projectHeroSectionField";
+          _key: string;
+        }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: AboutSection;
+          _type: "aboutSectionField";
+          _key: string;
+        }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: PortfolioGridSection;
+          _type: "portfolioGridSectionField";
+          _key: string;
+        }
     >;
   };
   seoMetadata?: {
@@ -644,6 +686,153 @@ export type ContactFormSubmission = {
   lastName?: string;
   email?: string;
   message?: string;
+};
+
+export type Project = {
+  _id: string;
+  _type: "project";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  category?: string;
+  date?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  gridStyle?: "normal" | "wide";
+  gridOrder?: number;
+  thumbnail?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image1?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image2?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image3?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image4?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image5?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image6?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image7?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image8?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image9?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image10?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image11?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image12?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image13?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image14?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image15?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image16?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type Redirect = {
@@ -909,6 +1098,24 @@ export type Page = {
           sectionSettings?: SectionSettings;
           sectionContent?: ContactFormSection;
           _type: "contactFormSectionField";
+          _key: string;
+        }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: ProjectHeroSection;
+          _type: "projectHeroSectionField";
+          _key: string;
+        }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: AboutSection;
+          _type: "aboutSectionField";
+          _key: string;
+        }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: PortfolioGridSection;
+          _type: "portfolioGridSectionField";
           _key: string;
         }
     >;
@@ -1192,6 +1399,9 @@ export type AllSanitySchemaTypes =
   | MediaRiveDimensions
   | MediaLottieFile
   | MediaLottieDimensions
+  | PortfolioGridSection
+  | AboutSection
+  | ProjectHeroSection
   | ContactFormSection
   | TextSection
   | CtaSection
@@ -1208,6 +1418,7 @@ export type AllSanitySchemaTypes =
   | SanityImageHotspot
   | Slug
   | ContactFormSubmission
+  | Project
   | Redirect
   | Site
   | Page
@@ -1300,6 +1511,212 @@ export type ArticlePageUrisQResult = Array<{
   uri: string | "/articles";
 }>;
 
+// Source: app/(web)/project/[slug]/page.tsx
+// Variable: ProjectQ
+// Query: *[_type == "project" && slug.current == $slug][0]{    _id,    title,    description,    "slug": slug.current,    image1{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image2{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image3{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image4{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image5{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image6{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image7{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image8{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image9{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image10{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image11{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image12{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image13{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image14{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image15{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image16{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}  }
+export type ProjectQResult = {
+  _id: string;
+  title: string | undefined;
+  description: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | undefined;
+  slug: string | undefined;
+  image1: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image2: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image3: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image4: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image5: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image6: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image7: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image8: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image9: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image10: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image11: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image12: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image13: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image14: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image15: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  image16: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+} | undefined;
+
+// Source: app/(web)/project/[slug]/page.tsx
+// Variable: ProjectSlugsQ
+// Query: *[_type == "project" && defined(slug.current)]{"slug": slug.current}
+export type ProjectSlugsQResult = Array<{
+  slug: string | undefined;
+}>;
+
 // Source: app/sitemap.ts
 // Variable: SitemapQ
 // Query: *[defined(uri.current) && seoMetadata.noIndex != true && passwordProtected != true]{    "uri": uri.current,    "updatedAt": _updatedAt,    "freq": select(      _id == "homepage" => "daily",      true => "weekly",    ),    "priority": select(      _id == "homepage" => 1,      true => 0.8,    ),  }
@@ -1360,6 +1777,14 @@ export type AgentMarkdownContentQueryResult =
       author: string | undefined;
       categories: Array<string | undefined> | undefined;
       sections: Array<
+        | {
+            _type: "aboutSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
         | {
             _type: "contactFormSectionField";
             text: Array<{
@@ -1479,6 +1904,22 @@ export type AgentMarkdownContentQueryResult =
             cta: null;
             headline: null;
             caption: string | undefined;
+          }
+        | {
+            _type: "portfolioGridSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
+            _type: "projectHeroSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
           }
         | {
             _type: "textSectionField";
@@ -1554,6 +1995,14 @@ export type AgentMarkdownContentQueryResult =
       categories: null;
       sections: Array<
         | {
+            _type: "aboutSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
             _type: "contactFormSectionField";
             text: Array<{
               _type: "block";
@@ -1672,6 +2121,22 @@ export type AgentMarkdownContentQueryResult =
             cta: null;
             headline: null;
             caption: string | undefined;
+          }
+        | {
+            _type: "portfolioGridSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
+            _type: "projectHeroSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
           }
         | {
             _type: "textSectionField";
@@ -1753,6 +2218,10 @@ export type AgentMarkdownServeQueryResult = {
 export type PageSectionsQResult = Array<
   | {
       _key: string;
+      _type: "aboutSectionField";
+    }
+  | {
+      _key: string;
       _type: "contactFormSectionField";
     }
   | {
@@ -1765,9 +2234,39 @@ export type PageSectionsQResult = Array<
     }
   | {
       _key: string;
+      _type: "portfolioGridSectionField";
+    }
+  | {
+      _key: string;
+      _type: "projectHeroSectionField";
+    }
+  | {
+      _key: string;
       _type: "textSectionField";
     }
 > | undefined;
+
+// Source: features/page-builder/sections/about-section.tsx
+// Variable: AboutSectionQ
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "aboutSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      title,      text,      secondText,      image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}    }}
+export type AboutSectionQResult = {
+  content: {
+    title: string | undefined;
+    text: string | undefined;
+    secondText: string | undefined;
+    image: {
+      _id: string | undefined;
+      _rev: string | undefined;
+      altText: string | undefined;
+      description: string | undefined;
+      title: string | undefined;
+      lqip: string | undefined;
+      dimensions: SanityImageDimensions | undefined;
+      crop: SanityImageCrop | undefined;
+      hotspot: SanityImageHotspot | undefined;
+    } | undefined;
+  } | undefined;
+} | undefined;
 
 // Source: features/page-builder/sections/contact-form-section/actions.ts
 // Variable: SiteNotificationEmailsQ
@@ -2139,6 +2638,52 @@ export type MediaSectionQResult = {
     hash: string | undefined;
   } | undefined;
 } | undefined;
+
+// Source: features/page-builder/sections/portfolio-grid-section.tsx
+// Variable: PortfolioGridQ
+// Query: *[_type == "project" && defined(slug.current)] | order(gridOrder asc){  _id,  title,  category,  date,  "slug": slug.current,  "gridStyle": coalesce(gridStyle, "normal"),  thumbnail{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}}
+export type PortfolioGridQResult = Array<{
+  _id: string;
+  title: string | undefined;
+  category: string | undefined;
+  date: string | undefined;
+  slug: string | undefined;
+  gridStyle: "normal" | "wide";
+  thumbnail: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+}>;
+
+// Source: features/page-builder/sections/project-hero-section.tsx
+// Variable: ProjectHeroQ
+// Query: *[_type == "project" && defined(slug.current)] | order(date asc){  _id,  title,  category,  date,  "slug": slug.current,  "gridStyle": coalesce(gridStyle, "normal"),  thumbnail{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}}
+export type ProjectHeroQResult = Array<{
+  _id: string;
+  title: string | undefined;
+  category: string | undefined;
+  date: string | undefined;
+  slug: string | undefined;
+  gridStyle: "normal" | "wide";
+  thumbnail: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+}>;
 
 // Source: features/page-builder/sections/text-section.tsx
 // Variable: TextSectionQ

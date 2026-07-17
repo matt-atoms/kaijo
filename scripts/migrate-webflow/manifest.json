@@ -1,0 +1,559 @@
+{
+  "projects": [
+    {
+      "slug": "tno",
+      "title": "THE NEW ORIGINALS",
+      "category": "Assignment",
+      "date": "2023-07-01",
+      "gridOrder": 5,
+      "gridStyle": "wide",
+      "thumbnail": "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab3f91d1ee424887075d77_Kaijo_portfolio_tno-17.avif",
+      "description": [
+        {
+          "_type": "block",
+          "_key": "block0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "span0x0",
+              "text": "CLIENT:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x1",
+              "text": " The New Originals\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x2",
+              "text": "CLIENT INTEL:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x3",
+              "text": " Amsterdam-based brand creating performance-focused streetwear that champions creativity and subculture through design\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x4",
+              "text": "SUBJECT:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x5",
+              "text": " Scout Camp Collection\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x6",
+              "text": "BRIEF:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x7",
+              "text": " Capture the new Scout Camp items in an outdoor setting\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x8",
+              "text": "APPROACH:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x9",
+              "text": " We leaned into playful composition—using scale, subframing, and environmental cues to evoke the carefree spirit of classic American camp movies, while simultaneously shooting it in a highly stylized way. The imagery taps into nostalgia but subverts it, placing the pieces at the intersection of humor and style with self awareness. Nature becomes both backdrop and character, amplifying the spirit of exploration that runs through the collection.",
+              "marks": []
+            }
+          ]
+        }
+      ],
+      "images": [
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab3fbb3ff9381c53d05f6b_Kaijo_portfolio_tno-02.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab3fd068d435978f235d3f_Kaijo_portfolio_tno-06.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab3fd83bb98e4aa6834ec7_Kaijo_portfolio_tno-08.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab3fe0bbf3b30091656188_Kaijo_portfolio_tno-14.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab3feb67f10e24e869ead2_Kaijo_portfolio_tno-19.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab4029121a347e91cb9206_Kaijo_portfolio_tno-18.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab3ffd777a506d082686b2_Kaijo_portfolio_tno-24.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab4004d290fad16c3b351b_Kaijo_portfolio_tno-10.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab401ca68333503aa6f94f_Kaijo_portfolio_tno-22.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab4044e870b0fa2082a145_Kaijo_portfolio_tno-12.avif",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "slug": "etienne-cootjans",
+      "title": "ETIENNE COOTJANS",
+      "category": "Assignment",
+      "date": "2024-07-01",
+      "gridOrder": 3,
+      "gridStyle": "normal",
+      "thumbnail": "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab416166801d739efee67a_Kaijo_portfolio_ec-02.avif",
+      "description": [
+        {
+          "_type": "block",
+          "_key": "block0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "span0x0",
+              "text": "CLIENT:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x1",
+              "text": " Etienne Cootjans\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x2",
+              "text": "CLIENT INTEL:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x3",
+              "text": " Multidisciplinary Designer; Co-founder of Plant Based Gallery\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x4",
+              "text": "SUBJECT:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x5",
+              "text": " Three-Piece Suit\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x6",
+              "text": "APPROACH:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x7",
+              "text": " In collaboration with Etienne Cootjans, we sought to highlight the fusion of military apparel influences and the intricate tailoring of his three-piece suit design. Drawing inspiration from the historical interplay between military uniforms and civilian fashion, we conceptualized a visual narrative where the suit's complex patterns and bold materials serve as a form of camouflage. This approach underscores the idea that even the most elaborate designs can seamlessly blend into their surroundings, reflecting the duality of visibility and subtlety. The resulting imagery captures the essence of formal wear's evolution, paying homage to its martial roots while celebrating contemporary artistry",
+              "marks": []
+            }
+          ]
+        }
+      ],
+      "images": [
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab4171135d51a05a61352a_Kaijo_portfolio_ec-04.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab417505d0b244b886afee_Kaijo_portfolio_ec-08.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab417b135d51a05a613c13_Kaijo_portfolio_ec-10.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab417fc8b464fb96a1705c_Kaijo_portfolio_ec-11.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab41873ff9381c53d34c9d_Kaijo_portfolio_ec-01.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab4198de74acba83e0ece7_Kaijo_portfolio_ec-03.avif",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "slug": "glass-steel",
+      "title": "GLASS / STEEL",
+      "category": "Concept Work",
+      "date": "2024-08-01",
+      "gridOrder": 6,
+      "gridStyle": "normal",
+      "thumbnail": "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67e3cda8ef49811487561bdd_P1023051.jpg",
+      "description": [
+        {
+          "_type": "block",
+          "_key": "block0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "span0x0",
+              "text": "CLIENT:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x1",
+              "text": " Joep Hijwegen\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x2",
+              "text": "CLIENT INTEL:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x3",
+              "text": " Photographer and co-founder of Kaijo Studio, known for crafting layered, cinematic imagery that sits between observation and orchestration\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x4",
+              "text": "SUBJECT:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x5",
+              "text": " <em>Glass & Steel</em> — portrait series\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x6",
+              "text": "APPROACH:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x7",
+              "text": " In <em>Glass & Steel</em>, Joep turns his lens toward the face—not as subject, but as surface. Eyes refract behind curved glass; lips soften into chrome reflections. Flesh becomes unfamiliar, reframed through the language of metal, mirror, and distortion. The series drifts between warmth and cold, intimacy and detachment—offering a vision of beauty that feels both ancient and entirely new. Expressions are fractured, refracted, veiled by the textures of industry and ornament, as if the human form were remembering or rehearsing a future version of itself.",
+              "marks": []
+            }
+          ]
+        }
+      ],
+      "images": [
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67e3d3645cd004709edd49c5_P1023079.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67e3d4b31adc28c746ea814b_P1023052.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67e3d38d40efb12d8e1bb3a7_P1023546.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67e3cf840d9e3630b611de39_L1510165.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67e3cf908d9f87bdbb30d07c_L1510236-2.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67e3cf9632b5378cf0d794b6_L1500900.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67e3cfa8535561c65544c744_L1510237.jpg",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "slug": "lobomar",
+      "title": "LOBOMAR-",
+      "category": "Assignment",
+      "date": "2024-10-01",
+      "gridOrder": 2,
+      "gridStyle": "wide",
+      "thumbnail": "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67a39109657b4c729ef63200_Lobomar_Caps_V4_21Oct2024_L1000379_76b481f4-445a-49bc-89a1-05bfb22eb61a.jpg.avif",
+      "description": [
+        {
+          "_type": "block",
+          "_key": "block0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "span0x0",
+              "text": "CLIENT:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x1",
+              "text": " LOBOMAR-\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x2",
+              "text": "CLIENT INTEL:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x3",
+              "text": " Founded by siblings Marcella and Marco Lobo in 2023, LOBOMAR- was born from a life lived between Köln, London, and Amsterdam. With Indian-Italian roots, the duo built a brand that questions rigid definitions of identity—celebrating the fluidity of personal expression and the cultural layering that shapes it.\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x4",
+              "text": "SUBJECT:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x5",
+              "text": " New collection of headwear\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x6",
+              "text": "BRIEF:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x7",
+              "text": " Capture the brand’s latest capsule of upcycled caps, made from reclaimed sarees sourced in Mumbai.\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x8",
+              "text": "APPROACH:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x9",
+              "text": " To spotlight the intricate patterns and tactile richness of the sarees, we used contrasting tones and defined shadows—amplifying the sculptural quality of the caps. The editorial narrative unfolds around a late-night dinner among friends, echoing LOBOMAR-’s emphasis on community, connection, and the warmth found in shared rituals.",
+              "marks": []
+            }
+          ]
+        }
+      ],
+      "images": [
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab39d811daa766d799a9a8_Kaijo_portfolio_lobomar-1.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab39eaf66d6cd9bad91265_Kaijo_portfolio_lobomar-2.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab3a46899594e2d80a5a89_Kaijo_portfolio_lobomar-3.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab3a4a90ff2b3f1a2d6e98_Kaijo_portfolio_lobomar-9.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab3a4fd888a5e543a5146b_Kaijo_portfolio_lobomar-5.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab3a571fa6bf0543adc106_Kaijo_portfolio_lobomar-4.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab3a805601c8cb78cc4882_Kaijo_portfolio_lobomar-10.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67e3d5116954ac80986b8cea_Kaijo_portfolio_lobomar-7.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67e3d546b973090cb6fbf2fe_L1000379.jpg",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "slug": "studio-archivio",
+      "title": "STUDIO ARCHIVIO",
+      "category": null,
+      "date": "2025-01-01",
+      "gridOrder": 1,
+      "gridStyle": "normal",
+      "thumbnail": "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825c993492341c1773ffe96_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1010675.jpg",
+      "description": [
+        {
+          "_type": "block",
+          "_key": "block0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "span0x0",
+              "text": "CLIENT:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x1",
+              "text": " Studio Archivio\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x2",
+              "text": "CLIENT INTEL:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x3",
+              "text": " Archivist and premium reseller of rare and iconic Stone Island pieces, dedicated to preserving and curating the brand’s material legacy\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x4",
+              "text": "SUBJECT:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x5",
+              "text": " Archival Stone Island collection, including standout pieces like the Jock 23\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x6",
+              "text": "BRIEF:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x7",
+              "text": " Create a visual journey through the brand’s history, with a focus on material innovation and transformation\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x8",
+              "text": "APPROACH:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x9",
+              "text": " In close collaboration with Studio Archivio, we crafted a study in fabric, memory, and motion—tracing the evolution of Stone Island through its most iconic materials. Using textures and elements that once inspired the original garments as visual anchors, we placed each piece in a dialogue with its roots. From glazed silk to experimental PVC, the materials shift with light, weather, and movement—captured through lenses that range from macro to landscape, from stillness to motion. The resulting imagery reveals the garments as living artefacts—technical, tactile, and steeped in story. For us, this was more than a shoot; it was an homage to one of the most visionary brands in menswear history.",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "block1",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "span1x0",
+              "text": "\n",
+              "marks": []
+            }
+          ]
+        }
+      ],
+      "images": [
+        null,
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825c9a47f1d850ae9bd51bc_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1010692.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825c9ab4c8724252846ce5e_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1010767.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825c9b42966eb1600170d60_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1010730.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825c9bc2966eb16001716de_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1010618.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825c9cd3b59f0273cf33f74_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1020017.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825c9d11ceb6ec5cbfb10c7_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1010990.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825c9ee7ac4c767411d1535_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1020317.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825c9f2bcb7dc2f6cacbc54_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1020327.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825c9fab0febca70cb10bfc_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1020363.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825ca00255b5973b20f87fb_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1020419.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825ca07602ca7b945aa2459_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1020447.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825ca0ba9db931d1549f06b_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1020451.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825ca0f48b10b3280a9dfb8_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1020495.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825ca12052059e06ba886b2_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1020508.jpg",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/6825ca17052795be8a1e3cc5_StudioArchivio_JoepHijwegen_Materials_Aging_May2025_L1020550.jpg"
+      ]
+    },
+    {
+      "slug": "street-work",
+      "title": "STREET",
+      "category": "Concept Work",
+      "date": "2025-02-01",
+      "gridOrder": 4,
+      "gridStyle": "wide",
+      "thumbnail": "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67b5fc651efec020a70e46e8_Kaijo_portfolio_ec-053.avif",
+      "description": [
+        {
+          "_type": "block",
+          "_key": "block0",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "span0x0",
+              "text": "INTEL:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x1",
+              "text": " Co-founder and creative lead of Kaijo Studio, Joep Hijwegen brings a background in street photography shaped by philosophy, atmosphere, and visual instinct.\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x2",
+              "text": "SUBJECT:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x3",
+              "text": " Ongoing personal series — Street Observations\n",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "span0x4",
+              "text": "APPROACH:",
+              "marks": ["strong"]
+            },
+            {
+              "_type": "span",
+              "_key": "span0x5",
+              "text": " This ongoing body of work captures unguarded moments in the city—fragments of life caught in passing. Joep’s lens lingers on fabric in motion, on silhouettes caught between light and shadow, on gestures that feel rehearsed only by repetition. There’s a quiet elegance to his eye: reflections ripple across glass, saturated tones melt into monochrome, and layered scenes unfold like frames from forgotten films. The series moves with an editorial rhythm—moments sequenced not by chronology, but by feeling. From coat hems to cigarette smoke, from the blur of movement to the cut of a collar, the work reads like fashion in its rawest form: lived-in, observed, and always in conversation with its surroundings.",
+              "marks": []
+            }
+          ]
+        }
+      ],
+      "images": [
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab4467c8bc613810d0998c_Kaijo_portfolio_ec-034.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab446cbea97e1dd6f737e0_Kaijo_portfolio_ec-035.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab4474b1e8b1f8a4bb05ad_Kaijo_portfolio_ec-041.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab4479e870b0fa2086c81a_Kaijo_portfolio_ec-043.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab4484f66d6cd9bae9e905_Kaijo_portfolio_ec-053.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab4489bbb90245651e6483_Kaijo_portfolio_ec-057.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab4496bb302db127765c12_Kaijo_portfolio_ec-054.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab449cbb9d063d59f91cb0_Kaijo_portfolio_ec-062.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab44a14b2f40af83ab9461_Kaijo_portfolio_ec-066.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab44a8c8bc613810d0d115_Kaijo_portfolio_ec-075.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab4459d67fa8420c203566_Kaijo_portfolio_ec-031.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab44dfbb302db12776d96a_Kaijo_portfolio_ec-019.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab44e5f2955b7e6d7e8e9d_Kaijo_portfolio_ec-048.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab44eea5a9ae4150079e8e_Kaijo_portfolio_ec-047.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab44f4dee1de410f73eded_Kaijo_portfolio_ec-045.avif",
+        "https://cdn.prod.website-files.com/67a39066c276671b47c91c55/67ab44fb7b562af9aebf53d5_Kaijo_portfolio_ec-067.avif"
+      ]
+    }
+  ],
+  "about": {
+    "title": "About",
+    "text": "Kaijo Studio is a creative photography studio crafting imagery that merges the commercial with the artistic. We create photos that convey the identity of both your brand and your products with daring visual direction and a gentle eye.",
+    "secondText": "Founded by photographer Joep Hijwegen and producer Kathy Sihavong, Kaijo is a strange beast: part production house, part creative partner. We collaborate with small brands to shape visuals that sell both a product and a vision. As a small team with a multidisciplinary background, we are able to translate your vision forcefully without dilution.",
+    "image": "https://cdn.prod.website-files.com/67a349cbd5c45c0d495fc830/6825e3b3604db12db33a195e_Kaijo_portfolio_ec-112.jpg"
+  },
+  "favicon": "https://cdn.prod.website-files.com/67a349cbd5c45c0d495fc830/67a49e05a5adb0ff3a18fe7f_FaviCon.png"
+}

@@ -1,15 +1,8 @@
-html,
-body {
-  @apply h-dvh overflow-hidden bg-black relative overscroll-none;
-}
-
-body {
-  @apply bg-black flex-1 flex flex-col text-white font-sans text-body-20 antialiased;
-}
-
-main {
-  @apply flex-1 bg-black;
-}
+/*
+ * The boilerplate styled html/body as a fixed-height Lenis scroll container with its own
+ * dark theme. Kaijo is a 1:1 Webflow port: native scrolling, and features/style/webflow.css
+ * owns the page look (background, typography, layout).
+ */
 
 img {
   @apply select-none;

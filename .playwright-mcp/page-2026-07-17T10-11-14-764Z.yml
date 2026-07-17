@@ -1,0 +1,13 @@
+- generic [active] [ref=f10e1]:
+  - generic:
+    - banner [ref=f10e2]:
+      - generic [ref=f10e4]:
+        - link [ref=f10e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f10e13]:
+          - link "work" [ref=f10e14] [cursor=pointer]:
+            - /url: /work
+          - link "info" [ref=f10e16] [cursor=pointer]:
+            - /url: /info
+    - main
+  - button "Open Next.js Dev Tools" [ref=f10e23] [cursor=pointer]

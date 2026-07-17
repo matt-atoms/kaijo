@@ -1,4 +1,5 @@
 import type * as React from "react";
+import { ScrambleReveal } from "~/features/kaijo/scramble-reveal";
 import { SiteFooter } from "~/features/site/site-footer";
 import { SiteHeader } from "~/features/site/site-header";
 
@@ -12,10 +13,11 @@ export function SiteShell(props: SiteShellProps) {
   const { children, showHeader = true, showFooter = true } = props;
 
   return (
-    <div className="flex min-h-dvh flex-col">
+    <div className="page">
       {showHeader && <SiteHeader />}
-      <main className="flex-1">{children}</main>
+      <main className="main">{children}</main>
       {showFooter && <SiteFooter />}
+      <ScrambleReveal />
     </div>
   );
 }

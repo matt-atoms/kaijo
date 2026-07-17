@@ -30,3 +30,4 @@ export const API_ONLY_DOCUMENTS = {
 /** Routed non-singleton `_type` names; use these literal bindings in `defineQuery` interpolations (typegen won't resolve member access). Site's `_type` is `SANITY_SINGLETON_SITE_ID`, also its `revalidateTag`. */
 export const SANITY_PAGE_DOCUMENT_TYPE = "page" as const;
 export const SANITY_ARTICLE_DOCUMENT_TYPE = "article" as const;
+export const SANITY_PROJECT_DOCUMENT_TYPE = "project" as const;

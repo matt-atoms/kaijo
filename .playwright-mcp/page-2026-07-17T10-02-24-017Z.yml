@@ -1,0 +1,208 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - navigation [ref=e6]:
+        - link "Mokum Watches home" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "Mokum Watches" [ref=e8]
+        - link [ref=e9] [cursor=pointer]:
+          - /url: /
+          - text: Mokum Watches
+        - list [ref=e10]:
+          - listitem [ref=e11]:
+            - link "Collection" [ref=e12] [cursor=pointer]:
+              - /url: /collection
+          - listitem [ref=e13]:
+            - link "What to expect" [ref=e14] [cursor=pointer]:
+              - /url: /what-to-expect
+          - listitem [ref=e15]:
+            - link "About" [ref=e16] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e17]:
+            - link "Archive" [ref=e18] [cursor=pointer]:
+              - /url: /archive
+          - listitem [ref=e19]:
+            - link "Contact" [ref=e20] [cursor=pointer]:
+              - /url: /contact
+    - main [ref=e21]:
+      - generic [ref=e22]:
+        - generic [ref=e23]:
+          - button "Enter Mokum Watches" [ref=e24] [cursor=pointer]
+          - button "Enter" [ref=e91] [cursor=pointer]
+        - generic [ref=e92]:
+          - generic:
+            - paragraph: Discover Our Collection
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - heading "Latest arrivals" [level=2] [ref=e101]
+            - link "Explore full collection" [ref=e102] [cursor=pointer]:
+              - /url: /collection
+          - generic [ref=e105]:
+            - region "Watch collection slider" [ref=e106]:
+              - generic [ref=e108]:
+                - link "Rolex € 8.500 Datejust Steel · 36mm · 1972" [ref=e109] [cursor=pointer]:
+                  - /url: /watches/rolex-datejust-1972
+                  - generic [ref=e112]:
+                    - generic [ref=e113]:
+                      - paragraph [ref=e114]: Rolex
+                      - paragraph [ref=e115]: € 8.500
+                    - paragraph [ref=e116]: Datejust
+                    - paragraph [ref=e117]: Steel · 36mm · 1972
+                - link "Patek Philippe € 19.500 Calatrava 3796 Yellow gold · 33mm · 1986" [ref=e118] [cursor=pointer]:
+                  - /url: /watches/patek-philippe-calatrava-3796-1986
+                  - generic [ref=e121]:
+                    - generic [ref=e122]:
+                      - paragraph [ref=e123]: Patek Philippe
+                      - paragraph [ref=e124]: € 19.500
+                    - paragraph [ref=e125]: Calatrava 3796
+                    - paragraph [ref=e126]: Yellow gold · 33mm · 1986
+                - link "Rolex € 6.800 Datejust 16013 Steel & gold · 36mm · 1984" [ref=e127] [cursor=pointer]:
+                  - /url: /watches/rolex-datejust-16013-1984
+                  - generic [ref=e130]:
+                    - generic [ref=e131]:
+                      - paragraph [ref=e132]: Rolex
+                      - paragraph [ref=e133]: € 6.800
+                    - paragraph [ref=e134]: Datejust 16013
+                    - paragraph [ref=e135]: Steel & gold · 36mm · 1984
+                - link "Piaget € 9.300 Polo Yellow gold · 32mm · 1981" [ref=e136] [cursor=pointer]:
+                  - /url: /watches/piaget-polo-1981
+                  - generic [ref=e139]:
+                    - generic [ref=e140]:
+                      - paragraph [ref=e141]: Piaget
+                      - paragraph [ref=e142]: € 9.300
+                    - paragraph [ref=e143]: Polo
+                    - paragraph [ref=e144]: Yellow gold · 32mm · 1981
+                - link "Rolex € 14.500 GMT-Master 16750 Steel · 40mm · 1983" [ref=e145] [cursor=pointer]:
+                  - /url: /watches/rolex-gmt-master-16750-1983
+                  - generic [ref=e148]:
+                    - generic [ref=e149]:
+                      - paragraph [ref=e150]: Rolex
+                      - paragraph [ref=e151]: € 14.500
+                    - paragraph [ref=e152]: GMT-Master 16750
+                    - paragraph [ref=e153]: Steel · 40mm · 1983
+                - link "Audemars Piguet € 24.000 Royal Oak 14790 Steel · 36mm · 1992" [ref=e154] [cursor=pointer]:
+                  - /url: /watches/audemars-piguet-royal-oak-14790-1992
+                  - generic [ref=e157]:
+                    - generic [ref=e158]:
+                      - paragraph [ref=e159]: Audemars Piguet
+                      - paragraph [ref=e160]: € 24.000
+                    - paragraph [ref=e161]: Royal Oak 14790
+                    - paragraph [ref=e162]: Steel · 36mm · 1992
+                - link "Rolex € 11.200 Datejust Yellow gold · 36mm · 1969" [ref=e163] [cursor=pointer]:
+                  - /url: /watches/rolex-datejust-1969
+                  - generic [ref=e166]:
+                    - generic [ref=e167]:
+                      - paragraph [ref=e168]: Rolex
+                      - paragraph [ref=e169]: € 11.200
+                    - paragraph [ref=e170]: Datejust
+                    - paragraph [ref=e171]: Yellow gold · 36mm · 1969
+                - link "Audemars Piguet € 42.000 Royal Oak Yellow gold · 39mm · 1985" [ref=e172] [cursor=pointer]:
+                  - /url: /watches/audemars-piguet-royal-oak-1985
+                  - generic [ref=e175]:
+                    - generic [ref=e176]:
+                      - paragraph [ref=e177]: Audemars Piguet
+                      - paragraph [ref=e178]: € 42.000
+                    - paragraph [ref=e179]: Royal Oak
+                    - paragraph [ref=e180]: Yellow gold · 39mm · 1985
+            - generic [ref=e207]:
+              - button "Previous watch" [ref=e208] [cursor=pointer]
+              - button "Next watch" [ref=e212] [cursor=pointer]
+        - figure [ref=e216]:
+          - link "Learn More About Our Process" [ref=e220] [cursor=pointer]:
+            - /url: /about
+        - generic [ref=e224]:
+          - paragraph [ref=e229]: (est. 2011)
+          - generic [ref=e236]:
+            - paragraph [ref=e237]: Vintage Watches From Amsterdam
+            - heading "Fifteen years. Every watch personally selected." [level=2] [ref=e238]
+            - generic [ref=e239]:
+              - paragraph [ref=e240]: "Every watch in this collection was chosen by one person. Jochem has spent fifteen years in the vintage watch trade, studying Art & Economics in Amsterdam before turning a deep knowledge of horology into a straightforward business: find exceptional pieces, describe them honestly, and stand behind every sale."
+              - paragraph [ref=e241]: The roster runs from Patek Philippe and Audemars Piguet to names like Gerald Genta and Universal Geneve. Blue-chip alongside specialist. If it's here, it passed a filter that most watches don't.
+            - link "About Mokum Watches" [ref=e242] [cursor=pointer]:
+              - /url: /about
+        - generic [ref=e246]:
+          - generic [ref=e247]:
+            - heading "Archive" [level=2] [ref=e248]
+            - link "View All" [ref=e249] [cursor=pointer]:
+              - /url: /archive
+          - generic [ref=e252]:
+            - link "Cartier Tank Louis" [ref=e253] [cursor=pointer]:
+              - /url: /watches/cartier-tank-louis-1995
+            - link "Patek Philippe Ellipse 3738" [ref=e256] [cursor=pointer]:
+              - /url: /watches/patek-philippe-ellipse-3738-1979
+            - link "Piaget Jade Dial" [ref=e259] [cursor=pointer]:
+              - /url: /watches/piaget-jade-dial-1973
+            - link "Rolex GMT-Master \"Pepsi\"" [ref=e262] [cursor=pointer]:
+              - /url: /watches/rolex-gmt-master-pepsi-1978
+            - link "Patek Philippe Golden Ellipse" [ref=e265] [cursor=pointer]:
+              - /url: /watches/patek-philippe-golden-ellipse-1981
+            - link "Rolex Datejust 1601" [ref=e268] [cursor=pointer]:
+              - /url: /watches/rolex-datejust-1601-1968
+    - contentinfo [ref=e271]:
+      - generic [ref=e272]:
+        - generic [ref=e273]:
+          - navigation "Site index" [ref=e274]:
+            - paragraph [ref=e275]: Site Index
+            - list [ref=e276]:
+              - listitem [ref=e277]:
+                - link "Home" [ref=e278] [cursor=pointer]:
+                  - /url: /
+              - listitem [ref=e279]:
+                - link "Collection" [ref=e280] [cursor=pointer]:
+                  - /url: /collection
+              - listitem [ref=e281]:
+                - link "Archive" [ref=e282] [cursor=pointer]:
+                  - /url: /archive
+              - listitem [ref=e283]:
+                - link "Journal" [ref=e284] [cursor=pointer]:
+                  - /url: /journal
+              - listitem [ref=e285]:
+                - link "About" [ref=e286] [cursor=pointer]:
+                  - /url: /about
+              - listitem [ref=e287]:
+                - link "FAQ" [ref=e288] [cursor=pointer]:
+                  - /url: /faq
+          - navigation "Policy" [ref=e289]:
+            - paragraph [ref=e290]: Policy
+            - list [ref=e291]:
+              - listitem [ref=e292]:
+                - link "Shipment" [ref=e293] [cursor=pointer]:
+                  - /url: /shipment
+              - listitem [ref=e294]:
+                - link "Payment" [ref=e295] [cursor=pointer]:
+                  - /url: /payment
+              - listitem [ref=e296]:
+                - link "Returns" [ref=e297] [cursor=pointer]:
+                  - /url: /returns
+              - listitem [ref=e298]:
+                - link "Warranty" [ref=e299] [cursor=pointer]:
+                  - /url: /warranty
+              - listitem [ref=e300]:
+                - link "Terms & Conditions" [ref=e301] [cursor=pointer]:
+                  - /url: /terms-conditions
+              - listitem [ref=e302]:
+                - link "Privacy Policy" [ref=e303] [cursor=pointer]:
+                  - /url: /privacy-policy
+        - generic [ref=e304]:
+          - generic [ref=e305]:
+            - link "Contact Us" [ref=e306] [cursor=pointer]:
+              - /url: /contact
+            - paragraph [ref=e307]: 12:02:23 (CET)
+          - list [ref=e308]:
+            - listitem [ref=e309]:
+              - link "WhatsApp" [ref=e310] [cursor=pointer]:
+                - /url: https://wa.me/31682554623
+            - listitem [ref=e313]:
+              - link "Telephone / +31682554623" [ref=e314] [cursor=pointer]:
+                - /url: tel:+31682554623
+            - listitem [ref=e317]:
+              - link "Email" [ref=e318] [cursor=pointer]:
+                - /url: mailto:info@mokumwatches.com
+            - listitem [ref=e321]:
+              - link "Instagram" [ref=e322] [cursor=pointer]:
+                - /url: https://www.instagram.com/mokumwatches/
+            - listitem [ref=e325]:
+              - link "Signal" [ref=e326] [cursor=pointer]:
+                - /url: https://signal.me/#p/+31682554623
+  - button "Open Next.js Dev Tools" [ref=e334] [cursor=pointer]
+  - alert [ref=e338]

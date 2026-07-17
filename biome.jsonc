@@ -12,7 +12,9 @@
       "**/*.{ts,js,tsx,jsx,css,json,jsonc,md,mdx,gql,graphql}",
       "!**/sanity/types.ts",
       "!**/public",
-      "!**/node_modules"
+      "!**/node_modules",
+      // Vendored 1:1 port of the Webflow site's compiled CSS; not held to our lint rules.
+      "!**/features/style/webflow.css"
     ]
   },
   "assist": {

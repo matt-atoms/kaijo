@@ -15,6 +15,13 @@ const _sections = {
   contactFormSectionField: dynamic(() =>
     import("~/features/page-builder/sections/contact-form-section").then((mod) => mod.ContactFormSection)
   ),
+  projectHeroSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/project-hero-section").then((mod) => mod.ProjectHeroSection)
+  ),
+  aboutSectionField: dynamic(() => import("~/features/page-builder/sections/about-section").then((mod) => mod.AboutSection)),
+  portfolioGridSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/portfolio-grid-section").then((mod) => mod.PortfolioGridSection)
+  ),
   // PLOP: Add Import
 } as const;
 
@@ -40,7 +47,7 @@ export async function PageSections({ docId }: { docId: string }) {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-1200 flex-col gap-80 px-16 py-64 lg:gap-120 lg:px-48 lg:py-96">
+    <>
       {sections.map((section) => {
         if (!isValidSectionType(section._type)) {
           return null;
@@ -55,6 +62,6 @@ export async function PageSections({ docId }: { docId: string }) {
 
         return <Component key={section._key} sectionKey={section._key} docId={docId} />;
       })}
-    </div>
+    </>
   );
 }

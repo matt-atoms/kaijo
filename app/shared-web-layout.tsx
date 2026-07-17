@@ -2,12 +2,10 @@ import dynamic from "next/dynamic";
 import Script from "next/script";
 import * as React from "react";
 import { preconnect, prefetchDNS } from "react-dom";
-import { Credits } from "~/components/credits";
 import { env } from "~/env";
 import { KeyboardFocusMode } from "~/features/dom/keyboard-focus-mode";
 import { DraftModeProvider } from "~/features/draft-mode/context";
 import { fonts } from "~/features/fonts";
-import { Lenis } from "~/features/lenis";
 import { MotionProvider } from "~/features/motion/lazy-motion";
 import { cx } from "~/features/style/utils";
 import { ViewTransitions } from "~/features/view-transition/app-view-transitions";
@@ -60,9 +58,8 @@ export function SharedWebLayout(props: SharedWebLayoutProps) {
                   <DisableDraftMode />
                 </React.Suspense>
               )}
-              <Lenis>{props.children}</Lenis>
+              {props.children}
             </DraftModeProvider>
-            <Credits />
             {env.NEXT_PUBLIC_UNAMI_WEBSITE_ID && trackedDomains && (
               <Script
                 defer
