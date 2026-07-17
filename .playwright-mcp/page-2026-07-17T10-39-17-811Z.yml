@@ -1,0 +1,39 @@
+- generic [ref=f21e2]:
+  - banner [ref=f21e3]:
+    - generic [ref=f21e5]:
+      - link [ref=f21e6] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f21e14]:
+        - link "work" [ref=f21e15] [cursor=pointer]:
+          - /url: /work
+        - link "info" [ref=f21e17] [cursor=pointer]:
+          - /url: /info
+  - main [ref=f21e19]:
+    - generic [ref=f21e20]:
+      - generic:
+        - paragraph: Learn more
+      - list [ref=f21e24]:
+        - listitem [ref=f21e25]:
+          - link [ref=f21e26] [cursor=pointer]:
+            - /url: /project/studio-archivio
+        - listitem [ref=f21e28]:
+          - link [ref=f21e29] [cursor=pointer]:
+            - /url: /project/lobomar
+        - listitem [ref=f21e31]:
+          - link [ref=f21e32] [cursor=pointer]:
+            - /url: /project/etienne-cootjans
+        - listitem [ref=f21e34]:
+          - link [ref=f21e35] [cursor=pointer]:
+            - /url: /project/street-work
+        - listitem [ref=f21e37]:
+          - link [ref=f21e38] [cursor=pointer]:
+            - /url: /project/tno
+        - listitem [ref=f21e40]:
+          - link [ref=f21e41] [cursor=pointer]:
+            - /url: /project/glass-steel
+  - contentinfo [ref=f21e43]:
+    - generic [ref=f21e45]:
+      - link "INSTAGRAM" [ref=f21e46] [cursor=pointer]:
+        - /url: "#"
+      - link "CONTACT@KAIJO.STUDIO" [ref=f21e48] [cursor=pointer]:
+        - /url: mailto:CONTACT@KAIJO.STUDIO

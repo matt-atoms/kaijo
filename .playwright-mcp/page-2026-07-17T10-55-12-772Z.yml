@@ -1,0 +1,32 @@
+- generic [active] [ref=f40e1]:
+  - generic [ref=f40e2]:
+    - banner [ref=f40e3]:
+      - generic [ref=f40e5]:
+        - link [ref=f40e6] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f40e14]:
+          - link "work" [ref=f40e15] [cursor=pointer]:
+            - /url: /work
+          - link "info" [ref=f40e17] [cursor=pointer]:
+            - /url: /info
+    - main [ref=f40e19]:
+      - generic [ref=f40e23]:
+        - generic [ref=f40e24]: THE NEW ORIGINALS
+        - paragraph [ref=f40e28]:
+          - strong [ref=f40e29]: "CLIENT:"
+          - text: The New Originals
+          - strong [ref=f40e30]: "CLIENT INTEL:"
+          - text: Amsterdam-based brand creating performance-focused streetwear that champions creativity and subculture through design
+          - strong [ref=f40e31]: "SUBJECT:"
+          - text: Scout Camp Collection
+          - strong [ref=f40e32]: "BRIEF:"
+          - text: Capture the new Scout Camp items in an outdoor setting
+          - strong [ref=f40e33]: "APPROACH:"
+          - text: We leaned into playful composition—using scale, subframing, and environmental cues to evoke the carefree spirit of classic American camp movies, while simultaneously shooting it in a highly stylized way. The imagery taps into nostalgia but subverts it, placing the pieces at the intersection of humor and style with self awareness. Nature becomes both backdrop and character, amplifying the spirit of exploration that runs through the collection.
+    - contentinfo [ref=f40e44]:
+      - generic [ref=f40e46]:
+        - link "INSTAGRAM" [ref=f40e47] [cursor=pointer]:
+          - /url: "#"
+        - link "CONTACT@KAIJO.STUDIO" [ref=f40e49] [cursor=pointer]:
+          - /url: mailto:CONTACT@KAIJO.STUDIO
+  - button "Open Next.js Dev Tools" [ref=f40e56] [cursor=pointer]

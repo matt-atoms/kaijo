@@ -1,0 +1,26 @@
+- generic [ref=f23e2]:
+  - banner [ref=f23e3]:
+    - generic [ref=f23e5]:
+      - link [ref=f23e6] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f23e14]:
+        - link "work" [ref=f23e15] [cursor=pointer]:
+          - /url: /work
+        - link "info" [ref=f23e17] [cursor=pointer]:
+          - /url: /info
+  - main [ref=f23e19]:
+    - generic [ref=f23e23]:
+      - generic [ref=f23e24]: STREET
+      - paragraph [ref=f23e28]:
+        - strong [ref=f23e29]: "INTEL:"
+        - text: Co-founder and creative lead of Kaijo Studio, Joep Hijwegen brings a background in street photography shaped by philosophy, atmosphere, and visual instinct.‍
+        - strong [ref=f23e30]: "SUBJECT:"
+        - text: Ongoing personal series — Street Observations‍
+        - strong [ref=f23e31]: "APPROACH:"
+        - text: "This ongoing body of work captures unguarded moments in the city—fragments of life caught in passing. Joep’s lens lingers on fabric in motion, on silhouettes caught between light and shadow, on gestures that feel rehearsed only by repetition. There’s a quiet elegance to his eye: reflections ripple across glass, saturated tones melt into monochrome, and layered scenes unfold like frames from forgotten films. The series moves with an editorial rhythm—moments sequenced not by chronology, but by feeling. From coat hems to cigarette smoke, from the blur of movement to the cut of a collar, the work reads like fashion in its rawest form: lived-in, observed, and always in conversation with its surroundings."
+  - contentinfo [ref=f23e42]:
+    - generic [ref=f23e44]:
+      - link "INSTAGRAM" [ref=f23e45] [cursor=pointer]:
+        - /url: "#"
+      - link "CONTACT@KAIJO.STUDIO" [ref=f23e47] [cursor=pointer]:
+        - /url: mailto:CONTACT@KAIJO.STUDIO

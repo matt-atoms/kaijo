@@ -1,5 +1,6 @@
 import "~/features/style/tailwind.css";
 import "~/features/style/webflow.css";
+import "~/features/style/kaijo-mobile.css";
 import { draftMode } from "next/headers";
 import type * as React from "react";
 import type { WebPage, WebSite, WithContext } from "schema-dts";

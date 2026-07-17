@@ -1,0 +1,93 @@
+- generic [ref=f19e2]:
+  - banner [ref=f19e3]:
+    - generic [ref=f19e5]:
+      - link [ref=f19e6] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f19e14]:
+        - link "work" [ref=f19e15] [cursor=pointer]:
+          - /url: /work
+        - link "info" [ref=f19e17] [cursor=pointer]:
+          - /url: /info
+  - main [ref=f19e19]:
+    - generic [ref=f19e23]:
+      - list [ref=f19e25]:
+        - listitem [ref=f19e26]:
+          - link "THE NEW ORIGINALS Assignment July 2023" [ref=f19e27] [cursor=pointer]:
+            - /url: /project/tno
+            - generic [ref=f19e28]:
+              - heading "THE NEW ORIGINALS" [level=2] [ref=f19e29]
+              - generic [ref=f19e30]:
+                - generic [ref=f19e31]: Assignment
+                - generic [ref=f19e32]: July 2023
+        - listitem [ref=f19e33]:
+          - link "ETIENNE COOTJANS Assignment July 2024" [ref=f19e34] [cursor=pointer]:
+            - /url: /project/etienne-cootjans
+            - generic [ref=f19e35]:
+              - heading "ETIENNE COOTJANS" [level=2] [ref=f19e36]
+              - generic [ref=f19e37]:
+                - generic [ref=f19e38]: Assignment
+                - generic [ref=f19e39]: July 2024
+        - listitem [ref=f19e40]:
+          - link "GLASS / STEEL Concept Work August 2024" [ref=f19e41] [cursor=pointer]:
+            - /url: /project/glass-steel
+            - generic [ref=f19e42]:
+              - heading "GLASS / STEEL" [level=2] [ref=f19e43]
+              - generic [ref=f19e44]:
+                - generic [ref=f19e45]: Concept Work
+                - generic [ref=f19e46]: August 2024
+      - list [ref=f19e48]:
+        - listitem [ref=f19e49]:
+          - link "LOBOMAR- Assignment October 2024" [ref=f19e50] [cursor=pointer]:
+            - /url: /project/lobomar
+            - generic [ref=f19e51]:
+              - heading "LOBOMAR-" [level=2] [ref=f19e52]
+              - generic [ref=f19e53]:
+                - generic [ref=f19e54]: Assignment
+                - generic [ref=f19e55]: October 2024
+        - listitem [ref=f19e56]:
+          - link "STUDIO ARCHIVIO January 2025" [ref=f19e57] [cursor=pointer]:
+            - /url: /project/studio-archivio
+            - generic [ref=f19e58]:
+              - heading "STUDIO ARCHIVIO" [level=2] [ref=f19e59]
+              - generic [ref=f19e60]: January 2025
+        - listitem [ref=f19e62]:
+          - link "STREET Concept Work February 2025" [ref=f19e63] [cursor=pointer]:
+            - /url: /project/street-work
+            - generic [ref=f19e64]:
+              - heading "STREET" [level=2] [ref=f19e65]
+              - generic [ref=f19e66]:
+                - generic [ref=f19e67]: Concept Work
+                - generic [ref=f19e68]: February 2025
+    - generic [ref=f19e71]:
+      - generic [ref=f19e72]:
+        - heading "About" [level=2] [ref=f19e73]
+        - paragraph [ref=f19e74]: Kaijo Studio is a creative photography studio crafting imagery that merges the commercial with the artistic. We create photos that convey the identity of both your brand and your products with daring visual direction and a gentle eye.
+      - paragraph [ref=f19e76]: "Founded by photographer Joep Hijwegen and producer Kathy Sihavong, Kaijo is a strange beast: part production house, part creative partner. We collaborate with small brands to shape visuals that sell both a product and a vision. As a small team with a multidisciplinary background, we are able to translate your vision forcefully without dilution."
+    - generic [ref=f19e77]:
+      - generic:
+        - paragraph: Learn more
+      - list [ref=f19e81]:
+        - listitem [ref=f19e82]:
+          - link [ref=f19e83] [cursor=pointer]:
+            - /url: /project/studio-archivio
+        - listitem [ref=f19e85]:
+          - link [ref=f19e86] [cursor=pointer]:
+            - /url: /project/lobomar
+        - listitem [ref=f19e88]:
+          - link [ref=f19e89] [cursor=pointer]:
+            - /url: /project/etienne-cootjans
+        - listitem [ref=f19e91]:
+          - link [ref=f19e92] [cursor=pointer]:
+            - /url: /project/street-work
+        - listitem [ref=f19e94]:
+          - link [ref=f19e95] [cursor=pointer]:
+            - /url: /project/tno
+        - listitem [ref=f19e97]:
+          - link [ref=f19e98] [cursor=pointer]:
+            - /url: /project/glass-steel
+  - contentinfo [ref=f19e100]:
+    - generic [ref=f19e102]:
+      - link "INSTAGRAM" [ref=f19e103] [cursor=pointer]:
+        - /url: "#"
+      - link "CONTACT@KAIJO.STUDIO" [ref=f19e105] [cursor=pointer]:
+        - /url: mailto:CONTACT@KAIJO.STUDIO

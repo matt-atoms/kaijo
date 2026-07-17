@@ -21,6 +21,11 @@ export function DynamicCursor() {
       return;
     }
 
+    // Touch devices get static captions (kaijo-mobile.css) instead of the cursor follower.
+    if (!window.matchMedia("(hover: hover)").matches) {
+      return;
+    }
+
     const targets = document.querySelectorAll("[data-cursor]");
     const xOffset = 6;
     const yOffset = 140;

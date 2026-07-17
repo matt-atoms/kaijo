@@ -58,6 +58,11 @@ export async function PortfolioGridSection(_props: { docId: string; sectionKey: 
                         sizes="(max-width: 767px) 90vw, (max-width: 991px) 63vw, 65vw"
                       />
                     </div>
+                    {/* Mobile-only: touch devices have no cursor follower to name the project. */}
+                    <div className="portfolio_item-caption">
+                      <div>{project.title}</div>
+                      {project.category && <div className="portfolio_item-caption-category">{project.category}</div>}
+                    </div>
                   </Link>
                 </div>
               ))}

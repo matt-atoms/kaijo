@@ -9,6 +9,12 @@ import * as React from "react";
  */
 export function HeroHover() {
   React.useEffect(() => {
+    // On touch devices the hero images are shown inline (kaijo-mobile.css); the hover
+    // scale effect would only cause a jump on tap.
+    if (!window.matchMedia("(hover: hover)").matches) {
+      return;
+    }
+
     const cleanups: Array<() => void> = [];
 
     for (const item of document.querySelectorAll(".project_item")) {

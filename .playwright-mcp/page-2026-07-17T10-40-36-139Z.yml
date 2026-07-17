@@ -1,0 +1,32 @@
+- generic [ref=f25e2]:
+  - banner [ref=f25e3]:
+    - generic [ref=f25e5]:
+      - link [ref=f25e6] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f25e14]:
+        - link "work" [ref=f25e15] [cursor=pointer]:
+          - /url: /work
+        - link "info" [ref=f25e17] [cursor=pointer]:
+          - /url: /info
+  - main [ref=f25e19]:
+    - generic [ref=f25e23]:
+      - generic [ref=f25e24]: STUDIO ARCHIVIO
+      - generic [ref=f25e27]:
+        - paragraph [ref=f25e28]:
+          - strong [ref=f25e29]: "CLIENT:"
+          - text: Studio Archivio‍
+          - strong [ref=f25e30]: "CLIENT INTEL:"
+          - text: Archivist and premium reseller of rare and iconic Stone Island pieces, dedicated to preserving and curating the brand’s material legacy‍
+          - strong [ref=f25e31]: "SUBJECT:"
+          - text: Archival Stone Island collection, including standout pieces like the Jock 23‍
+          - strong [ref=f25e32]: "BRIEF:"
+          - text: Create a visual journey through the brand’s history, with a focus on material innovation and transformation‍
+          - strong [ref=f25e33]: "APPROACH:"
+          - text: In close collaboration with Studio Archivio, we crafted a study in fabric, memory, and motion—tracing the evolution of Stone Island through its most iconic materials. Using textures and elements that once inspired the original garments as visual anchors, we placed each piece in a dialogue with its roots. From glazed silk to experimental PVC, the materials shift with light, weather, and movement—captured through lenses that range from macro to landscape, from stillness to motion. The resulting imagery reveals the garments as living artefacts—technical, tactile, and steeped in story. For us, this was more than a shoot; it was an homage to one of the most visionary brands in menswear history.
+        - paragraph [ref=f25e34]: ‍
+  - contentinfo [ref=f25e45]:
+    - generic [ref=f25e47]:
+      - link "INSTAGRAM" [ref=f25e48] [cursor=pointer]:
+        - /url: "#"
+      - link "CONTACT@KAIJO.STUDIO" [ref=f25e50] [cursor=pointer]:
+        - /url: mailto:CONTACT@KAIJO.STUDIO

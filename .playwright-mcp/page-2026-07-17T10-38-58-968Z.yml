@@ -1,0 +1,41 @@
+- generic [active] [ref=f20e1]:
+  - generic [ref=f20e2]:
+    - banner [ref=f20e3]:
+      - generic [ref=f20e5]:
+        - link [ref=f20e6] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f20e14]:
+          - link "work" [ref=f20e15] [cursor=pointer]:
+            - /url: /work
+          - link "info" [ref=f20e17] [cursor=pointer]:
+            - /url: /info
+    - main [ref=f20e19]:
+      - generic [ref=f20e20]:
+        - generic:
+          - paragraph: Learn more
+        - list [ref=f20e24]:
+          - listitem [ref=f20e25]:
+            - link [ref=f20e26] [cursor=pointer]:
+              - /url: /project/studio-archivio
+          - listitem [ref=f20e28]:
+            - link [ref=f20e29] [cursor=pointer]:
+              - /url: /project/lobomar
+          - listitem [ref=f20e31]:
+            - link [ref=f20e32] [cursor=pointer]:
+              - /url: /project/etienne-cootjans
+          - listitem [ref=f20e34]:
+            - link [ref=f20e35] [cursor=pointer]:
+              - /url: /project/street-work
+          - listitem [ref=f20e37]:
+            - link [ref=f20e38] [cursor=pointer]:
+              - /url: /project/tno
+          - listitem [ref=f20e40]:
+            - link [ref=f20e41] [cursor=pointer]:
+              - /url: /project/glass-steel
+    - contentinfo [ref=f20e43]:
+      - generic [ref=f20e45]:
+        - link "INSTAGRAM" [ref=f20e46] [cursor=pointer]:
+          - /url: "#"
+        - link "CONTACT@KAIJO.STUDIO" [ref=f20e48] [cursor=pointer]:
+          - /url: mailto:CONTACT@KAIJO.STUDIO
+  - button "Open Next.js Dev Tools" [ref=f20e55] [cursor=pointer]

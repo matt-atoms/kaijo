@@ -1,0 +1,162 @@
+/*
+ * Kaijo mobile design pass — improvements over the 1:1 Webflow port, scoped to touch/mobile
+ * breakpoints only. Desktop (≥768px) is untouched and stays pixel-identical to the original.
+ *
+ * What this fixes (all inherited from the Webflow original):
+ * 1. Hero project images were hover-revealed overlays — invisible on touch. Now shown inline.
+ * 2. The portfolio grid had no visible project names on touch (labels lived in the
+ *    desktop-only cursor follower). Captions appear under each tile.
+ * 3. Project collage slots kept desktop proportions (is-smaller = 20% ≈ 68px wide). Images now
+ *    stack at readable widths while keeping the collage rhythm (varied widths + alignment).
+ * 4. Oversized display titles clipped off both viewport edges. They now scale to fit the container.
+ * 5. The about paragraph was white text absolutely positioned over the photo. It now flows
+ *    below the image as black text.
+ */
+
+/* Grid captions are a mobile-only affordance; desktop keeps the cursor follower. */
+.portfolio_item-caption {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  /* ---- 1. Hero: inline project imagery ---------------------------------- */
+
+  /* The original hero is a fixed 100vh window (overflow hidden) sized for text only;
+     with inline images the section must flow. */
+  .section_hero {
+    height: auto;
+    overflow: visible;
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+
+  .hero_wrapper {
+    height: auto;
+  }
+
+  .project_item {
+    position: relative;
+    width: 100%;
+  }
+
+  .project_image-wrapper {
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    width: 100%;
+    height: auto;
+    margin: 0.75em 0 0;
+    display: block;
+  }
+
+  .project_image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  .project_row {
+    grid-row-gap: 3em;
+  }
+
+  /* ---- 4. Display titles fit the container ------------------------------ */
+  /* The display face is very condensed; 23vw makes the longest titles
+     (THE NEW ORIGINALS, STUDIO ARCHIVIO) fill the container without clipping. */
+
+  .project_title {
+    font-size: 23vw;
+    line-height: 0.9;
+  }
+
+  /* ---- 2. Portfolio grid: visible captions ------------------------------ */
+
+  .portfolio_item-caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1em;
+    margin-top: 0.5em;
+    font-family: "Basier Circle Mono", Arial, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .portfolio_item-caption > div:first-child {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .portfolio_item-caption-category {
+    opacity: 0.55;
+    white-space: nowrap;
+  }
+
+  /* ---- 3. Project collage: readable image sizes, kept rhythm ------------ */
+
+  /* The description keeps its 67px-wide desktop sidebar column on mobile, wrapping one word
+     per line. Let it span the container. */
+  .project_description-wrapper {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  /* The original pulls the first collage row up beside the (narrow) description column;
+     with a full-width description that would overlap the text. */
+  .portfolio_section-1 {
+    margin-top: 2em;
+  }
+
+  .work_image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .work_image.is-smaller {
+    width: 72%;
+    align-self: flex-start;
+  }
+
+  .work_image.is-smaller.is-alt {
+    align-self: flex-end;
+  }
+
+  .work_image.is-medium {
+    width: 88%;
+    align-self: flex-end;
+  }
+
+  .work_image.is-large,
+  .work_image.is-full {
+    width: 100%;
+  }
+
+  /* The original mobile styles space collage rows with ~8em gaps sized for tiny images;
+     tighten them so the full-width photography reads as one flowing sequence. */
+  .portfolio_section-1,
+  .portfolio_section-2,
+  .portfolio_section-3,
+  .portfolio_section-4,
+  .portfolio_section-5,
+  .portfolio_section-6,
+  .portfolio_section-7,
+  .portfolio_section-8,
+  .portfolio_section-9,
+  .portfolio_section-10 {
+    grid-column-gap: 2em;
+    grid-row-gap: 2em;
+  }
+
+  /* ---- 5. About: paragraph flows below the image ------------------------ */
+
+  .about_paragraph {
+    position: static;
+    color: var(--colors--black);
+    text-align: left;
+    max-width: 100%;
+    margin: 1em 0 0;
+  }
+}

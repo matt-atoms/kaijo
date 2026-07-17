@@ -1,0 +1,12 @@
+- generic [active] [ref=f30e1]:
+  - generic:
+    - banner [ref=f30e2]:
+      - generic [ref=f30e4]:
+        - link [ref=f30e5] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f30e13]:
+          - link "work" [ref=f30e14] [cursor=pointer]:
+            - /url: /work
+          - link "info" [ref=f30e16] [cursor=pointer]:
+            - /url: /info
+    - main

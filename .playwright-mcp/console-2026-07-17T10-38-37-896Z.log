@@ -1,0 +1,7 @@
+[     465ms] [LOG] Slater loaded KAIJO.js: https://slater.app/12623.js 🤙 @ https://kaijo.webflow.io/:60
+[     619ms] TypeError: Cannot set property window of #<Window> which has only a getter
+    at https://slater.app/12623/30923.js?v=219196:15:99
+    at https://slater.app/12623/30923.js?v=219196:17:2
+[     619ms] TypeError: Cannot set property window of #<Window> which has only a getter
+    at https://slater.app/12623/30924.js?v=570580:15:99
+    at https://slater.app/12623/30924.js?v=570580:17:2
