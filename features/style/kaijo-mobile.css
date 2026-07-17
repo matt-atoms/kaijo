@@ -26,7 +26,8 @@
   .section_hero {
     height: auto;
     overflow: visible;
-    padding-top: 2em;
+    /* The nav is position: fixed (~65px tall); clear it plus breathing room. */
+    padding-top: 7em;
     padding-bottom: 2em;
   }
 
