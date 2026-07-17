@@ -1,3 +1,11 @@
 [     157ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3001/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
 [     193ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3001/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
 [     206ms] [LOG] [HMR] connected @ http://localhost:3001/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  288411ms] [LOG] [HMR] connected @ http://localhost:3001/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 3340781ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3001/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 3340917ms] [LOG] [Fast Refresh] done in 186ms @ http://localhost:3001/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 3350016ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3001/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 3350150ms] [LOG] [Fast Refresh] done in 74ms @ http://localhost:3001/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 3350402ms] [ERROR] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). @ http://localhost:3001/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:3318
+[ 3350546ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3001/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[ 3350644ms] [LOG] [Fast Refresh] done in 198ms @ http://localhost:3001/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477

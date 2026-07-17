@@ -8,6 +8,35 @@ img {
   @apply select-none;
 }
 
+/*
+ * Page reveal: the display fonts reshape the layout when they swap in, so the page fades in
+ * once fonts are ready (see the inline script in shared-web-layout.tsx).
+ * - Without JS the attribute is never flipped, so a CSS-only fallback forces the page visible.
+ * - Client-side navigations keep data-reveal="done"; the fade only runs on a full load.
+ */
+html[data-reveal="pending"] .page {
+  opacity: 0;
+  /* Fallback: if the script never flips the attribute, reveal after 2.5s regardless. */
+  animation: kaijo-reveal-fallback 0s 2.5s forwards;
+}
+
+html[data-reveal="done"] .page {
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+@keyframes kaijo-reveal-fallback {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-reveal="done"] .page {
+    transition: none;
+  }
+}
+
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration,
 input[type="number"]::-webkit-outer-spin-button,

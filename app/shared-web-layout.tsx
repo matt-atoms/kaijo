@@ -45,8 +45,29 @@ export function SharedWebLayout(props: SharedWebLayoutProps) {
 
   return (
     <ViewTransitions>
-      <html lang="en" className={cx([fonts.map((f) => f.variable)])}>
+      {/* suppressHydrationWarning: the reveal bootstrap script below stamps data-reveal on <html>
+          before hydration; React 19 would otherwise warn about the attribute it didn't render. */}
+      <html lang="en" className={cx([fonts.map((f) => f.variable)])} suppressHydrationWarning>
         <body>
+          {/* Fades the page in once fonts are ready (max 1.2s), avoiding the fallback-font layout
+              flash. The data-reveal attribute is owned entirely by this script (never rendered by
+              React, so hydration ignores it); it runs synchronously before first paint. CSS lives
+              in features/style/global.css. */}
+          <script
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: static inline bootstrap script.
+            dangerouslySetInnerHTML={{
+              __html: `(function () {
+  var d = document.documentElement;
+  d.setAttribute("data-reveal", "pending");
+  var fonts = document.fonts ? document.fonts.ready : Promise.resolve();
+  Promise.race([fonts, new Promise(function (r) { setTimeout(r, 1200); })]).then(function () {
+    requestAnimationFrame(function () {
+      d.setAttribute("data-reveal", "done");
+    });
+  });
+})();`,
+            }}
+          />
           <MotionProvider>
             <KeyboardFocusMode />
             {props.bodyStart}
