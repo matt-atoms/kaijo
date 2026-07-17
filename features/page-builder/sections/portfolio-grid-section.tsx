@@ -31,6 +31,9 @@ export async function PortfolioGridSection(_props: { docId: string; sectionKey: 
       <DynamicCursor />
       <div className="container">
         <div className="vertical_layout">
+          {/* The original page has a Webflow embed (style block) here; as a flex child it adds one
+              vertical_layout gap to the section height, so keep an empty stand-in for 1:1 spacing. */}
+          <div className="w-embed" />
           <div className="portfolio_list-wrapper w-dyn-list">
             {/* biome-ignore lint/a11y/useSemanticElements: 1:1 port of the Webflow collection-list markup. */}
             <div role="list" className="portfolio_list w-dyn-items">
