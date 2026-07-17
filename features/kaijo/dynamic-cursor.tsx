@@ -1,5 +1,6 @@
 "use client";
 
+import { stegaClean } from "@sanity/client/stega";
 import gsap from "gsap";
 import * as React from "react";
 
@@ -52,8 +53,8 @@ export function DynamicCursor() {
       }
 
       if (currentTarget) {
-        const newText = currentTarget.getAttribute("data-cursor");
-        if (newText !== null && newText !== lastText) {
+        const newText = stegaClean(currentTarget.getAttribute("data-cursor") ?? "");
+        if (newText && newText !== lastText) {
           cursorParagraph.innerHTML = newText;
           lastText = newText;
         }
@@ -74,9 +75,9 @@ export function DynamicCursor() {
     for (const target of targets) {
       const handler = () => {
         currentTarget = target;
-        const newText = target.getAttribute("data-cursor");
+        const newText = stegaClean(target.getAttribute("data-cursor") ?? "");
 
-        if (newText !== null && newText !== lastText) {
+        if (newText && newText !== lastText) {
           cursorParagraph.innerHTML = newText;
           lastText = newText;
         }

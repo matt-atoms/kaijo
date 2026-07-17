@@ -1,5 +1,6 @@
 "use client";
 
+import { stegaClean } from "@sanity/client/stega";
 import gsap from "gsap";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,6 +9,20 @@ import { usePathname } from "next/navigation";
 import * as React from "react";
 
 gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin, SplitText);
+
+/**
+ * In Sanity Draft Mode, strings carry invisible stega payloads for Visual Editing. SplitText and
+ * ScrambleText slice text into characters, shredding those payloads into fragments that flood the
+ * console with decode errors (and scramble invisible junk). Strip them before animating.
+ */
+function cleanStega(el: Element) {
+  const text = el.textContent ?? "";
+  const cleaned = stegaClean(text);
+
+  if (cleaned !== text) {
+    el.textContent = cleaned;
+  }
+}
 
 /**
  * Ports the site's Slater "Scramble Reveal" script: text elements tagged with
@@ -24,6 +39,8 @@ export function ScrambleReveal() {
     const ctx = gsap.context(() => {
       // Reveal on load
       for (const target of document.querySelectorAll('[data-scramble="load"]')) {
+        cleanStega(target);
+
         const split = new SplitText(target, {
           type: "words, chars",
           wordsClass: "word",
@@ -44,6 +61,8 @@ export function ScrambleReveal() {
 
       // Reveal on scroll
       for (const target of document.querySelectorAll('[data-scramble="scroll"]')) {
+        cleanStega(target);
+
         const isAlternative = target.hasAttribute("data-scramble-alt");
 
         const split = new SplitText(target, {
@@ -77,6 +96,7 @@ export function ScrambleReveal() {
           continue;
         }
 
+        cleanStega(textEl);
         const originalText = textEl.textContent ?? "";
         const customHoverText = textEl.getAttribute("data-scramble-text");
 

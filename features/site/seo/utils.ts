@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { stegaClean } from "next-sanity";
 import { env } from "~/env";
 import { sanityFetch } from "~/features/sanity/client";
 import type { ImageFragmentResult } from "~/features/sanity/media/fragment";
@@ -99,8 +100,9 @@ export async function seo(
     },
   });
 
-  const title = props.title ?? site?.seoMetadata?.title;
-  const description = props.description ?? site?.seoMetadata?.description;
+  // Draft Mode strings carry invisible stega payloads; metadata must stay clean text.
+  const title = stegaClean(props.title ?? site?.seoMetadata?.title);
+  const description = stegaClean(props.description ?? site?.seoMetadata?.description);
   const image = props.image ?? site?.seoMetadata?.image;
   const robots = props.robots ?? site?.seoMetadata?.robots;
   const images = image ? getOgImageSrc(image) : undefined;
