@@ -8,6 +8,7 @@ import { site } from "./documents/site";
 import { appColor } from "./fields/app-color";
 import { aspectRatio } from "./fields/aspect-ratio";
 import { lottieOptions } from "./fields/lottie-options";
+import { headerNavItem } from "./fields/nav-item";
 import { riveOptions } from "./fields/rive-options";
 import { videoOptions } from "./fields/video-options";
 import { sections } from "./page-sections";
@@ -27,6 +28,7 @@ export const schemaTypes = [
   riveOptions,
   lottieOptions,
   appColor,
+  headerNavItem,
   // PLOP: Add Export
   ...sections,
 ];

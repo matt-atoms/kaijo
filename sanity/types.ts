@@ -15,6 +15,19 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: sanity-schema.json
+export type Link = {
+  type?: "internal" | "external" | "email" | "phone" | "file" | "params";
+  external?: string;
+  email?: string;
+  phone?: string;
+  file?: LinkFile;
+  canDownload?: boolean;
+  paramsHref?: string;
+  internal?: LinkInternal;
+  customText?: string;
+  openInNewTab?: boolean;
+};
+
 export type AppMedia = {
   type?: "image" | "videoMux" | "videoFile" | "videoUrl" | "rive" | "lottie";
   videoFile?: VideoFile;
@@ -308,9 +321,32 @@ export type MediaLottieDimensions = {
   height?: number;
 };
 
+export type LinkFile = {
+  asset?: SanityFileAssetReference;
+  media?: unknown; // Unable to locate the referenced type "link.file.media" in schema
+  _type: "file";
+};
+
+export type LinkInternal = {
+  link?: PageReference;
+  sectionTarget?: string;
+};
+
+export type ChildrenAppLinkFile = {
+  asset?: SanityFileAssetReference;
+  media?: unknown; // Unable to locate the referenced type "appLink.file.media" in schema
+  _type: "file";
+};
+
+export type ChildrenAppLinkInternal = {
+  link?: PageReference;
+  sectionTarget?: string;
+};
+
 export type PortfolioGridSection = {
   _type: "portfolioGridSection";
   note?: string;
+  category?: "Personal Projects" | "Selected Commissions & Editorials";
 };
 
 export type AboutSection = {
@@ -517,6 +553,25 @@ export type MediaSection = {
   caption?: string;
 };
 
+export type HeaderNavItem = {
+  _type: "headerNavItem";
+  link?: Link;
+  children?: Array<{
+    type?: "internal" | "external" | "email" | "phone" | "file" | "params";
+    external?: string;
+    email?: string;
+    phone?: string;
+    file?: ChildrenAppLinkFile;
+    canDownload?: boolean;
+    paramsHref?: string;
+    internal?: ChildrenAppLinkInternal;
+    customText?: string;
+    openInNewTab?: boolean;
+    _type: "appLink";
+    _key: string;
+  }>;
+};
+
 export type AppColor = string;
 
 export type LottieOptions = {
@@ -696,7 +751,7 @@ export type Project = {
   _rev: string;
   title?: string;
   slug?: Slug;
-  category?: string;
+  category?: "Personal Projects" | "Selected Commissions & Editorials";
   date?: string;
   description?: Array<{
     children?: Array<{
@@ -936,27 +991,11 @@ export type Site = {
     showFooter?: boolean;
   };
   header?: {
-    links?: Array<{
-      type?: "internal" | "external" | "email" | "phone" | "file" | "params";
-      external?: string;
-      email?: string;
-      phone?: string;
-      file?: {
-        asset?: SanityFileAssetReference;
-        media?: unknown;
-        _type: "file";
-      };
-      canDownload?: boolean;
-      paramsHref?: string;
-      internal?: {
-        link?: PageReference;
-        sectionTarget?: string;
-      };
-      customText?: string;
-      openInNewTab?: boolean;
-      _type: "appLink";
-      _key: string;
-    }>;
+    links?: Array<
+      {
+        _key: string;
+      } & HeaderNavItem
+    >;
   };
   contacts?: Array<{
     name?: string;
@@ -1357,6 +1396,7 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | Link
   | AppMedia
   | SectionSettings
   | SanityFileAssetReference
@@ -1399,6 +1439,10 @@ export type AllSanitySchemaTypes =
   | MediaRiveDimensions
   | MediaLottieFile
   | MediaLottieDimensions
+  | LinkFile
+  | LinkInternal
+  | ChildrenAppLinkFile
+  | ChildrenAppLinkInternal
   | PortfolioGridSection
   | AboutSection
   | ProjectHeroSection
@@ -1406,6 +1450,7 @@ export type AllSanitySchemaTypes =
   | TextSection
   | CtaSection
   | MediaSection
+  | HeaderNavItem
   | AppColor
   | LottieOptions
   | RiveOptions
@@ -2641,26 +2686,28 @@ export type MediaSectionQResult = {
 
 // Source: features/page-builder/sections/portfolio-grid-section.tsx
 // Variable: PortfolioGridQ
-// Query: *[_type == "project" && defined(slug.current)] | order(gridOrder asc){  _id,  title,  category,  date,  "slug": slug.current,  "gridStyle": coalesce(gridStyle, "normal"),  thumbnail{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}}
-export type PortfolioGridQResult = Array<{
-  _id: string;
-  title: string | undefined;
-  category: string | undefined;
-  date: string | undefined;
-  slug: string | undefined;
-  gridStyle: "normal" | "wide";
-  thumbnail: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "portfolioGridSectionField" && _key == $sectionKey][0]{    "projects": *[_type == "project" && defined(slug.current) && (!defined(^.sectionContent.category) || category == ^.sectionContent.category)] | order(gridOrder asc){  _id,  title,  category,  date,  "slug": slug.current,  "gridStyle": coalesce(gridStyle, "normal"),  thumbnail{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}}  }
+export type PortfolioGridQResult = {
+  projects: Array<{
+    _id: string;
     title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-}>;
+    category: "Personal Projects" | "Selected Commissions & Editorials" | undefined;
+    date: string | undefined;
+    slug: string | undefined;
+    gridStyle: "normal" | "wide";
+    thumbnail: {
+      _id: string | undefined;
+      _rev: string | undefined;
+      altText: string | undefined;
+      description: string | undefined;
+      title: string | undefined;
+      lqip: string | undefined;
+      dimensions: SanityImageDimensions | undefined;
+      crop: SanityImageCrop | undefined;
+      hotspot: SanityImageHotspot | undefined;
+    } | undefined;
+  }>;
+} | undefined;
 
 // Source: features/page-builder/sections/project-hero-section.tsx
 // Variable: ProjectHeroQ
@@ -2668,7 +2715,7 @@ export type PortfolioGridQResult = Array<{
 export type ProjectHeroQResult = Array<{
   _id: string;
   title: string | undefined;
-  category: string | undefined;
+  category: "Personal Projects" | "Selected Commissions & Editorials" | undefined;
   date: string | undefined;
   slug: string | undefined;
   gridStyle: "normal" | "wide";
@@ -3312,23 +3359,40 @@ export type SiteFooterQResult = {
 
 // Source: features/site/site-header/query.ts
 // Variable: SiteHeaderQ
-// Query: *[_type == "site"][0]{  header{    links[]{"key": _key,   type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}  }}
+// Query: *[_type == "site"][0]{  header{    links[]{      "key": _key,      "link": link{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )},      "children": children[]{"key": _key,   type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}    }  }}
 export type SiteHeaderQResult = {
   header: {
     links: Array<{
       key: string;
-      type:
-        | "email"
-        | "external"
-        | "file"
-        | "internal"
-        | "params"
-        | "phone"
-        | undefined;
-      openInNewTab: boolean | false;
-      canDownload: boolean | false;
-      href: string | "" | "mailto:" | "tel:";
-      text: string | "";
+      link: {
+        type:
+          | "email"
+          | "external"
+          | "file"
+          | "internal"
+          | "params"
+          | "phone"
+          | undefined;
+        openInNewTab: boolean | false;
+        canDownload: boolean | false;
+        href: string | "" | "mailto:" | "tel:";
+        text: string | "";
+      } | undefined;
+      children: Array<{
+        key: string;
+        type:
+          | "email"
+          | "external"
+          | "file"
+          | "internal"
+          | "params"
+          | "phone"
+          | undefined;
+        openInNewTab: boolean | false;
+        canDownload: boolean | false;
+        href: string | "" | "mailto:" | "tel:";
+        text: string | "";
+      }> | undefined;
     }> | undefined;
   } | undefined;
 } | undefined;

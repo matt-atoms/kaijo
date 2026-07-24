@@ -5,6 +5,8 @@
    */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  /* Brand wordmark (top-left name); see features/fonts/index.ts. */
+  --font-wordmark: var(--font-big-shoulders), "Arial Narrow", ui-sans-serif, system-ui, sans-serif;
   --font-pixel-square: var(--font-geist-pixel-square), ui-monospace, monospace;
   --font-pixel-grid: var(--font-geist-pixel-grid), ui-monospace, monospace;
   --font-pixel-circle: var(--font-geist-pixel-circle), ui-monospace, monospace;

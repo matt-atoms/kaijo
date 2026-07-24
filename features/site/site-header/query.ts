@@ -4,6 +4,10 @@ import { SANITY_SINGLETON_SITE_ID } from "~/sanity/constants";
 
 export const SiteHeaderQ = defineQuery(`*[_type == "${SANITY_SINGLETON_SITE_ID}"][0]{
   header{
-    links[]{"key": _key, ${LinkFragment}}
+    links[]{
+      "key": _key,
+      "link": link{${LinkFragment}},
+      "children": children[]{"key": _key, ${LinkFragment}}
+    }
   }
 }`);

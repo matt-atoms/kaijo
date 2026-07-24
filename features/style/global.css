@@ -9,6 +9,105 @@ img {
 }
 
 /*
+ * Brand wordmark (top-left name) — see features/site/site-header/wordmark.tsx and the
+ * --font-wordmark token in features/style/typography.css. Condensed display face, sized to
+ * roughly match the presence of the mark it replaced.
+ */
+.wordmark {
+  display: inline-block;
+  font-family: var(--font-wordmark);
+  font-weight: 600;
+  font-size: 2.4em;
+  line-height: 1;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* The name is longer than the mark it replaced; a slight trim on phones (kept deliberately
+ * close to the nav links — the crowded look is intentional). */
+@media screen and (max-width: 767px) {
+  .wordmark {
+    font-size: 2.1em;
+  }
+}
+
+/*
+ * Header nav dropdown (e.g. WORK → its sub-categories). See features/site/site-header/header-nav.tsx.
+ * The trigger is a plain nav link; the caret button toggles the submenu for touch/keyboard, and
+ * hover/focus reveals it for pointer users.
+ */
+.nav_dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.nav_dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25em;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 0.7em;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    color 0.3s ease;
+}
+
+.nav_dropdown-toggle:hover {
+  color: var(--colors--accent-color);
+}
+
+.nav_dropdown[data-open] .nav_dropdown-toggle {
+  transform: rotate(180deg);
+}
+
+.nav_dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 110;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  min-width: max-content;
+  margin-top: 0.75em;
+  padding: 1em 1.25em;
+  background: #fff;
+  color: var(--colors--black);
+  border: 1px solid rgb(0 0 0 / 0.1);
+}
+
+.nav_dropdown-menu[hidden] {
+  display: none;
+}
+
+.nav_dropdown-link {
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.nav_dropdown-link:hover,
+.nav_dropdown-link.w--current {
+  color: var(--colors--accent-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav_dropdown-toggle {
+    transition: color 0.3s ease;
+  }
+}
+
+/*
  * Page reveal: the display fonts reshape the layout when they swap in, so the page fades in
  * once fonts are ready (see the inline script in shared-web-layout.tsx).
  * - Without JS the attribute is never flipped, so a CSS-only fallback forces the page visible.

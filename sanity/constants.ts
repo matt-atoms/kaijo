@@ -31,3 +31,13 @@ export const API_ONLY_DOCUMENTS = {
 export const SANITY_PAGE_DOCUMENT_TYPE = "page" as const;
 export const SANITY_ARTICLE_DOCUMENT_TYPE = "article" as const;
 export const SANITY_PROJECT_DOCUMENT_TYPE = "project" as const;
+
+/**
+ * The fixed Work sub-categories. The value is also the label shown under a project title, and is
+ * what the Portfolio Grid section filters on and the /work sub-pages list. Shared by the project
+ * and portfolio-grid schemas so the two stay in sync; add an entry here to introduce a category.
+ */
+export const WORK_CATEGORIES = ["Personal Projects", "Selected Commissions & Editorials"] as const;
+
+/** `options.list` entries for a Work-category string field. */
+export const WORK_CATEGORY_OPTIONS = WORK_CATEGORIES.map((value) => ({ title: value, value }));

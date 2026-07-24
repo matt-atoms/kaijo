@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { WORK_CATEGORY_OPTIONS } from "../../constants";
 
 /**
  * The Webflow project template lays 16 CMS image fields into 10 fixed collage rows.
@@ -55,7 +56,12 @@ export const project = defineType({
       name: "category",
       type: "string",
       title: "Category",
-      description: "E.g. “Assignment” or “Concept Work”. Shown under the project title in the homepage hero.",
+      description:
+        "Groups the project under a Work sub-category. Drives the /work sub-menu listing pages, and is shown as the label under the project title.",
+      options: {
+        list: [...WORK_CATEGORY_OPTIONS],
+        layout: "radio",
+      },
     }),
     defineField({
       group: "details",

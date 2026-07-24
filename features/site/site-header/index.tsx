@@ -1,7 +1,8 @@
-import { KaijoLogo } from "~/features/kaijo/logo";
 import { KaijoNavLink } from "~/features/kaijo/nav-link";
 import { sanityFetch } from "~/features/sanity/client";
+import { HeaderNav } from "~/features/site/site-header/header-nav";
 import { SiteHeaderQ } from "~/features/site/site-header/query";
+import { Wordmark } from "~/features/site/site-header/wordmark";
 import { SANITY_SINGLETON_SITE_ID } from "~/sanity/constants";
 import type { SiteHeaderQResult } from "~/sanity/types";
 
@@ -18,18 +19,9 @@ export async function SiteHeader() {
       <div className="container">
         <div className="nav_inner">
           <KaijoNavLink href="/" className="kaijo_link w-inline-block">
-            {/* "kajio" typo is original Webflow class naming */}
-            <div className="kajio_logo w-embed">
-              <KaijoLogo />
-            </div>
+            <Wordmark />
           </KaijoNavLink>
-          <div className="nav_link-row">
-            {links.map((link) => (
-              <KaijoNavLink key={link.key} href={link.href} className="nav_link w-inline-block">
-                <div className="nav_link-text">{link.text}</div>
-              </KaijoNavLink>
-            ))}
-          </div>
+          <HeaderNav links={links} />
         </div>
       </div>
     </header>

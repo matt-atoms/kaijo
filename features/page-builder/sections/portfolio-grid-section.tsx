@@ -6,9 +6,19 @@ import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import { sanityFetch } from "~/features/sanity/client";
 import { SANITY_PROJECT_DOCUMENT_TYPE } from "~/sanity/constants";
 
+/**
+ * Reads this section's optional `category` filter and lists the matching projects in one round
+ * trip: `^.category` is the section's filter, so an unset filter (`!defined(^.category)`) lists
+ * every project (homepage / all-work behaviour) while a set filter narrows to that category (the
+ * /work sub-pages). The GROQ comparison runs server-side on raw values, so it needs no stegaClean.
+ */
 const PortfolioGridQ = defineQuery(`
-  *[_type == "${SANITY_PROJECT_DOCUMENT_TYPE}" && defined(slug.current)] | order(gridOrder asc){${ProjectTileFragment}}
+  *[_id == $docId][0].pageBuilder.sectionsArray[_type == "portfolioGridSectionField" && _key == $sectionKey][0]{
+    "projects": *[_type == "${SANITY_PROJECT_DOCUMENT_TYPE}" && defined(slug.current) && (!defined(^.sectionContent.category) || category == ^.sectionContent.category)] | order(gridOrder asc){${ProjectTileFragment}}
+  }
 `);
+
+type PortfolioGridResult = { projects: ProjectTileResult[] } | null;
 
 /**
  * The Webflow grid items carry this node id; the site CSS targets it with
@@ -16,11 +26,14 @@ const PortfolioGridQ = defineQuery(`
  */
 const W_NODE_ID = "w-node-_07809c38-3c7d-8b47-6519-7fadec3796aa-495fc836";
 
-export async function PortfolioGridSection(_props: { docId: string; sectionKey: string }) {
-  const projects = await sanityFetch<ProjectTileResult[]>({
+export async function PortfolioGridSection({ docId, sectionKey }: { docId: string; sectionKey: string }) {
+  const result = await sanityFetch<PortfolioGridResult>({
     query: PortfolioGridQ,
-    options: { next: { tags: [SANITY_PROJECT_DOCUMENT_TYPE] } },
+    params: { docId, sectionKey },
+    options: { next: { tags: [`doc:${docId}`, SANITY_PROJECT_DOCUMENT_TYPE] } },
   });
+
+  const projects = result?.projects;
 
   if (!projects?.length) {
     return null;
