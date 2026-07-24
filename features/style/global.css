@@ -84,6 +84,20 @@ img {
   border: 1px solid rgb(0 0 0 / 0.1);
 }
 
+/*
+ * Invisible bridge across the margin-top gap between the trigger and the menu, so moving the
+ * cursor down to a sub-link never leaves the group (which would fire mouseleave and close the
+ * menu before the click lands).
+ */
+.nav_dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -0.75em;
+  left: 0;
+  right: 0;
+  height: 0.75em;
+}
+
 .nav_dropdown-menu[hidden] {
   display: none;
 }
