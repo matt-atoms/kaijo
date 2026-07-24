@@ -154,27 +154,19 @@ img {
   position: relative;
   overflow: hidden;
   margin-bottom: 0.75em;
-}
-
-/* Varied aspect ratios create the masonry rhythm (the columns absorb the differing heights). */
-.selected_tile:nth-child(5n + 1) .selected_media {
   aspect-ratio: 4 / 5;
 }
 
-.selected_tile:nth-child(5n + 2) .selected_media {
-  aspect-ratio: 3 / 4;
-}
-
-.selected_tile:nth-child(5n + 3) .selected_media {
-  aspect-ratio: 1 / 1;
-}
-
-.selected_tile:nth-child(5n + 4) .selected_media {
+/*
+ * Two portrait ratios arranged so each 3-up column sums to the same height: the tile bottoms line
+ * up while the middle seams stay staggered (keeps the dynamic feel without a ragged bottom edge).
+ * Tuned for the current ~6 projects — tiles 1/4/5 are tall (2/3), the rest short (4/5), so every
+ * column is one tall + one short.
+ */
+.selected_tile:nth-child(1) .selected_media,
+.selected_tile:nth-child(4) .selected_media,
+.selected_tile:nth-child(5) .selected_media {
   aspect-ratio: 2 / 3;
-}
-
-.selected_tile:nth-child(5n + 5) .selected_media {
-  aspect-ratio: 3 / 4;
 }
 
 .selected_image {
