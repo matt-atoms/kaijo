@@ -37,9 +37,12 @@ function NavGroup({ item }: { item: HeaderItem }) {
   const pathname = usePathname();
   const menuId = React.useId();
 
-  // Close the menu after a navigation (the destination link was clicked).
+  // Close the menu whenever the route changes (a destination link was clicked). Referencing
+  // `pathname` in the body keeps it a real dependency (and survives `biome ... --unsafe`).
   React.useEffect(() => {
-    close();
+    if (pathname) {
+      close();
+    }
   }, [pathname, close]);
 
   const label = item.link?.text ?? "";

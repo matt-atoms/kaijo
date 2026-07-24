@@ -36,13 +36,15 @@ export async function AboutSection({ docId, sectionKey }: { docId: string; secti
   const { title, text, secondText, image } = section.content;
 
   return (
-    <div className="section_about">
+    <div className="section_about section-padding-top">
       <div className="container">
         <div className="vertical_layout">
           <div className="about_text-wrapper">
-            <h2 data-scramble="scroll" className="section_title">
-              {title}
-            </h2>
+            {title && (
+              <h2 data-scramble="scroll" className="section_title">
+                {title}
+              </h2>
+            )}
             <p data-scramble="scroll">{text}</p>
           </div>
           <div className="about_image-wrapper">

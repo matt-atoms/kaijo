@@ -12,19 +12,27 @@ export async function SiteFooter() {
 
   const links = [...(siteFooter?.footer?.links ?? []), ...(siteFooter?.footer?.legalLinks ?? [])];
 
-  if (links.length === 0) {
-    return null;
-  }
-
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer_inner-wrapper">
-          {links.map((link) => (
-            <SanityLink key={link.key} link={link} className="footer_link w-inline-block">
-              <div className="footer_link-text">{link.text}</div>
-            </SanityLink>
-          ))}
+          <div className="footer_links">
+            {links.map((link) => (
+              <SanityLink key={link.key} link={link} className="footer_link w-inline-block">
+                <div className="footer_link-text">{link.text}</div>
+              </SanityLink>
+            ))}
+          </div>
+          {/* Newsletter placeholder — non-functional; wire up to an email provider later. */}
+          <form className="footer_newsletter" aria-label="Newsletter sign-up" data-placeholder="true">
+            <span className="footer_newsletter-label">Newsletter</span>
+            <div className="footer_newsletter-row">
+              <input type="email" className="footer_newsletter-input" placeholder="your@email.com" aria-label="Email address" />
+              <button type="button" className="footer_newsletter-button">
+                Subscribe
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </footer>

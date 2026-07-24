@@ -122,6 +122,270 @@ img {
 }
 
 /*
+ * Selected Work grid — features/page-builder/sections/project-hero-section.tsx. Inverts the old
+ * floating-name hero: the image + category + year are shown, and the project name is revealed as
+ * an overlay on hover (CSS-only).
+ */
+.selected_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em;
+}
+
+@media screen and (max-width: 991px) {
+  .selected_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .selected_grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.selected_tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+  color: inherit;
+}
+
+.selected_media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+}
+
+.selected_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.selected_overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75em;
+  text-align: center;
+  background: rgb(0 0 0 / 0.35);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.selected_name {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 2em;
+  line-height: 1;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.selected_tile:hover .selected_overlay,
+.selected_tile:focus-visible .selected_overlay {
+  opacity: 1;
+}
+
+.selected_tile:hover .selected_image {
+  transform: scale(1.04);
+}
+
+.selected_meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  font-weight: 600;
+}
+
+.selected_year {
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .selected_image {
+    transition: none;
+  }
+}
+
+/* About preview — features/page-builder/sections/about-preview-section.tsx */
+.about-preview_inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5em;
+  max-width: 42em;
+}
+
+.about-preview_text {
+  opacity: 1;
+  text-align: left;
+  font-size: 1.25em;
+  line-height: 1.5;
+}
+
+.about-preview_link,
+.workshops_button,
+.feature-links_label {
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.about-preview_link:hover,
+.workshops_button:hover {
+  color: var(--colors--accent-color);
+}
+
+/* Feature links (Books / Prints) — features/page-builder/sections/feature-links-section.tsx */
+.feature-links_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em;
+}
+
+@media screen and (max-width: 767px) {
+  .feature-links_grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-links_tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+  color: inherit;
+}
+
+.feature-links_media {
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.feature-links_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.feature-links_tile:hover .feature-links_image {
+  transform: scale(1.04);
+}
+
+.feature-links_tile:hover .feature-links_label {
+  color: var(--colors--accent-color);
+}
+
+/* Workshops — features/page-builder/sections/workshops-section.tsx */
+.workshops_inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3em;
+  align-items: center;
+}
+
+@media screen and (max-width: 991px) {
+  .workshops_inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+.workshops_media {
+  overflow: hidden;
+}
+
+.workshops_content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5em;
+}
+
+.workshops_text {
+  opacity: 1;
+  text-align: left;
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-links_image {
+    transition: none;
+  }
+}
+
+/* Footer + newsletter placeholder — features/site/site-footer/index.tsx */
+.footer_links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.footer_newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.footer_newsletter-label {
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 500;
+}
+
+.footer_newsletter-row {
+  display: flex;
+  gap: 0.5em;
+}
+
+.footer_newsletter-input {
+  padding: 0.5em 0.75em;
+  border: 1px solid var(--colors--black);
+  background: transparent;
+  color: var(--colors--black);
+  font: inherit;
+  font-size: 0.88em;
+}
+
+.footer_newsletter-input::placeholder {
+  color: var(--colors--black);
+  opacity: 0.5;
+}
+
+.footer_newsletter-button {
+  padding: 0.5em 1em;
+  border: 1px solid var(--colors--black);
+  background: var(--colors--black);
+  color: #fff;
+  font: inherit;
+  font-size: 0.88em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.footer_newsletter-button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 767px) {
+  .footer_inner-wrapper {
+    flex-direction: column;
+    gap: 2em;
+    align-items: flex-start;
+  }
+}
+
+/*
  * Page reveal: the display fonts reshape the layout when they swap in, so the page fades in
  * once fonts are ready (see the inline script in shared-web-layout.tsx).
  * - Without JS the attribute is never flipped, so a CSS-only fallback forces the page visible.

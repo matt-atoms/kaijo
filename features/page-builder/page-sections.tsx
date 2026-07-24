@@ -22,6 +22,15 @@ const _sections = {
   portfolioGridSectionField: dynamic(() =>
     import("~/features/page-builder/sections/portfolio-grid-section").then((mod) => mod.PortfolioGridSection)
   ),
+  aboutPreviewSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/about-preview-section").then((mod) => mod.AboutPreviewSection)
+  ),
+  featureLinksSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/feature-links-section").then((mod) => mod.FeatureLinksSection)
+  ),
+  workshopsSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/workshops-section").then((mod) => mod.WorkshopsSection)
+  ),
   // PLOP: Add Import
 } as const;
 

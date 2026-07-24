@@ -10,8 +10,7 @@ export const aboutSection = defineField({
       name: "title",
       type: "string",
       title: "Title",
-      initialValue: "About",
-      validation: (R) => R.required(),
+      description: "Optional heading. Leave empty to use this section as a hero (image + intro, no header).",
     }),
     defineField({
       name: "text",
