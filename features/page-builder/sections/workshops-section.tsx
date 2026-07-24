@@ -30,7 +30,7 @@ export async function WorkshopsSection({ docId, sectionKey }: { docId: string; s
   }
 
   return (
-    <div className="section_workshops section-padding-top section-padding-bottom">
+    <div className="section_workshops">
       <div className="container">
         <div className="workshops_inner">
           <div className="workshops_media">

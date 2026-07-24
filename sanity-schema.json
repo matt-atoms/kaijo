@@ -5309,6 +5309,34 @@
         },
         "optional": true
       },
+      "type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "Personal Project"
+            },
+            {
+              "type": "string",
+              "value": "Commission"
+            },
+            {
+              "type": "string",
+              "value": "Editorial"
+            }
+          ]
+        },
+        "optional": true
+      },
+      "client": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "date": {
         "type": "objectAttribute",
         "value": {

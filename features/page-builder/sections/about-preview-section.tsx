@@ -26,7 +26,7 @@ export async function AboutPreviewSection({ docId, sectionKey }: { docId: string
   const { text, link } = section.content;
 
   return (
-    <div className="section_about-preview section-padding-top section-padding-bottom">
+    <div className="section_about-preview">
       <div className="container">
         <div className="about-preview_inner">
           <p data-scramble="scroll" className="about-preview_text">

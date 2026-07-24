@@ -882,6 +882,8 @@ export type Project = {
   title?: string;
   slug?: Slug;
   category?: "Personal Projects" | "Selected Commissions & Editorials";
+  type?: "Personal Project" | "Commission" | "Editorial";
+  client?: string;
   date?: string;
   description?: Array<{
     children?: Array<{
@@ -3020,12 +3022,14 @@ export type MediaSectionQResult = {
 
 // Source: features/page-builder/sections/portfolio-grid-section.tsx
 // Variable: PortfolioGridQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "portfolioGridSectionField" && _key == $sectionKey][0]{    "projects": *[_type == "project" && defined(slug.current) && (!defined(^.sectionContent.category) || category == ^.sectionContent.category)] | order(gridOrder asc){  _id,  title,  category,  date,  "slug": slug.current,  "gridStyle": coalesce(gridStyle, "normal"),  thumbnail{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}}  }
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "portfolioGridSectionField" && _key == $sectionKey][0]{    "projects": *[_type == "project" && defined(slug.current) && (!defined(^.sectionContent.category) || category == ^.sectionContent.category)] | order(gridOrder asc){  _id,  title,  category,  type,  client,  date,  "slug": slug.current,  "gridStyle": coalesce(gridStyle, "normal"),  thumbnail{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}}  }
 export type PortfolioGridQResult = {
   projects: Array<{
     _id: string;
     title: string | undefined;
     category: "Personal Projects" | "Selected Commissions & Editorials" | undefined;
+    type: "Commission" | "Editorial" | "Personal Project" | undefined;
+    client: string | undefined;
     date: string | undefined;
     slug: string | undefined;
     gridStyle: "normal" | "wide";
@@ -3045,11 +3049,13 @@ export type PortfolioGridQResult = {
 
 // Source: features/page-builder/sections/project-hero-section.tsx
 // Variable: ProjectHeroQ
-// Query: *[_type == "project" && defined(slug.current)] | order(date asc){  _id,  title,  category,  date,  "slug": slug.current,  "gridStyle": coalesce(gridStyle, "normal"),  thumbnail{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}}
+// Query: *[_type == "project" && defined(slug.current)] | order(date asc){  _id,  title,  category,  type,  client,  date,  "slug": slug.current,  "gridStyle": coalesce(gridStyle, "normal"),  thumbnail{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}}
 export type ProjectHeroQResult = Array<{
   _id: string;
   title: string | undefined;
   category: "Personal Projects" | "Selected Commissions & Editorials" | undefined;
+  type: "Commission" | "Editorial" | "Personal Project" | undefined;
+  client: string | undefined;
   date: string | undefined;
   slug: string | undefined;
   gridStyle: "normal" | "wide";

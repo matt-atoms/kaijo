@@ -5,6 +5,8 @@ export const ProjectTileFragment = `
   _id,
   title,
   category,
+  type,
+  client,
   date,
   "slug": slug.current,
   "gridStyle": coalesce(gridStyle, "normal"),
@@ -15,6 +17,8 @@ export type ProjectTileResult = {
   _id: string;
   title: string | null;
   category: string | null;
+  type: string | null;
+  client: string | null;
   date: string | null;
   slug: string | null;
   gridStyle: string;

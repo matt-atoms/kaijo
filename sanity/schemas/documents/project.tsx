@@ -57,11 +57,34 @@ export const project = defineType({
       type: "string",
       title: "Category",
       description:
-        "Groups the project under a Work sub-category. Drives the /work sub-menu listing pages, and is shown as the label under the project title.",
+        "Groups the project under a Work sub-category. Drives the /work sub-menu listing pages and nav (it is NOT shown on the tile — the Type field below is).",
       options: {
         list: [...WORK_CATEGORY_OPTIONS],
         layout: "radio",
       },
+    }),
+    defineField({
+      group: "details",
+      name: "type",
+      type: "string",
+      title: "Type",
+      description:
+        "The individual label shown on the Selected Work tile (e.g. a “Selected Commissions & Editorials” project is labelled either Commission or Editorial). May get its own portfolio-page approach later.",
+      options: {
+        list: [
+          { title: "Personal Project", value: "Personal Project" },
+          { title: "Commission", value: "Commission" },
+          { title: "Editorial", value: "Editorial" },
+        ],
+        layout: "radio",
+      },
+    }),
+    defineField({
+      group: "details",
+      name: "client",
+      type: "string",
+      title: "Client",
+      description: "Shown first on the Selected Work tile label (before Type and year). Defaults to the project name for now.",
     }),
     defineField({
       group: "details",

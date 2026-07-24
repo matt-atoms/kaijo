@@ -122,42 +122,63 @@ img {
 }
 
 /*
- * Selected Work grid — features/page-builder/sections/project-hero-section.tsx. Inverts the old
- * floating-name hero: the image + category + year are shown, and the project name is revealed as
- * an overlay on hover (CSS-only).
+ * Selected Work — features/page-builder/sections/project-hero-section.tsx. Inverts the old
+ * floating-name hero: image + client + type + year are shown, and the project name is revealed as
+ * an overlay on hover. A CSS-columns masonry with per-tile aspect ratios gives a dynamic layout.
  */
 .selected_grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2em;
+  column-count: 3;
+  column-gap: 2em;
 }
 
 @media screen and (max-width: 991px) {
   .selected_grid {
-    grid-template-columns: repeat(2, 1fr);
+    column-count: 2;
   }
 }
 
 @media screen and (max-width: 767px) {
   .selected_grid {
-    grid-template-columns: 1fr;
+    column-count: 1;
   }
 }
 
 .selected_tile {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75em;
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 2em;
   color: inherit;
 }
 
 .selected_media {
   position: relative;
   overflow: hidden;
+  margin-bottom: 0.75em;
+}
+
+/* Varied aspect ratios create the masonry rhythm (the columns absorb the differing heights). */
+.selected_tile:nth-child(5n + 1) .selected_media {
+  aspect-ratio: 4 / 5;
+}
+
+.selected_tile:nth-child(5n + 2) .selected_media {
+  aspect-ratio: 3 / 4;
+}
+
+.selected_tile:nth-child(5n + 3) .selected_media {
+  aspect-ratio: 1 / 1;
+}
+
+.selected_tile:nth-child(5n + 4) .selected_media {
+  aspect-ratio: 2 / 3;
+}
+
+.selected_tile:nth-child(5n + 5) .selected_media {
   aspect-ratio: 3 / 4;
 }
 
 .selected_image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -196,13 +217,14 @@ img {
 
 .selected_meta {
   display: flex;
-  justify-content: space-between;
-  gap: 1em;
+  flex-wrap: wrap;
+  gap: 0.5em;
   text-transform: uppercase;
   font-size: 0.75em;
   font-weight: 600;
 }
 
+.selected_client,
 .selected_year {
   font-weight: 400;
   opacity: 0.6;
@@ -212,6 +234,23 @@ img {
   .selected_image {
     transition: none;
   }
+}
+
+/*
+ * Tighter vertical rhythm for the lower homepage sections (each uses top-only spacing so gaps
+ * aren't doubled between sections). Kept smaller than the 12.5em section padding used above.
+ */
+.section_about-preview {
+  padding-top: 5em;
+}
+
+.section_feature-links {
+  padding-top: 7em;
+}
+
+.section_workshops {
+  padding-top: 7em;
+  padding-bottom: 7em;
 }
 
 /* About preview — features/page-builder/sections/about-preview-section.tsx */

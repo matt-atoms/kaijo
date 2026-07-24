@@ -33,7 +33,7 @@ export async function FeatureLinksSection({ docId, sectionKey }: { docId: string
   }
 
   return (
-    <div className="section_feature-links section-padding-top section-padding-bottom">
+    <div className="section_feature-links">
       <div className="container">
         <div className="vertical_layout">
           {content.title && (

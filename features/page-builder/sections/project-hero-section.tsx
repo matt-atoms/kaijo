@@ -25,7 +25,7 @@ export async function ProjectHeroSection(_props: { docId: string; sectionKey: st
   }
 
   return (
-    <section className="section_selected section-padding-top section-padding-bottom">
+    <section className="section_selected section-padding-top">
       <div className="container">
         <div className="vertical_layout">
           <h2 data-scramble="scroll" className="section_title">
@@ -45,7 +45,8 @@ export async function ProjectHeroSection(_props: { docId: string; sectionKey: st
                   </div>
                 </div>
                 <div className="selected_meta">
-                  {project.category && <span className="selected_category">{project.category}</span>}
+                  {project.client && <span className="selected_client">{project.client}</span>}
+                  {project.type && <span className="selected_category">{project.type}</span>}
                   {project.date && <span className="selected_year">{project.date.slice(0, 4)}</span>}
                 </div>
               </Link>
