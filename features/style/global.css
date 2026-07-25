@@ -475,21 +475,33 @@ img {
  * masonry of randomized, aspect-ratio-preserving image tiles (brand + year captions).
  */
 .work-anchors {
+  position: sticky;
+  top: 4.5em;
+  z-index: 50;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5em;
   margin-bottom: 4em;
+  /* Blend over the content it scrolls past, like the header. */
+  color: limegreen;
+  mix-blend-mode: difference;
 }
 
 .work-anchor {
   font-size: 0.88em;
   font-weight: 500;
   text-transform: uppercase;
+  text-underline-offset: 0.35em;
   transition: color 0.3s ease;
 }
 
 .work-anchor:hover {
   color: var(--colors--accent-color);
+}
+
+.work-anchor.is-active {
+  text-decoration: underline;
 }
 
 .work-group {
@@ -514,6 +526,26 @@ img {
     grid-template-columns: 1fr;
     gap: 1.5em;
     align-items: start;
+  }
+}
+
+/* Alternate groups flip the band: heading on the right, intro on the left. */
+.work-group--reversed .work-section_header {
+  grid-template-columns: 1fr 1.1fr;
+}
+
+.work-group--reversed .work-group_heading {
+  order: 2;
+}
+
+.work-group--reversed .work-group_intro {
+  order: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .work-group--reversed .work-group_heading,
+  .work-group--reversed .work-group_intro {
+    order: 0;
   }
 }
 
@@ -618,8 +650,8 @@ img {
 }
 
 .section_work--project .w-richtext p {
-  font-size: 0.95em;
-  font-weight: 500;
+  font-size: 1.1em;
+  font-weight: 400;
   line-height: 1.5;
   text-align: left;
   opacity: 1;

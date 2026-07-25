@@ -1,7 +1,9 @@
 import { defineQuery, stegaClean } from "next-sanity";
 import { WorkTileFragment, type WorkTileResult } from "~/features/kaijo/fragments";
+import { WorkAnchors } from "~/features/page-builder/sections/work-overview-anchors";
 import { WorkTile } from "~/features/page-builder/sections/work-overview-tile";
 import { sanityFetch } from "~/features/sanity/client";
+import { cx } from "~/features/style/utils";
 import { SANITY_PROJECT_DOCUMENT_TYPE } from "~/sanity/constants";
 
 const WorkOverviewSectionQ =
@@ -45,18 +47,18 @@ export async function WorkOverviewSection({ docId, sectionKey }: { docId: string
     return null;
   }
 
+  const anchors = groups.map((group) => ({ id: anchorId(group.heading), label: group.heading ?? "" }));
+
   return (
     <div className="section_work section-padding-top" data-page-builder-section="workOverviewSection">
       <div className="container">
-        <nav className="work-anchors" aria-label="Work sections">
-          {groups.map((group) => (
-            <a key={group.key} href={`#${anchorId(group.heading)}`} className="work-anchor">
-              {group.heading}
-            </a>
-          ))}
-        </nav>
-        {groups.map((group) => (
-          <section key={group.key} id={anchorId(group.heading)} className="work-group">
+        <WorkAnchors anchors={anchors} />
+        {groups.map((group, index) => (
+          <section
+            key={group.key}
+            id={anchorId(group.heading)}
+            className={cx("work-group", index % 2 === 1 && "work-group--reversed")}
+          >
             <div className="work-section_header">
               <h2 data-scramble="scroll" className="section_title work-group_heading">
                 {group.heading}
