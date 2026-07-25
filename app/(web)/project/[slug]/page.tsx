@@ -108,7 +108,7 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
 
   return (
     <SiteShell>
-      <div className="section_work">
+      <div className="section_work section_work--project">
         <div className="container">
           <div className="portfolio_wrapper">
             <div className="project_description-wrapper">

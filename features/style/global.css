@@ -595,6 +595,37 @@ img {
 }
 
 /*
+ * Project detail page — app/(web)/project/[slug]/page.tsx. Tighter top spacing; the sticky
+ * description pins higher so it stays fully visible; it blends over the collage like the header;
+ * larger/bolder body text; and a display-font title.
+ */
+.section_work.section_work--project {
+  padding-top: 6em;
+}
+
+.section_work--project .project_description-wrapper {
+  top: 6em;
+  width: 34%;
+  color: limegreen;
+  mix-blend-mode: difference;
+}
+
+.section_work--project .project_name-text {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 3em;
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.section_work--project .w-richtext p {
+  font-size: 0.95em;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: left;
+  opacity: 1;
+}
+
+/*
  * Page reveal: the display fonts reshape the layout when they swap in, so the page fades in
  * once fonts are ready (see the inline script in shared-web-layout.tsx).
  * - Without JS the attribute is never flipped, so a CSS-only fallback forces the page visible.
