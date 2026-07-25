@@ -146,6 +146,15 @@ export const project = defineType({
       description: "Used in the homepage hero and the portfolio grids.",
       validation: (R) => R.required(),
     }),
+    defineField({
+      group: "media",
+      name: "overviewImages",
+      type: "array",
+      title: "Overview images",
+      description:
+        "The images the /work gallery randomly cycles through for this project — curate just your strongest ones here. Leave empty to fall back to the thumbnail + all collage images.",
+      of: [{ type: "image" }],
+    }),
     ...PROJECT_IMAGE_SLOTS.map((slot, index) =>
       defineField({
         group: "media",

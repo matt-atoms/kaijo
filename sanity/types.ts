@@ -926,6 +926,14 @@ export type Project = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  overviewImages?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
   image1?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -3581,9 +3589,9 @@ export type TextSectionQResult = {
   } | undefined;
 } | undefined;
 
-// Source: features/page-builder/sections/work-overview-section/index.tsx
+// Source: features/page-builder/sections/work-overview-section.tsx
 // Variable: WorkOverviewSectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workOverviewSectionField" && _key == $sectionKey][0]{    "groups": sectionContent.groups[]{      "key": _key,      heading,      intro,      "projects": *[_type == "project" && defined(slug.current) && category == ^.category] | order(date asc){  _id,  title,  client,  date,  "slug": slug.current,  "images": [thumbnail, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16][defined(@.asset)]{      "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,    "aspectRatio": asset->metadata.dimensions.aspectRatio,  }}    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workOverviewSectionField" && _key == $sectionKey][0]{    "groups": sectionContent.groups[]{      "key": _key,      heading,      intro,      "projects": *[_type == "project" && defined(slug.current) && category == ^.category] | order(date asc){  _id,  title,  client,  date,  "slug": slug.current,  "images": select(    count(overviewImages[defined(asset)]) > 0 => overviewImages[defined(asset)],    true => [thumbnail, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16][defined(@.asset)]  ){      "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,    "aspectRatio": asset->metadata.dimensions.aspectRatio,  }}    }}
 export type WorkOverviewSectionQResult = {
   groups: Array<{
     key: string;
@@ -3595,18 +3603,7 @@ export type WorkOverviewSectionQResult = {
       client: string | undefined;
       date: string | undefined;
       slug: string | undefined;
-      images: Array<{
-        _id: string | undefined;
-        _rev: string | undefined;
-        altText: string | undefined;
-        description: string | undefined;
-        title: string | undefined;
-        lqip: string | undefined;
-        dimensions: SanityImageDimensions | undefined;
-        crop: SanityImageCrop | undefined;
-        hotspot: SanityImageHotspot | undefined;
-        aspectRatio: number | undefined;
-      } | undefined>;
+      images: null;
     }>;
   }> | undefined;
 } | undefined;

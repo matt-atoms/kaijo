@@ -35,7 +35,10 @@ export const WorkTileFragment = `
   client,
   date,
   "slug": slug.current,
-  "images": [thumbnail, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16][defined(@.asset)]{
+  "images": select(
+    count(overviewImages[defined(asset)]) > 0 => overviewImages[defined(asset)],
+    true => [thumbnail, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16][defined(@.asset)]
+  ){
     ${ImageFragment}
     "aspectRatio": asset->metadata.dimensions.aspectRatio,
   }
