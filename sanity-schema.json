@@ -2661,6 +2661,16 @@
             "name": "sectionContent.appLink"
           },
           "optional": true
+        },
+        "credentials": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "string"
+            }
+          },
+          "optional": true
         }
       }
     }

@@ -1,4 +1,4 @@
-import { defineField } from "sanity";
+import { defineArrayMember, defineField } from "sanity";
 import { createLinkField } from "../fields/create-link";
 
 export const aboutPreviewSection = defineField({
@@ -16,6 +16,13 @@ export const aboutPreviewSection = defineField({
       validation: (R) => R.required(),
     }),
     createLinkField({ title: "Read more link", validation: (R) => R.required() }),
+    defineField({
+      name: "credentials",
+      type: "array",
+      title: "Credentials",
+      description: "Short lines shown in a column beside the text (e.g. location, exhibitions, publications).",
+      of: [defineArrayMember({ type: "string" })],
+    }),
   ],
   preview: {
     select: { title: "text" },

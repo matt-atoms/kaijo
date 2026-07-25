@@ -33,6 +33,27 @@ img {
 }
 
 /*
+ * Header legibility over imagery: the fixed header blends with whatever scrolls behind it, so the
+ * wordmark + nav read as near-black over the lime background (difference of two equal greens = black)
+ * and flip to bright lime over dark images — per-pixel, only where they overlap an image. The blend
+ * must live on `.nav_wrapper` (its backdrop is the page) rather than the inner text, since the fixed
+ * header is its own stacking context. GPU-composited, so cheap. Caveat: over bright image areas the
+ * difference tends toward magenta rather than green (fine for the dark imagery here).
+ *
+ * `.page` carries the lime backdrop (it mirrors the body background): the reveal wrapper can form its
+ * own stacking context, so the green must live inside it for the header to blend to black over empty
+ * areas rather than staying invisible-green.
+ */
+.page {
+  background-color: limegreen;
+}
+
+.nav_wrapper {
+  color: limegreen;
+  mix-blend-mode: difference;
+}
+
+/*
  * Header nav dropdown (e.g. WORK → its sub-categories). See features/site/site-header/header-nav.tsx.
  * The trigger is a plain nav link; the caret button toggles the submenu for touch/keyboard, and
  * hover/focus reveals it for pointer users.
@@ -78,10 +99,10 @@ img {
   gap: 0.7em;
   min-width: max-content;
   margin-top: 0.75em;
-  padding: 1em 1.25em;
-  background: #fff;
-  color: var(--colors--black);
-  border: 1px solid rgb(0 0 0 / 0.1);
+  padding: 1em 0;
+  /* Transparent so it blends as plain text with the rest of the nav (a solid card would invert
+     under the header's mix-blend-mode). Colour is inherited from the blended header. */
+  background: transparent;
 }
 
 /*
@@ -247,6 +268,20 @@ img {
 
 /* About preview — features/page-builder/sections/about-preview-section.tsx */
 .about-preview_inner {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 4em;
+  align-items: start;
+}
+
+@media screen and (max-width: 767px) {
+  .about-preview_inner {
+    grid-template-columns: 1fr;
+    gap: 2.5em;
+  }
+}
+
+.about-preview_main {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -259,6 +294,24 @@ img {
   text-align: left;
   font-size: 1.25em;
   line-height: 1.5;
+}
+
+.about-preview_credentials {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-preview_credential {
+  padding-top: 0.9em;
+  border-top: 1px solid var(--colors--black);
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 500;
+  line-height: 1.3;
 }
 
 .about-preview_link,

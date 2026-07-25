@@ -8,6 +8,7 @@ const AboutPreviewSectionQ =
   defineQuery(`*[_id == $docId][0].pageBuilder.sectionsArray[_type == "aboutPreviewSectionField" && _key == $sectionKey][0]{
     "content": sectionContent{
       text,
+      credentials,
       "link": appLink{${LinkFragment}}
     }
 }`);
@@ -23,19 +24,30 @@ export async function AboutPreviewSection({ docId, sectionKey }: { docId: string
     return null;
   }
 
-  const { text, link } = section.content;
+  const { text, link, credentials } = section.content;
 
   return (
     <div className="section_about-preview">
       <div className="container">
         <div className="about-preview_inner">
-          <p data-scramble="scroll" className="about-preview_text">
-            {text}
-          </p>
-          {link?.href && (
-            <SanityLink link={link} className="about-preview_link">
-              {link.text || "Read more"} →
-            </SanityLink>
+          <div className="about-preview_main">
+            <p data-scramble="scroll" className="about-preview_text">
+              {text}
+            </p>
+            {link?.href && (
+              <SanityLink link={link} className="about-preview_link">
+                {link.text || "Read more"} →
+              </SanityLink>
+            )}
+          </div>
+          {credentials && credentials.length > 0 && (
+            <ul className="about-preview_credentials">
+              {credentials.map((credential) => (
+                <li key={credential} data-scramble="scroll" className="about-preview_credential">
+                  {credential}
+                </li>
+              ))}
+            </ul>
           )}
         </div>
       </div>
