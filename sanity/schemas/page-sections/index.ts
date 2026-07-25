@@ -7,6 +7,7 @@ import { mediaSection } from "./media-section";
 import { portfolioGridSection } from "./portfolio-grid-section";
 import { projectHeroSection } from "./project-hero-section";
 import { textSection } from "./text-section";
+import { workOverviewSection } from "./work-overview-section";
 import { workshopsSection } from "./workshops-section";
 // PLOP: Add Import
 
@@ -21,5 +22,6 @@ export const sections = [
   aboutPreviewSection,
   featureLinksSection,
   workshopsSection,
+  workOverviewSection,
   // PLOP: Add Export
 ];

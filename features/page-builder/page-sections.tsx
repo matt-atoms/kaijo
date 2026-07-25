@@ -31,6 +31,9 @@ const _sections = {
   workshopsSectionField: dynamic(() =>
     import("~/features/page-builder/sections/workshops-section").then((mod) => mod.WorkshopsSection)
   ),
+  workOverviewSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/work-overview-section").then((mod) => mod.WorkOverviewSection)
+  ),
   // PLOP: Add Import
 } as const;
 

@@ -2474,6 +2474,83 @@
     }
   },
   {
+    "name": "workOverviewSection",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "workOverviewSection"
+          }
+        },
+        "groups": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "object",
+              "attributes": {
+                "heading": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  },
+                  "optional": true
+                },
+                "intro": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  },
+                  "optional": true
+                },
+                "category": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "union",
+                    "of": [
+                      {
+                        "type": "string",
+                        "value": "Personal Projects"
+                      },
+                      {
+                        "type": "string",
+                        "value": "Selected Commissions & Editorials"
+                      }
+                    ]
+                  },
+                  "optional": true
+                },
+                "_type": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string",
+                    "value": "workGroup"
+                  }
+                }
+              },
+              "rest": {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "name": "workshopsSection",
     "type": "type",
     "value": {
@@ -4929,6 +5006,45 @@
                           "value": {
                             "type": "string",
                             "value": "workshopsSectionField"
+                          }
+                        }
+                      },
+                      "rest": {
+                        "type": "object",
+                        "attributes": {
+                          "_key": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "attributes": {
+                        "sectionSettings": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "inline",
+                            "name": "sectionSettings"
+                          },
+                          "optional": true
+                        },
+                        "sectionContent": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "inline",
+                            "name": "workOverviewSection"
+                          },
+                          "optional": true
+                        },
+                        "_type": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "string",
+                            "value": "workOverviewSectionField"
                           }
                         }
                       },
@@ -8218,6 +8334,45 @@
                           "value": {
                             "type": "string",
                             "value": "workshopsSectionField"
+                          }
+                        }
+                      },
+                      "rest": {
+                        "type": "object",
+                        "attributes": {
+                          "_key": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "attributes": {
+                        "sectionSettings": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "inline",
+                            "name": "sectionSettings"
+                          },
+                          "optional": true
+                        },
+                        "sectionContent": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "inline",
+                            "name": "workOverviewSection"
+                          },
+                          "optional": true
+                        },
+                        "_type": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "string",
+                            "value": "workOverviewSectionField"
                           }
                         }
                       },

@@ -470,6 +470,131 @@ img {
 }
 
 /*
+ * Work overview page — features/page-builder/sections/work-overview-section. Magazine-style: a top
+ * anchor nav, then per-category header bands (big heading left, intro right) followed by a loose
+ * masonry of randomized, aspect-ratio-preserving image tiles (brand + year captions).
+ */
+.work-anchors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  margin-bottom: 4em;
+}
+
+.work-anchor {
+  font-size: 0.88em;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.work-anchor:hover {
+  color: var(--colors--accent-color);
+}
+
+.work-group {
+  /* Clear the fixed header when jumping to the anchor. */
+  scroll-margin-top: 8em;
+}
+
+.work-group + .work-group {
+  margin-top: 7em;
+}
+
+.work-section_header {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 3em;
+  align-items: end;
+  margin-bottom: 3em;
+}
+
+@media screen and (max-width: 767px) {
+  .work-section_header {
+    grid-template-columns: 1fr;
+    gap: 1.5em;
+    align-items: start;
+  }
+}
+
+.work-group_heading {
+  font-size: 5em;
+  line-height: 0.95;
+}
+
+.work-group_intro {
+  max-width: 36em;
+  opacity: 1;
+  text-align: left;
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+
+.work-masonry {
+  column-count: 3;
+  column-gap: 2em;
+}
+
+@media screen and (max-width: 991px) {
+  .work-masonry {
+    column-count: 2;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .work-masonry {
+    column-count: 1;
+  }
+}
+
+.work-tile {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 2em;
+  color: inherit;
+}
+
+.work-tile_media {
+  overflow: hidden;
+  margin-bottom: 0.6em;
+}
+
+.work-tile_image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.work-tile:hover .work-tile_image {
+  transform: scale(1.03);
+}
+
+.work-tile_meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  text-transform: uppercase;
+  font-size: 0.75em;
+}
+
+.work-tile_brand {
+  font-weight: 600;
+}
+
+.work-tile_year {
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-tile_image {
+    transition: none;
+  }
+}
+
+/*
  * Page reveal: the display fonts reshape the layout when they swap in, so the page fades in
  * once fonts are ready (see the inline script in shared-web-layout.tsx).
  * - Without JS the attribute is never flipped, so a CSS-only fallback forces the page visible.
