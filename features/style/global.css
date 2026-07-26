@@ -1057,13 +1057,27 @@ img {
   line-height: 1.6;
 }
 
+.workshop-pricing_layout {
+  display: grid;
+  grid-template-columns: 1.9fr 1fr;
+  gap: 1.5em;
+  align-items: start;
+}
+
+@media screen and (max-width: 991px) {
+  .workshop-pricing_layout {
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+}
+
 .workshop-pricing_grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5em;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 479px) {
   .workshop-pricing_grid {
     grid-template-columns: 1fr;
   }
@@ -1105,6 +1119,115 @@ img {
   text-align: left;
   font-size: 0.85em;
   line-height: 1.5;
+}
+
+/* Booking box — enquiry form beside the tiers */
+.workshop-booking {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1.75em;
+  border: 1px solid var(--colors--black);
+  background: var(--colors--black);
+  color: #fff;
+}
+
+.workshop-booking_title {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 1.6em;
+  line-height: 1;
+}
+
+.workshop-booking_intro {
+  opacity: 0.7;
+  text-align: left;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.workshop-booking_field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.workshop-booking_label {
+  text-transform: uppercase;
+  font-size: 0.78em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+.workshop-booking_select {
+  width: 100%;
+  padding: 0.75em 2.25em 0.75em 0.9em;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 0;
+  background-color: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 0.9em;
+  cursor: pointer;
+  appearance: none;
+  /* Chevron */
+  background-image: linear-gradient(45deg, transparent 50%, #fff 50%), linear-gradient(135deg, #fff 50%, transparent 50%);
+  background-position:
+    right 1.05em top 55%,
+    right 0.75em top 55%;
+  background-size:
+    0.35em 0.35em,
+    0.35em 0.35em;
+  background-repeat: no-repeat;
+}
+
+.workshop-booking_select:focus-visible {
+  outline: 2px solid limegreen;
+  outline-offset: 2px;
+}
+
+.workshop-booking_select option {
+  color: initial;
+}
+
+.workshop-booking_button {
+  padding: 0.85em 1.5em;
+  border: 1px solid #fff;
+  background: #fff;
+  color: var(--colors--black);
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.workshop-booking_button:hover {
+  background: transparent;
+  color: #fff;
+}
+
+.workshop-booking_contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  margin-top: 0.25em;
+  padding-top: 1em;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.workshop-booking_link {
+  text-transform: uppercase;
+  font-size: 0.82em;
+  font-weight: 500;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.workshop-booking_link:hover {
+  opacity: 1;
 }
 
 /*

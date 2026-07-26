@@ -507,6 +507,11 @@ export type WorkshopPricingSection = {
     _key: string;
   }>;
   note?: string;
+  bookingHeading?: string;
+  bookingIntro?: string;
+  bookingEmail?: string;
+  bookingInstagram?: string;
+  bookingExtraOptions?: Array<string>;
 };
 
 export type WorkshopLearnSection = {
@@ -4767,7 +4772,7 @@ export type WorkshopLearnSectionQResult = {
 
 // Source: features/page-builder/sections/workshop-pricing-section.tsx
 // Variable: WorkshopPricingSectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopPricingSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      lead,      tiers[]{ "key": _key, title, price, description },      note    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopPricingSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      lead,      tiers[]{ "key": _key, title, price, description },      note,      bookingHeading,      bookingIntro,      bookingEmail,      bookingInstagram,      bookingExtraOptions    }}
 export type WorkshopPricingSectionQResult = {
   content: {
     heading: string | undefined;
@@ -4779,6 +4784,11 @@ export type WorkshopPricingSectionQResult = {
       description: string | undefined;
     }> | undefined;
     note: string | undefined;
+    bookingHeading: string | undefined;
+    bookingIntro: string | undefined;
+    bookingEmail: string | undefined;
+    bookingInstagram: string | undefined;
+    bookingExtraOptions: Array<string> | undefined;
   } | undefined;
 } | undefined;
 

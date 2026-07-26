@@ -39,6 +39,37 @@ export const workshopPricingSection = defineField({
       title: "Fine print",
       description: "Optional note shown below the tiers (travel, vouchers, etc.).",
     }),
+    defineField({
+      name: "bookingHeading",
+      type: "string",
+      title: "Booking box — heading",
+      description: "Heading of the enquiry box beside the tiers.",
+    }),
+    defineField({
+      name: "bookingIntro",
+      type: "text",
+      rows: 2,
+      title: "Booking box — intro",
+    }),
+    defineField({
+      name: "bookingEmail",
+      type: "string",
+      title: "Booking box — email",
+      description: "Where enquiries are sent (mailto). Falls back to me@joephijwegen.com.",
+    }),
+    defineField({
+      name: "bookingInstagram",
+      type: "string",
+      title: "Booking box — Instagram",
+      description: "Handle (@name) or full URL, shown under the form.",
+    }),
+    defineField({
+      name: "bookingExtraOptions",
+      type: "array",
+      title: "Booking box — extra options",
+      description: "Extra dropdown choices beyond the tiers above (e.g. Gift voucher).",
+      of: [{ type: "string" }],
+    }),
   ],
   preview: {
     select: { title: "heading" },
