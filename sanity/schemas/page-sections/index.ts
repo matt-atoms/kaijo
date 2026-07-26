@@ -1,5 +1,9 @@
+import { aboutContactSection } from "./about-contact-section";
+import { aboutCredentialsSection } from "./about-credentials-section";
+import { aboutIdentitySection } from "./about-identity-section";
 import { aboutPreviewSection } from "./about-preview-section";
 import { aboutSection } from "./about-section";
+import { aboutTextSection } from "./about-text-section";
 import { contactFormSection } from "./contact-form-section";
 import { ctaSection } from "./cta-section";
 import { featureLinksSection } from "./feature-links-section";
@@ -23,5 +27,9 @@ export const sections = [
   featureLinksSection,
   workshopsSection,
   workOverviewSection,
+  aboutIdentitySection,
+  aboutTextSection,
+  aboutCredentialsSection,
+  aboutContactSection,
   // PLOP: Add Export
 ];

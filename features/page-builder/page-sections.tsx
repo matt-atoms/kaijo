@@ -34,6 +34,18 @@ const _sections = {
   workOverviewSectionField: dynamic(() =>
     import("~/features/page-builder/sections/work-overview-section").then((mod) => mod.WorkOverviewSection)
   ),
+  aboutIdentitySectionField: dynamic(() =>
+    import("~/features/page-builder/sections/about-identity-section").then((mod) => mod.AboutIdentitySection)
+  ),
+  aboutTextSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/about-text-section").then((mod) => mod.AboutTextSection)
+  ),
+  aboutCredentialsSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/about-credentials-section").then((mod) => mod.AboutCredentialsSection)
+  ),
+  aboutContactSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/about-contact-section").then((mod) => mod.AboutContactSection)
+  ),
   // PLOP: Add Import
 } as const;
 

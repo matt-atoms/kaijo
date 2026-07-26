@@ -658,6 +658,256 @@ img {
 }
 
 /*
+ * About page — features/page-builder/sections/about-*-section. Editorial sections: identity
+ * (portrait + name), titled text blocks (bio / method / bridge), credential columns, and contact.
+ */
+.about-identity_inner {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 4em;
+  align-items: center;
+}
+
+@media screen and (max-width: 991px) {
+  .about-identity_inner {
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+}
+
+.about-identity_portrait {
+  overflow: hidden;
+}
+
+.about-identity_portrait .image {
+  aspect-ratio: 4 / 5;
+}
+
+.about-identity_text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+}
+
+.about-identity_meta {
+  opacity: 1;
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 500;
+}
+
+.about-identity_statement {
+  max-width: 30em;
+  opacity: 1;
+  text-align: left;
+  font-size: 1.25em;
+  line-height: 1.5;
+}
+
+/* Titled text block */
+.about-text_inner {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 4em;
+  align-items: start;
+}
+
+@media screen and (max-width: 991px) {
+  .about-text_inner {
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+}
+
+.about-text_main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5em;
+  max-width: 34em;
+}
+
+.about-text_heading {
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.about-text_body p {
+  margin-bottom: 1em;
+  opacity: 1;
+  text-align: left;
+  font-size: 1.05em;
+  line-height: 1.6;
+}
+
+.about-text_body p:last-child {
+  margin-bottom: 0;
+}
+
+.about-text_quote {
+  max-width: 16em;
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 2.2em;
+  line-height: 1.05;
+  opacity: 1;
+  text-align: left;
+}
+
+.about-text_cta {
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.about-text_cta:hover {
+  color: var(--colors--accent-color);
+}
+
+.about-text_images {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.about-text_image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Credential columns */
+.about-credentials_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2em;
+}
+
+@media screen and (max-width: 991px) {
+  .about-credentials_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5em;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .about-credentials_grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.about-credentials_col {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.about-credentials_col-title {
+  padding-bottom: 0.75em;
+  border-bottom: 1px solid var(--colors--black);
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 600;
+}
+
+.about-credentials_list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-credentials_entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  font-size: 0.88em;
+}
+
+.about-credentials_name {
+  font-weight: 600;
+}
+
+.about-credentials_year {
+  font-size: 0.85em;
+  opacity: 0.6;
+}
+
+/* Contact */
+.about-contact_inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4em;
+  align-items: start;
+}
+
+@media screen and (max-width: 767px) {
+  .about-contact_inner {
+    grid-template-columns: 1fr;
+    gap: 2.5em;
+  }
+}
+
+.about-contact_card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5em;
+}
+
+.about-contact_details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.about-contact_link {
+  text-transform: uppercase;
+  font-size: 1em;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.about-contact_link:hover {
+  color: var(--colors--accent-color);
+}
+
+.about-contact_location {
+  text-transform: uppercase;
+  font-size: 0.88em;
+  opacity: 0.6;
+}
+
+.about-contact_inquiries {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+}
+
+.about-contact_button {
+  padding: 0.75em 1.5em;
+  border: 1px solid var(--colors--black);
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 600;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.about-contact_button:hover {
+  background: var(--colors--black);
+  color: #fff;
+}
+
+/*
  * Page reveal: the display fonts reshape the layout when they swap in, so the page fades in
  * once fonts are ready (see the inline script in shared-web-layout.tsx).
  * - Without JS the attribute is never flipped, so a CSS-only fallback forces the page visible.
