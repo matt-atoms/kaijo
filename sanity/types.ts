@@ -567,6 +567,56 @@ export type AboutTextSection = {
 
 export type AboutIdentitySection = {
   _type: "aboutIdentitySection";
+  heading?: string;
+  appRichText?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "caption";
+    listItem?: never;
+    markDefs?: Array<
+      | {
+          type?:
+            | "internal"
+            | "external"
+            | "email"
+            | "phone"
+            | "file"
+            | "params";
+          external?: string;
+          email?: string;
+          phone?: string;
+          file?: LinkFieldFile;
+          canDownload?: boolean;
+          paramsHref?: string;
+          internal?: Internal;
+          openInNewTab?: boolean;
+          _type: "linkField";
+          _key: string;
+        }
+      | {
+          color?: AppColor;
+          _type: "textColorField";
+          _key: string;
+        }
+      | {
+          color?: AppColor;
+          _type: "highlightColorField";
+          _key: string;
+        }
+      | {
+          widthPercent?: number;
+          _type: "indentField";
+          _key: string;
+        }
+    >;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
   portrait?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -574,10 +624,6 @@ export type AboutIdentitySection = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  name?: string;
-  descriptor?: string;
-  location?: string;
-  statement?: string;
 };
 
 export type WorkOverviewSection = {
@@ -2251,7 +2297,47 @@ export type AgentMarkdownContentQueryResult =
           }
         | {
             _type: "aboutIdentitySectionField";
-            text: null;
+            text: Array<{
+              _type: "block";
+              style: "caption" | "normal" | undefined;
+              listItem: null;
+              level: number | undefined;
+              children: Array<{
+                _type: "span";
+                text: string | undefined;
+                marks: Array<string> | undefined;
+              }> | undefined;
+              markDefs: Array<
+                | {
+                    _key: string;
+                    _type: "highlightColorField";
+                  }
+                | {
+                    _key: string;
+                    _type: "indentField";
+                  }
+                | {
+                    _key: string;
+                    _type: "linkField";
+                    type:
+                      | "email"
+                      | "external"
+                      | "file"
+                      | "internal"
+                      | "params"
+                      | "phone"
+                      | undefined;
+                    openInNewTab: boolean | false;
+                    canDownload: boolean | false;
+                    href: string | "" | "mailto:" | "tel:";
+                    text: string | "";
+                  }
+                | {
+                    _key: string;
+                    _type: "textColorField";
+                  }
+              > | undefined;
+            }> | undefined;
             media: null;
             cta: null;
             headline: null;
@@ -2611,7 +2697,47 @@ export type AgentMarkdownContentQueryResult =
           }
         | {
             _type: "aboutIdentitySectionField";
-            text: null;
+            text: Array<{
+              _type: "block";
+              style: "caption" | "normal" | undefined;
+              listItem: null;
+              level: number | undefined;
+              children: Array<{
+                _type: "span";
+                text: string | undefined;
+                marks: Array<string> | undefined;
+              }> | undefined;
+              markDefs: Array<
+                | {
+                    _key: string;
+                    _type: "highlightColorField";
+                  }
+                | {
+                    _key: string;
+                    _type: "indentField";
+                  }
+                | {
+                    _key: string;
+                    _type: "linkField";
+                    type:
+                      | "email"
+                      | "external"
+                      | "file"
+                      | "internal"
+                      | "params"
+                      | "phone"
+                      | undefined;
+                    openInNewTab: boolean | false;
+                    canDownload: boolean | false;
+                    href: string | "" | "mailto:" | "tel:";
+                    text: string | "";
+                  }
+                | {
+                    _key: string;
+                    _type: "textColorField";
+                  }
+              > | undefined;
+            }> | undefined;
             media: null;
             cta: null;
             headline: null;
@@ -3070,13 +3196,59 @@ export type AboutCredentialsSectionQResult = {
 
 // Source: features/page-builder/sections/about-identity-section.tsx
 // Variable: AboutIdentitySectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "aboutIdentitySectionField" && _key == $sectionKey][0]{    "content": sectionContent{      name,      descriptor,      location,      statement,      portrait{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "aboutIdentitySectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      appRichText,      portrait{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}    }}
 export type AboutIdentitySectionQResult = {
   content: {
-    name: string | undefined;
-    descriptor: string | undefined;
-    location: string | undefined;
-    statement: string | undefined;
+    heading: string | undefined;
+    appRichText: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "caption" | "normal";
+      listItem?: never;
+      markDefs?: Array<
+        | {
+            color?: AppColor;
+            _type: "highlightColorField";
+            _key: string;
+          }
+        | {
+            widthPercent?: number;
+            _type: "indentField";
+            _key: string;
+          }
+        | {
+            type?:
+              | "email"
+              | "external"
+              | "file"
+              | "internal"
+              | "params"
+              | "phone";
+            external?: string;
+            email?: string;
+            phone?: string;
+            file?: LinkFieldFile;
+            canDownload?: boolean;
+            paramsHref?: string;
+            internal?: Internal;
+            openInNewTab?: boolean;
+            _type: "linkField";
+            _key: string;
+          }
+        | {
+            color?: AppColor;
+            _type: "textColorField";
+            _key: string;
+          }
+      >;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | undefined;
     portrait: {
       _id: string | undefined;
       _rev: string | undefined;

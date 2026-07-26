@@ -663,9 +663,9 @@ img {
  */
 .about-identity_inner {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: 1.1fr 0.9fr;
   gap: 4em;
-  align-items: center;
+  align-items: start;
 }
 
 @media screen and (max-width: 991px) {
@@ -687,23 +687,20 @@ img {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1em;
+  gap: 1.5em;
+  max-width: 34em;
 }
 
-.about-identity_meta {
+.about-identity_body p {
+  margin-bottom: 1em;
   opacity: 1;
   text-align: left;
-  text-transform: uppercase;
-  font-size: 0.88em;
-  font-weight: 500;
+  font-size: 1.05em;
+  line-height: 1.6;
 }
 
-.about-identity_statement {
-  max-width: 30em;
-  opacity: 1;
-  text-align: left;
-  font-size: 1.25em;
-  line-height: 1.5;
+.about-identity_body p:last-child {
+  margin-bottom: 0;
 }
 
 /* Titled text block */

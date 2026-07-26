@@ -1,32 +1,21 @@
 import { defineField } from "sanity";
+import { createRichTextField } from "../fields/create-rich-text";
 
 export const aboutIdentitySection = defineField({
   type: "object",
   name: "aboutIdentitySection",
-  title: "About Identity",
+  title: "About Intro",
+  description: "Opening block: heading + biography text on the left, portrait on the right.",
   icon: () => <>🪪</>,
   fields: [
+    defineField({ name: "heading", type: "string", title: "Heading", initialValue: "About" }),
+    createRichTextField({ title: "Text", validation: (R) => R.required() }),
     defineField({ name: "portrait", type: "image", title: "Portrait" }),
-    defineField({ name: "name", type: "string", title: "Name", validation: (R) => R.required() }),
-    defineField({
-      name: "descriptor",
-      type: "string",
-      title: "Descriptor",
-      description: "e.g. “Photographer based in Amsterdam”.",
-    }),
-    defineField({ name: "location", type: "string", title: "Location" }),
-    defineField({
-      name: "statement",
-      type: "text",
-      rows: 4,
-      title: "Statement",
-      description: "Short positioning paragraph (~40–80 words).",
-    }),
   ],
   preview: {
-    select: { title: "name", media: "portrait" },
+    select: { title: "heading", media: "portrait" },
     prepare({ title, media }) {
-      return { title: title || "About Identity", subtitle: "About Identity", media };
+      return { title: title || "About Intro", subtitle: "About Intro", media };
     },
   },
 });
