@@ -12,6 +12,9 @@ import { portfolioGridSection } from "./portfolio-grid-section";
 import { projectHeroSection } from "./project-hero-section";
 import { textSection } from "./text-section";
 import { workOverviewSection } from "./work-overview-section";
+import { workshopIntroSection } from "./workshop-intro-section";
+import { workshopLearnSection } from "./workshop-learn-section";
+import { workshopPricingSection } from "./workshop-pricing-section";
 import { workshopsSection } from "./workshops-section";
 // PLOP: Add Import
 
@@ -31,5 +34,8 @@ export const sections = [
   aboutTextSection,
   aboutCredentialsSection,
   aboutContactSection,
+  workshopIntroSection,
+  workshopLearnSection,
+  workshopPricingSection,
   // PLOP: Add Export
 ];

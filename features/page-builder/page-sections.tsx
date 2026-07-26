@@ -46,6 +46,15 @@ const _sections = {
   aboutContactSectionField: dynamic(() =>
     import("~/features/page-builder/sections/about-contact-section").then((mod) => mod.AboutContactSection)
   ),
+  workshopIntroSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/workshop-intro-section").then((mod) => mod.WorkshopIntroSection)
+  ),
+  workshopLearnSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/workshop-learn-section").then((mod) => mod.WorkshopLearnSection)
+  ),
+  workshopPricingSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/workshop-pricing-section").then((mod) => mod.WorkshopPricingSection)
+  ),
   // PLOP: Add Import
 } as const;
 

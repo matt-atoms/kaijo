@@ -905,6 +905,209 @@ img {
 }
 
 /*
+ * Workshops page — features/page-builder/sections/workshop-*-section. Intro (title + pulled
+ * quote + lede + CTA), a numbered "what you'll learn" list, and pricing tiers.
+ */
+.workshop-intro_inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4em;
+  align-items: start;
+  margin-top: 1.5em;
+}
+
+@media screen and (max-width: 991px) {
+  .workshop-intro_inner {
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+}
+
+.workshop-intro_quote {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+  max-width: 12em;
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 2.2em;
+  line-height: 1.05;
+}
+
+.workshop-intro_quote p {
+  margin: 0;
+  opacity: 1;
+  text-align: left;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.workshop-intro_quote cite {
+  font-family: inherit;
+  font-style: normal;
+  font-size: 0.4em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+}
+
+.workshop-intro_body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5em;
+  max-width: 34em;
+}
+
+.workshop-intro_body .w-richtext p {
+  margin-bottom: 1em;
+  opacity: 1;
+  text-align: left;
+  font-size: 1.05em;
+  line-height: 1.6;
+}
+
+.workshop-intro_body .w-richtext p:last-child {
+  margin-bottom: 0;
+}
+
+.workshop-intro_cta {
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.workshop-intro_cta:hover {
+  color: var(--colors--accent-color);
+}
+
+/* What you'll learn */
+.workshop-learn_head {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 34em;
+  margin-bottom: 2.5em;
+}
+
+.workshop-learn_lead {
+  opacity: 1;
+  text-align: left;
+  font-size: 1.05em;
+  line-height: 1.6;
+}
+
+.workshop-learn_list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em 4em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: learn;
+}
+
+@media screen and (max-width: 767px) {
+  .workshop-learn_list {
+    grid-template-columns: 1fr;
+    gap: 1.75em;
+  }
+}
+
+.workshop-learn_item {
+  counter-increment: learn;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+  padding-top: 1em;
+  border-top: 1px solid var(--colors--black);
+}
+
+.workshop-learn_item-title {
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.workshop-learn_item-title::before {
+  content: counter(learn, decimal-leading-zero);
+  margin-right: 0.75em;
+  opacity: 0.4;
+}
+
+.workshop-learn_item-desc {
+  font-size: 0.9em;
+  line-height: 1.5;
+  opacity: 0.7;
+}
+
+/* Pricing */
+.workshop-pricing_head {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 34em;
+  margin-bottom: 2.5em;
+}
+
+.workshop-pricing_lead {
+  opacity: 1;
+  text-align: left;
+  font-size: 1.05em;
+  line-height: 1.6;
+}
+
+.workshop-pricing_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em;
+}
+
+@media screen and (max-width: 767px) {
+  .workshop-pricing_grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.workshop-pricing_tier {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 1.75em;
+  border: 1px solid var(--colors--black);
+}
+
+.workshop-pricing_tier-price {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 2.4em;
+  line-height: 1;
+}
+
+.workshop-pricing_tier-title {
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.workshop-pricing_tier-desc {
+  margin-top: 0.25em;
+  opacity: 0.7;
+  text-align: left;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.workshop-pricing_note {
+  margin-top: 1.75em;
+  max-width: 40em;
+  opacity: 0.6;
+  text-align: left;
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+/*
  * Page reveal: the display fonts reshape the layout when they swap in, so the page fades in
  * once fonts are ready (see the inline script in shared-web-layout.tsx).
  * - Without JS the attribute is never flipped, so a CSS-only fallback forces the page visible.
