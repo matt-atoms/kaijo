@@ -1302,60 +1302,52 @@ img {
 }
 
 /*
- * Workshop notes — features/page-builder/sections/workshop-notes-section.tsx. "Who it's for" and
- * "Equipment & experience" flow through two balanced columns (CSS multicol), so the longer list
- * spills into the right column above the second heading and both sides end up level.
+ * Workshop notes — features/page-builder/sections/workshop-notes-section.tsx. A single seamless
+ * numbered list (Who it's for, with equipment/experience as the last items), laid out in the same
+ * two-column, row-by-row grid as "What you'll learn".
  */
-.workshop-notes_flow {
-  column-count: 2;
-  column-gap: 4em;
+.workshop-notes_head {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 34em;
+  margin-bottom: 2.5em;
 }
 
-@media screen and (max-width: 767px) {
-  .workshop-notes_flow {
-    column-count: 1;
-  }
-}
-
-.workshop-notes_heading {
-  margin-bottom: 0.75em;
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 2em;
-  line-height: 1;
-  break-inside: avoid;
-  break-after: avoid;
-}
-
-.workshop-notes_heading:not(:first-child) {
-  margin-top: 1.5em;
-}
-
-.workshop-notes_intro {
-  margin-bottom: 1.25em;
+.workshop-notes_lead {
   opacity: 1;
   text-align: left;
-  font-size: 1.02em;
+  font-size: 1.05em;
   line-height: 1.6;
-  break-inside: avoid;
 }
 
 .workshop-notes_list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em 4em;
   margin: 0;
   padding: 0;
   list-style: none;
   counter-reset: notes;
 }
 
+@media screen and (max-width: 767px) {
+  .workshop-notes_list {
+    grid-template-columns: 1fr;
+    gap: 1.75em;
+  }
+}
+
 .workshop-notes_item {
   counter-increment: notes;
-  margin-bottom: 1.25em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
   padding-top: 1em;
   border-top: 1px solid var(--colors--black);
-  break-inside: avoid;
 }
 
 .workshop-notes_item-title {
-  display: block;
   font-weight: 600;
   font-size: 1em;
   line-height: 1.35;
@@ -1368,21 +1360,18 @@ img {
 }
 
 .workshop-notes_item-desc {
-  display: block;
-  margin-top: 0.35em;
   font-size: 0.9em;
   line-height: 1.5;
   opacity: 0.7;
 }
 
 .workshop-notes_note {
-  margin-top: 1em;
+  margin-top: 2em;
   opacity: 0.6;
   font-style: italic;
   text-align: left;
   font-size: 0.9em;
   line-height: 1.5;
-  break-inside: avoid;
 }
 
 /*

@@ -3827,72 +3827,28 @@
           },
           "optional": true
         },
-        "columns": {
+        "intro": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "items": {
           "type": "objectAttribute",
           "value": {
             "type": "array",
             "of": {
               "type": "object",
               "attributes": {
-                "heading": {
+                "label": {
                   "type": "objectAttribute",
                   "value": {
                     "type": "string"
                   },
                   "optional": true
                 },
-                "intro": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "string"
-                  },
-                  "optional": true
-                },
-                "items": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "array",
-                    "of": {
-                      "type": "object",
-                      "attributes": {
-                        "label": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string"
-                          },
-                          "optional": true
-                        },
-                        "text": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "noteItem"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "optional": true
-                },
-                "note": {
+                "text": {
                   "type": "objectAttribute",
                   "value": {
                     "type": "string"
@@ -3903,7 +3859,7 @@
                   "type": "objectAttribute",
                   "value": {
                     "type": "string",
-                    "value": "notesColumn"
+                    "value": "noteItem"
                   }
                 }
               },
@@ -3919,6 +3875,13 @@
                 }
               }
             }
+          },
+          "optional": true
+        },
+        "note": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
           },
           "optional": true
         }

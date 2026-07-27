@@ -624,19 +624,14 @@ export type WorkshopTestimonialsSection = {
 export type WorkshopNotesSection = {
   _type: "workshopNotesSection";
   heading?: string;
-  columns?: Array<{
-    heading?: string;
-    intro?: string;
-    items?: Array<{
-      label?: string;
-      text?: string;
-      _type: "noteItem";
-      _key: string;
-    }>;
-    note?: string;
-    _type: "notesColumn";
+  intro?: string;
+  items?: Array<{
+    label?: string;
+    text?: string;
+    _type: "noteItem";
     _key: string;
   }>;
+  note?: string;
 };
 
 export type WorkshopPricingSection = {
@@ -5113,21 +5108,17 @@ export type WorkshopLearnSectionQResult = {
 
 // Source: features/page-builder/sections/workshop-notes-section.tsx
 // Variable: WorkshopNotesSectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopNotesSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      columns[]{        "key": _key,        heading,        intro,        items[]{ "key": _key, label, text },        note      }    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopNotesSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      intro,      items[]{ "key": _key, label, text },      note    }}
 export type WorkshopNotesSectionQResult = {
   content: {
     heading: string | undefined;
-    columns: Array<{
+    intro: string | undefined;
+    items: Array<{
       key: string;
-      heading: string | undefined;
-      intro: string | undefined;
-      items: Array<{
-        key: string;
-        label: string | undefined;
-        text: string | undefined;
-      }> | undefined;
-      note: string | undefined;
+      label: string | undefined;
+      text: string | undefined;
     }> | undefined;
+    note: string | undefined;
   } | undefined;
 } | undefined;
 
