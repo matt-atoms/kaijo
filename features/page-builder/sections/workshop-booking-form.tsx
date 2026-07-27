@@ -2,43 +2,81 @@
 
 import * as React from "react";
 
-/** Normalise an @handle or URL into a { url, label } pair. */
-function instagram(value: string | null | undefined) {
-  if (!value) {
-    return null;
-  }
-  const handle = value
-    .replace(/^https?:\/\/(www\.)?instagram\.com\//i, "")
-    .replace(/^@/, "")
-    .replace(/\/$/, "");
-  return { url: value.startsWith("http") ? value : `https://instagram.com/${handle}`, label: `@${handle}` };
-}
-
 type Props = {
   heading?: string | null;
   intro?: string | null;
-  email: string;
-  instagram?: string | null;
   options: string[];
 };
 
-export function WorkshopBookingForm({ heading, intro, email, instagram: instagramValue, options }: Props) {
-  const [choice, setChoice] = React.useState(options[0] ?? "");
-  const ig = instagram(instagramValue);
+type Status = "idle" | "sending" | "success" | "error";
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+export function WorkshopBookingForm({ heading, intro, options }: Props) {
+  const [expanded, setExpanded] = React.useState(false);
+  const [choice, setChoice] = React.useState(options[0] ?? "");
+  const [email, setEmail] = React.useState("");
+  const [message, setMessage] = React.useState("");
+  const [company, setCompany] = React.useState(""); // honeypot
+  const [status, setStatus] = React.useState<Status>("idle");
+  const [error, setError] = React.useState<string | null>(null);
+  const selectRef = React.useRef<HTMLSelectElement>(null);
+
+  function open() {
+    setExpanded(true);
+    // Move focus into the form once it renders.
+    window.requestAnimationFrame(() => selectRef.current?.focus());
+  }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const subject = choice ? `Workshop enquiry — ${choice}` : "Workshop enquiry";
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+    setStatus("sending");
+    setError(null);
+    try {
+      const response = await fetch("/api/workshop-enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ option: choice, email, message, company }),
+      });
+      const data = (await response.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+      if (!response.ok || !data?.ok) {
+        throw new Error(data?.error || "Something went wrong. Please try again.");
+      }
+      setStatus("success");
+    } catch (submitError) {
+      setStatus("error");
+      setError(submitError instanceof Error ? submitError.message : "Something went wrong. Please try again.");
+    }
+  }
+
+  if (!expanded) {
+    return (
+      <button type="button" className="workshop-booking workshop-booking--collapsed" onClick={open} aria-expanded={false}>
+        {heading && <span className="workshop-booking_title">{heading}</span>}
+        {intro && <span className="workshop-booking_intro">{intro}</span>}
+        <span className="workshop-booking_cue">Enquire →</span>
+      </button>
+    );
+  }
+
+  if (status === "success") {
+    return (
+      <div className="workshop-booking workshop-booking--expanded">
+        {heading && <div className="workshop-booking_title">{heading}</div>}
+        <p className="workshop-booking_success">Thanks — your enquiry is on its way. I'll be in touch shortly.</p>
+      </div>
+    );
   }
 
   return (
-    <form className="workshop-booking" onSubmit={handleSubmit}>
+    <form className="workshop-booking workshop-booking--expanded" onSubmit={handleSubmit}>
       {heading && <div className="workshop-booking_title">{heading}</div>}
-      {intro && <p className="workshop-booking_intro">{intro}</p>}
       <label className="workshop-booking_field">
         <span className="workshop-booking_label">I'm interested in</span>
-        <select className="workshop-booking_select" value={choice} onChange={(event) => setChoice(event.target.value)}>
+        <select
+          ref={selectRef}
+          className="workshop-booking_select"
+          value={choice}
+          onChange={(event) => setChoice(event.target.value)}
+        >
           {options.map((option) => (
             <option key={option} value={option}>
               {option}
@@ -46,19 +84,47 @@ export function WorkshopBookingForm({ heading, intro, email, instagram: instagra
           ))}
         </select>
       </label>
-      <button type="submit" className="workshop-booking_button">
-        Send enquiry →
+      <label className="workshop-booking_field">
+        <span className="workshop-booking_label">Your email</span>
+        <input
+          type="email"
+          className="workshop-booking_input"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          autoComplete="email"
+          required
+          placeholder="you@example.com"
+        />
+      </label>
+      <label className="workshop-booking_field">
+        <span className="workshop-booking_label">Message</span>
+        <textarea
+          className="workshop-booking_textarea"
+          value={message}
+          onChange={(event) => setMessage(event.target.value)}
+          rows={4}
+          required
+          placeholder="A little about what you're after…"
+        />
+      </label>
+      {/* Honeypot — hidden from users, catches bots. */}
+      <input
+        type="text"
+        className="workshop-booking_honeypot"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        value={company}
+        onChange={(event) => setCompany(event.target.value)}
+      />
+      {status === "error" && error && (
+        <p className="workshop-booking_error" role="alert">
+          {error}
+        </p>
+      )}
+      <button type="submit" className="workshop-booking_button" disabled={status === "sending"}>
+        {status === "sending" ? "Sending…" : "Send enquiry →"}
       </button>
-      <div className="workshop-booking_contact">
-        <a href={`mailto:${email}`} className="workshop-booking_link">
-          {email}
-        </a>
-        {ig && (
-          <a href={ig.url} target="_blank" rel="noopener noreferrer" className="workshop-booking_link">
-            {ig.label}
-          </a>
-        )}
-      </div>
     </form>
   );
 }

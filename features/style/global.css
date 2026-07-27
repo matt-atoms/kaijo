@@ -1057,24 +1057,17 @@ img {
   line-height: 1.6;
 }
 
-.workshop-pricing_layout {
+.workshop-pricing_grid {
   display: grid;
-  grid-template-columns: 1.9fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5em;
   align-items: start;
 }
 
 @media screen and (max-width: 991px) {
-  .workshop-pricing_layout {
-    grid-template-columns: 1fr;
-    gap: 2em;
+  .workshop-pricing_grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-}
-
-.workshop-pricing_grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5em;
 }
 
 @media screen and (max-width: 479px) {
@@ -1121,7 +1114,10 @@ img {
   line-height: 1.5;
 }
 
-/* Booking box — enquiry form beside the tiers */
+/*
+ * Booking box — the 6th cell in the pricing grid. Collapsed it's a dark tier-sized button;
+ * on click it expands to a full-width band (grid-column: 1 / -1) holding the enquiry form.
+ */
 .workshop-booking {
   display: flex;
   flex-direction: column;
@@ -1130,6 +1126,30 @@ img {
   border: 1px solid var(--colors--black);
   background: var(--colors--black);
   color: #fff;
+  text-align: left;
+}
+
+.workshop-booking--collapsed {
+  gap: 0.5em;
+  width: 100%;
+  height: 100%;
+  font: inherit;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+.workshop-booking--collapsed:hover {
+  opacity: 0.85;
+}
+
+.workshop-booking--expanded {
+  grid-column: 1 / -1;
+}
+
+.workshop-booking--expanded > * {
+  width: 100%;
+  max-width: 34em;
 }
 
 .workshop-booking_title {
@@ -1140,15 +1160,22 @@ img {
 
 .workshop-booking_intro {
   opacity: 0.7;
-  text-align: left;
   font-size: 0.9em;
   line-height: 1.5;
+}
+
+.workshop-booking_cue {
+  margin-top: auto;
+  padding-top: 0.9em;
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 600;
 }
 
 .workshop-booking_field {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 0.4em;
 }
 
 .workshop-booking_label {
@@ -1159,15 +1186,21 @@ img {
   opacity: 0.7;
 }
 
-.workshop-booking_select {
+.workshop-booking_select,
+.workshop-booking_input,
+.workshop-booking_textarea {
   width: 100%;
-  padding: 0.75em 2.25em 0.75em 0.9em;
+  padding: 0.7em 0.9em;
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 0;
   background-color: transparent;
   color: #fff;
   font: inherit;
   font-size: 0.9em;
+}
+
+.workshop-booking_select {
+  padding-right: 2.25em;
   cursor: pointer;
   appearance: none;
   /* Chevron */
@@ -1181,16 +1214,42 @@ img {
   background-repeat: no-repeat;
 }
 
-.workshop-booking_select:focus-visible {
+.workshop-booking_textarea {
+  min-height: 6em;
+  resize: vertical;
+}
+
+.workshop-booking_select:focus-visible,
+.workshop-booking_input:focus-visible,
+.workshop-booking_textarea:focus-visible {
   outline: 2px solid limegreen;
   outline-offset: 2px;
+}
+
+.workshop-booking_input::placeholder,
+.workshop-booking_textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .workshop-booking_select option {
   color: initial;
 }
 
+/* Visually hidden honeypot — off-screen but focusable only by bots. */
+.workshop-booking_honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .workshop-booking_button {
+  width: fit-content;
   padding: 0.85em 1.5em;
   border: 1px solid #fff;
   background: #fff;
@@ -1209,25 +1268,20 @@ img {
   color: #fff;
 }
 
-.workshop-booking_contact {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4em;
-  margin-top: 0.25em;
-  padding-top: 1em;
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
+.workshop-booking_button:disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 
-.workshop-booking_link {
-  text-transform: uppercase;
-  font-size: 0.82em;
-  font-weight: 500;
-  opacity: 0.85;
-  transition: opacity 0.3s ease;
+.workshop-booking_error {
+  color: #ffd4d4;
+  font-size: 0.85em;
+  line-height: 1.4;
 }
 
-.workshop-booking_link:hover {
-  opacity: 1;
+.workshop-booking_success {
+  font-size: 0.95em;
+  line-height: 1.5;
 }
 
 /*

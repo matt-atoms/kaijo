@@ -12,8 +12,6 @@ const WorkshopPricingSectionQ =
       note,
       bookingHeading,
       bookingIntro,
-      bookingEmail,
-      bookingInstagram,
       bookingExtraOptions
     }
 }`);
@@ -48,27 +46,17 @@ export async function WorkshopPricingSection({ docId, sectionKey }: { docId: str
           )}
           {content.lead && <p className="workshop-pricing_lead">{content.lead}</p>}
         </div>
-        <div className="workshop-pricing_layout">
-          <div className="workshop-pricing_tiers">
-            <div className="workshop-pricing_grid">
-              {content.tiers.map((tier) => (
-                <div key={tier.key} className="workshop-pricing_tier">
-                  <span className="workshop-pricing_tier-price">{tier.price || "On request"}</span>
-                  <span className="workshop-pricing_tier-title">{tier.title}</span>
-                  {tier.description && <p className="workshop-pricing_tier-desc">{tier.description}</p>}
-                </div>
-              ))}
+        <div className="workshop-pricing_grid">
+          {content.tiers.map((tier) => (
+            <div key={tier.key} className="workshop-pricing_tier">
+              <span className="workshop-pricing_tier-price">{tier.price || "On request"}</span>
+              <span className="workshop-pricing_tier-title">{tier.title}</span>
+              {tier.description && <p className="workshop-pricing_tier-desc">{tier.description}</p>}
             </div>
-            {content.note && <p className="workshop-pricing_note">{content.note}</p>}
-          </div>
-          <WorkshopBookingForm
-            heading={content.bookingHeading}
-            intro={content.bookingIntro}
-            email={content.bookingEmail || "me@joephijwegen.com"}
-            instagram={content.bookingInstagram}
-            options={options}
-          />
+          ))}
+          <WorkshopBookingForm heading={content.bookingHeading} intro={content.bookingIntro} options={options} />
         </div>
+        {content.note && <p className="workshop-pricing_note">{content.note}</p>}
       </div>
     </div>
   );

@@ -52,18 +52,6 @@ export const workshopPricingSection = defineField({
       title: "Booking box — intro",
     }),
     defineField({
-      name: "bookingEmail",
-      type: "string",
-      title: "Booking box — email",
-      description: "Where enquiries are sent (mailto). Falls back to me@joephijwegen.com.",
-    }),
-    defineField({
-      name: "bookingInstagram",
-      type: "string",
-      title: "Booking box — Instagram",
-      description: "Handle (@name) or full URL, shown under the form.",
-    }),
-    defineField({
       name: "bookingExtraOptions",
       type: "array",
       title: "Booking box — extra options",
