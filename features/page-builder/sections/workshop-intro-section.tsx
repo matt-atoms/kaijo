@@ -1,13 +1,16 @@
 import { defineQuery, PortableText } from "next-sanity";
+import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import { sanityFetch } from "~/features/sanity/client";
 import { SanityLink } from "~/features/sanity/link";
 import { LinkFragment } from "~/features/sanity/link/fragment";
+import { ImageFragment } from "~/features/sanity/media/fragment";
 import type { WorkshopIntroSectionQResult } from "~/sanity/types";
 
 const WorkshopIntroSectionQ =
   defineQuery(`*[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopIntroSectionField" && _key == $sectionKey][0]{
     "content": sectionContent{
       heading,
+      image{${ImageFragment}},
       quote,
       quoteAttribution,
       appRichText,
@@ -36,6 +39,9 @@ export async function WorkshopIntroSection({ docId, sectionKey }: { docId: strin
         </h1>
         <div className="workshop-intro_inner">
           <div className="workshop-intro_lede">
+            {content.image && (
+              <KaijoImage image={content.image} className="workshop-intro_image" sizes="(max-width: 991px) 100vw, 45vw" />
+            )}
             {content.quote && (
               <blockquote className="workshop-intro_quote">
                 <p>“{content.quote}”</p>

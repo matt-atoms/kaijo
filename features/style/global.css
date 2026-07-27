@@ -923,6 +923,20 @@ img {
   }
 }
 
+.workshop-intro_lede {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.75em;
+}
+
+.workshop-intro_image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
 .workshop-intro_quote {
   margin: 0;
   display: flex;
@@ -1288,47 +1302,44 @@ img {
 }
 
 /*
- * Workshop notes — features/page-builder/sections/workshop-notes-section.tsx. Two smaller
- * side-by-side panels (Who it's for / Equipment & experience).
+ * Workshop notes — features/page-builder/sections/workshop-notes-section.tsx. "Who it's for" and
+ * "Equipment & experience" flow through two balanced columns (CSS multicol), so the longer list
+ * spills into the right column above the second heading and both sides end up level.
  */
-.workshop-notes_grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4em;
-  align-items: start;
+.workshop-notes_flow {
+  column-count: 2;
+  column-gap: 4em;
 }
 
 @media screen and (max-width: 767px) {
-  .workshop-notes_grid {
-    grid-template-columns: 1fr;
-    gap: 2.5em;
+  .workshop-notes_flow {
+    column-count: 1;
   }
 }
 
-.workshop-notes_col {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  max-width: 34em;
-}
-
 .workshop-notes_heading {
+  margin-bottom: 0.75em;
   font-family: "Art Grootfontein", Arial, sans-serif;
   font-size: 2em;
   line-height: 1;
+  break-inside: avoid;
+  break-after: avoid;
+}
+
+.workshop-notes_heading:not(:first-child) {
+  margin-top: 1.5em;
 }
 
 .workshop-notes_intro {
+  margin-bottom: 1.25em;
   opacity: 1;
   text-align: left;
   font-size: 1.02em;
   line-height: 1.6;
+  break-inside: avoid;
 }
 
 .workshop-notes_list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25em;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1337,14 +1348,14 @@ img {
 
 .workshop-notes_item {
   counter-increment: notes;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35em;
+  margin-bottom: 1.25em;
   padding-top: 1em;
   border-top: 1px solid var(--colors--black);
+  break-inside: avoid;
 }
 
 .workshop-notes_item-title {
+  display: block;
   font-weight: 600;
   font-size: 1em;
   line-height: 1.35;
@@ -1357,18 +1368,21 @@ img {
 }
 
 .workshop-notes_item-desc {
+  display: block;
+  margin-top: 0.35em;
   font-size: 0.9em;
   line-height: 1.5;
   opacity: 0.7;
 }
 
 .workshop-notes_note {
-  margin-top: 0.5em;
+  margin-top: 1em;
   opacity: 0.6;
   font-style: italic;
   text-align: left;
   font-size: 0.9em;
   line-height: 1.5;
+  break-inside: avoid;
 }
 
 /*

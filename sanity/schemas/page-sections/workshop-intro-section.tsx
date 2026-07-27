@@ -11,6 +11,12 @@ export const workshopIntroSection = defineField({
   fields: [
     defineField({ name: "heading", type: "string", title: "Heading", validation: (R) => R.required() }),
     defineField({
+      name: "image",
+      type: "image",
+      title: "Image",
+      description: "Shown above the quote, to balance the intro.",
+    }),
+    defineField({
       name: "quote",
       type: "text",
       rows: 3,

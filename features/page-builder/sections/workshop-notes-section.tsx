@@ -1,4 +1,5 @@
 import { defineQuery } from "next-sanity";
+import * as React from "react";
 import { sanityFetch } from "~/features/sanity/client";
 import type { WorkshopNotesSectionQResult } from "~/sanity/types";
 
@@ -37,9 +38,9 @@ export async function WorkshopNotesSection({ docId, sectionKey }: { docId: strin
             {content.heading}
           </h2>
         )}
-        <div className="workshop-notes_grid">
+        <div className="workshop-notes_flow">
           {content.columns.map((column) => (
-            <div key={column.key} className="workshop-notes_col">
+            <React.Fragment key={column.key}>
               <h2 className="workshop-notes_heading">{column.heading}</h2>
               {column.intro && <p className="workshop-notes_intro">{column.intro}</p>}
               {column.items && column.items.length > 0 && (
@@ -53,7 +54,7 @@ export async function WorkshopNotesSection({ docId, sectionKey }: { docId: strin
                 </ol>
               )}
               {column.note && <p className="workshop-notes_note">{column.note}</p>}
-            </div>
+            </React.Fragment>
           ))}
         </div>
       </div>
