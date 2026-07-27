@@ -43,14 +43,14 @@ export async function WorkshopNotesSection({ docId, sectionKey }: { docId: strin
               <h2 className="workshop-notes_heading">{column.heading}</h2>
               {column.intro && <p className="workshop-notes_intro">{column.intro}</p>}
               {column.items && column.items.length > 0 && (
-                <ul className="workshop-notes_list">
+                <ol className="workshop-notes_list">
                   {column.items.map((item) => (
                     <li key={item.key} className="workshop-notes_item">
-                      {item.label && <span className="workshop-notes_item-label">{item.label}</span>}
-                      <span className="workshop-notes_item-text">{item.text}</span>
+                      <span className="workshop-notes_item-title">{item.label ?? item.text}</span>
+                      {item.label && <span className="workshop-notes_item-desc">{item.text}</span>}
                     </li>
                   ))}
-                </ul>
+                </ol>
               )}
               {column.note && <p className="workshop-notes_note">{column.note}</p>}
             </div>

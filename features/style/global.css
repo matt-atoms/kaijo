@@ -929,6 +929,9 @@ img {
   flex-direction: column;
   gap: 0.75em;
   max-width: 12em;
+  /* Black side bar (overrides the webflow blockquote grey). */
+  border-left: 4px solid var(--colors--black);
+  padding: 0 0 0 0.6em;
   font-family: "Art Grootfontein", Arial, sans-serif;
   font-size: 2.2em;
   line-height: 1.05;
@@ -1325,35 +1328,38 @@ img {
 .workshop-notes_list {
   display: flex;
   flex-direction: column;
-  gap: 0.75em;
+  gap: 1.25em;
   margin: 0;
   padding: 0;
   list-style: none;
+  counter-reset: notes;
 }
 
 .workshop-notes_item {
-  position: relative;
+  counter-increment: notes;
   display: flex;
   flex-direction: column;
-  gap: 0.1em;
-  padding-left: 1.2em;
-  font-size: 0.95em;
-  line-height: 1.5;
+  gap: 0.35em;
+  padding-top: 1em;
+  border-top: 1px solid var(--colors--black);
 }
 
-.workshop-notes_item::before {
-  content: "—";
-  position: absolute;
-  left: 0;
-  opacity: 0.5;
-}
-
-.workshop-notes_item-label {
+.workshop-notes_item-title {
   font-weight: 600;
+  font-size: 1em;
+  line-height: 1.35;
 }
 
-.workshop-notes_item-text {
-  opacity: 0.85;
+.workshop-notes_item-title::before {
+  content: counter(notes, decimal-leading-zero);
+  margin-right: 0.75em;
+  opacity: 0.4;
+}
+
+.workshop-notes_item-desc {
+  font-size: 0.9em;
+  line-height: 1.5;
+  opacity: 0.7;
 }
 
 .workshop-notes_note {
@@ -1403,19 +1409,22 @@ img {
 .workshop-testimonials_item {
   display: flex;
   flex-direction: column;
-  gap: 0.6em;
-  padding-top: 1em;
-  border-top: 1px solid var(--colors--black);
+  gap: 0.85em;
 }
 
+/* Body font, slightly bolder italic, with a black side bar (overrides the webflow blockquote grey). */
 .workshop-testimonials_quote {
   margin: 0;
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 1.4em;
-  line-height: 1.2;
+  border-left: 4px solid var(--colors--black);
+  padding: 0.05em 0 0.05em 1.1em;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.02em;
+  line-height: 1.6;
 }
 
 .workshop-testimonials_name {
+  margin-left: calc(1.1em + 4px);
   font-style: normal;
   text-transform: uppercase;
   font-size: 0.8em;
