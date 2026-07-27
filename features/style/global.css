@@ -1592,6 +1592,196 @@ img {
 }
 
 /*
+ * Prints — features/page-builder/sections/prints-gallery-section.tsx + prints-carousel.tsx.
+ * A framed-print coverflow per series: the centre print is lit on a gallery wall, its neighbours
+ * dimmed to either side, looping seamlessly. The anthracite frame + white mat + wall are built in
+ * CSS (works across every image orientation) rather than a fixed-perspective mockup photo.
+ */
+.prints_head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.prints_intro {
+  max-width: 40em;
+  margin-top: 1em;
+  opacity: 1;
+  text-align: left;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+.prints_enquiry {
+  margin-top: 1.25em;
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.prints_enquiry:hover {
+  color: var(--colors--accent-color);
+}
+
+.prints_series {
+  margin-top: 4.5em;
+}
+
+.prints_series-head {
+  margin-bottom: 1.5em;
+}
+
+.prints_series-title {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 2.4em;
+  line-height: 1;
+}
+
+.prints_series-desc {
+  margin-top: 0.4em;
+  opacity: 0.65;
+  text-align: left;
+  font-size: 0.95em;
+}
+
+/* Coverflow */
+.prints-carousel {
+  --slide-w: clamp(240px, 32vw, 380px);
+}
+
+.prints-carousel_stage {
+  position: relative;
+  height: clamp(360px, 62vh, 600px);
+  overflow: hidden;
+  background: linear-gradient(180deg, #d8d5cd 0%, #c6c3ba 100%);
+  touch-action: pan-y;
+  user-select: none;
+}
+
+/* Soft spotlight on the centre of the wall. */
+.prints-carousel_stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(58% 82% at 50% 45%, rgb(255 255 255 / 0.34), rgb(0 0 0 / 0) 72%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.prints-slide {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--slide-w);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform: translateX(-50%) translateX(calc(var(--off) * 58%)) scale(0.66);
+  filter: brightness(0.34);
+  z-index: 1;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    filter 0.55s ease;
+}
+
+.prints-slide[data-pos="1"] {
+  transform: translateX(-50%) translateX(calc(var(--off) * 58%)) scale(0.82);
+  filter: brightness(0.5);
+  z-index: 2;
+}
+
+.prints-slide[data-pos="0"] {
+  transform: translateX(-50%) scale(1);
+  filter: brightness(1);
+  z-index: 3;
+  cursor: default;
+}
+
+/* Framed print: fixed 4:5 box (robust before the photo loads) → anthracite frame → mat → photo. */
+.prints-frame {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  padding: 0.7em;
+  background: linear-gradient(145deg, #40404a 0%, #26262b 55%, #1b1b1f 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    0 2px 5px rgb(0 0 0 / 0.35),
+    0 22px 45px rgb(0 0 0 / 0.4);
+}
+
+.prints-slide[data-pos="0"] .prints-frame {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    0 4px 10px rgb(0 0 0 / 0.4),
+    0 32px 64px rgb(0 0 0 / 0.5);
+}
+
+.prints-mat {
+  display: flex;
+  flex: 1;
+  box-sizing: border-box;
+  padding: 0.55em;
+  background: #f5f3ee;
+}
+
+.prints-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.prints-carousel_controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5em;
+  margin-top: 1.75em;
+}
+
+.prints-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6em;
+  height: 2.6em;
+  border: 1px solid var(--colors--black);
+  background: transparent;
+  font-size: 1em;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.prints-nav:hover {
+  background: var(--colors--black);
+  color: #fff;
+}
+
+.prints-counter {
+  min-width: 5em;
+  text-align: center;
+  font-size: 0.9em;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prints-slide {
+    transition: none;
+  }
+}
+
+/*
  * Page reveal: the display fonts reshape the layout when they swap in, so the page fades in
  * once fonts are ready (see the inline script in shared-web-layout.tsx).
  * - Without JS the attribute is never flipped, so a CSS-only fallback forces the page visible.
