@@ -36,7 +36,7 @@ export async function WorkshopPricingSection({ docId, sectionKey }: { docId: str
   const options = [...tierOptions, ...extraOptions];
 
   return (
-    <div className="section_workshop-pricing section-padding-top">
+    <div id="enquire" className="section_workshop-pricing section-padding-top">
       <div className="container">
         <div className="workshop-pricing_head">
           {content.heading && (

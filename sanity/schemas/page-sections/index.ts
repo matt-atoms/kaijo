@@ -14,7 +14,10 @@ import { textSection } from "./text-section";
 import { workOverviewSection } from "./work-overview-section";
 import { workshopIntroSection } from "./workshop-intro-section";
 import { workshopLearnSection } from "./workshop-learn-section";
+import { workshopNotesSection } from "./workshop-notes-section";
 import { workshopPricingSection } from "./workshop-pricing-section";
+import { workshopTestimonialsSection } from "./workshop-testimonials-section";
+import { workshopUpcomingSection } from "./workshop-upcoming-section";
 import { workshopsSection } from "./workshops-section";
 // PLOP: Add Import
 
@@ -37,5 +40,8 @@ export const sections = [
   workshopIntroSection,
   workshopLearnSection,
   workshopPricingSection,
+  workshopNotesSection,
+  workshopTestimonialsSection,
+  workshopUpcomingSection,
   // PLOP: Add Export
 ];

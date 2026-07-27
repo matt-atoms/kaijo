@@ -1285,6 +1285,290 @@ img {
 }
 
 /*
+ * Workshop notes — features/page-builder/sections/workshop-notes-section.tsx. Two smaller
+ * side-by-side panels (Who it's for / Equipment & experience).
+ */
+.workshop-notes_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4em;
+  align-items: start;
+}
+
+@media screen and (max-width: 767px) {
+  .workshop-notes_grid {
+    grid-template-columns: 1fr;
+    gap: 2.5em;
+  }
+}
+
+.workshop-notes_col {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 34em;
+}
+
+.workshop-notes_heading {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 2em;
+  line-height: 1;
+}
+
+.workshop-notes_intro {
+  opacity: 1;
+  text-align: left;
+  font-size: 1.02em;
+  line-height: 1.6;
+}
+
+.workshop-notes_list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.workshop-notes_item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  padding-left: 1.2em;
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+.workshop-notes_item::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  opacity: 0.5;
+}
+
+.workshop-notes_item-label {
+  font-weight: 600;
+}
+
+.workshop-notes_item-text {
+  opacity: 0.85;
+}
+
+.workshop-notes_note {
+  margin-top: 0.5em;
+  opacity: 0.6;
+  font-style: italic;
+  text-align: left;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+/*
+ * Testimonials — features/page-builder/sections/workshop-testimonials-section.tsx. Short attributed
+ * quotes in a two-column grid (same rhythm as "what you'll learn").
+ */
+.workshop-testimonials_head {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 34em;
+  margin-bottom: 2.5em;
+}
+
+.workshop-testimonials_lead {
+  opacity: 1;
+  text-align: left;
+  font-size: 1.05em;
+  line-height: 1.6;
+}
+
+.workshop-testimonials_list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em 4em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media screen and (max-width: 767px) {
+  .workshop-testimonials_list {
+    grid-template-columns: 1fr;
+    gap: 1.75em;
+  }
+}
+
+.workshop-testimonials_item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  padding-top: 1em;
+  border-top: 1px solid var(--colors--black);
+}
+
+.workshop-testimonials_quote {
+  margin: 0;
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 1.4em;
+  line-height: 1.2;
+}
+
+.workshop-testimonials_name {
+  font-style: normal;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+}
+
+/*
+ * Upcoming workshops — features/page-builder/sections/workshop-upcoming-section.tsx. Larger event
+ * cards (up to 3 per row) with an honest empty state when nothing is scheduled.
+ */
+.workshop-upcoming_head {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 34em;
+  margin-bottom: 2.5em;
+}
+
+.workshop-upcoming_lead {
+  opacity: 1;
+  text-align: left;
+  font-size: 1.05em;
+  line-height: 1.6;
+}
+
+.workshop-upcoming_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em;
+}
+
+@media screen and (max-width: 991px) {
+  .workshop-upcoming_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 639px) {
+  .workshop-upcoming_grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.workshop-upcoming_event {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
+  padding: 2em;
+  border: 1px solid var(--colors--black);
+}
+
+.workshop-upcoming_event-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+.workshop-upcoming_date {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 2em;
+  line-height: 1;
+}
+
+.workshop-upcoming_location {
+  text-transform: uppercase;
+  font-size: 0.85em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+}
+
+.workshop-upcoming_meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin: 0;
+}
+
+.workshop-upcoming_meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  font-size: 0.9em;
+}
+
+.workshop-upcoming_meta-row dt {
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.03em;
+  opacity: 0.55;
+}
+
+.workshop-upcoming_meta-row dd {
+  margin: 0;
+  text-align: right;
+}
+
+.workshop-upcoming_event-foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+  padding-top: 1.1em;
+  border-top: 1px solid rgb(0 0 0 / 0.15);
+}
+
+.workshop-upcoming_price {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 1.6em;
+  line-height: 1;
+}
+
+.workshop-upcoming_book {
+  text-transform: uppercase;
+  font-size: 0.85em;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.workshop-upcoming_book:hover {
+  color: var(--colors--accent-color);
+}
+
+.workshop-upcoming_empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25em;
+  padding: 2.5em;
+  border: 1px solid var(--colors--black);
+}
+
+.workshop-upcoming_empty-text {
+  max-width: 16em;
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 1.8em;
+  line-height: 1.1;
+}
+
+.workshop-upcoming_empty-cta {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.workshop-upcoming_empty-cta:hover {
+  color: var(--colors--accent-color);
+}
+
+/*
  * Page reveal: the display fonts reshape the layout when they swap in, so the page fades in
  * once fonts are ready (see the inline script in shared-web-layout.tsx).
  * - Without JS the attribute is never flipped, so a CSS-only fallback forces the page visible.

@@ -141,6 +141,19 @@ export type WorkshopIntroSectionFieldSectionContentAppLink = {
   openInNewTab?: boolean;
 };
 
+export type EmptyCtaLink = {
+  type?: "internal" | "external" | "email" | "phone" | "file" | "params";
+  external?: string;
+  email?: string;
+  phone?: string;
+  file?: EmptyCtaLinkFile;
+  canDownload?: boolean;
+  paramsHref?: string;
+  internal?: EmptyCtaLinkInternal;
+  customText?: string;
+  openInNewTab?: boolean;
+};
+
 export type VideoFile = {
   asset?: SanityFileAssetReference;
   media?: unknown; // Unable to locate the referenced type "videoFile.media" in schema
@@ -473,6 +486,41 @@ export type WorkshopIntroSectionFieldSectionContentAppLinkInternal = {
   sectionTarget?: string;
 };
 
+export type WorkshopEventAppLink = {
+  type?: "internal" | "external" | "email" | "phone" | "file" | "params";
+  external?: string;
+  email?: string;
+  phone?: string;
+  file?: WorkshopEventAppLinkFile;
+  canDownload?: boolean;
+  paramsHref?: string;
+  internal?: WorkshopEventAppLinkInternal;
+  customText?: string;
+  openInNewTab?: boolean;
+};
+
+export type WorkshopEventAppLinkFile = {
+  asset?: SanityFileAssetReference;
+  media?: unknown; // Unable to locate the referenced type "workshopEvent.appLink.file.media" in schema
+  _type: "file";
+};
+
+export type WorkshopEventAppLinkInternal = {
+  link?: PageReference;
+  sectionTarget?: string;
+};
+
+export type EmptyCtaLinkFile = {
+  asset?: SanityFileAssetReference;
+  media?: unknown; // Unable to locate the referenced type "emptyCtaLink.file.media" in schema
+  _type: "file";
+};
+
+export type EmptyCtaLinkInternal = {
+  link?: PageReference;
+  sectionTarget?: string;
+};
+
 export type LinkFile = {
   asset?: SanityFileAssetReference;
   media?: unknown; // Unable to locate the referenced type "link.file.media" in schema
@@ -493,6 +541,57 @@ export type ChildrenAppLinkFile = {
 export type ChildrenAppLinkInternal = {
   link?: PageReference;
   sectionTarget?: string;
+};
+
+export type WorkshopUpcomingSection = {
+  _type: "workshopUpcomingSection";
+  heading?: string;
+  lead?: string;
+  events?: Array<{
+    date?: string;
+    time?: string;
+    location?: string;
+    language?: string;
+    availability?: string;
+    price?: string;
+    deadline?: string;
+    appLink?: WorkshopEventAppLink;
+    _type: "workshopEvent";
+    _key: string;
+  }>;
+  emptyMessage?: string;
+  emptyCtaLabel?: string;
+  emptyCtaLink?: EmptyCtaLink;
+};
+
+export type WorkshopTestimonialsSection = {
+  _type: "workshopTestimonialsSection";
+  heading?: string;
+  lead?: string;
+  items?: Array<{
+    quote?: string;
+    name?: string;
+    _type: "testimonial";
+    _key: string;
+  }>;
+};
+
+export type WorkshopNotesSection = {
+  _type: "workshopNotesSection";
+  heading?: string;
+  columns?: Array<{
+    heading?: string;
+    intro?: string;
+    items?: Array<{
+      label?: string;
+      text?: string;
+      _type: "noteItem";
+      _key: string;
+    }>;
+    note?: string;
+    _type: "notesColumn";
+    _key: string;
+  }>;
 };
 
 export type WorkshopPricingSection = {
@@ -1190,6 +1289,24 @@ export type Article = {
           _type: "workshopPricingSectionField";
           _key: string;
         }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: WorkshopNotesSection;
+          _type: "workshopNotesSectionField";
+          _key: string;
+        }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: WorkshopTestimonialsSection;
+          _type: "workshopTestimonialsSectionField";
+          _key: string;
+        }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: WorkshopUpcomingSection;
+          _type: "workshopUpcomingSectionField";
+          _key: string;
+        }
     >;
   };
   seoMetadata?: {
@@ -1736,6 +1853,24 @@ export type Page = {
           _type: "workshopPricingSectionField";
           _key: string;
         }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: WorkshopNotesSection;
+          _type: "workshopNotesSectionField";
+          _key: string;
+        }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: WorkshopTestimonialsSection;
+          _type: "workshopTestimonialsSectionField";
+          _key: string;
+        }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: WorkshopUpcomingSection;
+          _type: "workshopUpcomingSectionField";
+          _key: string;
+        }
     >;
   };
   seoMetadata?: {
@@ -1987,6 +2122,7 @@ export type AllSanitySchemaTypes =
   | WorkshopsSectionFieldSectionContentAppLink
   | AboutTextSectionFieldSectionContentAppLink
   | WorkshopIntroSectionFieldSectionContentAppLink
+  | EmptyCtaLink
   | VideoFile
   | VideoFileDimensions
   | VideoUrlDimensions
@@ -2037,10 +2173,18 @@ export type AllSanitySchemaTypes =
   | InquiryButtonAppLinkInternal
   | WorkshopIntroSectionFieldSectionContentAppLinkFile
   | WorkshopIntroSectionFieldSectionContentAppLinkInternal
+  | WorkshopEventAppLink
+  | WorkshopEventAppLinkFile
+  | WorkshopEventAppLinkInternal
+  | EmptyCtaLinkFile
+  | EmptyCtaLinkInternal
   | LinkFile
   | LinkInternal
   | ChildrenAppLinkFile
   | ChildrenAppLinkInternal
+  | WorkshopUpcomingSection
+  | WorkshopTestimonialsSection
+  | WorkshopNotesSection
   | WorkshopPricingSection
   | WorkshopLearnSection
   | WorkshopIntroSection
@@ -2869,6 +3013,14 @@ export type AgentMarkdownContentQueryResult =
             caption: null;
           }
         | {
+            _type: "workshopNotesSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
             _type: "workshopPricingSectionField";
             text: null;
             media: null;
@@ -2895,6 +3047,22 @@ export type AgentMarkdownContentQueryResult =
               text: string | "";
             } | undefined;
             headline: string | undefined;
+            caption: null;
+          }
+        | {
+            _type: "workshopTestimonialsSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
+            _type: "workshopUpcomingSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
             caption: null;
           }
       > | undefined;
@@ -3346,6 +3514,14 @@ export type AgentMarkdownContentQueryResult =
             caption: null;
           }
         | {
+            _type: "workshopNotesSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
             _type: "workshopPricingSectionField";
             text: null;
             media: null;
@@ -3372,6 +3548,22 @@ export type AgentMarkdownContentQueryResult =
               text: string | "";
             } | undefined;
             headline: string | undefined;
+            caption: null;
+          }
+        | {
+            _type: "workshopTestimonialsSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
+            _type: "workshopUpcomingSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
             caption: null;
           }
       > | undefined;
@@ -3456,11 +3648,23 @@ export type PageSectionsQResult = Array<
     }
   | {
       _key: string;
+      _type: "workshopNotesSectionField";
+    }
+  | {
+      _key: string;
       _type: "workshopPricingSectionField";
     }
   | {
       _key: string;
       _type: "workshopsSectionField";
+    }
+  | {
+      _key: string;
+      _type: "workshopTestimonialsSectionField";
+    }
+  | {
+      _key: string;
+      _type: "workshopUpcomingSectionField";
     }
 > | undefined;
 
@@ -4768,6 +4972,26 @@ export type WorkshopLearnSectionQResult = {
   } | undefined;
 } | undefined;
 
+// Source: features/page-builder/sections/workshop-notes-section.tsx
+// Variable: WorkshopNotesSectionQ
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopNotesSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      columns[]{        "key": _key,        heading,        intro,        items[]{ "key": _key, label, text },        note      }    }}
+export type WorkshopNotesSectionQResult = {
+  content: {
+    heading: string | undefined;
+    columns: Array<{
+      key: string;
+      heading: string | undefined;
+      intro: string | undefined;
+      items: Array<{
+        key: string;
+        label: string | undefined;
+        text: string | undefined;
+      }> | undefined;
+      note: string | undefined;
+    }> | undefined;
+  } | undefined;
+} | undefined;
+
 // Source: features/page-builder/sections/workshop-pricing-section.tsx
 // Variable: WorkshopPricingSectionQ
 // Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopPricingSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      lead,      tiers[]{ "key": _key, title, price, description },      note,      bookingHeading,      bookingIntro,      bookingExtraOptions    }}
@@ -4785,6 +5009,71 @@ export type WorkshopPricingSectionQResult = {
     bookingHeading: string | undefined;
     bookingIntro: string | undefined;
     bookingExtraOptions: Array<string> | undefined;
+  } | undefined;
+} | undefined;
+
+// Source: features/page-builder/sections/workshop-testimonials-section.tsx
+// Variable: WorkshopTestimonialsSectionQ
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopTestimonialsSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      lead,      items[]{ "key": _key, quote, name }    }}
+export type WorkshopTestimonialsSectionQResult = {
+  content: {
+    heading: string | undefined;
+    lead: string | undefined;
+    items: Array<{
+      key: string;
+      quote: string | undefined;
+      name: string | undefined;
+    }> | undefined;
+  } | undefined;
+} | undefined;
+
+// Source: features/page-builder/sections/workshop-upcoming-section.tsx
+// Variable: WorkshopUpcomingSectionQ
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopUpcomingSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      lead,      events[]{        "key": _key,        date,        time,        location,        language,        availability,        price,        deadline,        "link": appLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}      },      emptyMessage,      emptyCtaLabel,      "emptyCtaLink": emptyCtaLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}    }}
+export type WorkshopUpcomingSectionQResult = {
+  content: {
+    heading: string | undefined;
+    lead: string | undefined;
+    events: Array<{
+      key: string;
+      date: string | undefined;
+      time: string | undefined;
+      location: string | undefined;
+      language: string | undefined;
+      availability: string | undefined;
+      price: string | undefined;
+      deadline: string | undefined;
+      link: {
+        type:
+          | "email"
+          | "external"
+          | "file"
+          | "internal"
+          | "params"
+          | "phone"
+          | undefined;
+        openInNewTab: boolean | false;
+        canDownload: boolean | false;
+        href: string | "" | "mailto:" | "tel:";
+        text: string | "";
+      } | undefined;
+    }> | undefined;
+    emptyMessage: string | undefined;
+    emptyCtaLabel: string | undefined;
+    emptyCtaLink: {
+      type:
+        | "email"
+        | "external"
+        | "file"
+        | "internal"
+        | "params"
+        | "phone"
+        | undefined;
+      openInNewTab: boolean | false;
+      canDownload: boolean | false;
+      href: string | "" | "mailto:" | "tel:";
+      text: string | "";
+    } | undefined;
   } | undefined;
 } | undefined;
 
