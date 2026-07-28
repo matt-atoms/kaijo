@@ -67,6 +67,9 @@ const _sections = {
   printsGallerySectionField: dynamic(() =>
     import("~/features/page-builder/sections/prints-gallery-section").then((mod) => mod.PrintsGallerySection)
   ),
+  printsLicensingSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/prints-licensing-section").then((mod) => mod.PrintsLicensingSection)
+  ),
   // PLOP: Add Import
 } as const;
 

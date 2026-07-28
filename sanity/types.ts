@@ -20,10 +20,10 @@ export type Link = {
   external?: string;
   email?: string;
   phone?: string;
-  file?: LinkFile;
+  file?: File1;
   canDownload?: boolean;
   paramsHref?: string;
-  internal?: LinkInternal;
+  internal?: Internal1;
   customText?: string;
   openInNewTab?: boolean;
 };
@@ -163,6 +163,19 @@ export type EnquiryLink = {
   canDownload?: boolean;
   paramsHref?: string;
   internal?: EnquiryLinkInternal;
+  customText?: string;
+  openInNewTab?: boolean;
+};
+
+export type SectionContentLink = {
+  type?: "internal" | "external" | "email" | "phone" | "file" | "params";
+  external?: string;
+  email?: string;
+  phone?: string;
+  file?: LinkFile;
+  canDownload?: boolean;
+  paramsHref?: string;
+  internal?: LinkInternal;
   customText?: string;
   openInNewTab?: boolean;
 };
@@ -556,6 +569,17 @@ export type LinkInternal = {
   sectionTarget?: string;
 };
 
+export type File1 = {
+  asset?: SanityFileAssetReference;
+  media?: unknown; // Unable to locate the referenced type "media1" in schema
+  _type: "file";
+};
+
+export type Internal1 = {
+  link?: PageReference;
+  sectionTarget?: string;
+};
+
 export type ChildrenAppLinkFile = {
   asset?: SanityFileAssetReference;
   media?: unknown; // Unable to locate the referenced type "children.appLink.file.media" in schema
@@ -567,11 +591,34 @@ export type ChildrenAppLinkInternal = {
   sectionTarget?: string;
 };
 
+export type PrintsLicensingSection = {
+  _type: "printsLicensingSection";
+  heading?: string;
+  text?: string;
+  link?: SectionContentLink;
+  images?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+};
+
 export type PrintsGallerySection = {
   _type: "printsGallerySection";
   heading?: string;
   intro?: string;
   enquiryLink?: EnquiryLink;
+  optionsHeading?: string;
+  editions?: Array<{
+    size?: string;
+    edition?: string;
+    _type: "printEdition";
+    _key: string;
+  }>;
+  priceNote?: string;
   categories?: Array<{
     title?: string;
     description?: string;
@@ -1360,6 +1407,12 @@ export type Article = {
           _type: "printsGallerySectionField";
           _key: string;
         }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: PrintsLicensingSection;
+          _type: "printsLicensingSectionField";
+          _key: string;
+        }
     >;
   };
   seoMetadata?: {
@@ -1930,6 +1983,12 @@ export type Page = {
           _type: "printsGallerySectionField";
           _key: string;
         }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: PrintsLicensingSection;
+          _type: "printsLicensingSectionField";
+          _key: string;
+        }
     >;
   };
   seoMetadata?: {
@@ -2183,6 +2242,7 @@ export type AllSanitySchemaTypes =
   | WorkshopIntroSectionFieldSectionContentAppLink
   | EmptyCtaLink
   | EnquiryLink
+  | SectionContentLink
   | VideoFile
   | VideoFileDimensions
   | VideoUrlDimensions
@@ -2242,8 +2302,11 @@ export type AllSanitySchemaTypes =
   | EnquiryLinkInternal
   | LinkFile
   | LinkInternal
+  | File1
+  | Internal1
   | ChildrenAppLinkFile
   | ChildrenAppLinkInternal
+  | PrintsLicensingSection
   | PrintsGallerySection
   | WorkshopUpcomingSection
   | WorkshopTestimonialsSection
@@ -2937,6 +3000,14 @@ export type AgentMarkdownContentQueryResult =
             caption: null;
           }
         | {
+            _type: "printsLicensingSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
             _type: "projectHeroSectionField";
             text: null;
             media: null;
@@ -3446,6 +3517,14 @@ export type AgentMarkdownContentQueryResult =
             caption: null;
           }
         | {
+            _type: "printsLicensingSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
             _type: "projectHeroSectionField";
             text: null;
             media: null;
@@ -3708,6 +3787,10 @@ export type PageSectionsQResult = Array<
   | {
       _key: string;
       _type: "printsGallerySectionField";
+    }
+  | {
+      _key: string;
+      _type: "printsLicensingSectionField";
     }
   | {
       _key: string;
@@ -4436,7 +4519,7 @@ export type PortfolioGridQResult = {
 
 // Source: features/page-builder/sections/prints-gallery-section.tsx
 // Variable: PrintsGallerySectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "printsGallerySectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      intro,      "enquiry": enquiryLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )},      categories[]{        "key": _key,        title,        description,        images[]{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}      }    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "printsGallerySectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      intro,      "enquiry": enquiryLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )},      optionsHeading,      editions[]{ "key": _key, size, edition },      priceNote,      categories[]{        "key": _key,        title,        description,        images[]{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}      }    }}
 export type PrintsGallerySectionQResult = {
   content: {
     heading: string | undefined;
@@ -4455,6 +4538,13 @@ export type PrintsGallerySectionQResult = {
       href: string | "" | "mailto:" | "tel:";
       text: string | "";
     } | undefined;
+    optionsHeading: string | undefined;
+    editions: Array<{
+      key: string;
+      size: string | undefined;
+      edition: string | undefined;
+    }> | undefined;
+    priceNote: string | undefined;
     categories: Array<{
       key: string;
       title: string | undefined;
@@ -4470,6 +4560,41 @@ export type PrintsGallerySectionQResult = {
         crop: SanityImageCrop | undefined;
         hotspot: SanityImageHotspot | undefined;
       }> | undefined;
+    }> | undefined;
+  } | undefined;
+} | undefined;
+
+// Source: features/page-builder/sections/prints-licensing-section.tsx
+// Variable: PrintsLicensingSectionQ
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "printsLicensingSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      text,      "link": link{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )},      images[]{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}    }}
+export type PrintsLicensingSectionQResult = {
+  content: {
+    heading: string | undefined;
+    text: string | undefined;
+    link: {
+      type:
+        | "email"
+        | "external"
+        | "file"
+        | "internal"
+        | "params"
+        | "phone"
+        | undefined;
+      openInNewTab: boolean | false;
+      canDownload: boolean | false;
+      href: string | "" | "mailto:" | "tel:";
+      text: string | "";
+    } | undefined;
+    images: Array<{
+      _id: string | undefined;
+      _rev: string | undefined;
+      altText: string | undefined;
+      description: string | undefined;
+      title: string | undefined;
+      lqip: string | undefined;
+      dimensions: SanityImageDimensions | undefined;
+      crop: SanityImageCrop | undefined;
+      hotspot: SanityImageHotspot | undefined;
     }> | undefined;
   } | undefined;
 } | undefined;

@@ -9,8 +9,32 @@ export const printsGallerySection = defineField({
   icon: () => <>🖼️</>,
   fields: [
     defineField({ name: "heading", type: "string", title: "Heading" }),
-    defineField({ name: "intro", type: "text", rows: 3, title: "Intro" }),
+    defineField({ name: "intro", type: "text", rows: 4, title: "Intro" }),
     createLinkField({ name: "enquiryLink", title: "Enquiry link", description: "Optional 'enquire about prints' CTA." }),
+    defineField({ name: "optionsHeading", type: "string", title: "Options — heading" }),
+    defineField({
+      name: "editions",
+      type: "array",
+      title: "Options — editions",
+      description: "Size / edition rows shown beside the intro.",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "printEdition",
+          fields: [
+            defineField({ name: "size", type: "string", title: "Size", validation: (R) => R.required() }),
+            defineField({ name: "edition", type: "string", title: "Edition" }),
+          ],
+          preview: { select: { title: "size", subtitle: "edition" } },
+        }),
+      ],
+    }),
+    defineField({
+      name: "priceNote",
+      type: "string",
+      title: "Options — price note",
+      description: "e.g. “Prints from €1,250”. Deliberately no full price list.",
+    }),
     defineField({
       name: "categories",
       type: "array",

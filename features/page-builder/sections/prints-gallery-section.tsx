@@ -12,6 +12,9 @@ const PrintsGallerySectionQ =
       heading,
       intro,
       "enquiry": enquiryLink{${LinkFragment}},
+      optionsHeading,
+      editions[]{ "key": _key, size, edition },
+      priceNote,
       categories[]{
         "key": _key,
         title,
@@ -38,16 +41,32 @@ export async function PrintsGallerySection({ docId, sectionKey }: { docId: strin
     <div className="section_prints section-padding-top section-padding-bottom">
       <div className="container">
         <div className="prints_head">
-          {content.heading && (
-            <h1 data-scramble="scroll" className="section_title">
-              {content.heading}
-            </h1>
-          )}
-          {content.intro && <p className="prints_intro">{content.intro}</p>}
-          {content.enquiry?.href && (
-            <SanityLink link={content.enquiry} className="prints_enquiry">
-              {content.enquiry.text || "Enquire about prints"} →
-            </SanityLink>
+          <div className="prints_head-main">
+            {content.heading && (
+              <h1 data-scramble="scroll" className="section_title">
+                {content.heading}
+              </h1>
+            )}
+            {content.intro && <p className="prints_intro">{content.intro}</p>}
+            {content.enquiry?.href && (
+              <SanityLink link={content.enquiry} className="prints_enquiry">
+                {content.enquiry.text || "Enquire about prints"} →
+              </SanityLink>
+            )}
+          </div>
+          {content.editions && content.editions.length > 0 && (
+            <aside className="prints_options">
+              {content.optionsHeading && <div className="prints_options-title">{content.optionsHeading}</div>}
+              <dl className="prints_options-list">
+                {content.editions.map((edition) => (
+                  <div key={edition.key} className="prints_options-row">
+                    <dt>{edition.size}</dt>
+                    {edition.edition && <dd>{edition.edition}</dd>}
+                  </div>
+                ))}
+              </dl>
+              {content.priceNote && <p className="prints_options-price">{content.priceNote}</p>}
+            </aside>
           )}
         </div>
       </div>
