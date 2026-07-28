@@ -1983,6 +1983,627 @@ html body {
   transform: scale(1.05);
 }
 
+/*
+ * Books store — features/page-builder/sections/books-store-section.tsx, app/(web)/books/[slug],
+ * and features/store/*. Quiet, editorial storefront: overview entries, a book page, and a cart.
+ */
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  text-transform: uppercase;
+  font-size: 0.78em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.availability_dot {
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.availability[data-status="available"] .availability_dot {
+  background: #3fa34d;
+}
+
+.availability[data-status="limited"] .availability_dot {
+  background: #d99a2b;
+}
+
+.availability[data-status="soldOut"] {
+  opacity: 0.55;
+}
+
+/* Overview */
+.books_head {
+  max-width: 40em;
+  margin-bottom: 3em;
+}
+
+.books_intro {
+  margin-top: 1em;
+  opacity: 1;
+  text-align: left;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+.books_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4em;
+  align-items: start;
+}
+
+@media screen and (max-width: 767px) {
+  .books_grid {
+    grid-template-columns: 1fr;
+    gap: 3.5em;
+  }
+}
+
+.books_entry {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  color: inherit;
+}
+
+.books_entry-media {
+  overflow: hidden;
+}
+
+.books_entry-cover {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease;
+}
+
+.books_entry:hover .books_entry-cover {
+  transform: scale(1.03);
+}
+
+.books_entry-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+
+.books_entry-title {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 2.4em;
+  line-height: 1;
+}
+
+.books_entry-year {
+  text-transform: uppercase;
+  font-size: 0.85em;
+  opacity: 0.6;
+}
+
+.books_entry-desc {
+  margin-top: 0.5em;
+  max-width: 32em;
+  opacity: 1;
+  text-align: left;
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+.books_entry-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.25em;
+  margin-top: 0.5em;
+}
+
+.books_entry-price {
+  font-weight: 600;
+}
+
+.books_entry-cta {
+  margin-top: 0.75em;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.books_entry:hover .books_entry-cta {
+  color: var(--colors--accent-color);
+}
+
+/* Book page */
+.section_book {
+  padding-top: 3em;
+  padding-bottom: 6em;
+}
+
+.book-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4em;
+  align-items: center;
+  margin-bottom: 3em;
+}
+
+@media screen and (max-width: 991px) {
+  .book-header {
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+}
+
+.book-header_cover {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.book-header_info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+}
+
+.book-title.section_title {
+  font-size: 4em;
+}
+
+.book-year {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  opacity: 0.6;
+}
+
+.book-buy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+  margin-top: 0.5em;
+}
+
+.book-buy_variants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+}
+
+.book-variant {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15em;
+  padding: 0.6em 1em;
+  border: 1px solid var(--page-ink);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.book-variant[data-active] {
+  background: var(--page-ink);
+  color: var(--page-bg);
+}
+
+.book-variant:disabled {
+  opacity: 0.4;
+  cursor: default;
+  text-decoration: line-through;
+}
+
+.book-variant_name {
+  text-transform: uppercase;
+  font-size: 0.78em;
+  font-weight: 600;
+}
+
+.book-variant_price {
+  font-size: 0.9em;
+}
+
+.book-buy_row {
+  display: flex;
+  align-items: center;
+  gap: 1.25em;
+}
+
+.book-buy_price {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 1.8em;
+  line-height: 1;
+}
+
+.book-buy_button {
+  padding: 0.85em 1.75em;
+  border: 1px solid var(--page-ink);
+  background: var(--page-ink);
+  color: var(--page-bg);
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.book-buy_button:hover:not(:disabled) {
+  background: transparent;
+  color: var(--page-ink);
+}
+
+.book-buy_button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.book-description {
+  max-width: 40em;
+  margin-top: 1em;
+  opacity: 1;
+  text-align: left;
+  font-size: 1.15em;
+  line-height: 1.6;
+}
+
+.book-images {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4em;
+  margin: 5em 0;
+  padding: 0 2em;
+}
+
+.book-image {
+  margin: 0;
+  width: 100%;
+  max-width: 58em;
+}
+
+.book-image_img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.book-image[data-index="1"] {
+  max-width: 42em;
+  align-self: flex-start;
+}
+
+.book-image[data-index="2"] {
+  max-width: 48em;
+  align-self: flex-end;
+}
+
+.book-image[data-index="3"] {
+  max-width: 40em;
+}
+
+.book-specs {
+  max-width: 32em;
+  margin: 0 0 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.book-specs_row {
+  display: flex;
+  gap: 1.5em;
+  font-size: 0.9em;
+}
+
+.book-specs_row dt {
+  min-width: 8em;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.03em;
+  opacity: 0.55;
+}
+
+.book-specs_row dd {
+  margin: 0;
+}
+
+.book-related {
+  margin: 2em 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+.book-related_label {
+  text-transform: uppercase;
+  font-size: 0.78em;
+  font-weight: 600;
+  opacity: 0.6;
+}
+
+.book-related_link {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 1.6em;
+  transition: color 0.3s ease;
+}
+
+.book-related_link:hover {
+  color: var(--colors--accent-color);
+}
+
+.book-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2em;
+  flex-wrap: wrap;
+  margin-top: 4em;
+  padding-top: 2em;
+  border-top: 1px solid var(--page-ink);
+}
+
+.book-nav_other {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  color: inherit;
+}
+
+.book-nav_cover {
+  display: block;
+  width: 4em;
+  height: auto;
+}
+
+.book-nav_other-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-nav_other-label {
+  text-transform: uppercase;
+  font-size: 0.72em;
+  opacity: 0.6;
+}
+
+.book-nav_other-title {
+  font-weight: 600;
+}
+
+.book-nav_back {
+  text-transform: uppercase;
+  font-size: 0.85em;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.book-nav_back:hover {
+  color: var(--colors--accent-color);
+}
+
+/* Cart */
+.cart-fab {
+  position: fixed;
+  right: 1.5em;
+  bottom: 1.5em;
+  z-index: 200;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.85em 1.4em;
+  border: 1px solid #fff;
+  border-radius: 2em;
+  background: var(--colors--black);
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.25);
+}
+
+.cart-fab_count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.6em;
+  height: 1.6em;
+  padding: 0 0.4em;
+  border-radius: 1em;
+  background: #fff;
+  color: var(--colors--black);
+  font-size: 0.85em;
+}
+
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cart-overlay_backdrop {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  border: 0;
+  background: rgb(0 0 0 / 0.4);
+  cursor: pointer;
+}
+
+.cart-panel {
+  position: relative;
+  width: min(420px, 92vw);
+  height: 100%;
+  overflow-y: auto;
+  padding: 1.75em;
+  background: var(--colors--black);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
+}
+
+.cart-panel_head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-panel_title {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 1.6em;
+}
+
+.cart-panel_close {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 1.6em;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cart-panel_empty {
+  opacity: 0.7;
+}
+
+.cart-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
+}
+
+.cart-item {
+  display: flex;
+  gap: 1em;
+}
+
+.cart-item_cover {
+  width: 3.5em;
+  height: auto;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.cart-item_info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  flex: 1;
+}
+
+.cart-item_title {
+  font-weight: 600;
+  font-size: 0.95em;
+}
+
+.cart-item_variant {
+  text-transform: uppercase;
+  font-size: 0.8em;
+  opacity: 0.6;
+}
+
+.cart-item_qty {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  margin-top: 0.25em;
+}
+
+.cart-item_qty button {
+  width: 1.8em;
+  height: 1.8em;
+  border: 1px solid rgb(255 255 255 / 0.4);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cart-item_side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4em;
+}
+
+.cart-item_price {
+  font-weight: 600;
+}
+
+.cart-item_remove {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  opacity: 0.6;
+  text-transform: uppercase;
+  font-size: 0.78em;
+  cursor: pointer;
+}
+
+.cart-item_remove:hover {
+  opacity: 1;
+}
+
+.cart-panel_foot {
+  margin-top: auto;
+  padding-top: 1.25em;
+  border-top: 1px solid rgb(255 255 255 / 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.cart-panel_subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 1.3em;
+}
+
+.cart-panel_checkout {
+  padding: 0.9em 1.5em;
+  border: 1px solid #fff;
+  background: #fff;
+  color: var(--colors--black);
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.cart-panel_checkout:hover {
+  background: transparent;
+  color: #fff;
+}
+
+.cart-panel_notice {
+  font-size: 0.85em;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+.cart-panel_notice a {
+  text-decoration: underline;
+}
+
 /* Background theme switcher (footer) — coloured dots to try each background. */
 .theme-switcher {
   display: flex;

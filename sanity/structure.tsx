@@ -64,6 +64,11 @@ export function buildStructure(S: StructureBuilder) {
             )
         ),
 
+      S.listItem()
+        .title("Books")
+        .icon(() => <>📄</>)
+        .child(S.documentTypeList("book").title("Books")),
+
       // PLOP: Add Structure
 
       S.divider(),

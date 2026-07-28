@@ -591,6 +591,12 @@ export type ChildrenAppLinkInternal = {
   sectionTarget?: string;
 };
 
+export type BooksStoreSection = {
+  _type: "booksStoreSection";
+  heading?: string;
+  intro?: string;
+};
+
 export type PrintsLicensingSection = {
   _type: "printsLicensingSection";
   heading?: string;
@@ -1183,6 +1189,92 @@ export type MediaSection = {
   caption?: string;
 };
 
+export type ProjectReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "project";
+};
+
+export type Book = {
+  _id: string;
+  _type: "book";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  uri?: Slug;
+  year?: string;
+  shortDescription?: string;
+  variants?: Array<{
+    name?: string;
+    price?: number;
+    availability?: "available" | "limited" | "soldOut";
+    sku?: string;
+    _type: "bookVariant";
+    _key: string;
+  }>;
+  specifications?: Array<{
+    label?: string;
+    value?: string;
+    _type: "spec";
+    _key: string;
+  }>;
+  relatedProject?: ProjectReference;
+  order?: number;
+  coverImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  images?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  seoMetadata?: {
+    noIndex?: boolean;
+    title?: string;
+    description?: string;
+    sourceUrl?: string;
+    screenshotWaitSeconds?: number;
+    image?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
 export type HeaderNavItem = {
   _type: "headerNavItem";
   link?: Link;
@@ -1413,6 +1505,12 @@ export type Article = {
           _type: "printsLicensingSectionField";
           _key: string;
         }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: BooksStoreSection;
+          _type: "booksStoreSectionField";
+          _key: string;
+        }
     >;
   };
   seoMetadata?: {
@@ -1433,28 +1531,6 @@ export type Article = {
     enabled?: boolean;
     content?: string;
   };
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
 };
 
 export type ContactFormSubmission = {
@@ -1989,6 +2065,12 @@ export type Page = {
           _type: "printsLicensingSectionField";
           _key: string;
         }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: BooksStoreSection;
+          _type: "booksStoreSectionField";
+          _key: string;
+        }
     >;
   };
   seoMetadata?: {
@@ -2306,6 +2388,7 @@ export type AllSanitySchemaTypes =
   | Internal1
   | ChildrenAppLinkFile
   | ChildrenAppLinkInternal
+  | BooksStoreSection
   | PrintsLicensingSection
   | PrintsGallerySection
   | WorkshopUpcomingSection
@@ -2329,6 +2412,11 @@ export type AllSanitySchemaTypes =
   | TextSection
   | CtaSection
   | MediaSection
+  | ProjectReference
+  | Book
+  | SanityImageCrop
+  | SanityImageHotspot
+  | Slug
   | HeaderNavItem
   | AppColor
   | LottieOptions
@@ -2338,9 +2426,6 @@ export type AllSanitySchemaTypes =
   | ArticleCategory
   | ArticleCategoryReference
   | Article
-  | SanityImageCrop
-  | SanityImageHotspot
-  | Slug
   | ContactFormSubmission
   | Project
   | Redirect
@@ -2433,6 +2518,97 @@ export type ArticlePageQResult = {
 // Query: *[_type == "article" && defined(uri.current)]{    "uri": coalesce(uri.current, "/articles")  }
 export type ArticlePageUrisQResult = Array<{
   uri: string | "/articles";
+}>;
+
+// Source: app/(web)/books/[slug]/page.tsx
+// Variable: BookPageQ
+// Query: *[_type == "book" && defined(uri.current) && uri.current == $uri][0]{    _id,    title,    year,    "uri": uri.current,    shortDescription,    variants[]{ "key": _key, name, price, availability },    specifications[]{ "key": _key, label, value },    coverImage{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    images[]{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    "relatedProject": relatedProject->{ title, "uri": "/project/" + slug.current },    "seoMetadata": seoMetadata{  title,  description,  image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},  "robots": select(noIndex => "noindex,nofollow", true => undefined),}  }
+export type BookPageQResult = {
+  _id: string;
+  title: string | undefined;
+  year: string | undefined;
+  uri: string | undefined;
+  shortDescription: string | undefined;
+  variants: Array<{
+    key: string;
+    name: string | undefined;
+    price: number | undefined;
+    availability: "available" | "limited" | "soldOut" | undefined;
+  }> | undefined;
+  specifications: Array<{
+    key: string;
+    label: string | undefined;
+    value: string | undefined;
+  }> | undefined;
+  coverImage: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  images: Array<{
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  }> | undefined;
+  relatedProject: {
+    title: string | undefined;
+    uri: string | undefined;
+  } | undefined;
+  seoMetadata: {
+    title: string | undefined;
+    description: string | undefined;
+    image: {
+      _id: string | undefined;
+      _rev: string | undefined;
+      altText: string | undefined;
+      description: string | undefined;
+      title: string | undefined;
+      lqip: string | undefined;
+      dimensions: SanityImageDimensions | undefined;
+      crop: SanityImageCrop | undefined;
+      hotspot: SanityImageHotspot | undefined;
+    } | undefined;
+    robots: "noindex,nofollow" | undefined;
+  } | undefined;
+} | undefined;
+
+// Source: app/(web)/books/[slug]/page.tsx
+// Variable: BookNavQ
+// Query: *[_type == "book" && defined(uri.current)] | order(order asc){    _id, title, "uri": uri.current, coverImage{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}  }
+export type BookNavQResult = Array<{
+  _id: string;
+  title: string | undefined;
+  uri: string | undefined;
+  coverImage: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+}>;
+
+// Source: app/(web)/books/[slug]/page.tsx
+// Variable: BookUrisQ
+// Query: *[_type == "book" && defined(uri.current)]{ "uri": uri.current }
+export type BookUrisQResult = Array<{
+  uri: string | undefined;
 }>;
 
 // Source: app/(web)/project/[slug]/page.tsx
@@ -2856,6 +3032,14 @@ export type AgentMarkdownContentQueryResult =
             caption: null;
           }
         | {
+            _type: "booksStoreSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
             _type: "contactFormSectionField";
             text: Array<{
               _type: "block";
@@ -3210,6 +3394,16 @@ export type AgentMarkdownContentQueryResult =
       > | undefined;
     }
   | {
+      _type: "book";
+      uri: string | "/";
+      title: string | undefined;
+      description: string | undefined;
+      publishedAt: null;
+      author: null;
+      categories: null;
+      sections: null;
+    }
+  | {
       _type: "page";
       uri: string | "/";
       title: string | undefined;
@@ -3369,6 +3563,14 @@ export type AgentMarkdownContentQueryResult =
               href: string | "" | "mailto:" | "tel:";
               text: string | "";
             } | undefined;
+            headline: null;
+            caption: null;
+          }
+        | {
+            _type: "booksStoreSectionField";
+            text: null;
+            media: null;
+            cta: null;
             headline: null;
             caption: null;
           }
@@ -3731,10 +3933,16 @@ export type AgentMarkdownContentQueryResult =
 // Source: features/agents/query.ts
 // Variable: AgentMarkdownServeQuery
 // Query: *[  defined(uri.current)  && uri.current == $uri][0]{  "enabled": agentMarkdown.enabled,  "content": agentMarkdown.content}
-export type AgentMarkdownServeQueryResult = {
-  enabled: boolean | undefined;
-  content: string | undefined;
-} | undefined;
+export type AgentMarkdownServeQueryResult =
+  | {
+      enabled: null;
+      content: null;
+    }
+  | {
+      enabled: boolean | undefined;
+      content: string | undefined;
+    }
+  | undefined;
 
 // Source: features/page-builder/page-sections.tsx
 // Variable: PageSectionsQ
@@ -3763,6 +3971,10 @@ export type PageSectionsQResult = Array<
   | {
       _key: string;
       _type: "aboutTextSectionField";
+    }
+  | {
+      _key: string;
+      _type: "booksStoreSectionField";
     }
   | {
       _key: string;
@@ -4080,6 +4292,40 @@ export type AboutTextSectionQResult = {
     } | undefined;
   } | undefined;
 } | undefined;
+
+// Source: features/page-builder/sections/books-store-section.tsx
+// Variable: BooksStoreSectionQ
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "booksStoreSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      intro    }}
+export type BooksStoreSectionQResult = {
+  content: {
+    heading: string | undefined;
+    intro: string | undefined;
+  } | undefined;
+} | undefined;
+
+// Source: features/page-builder/sections/books-store-section.tsx
+// Variable: BooksListQ
+// Query: *[_type == "book" && defined(uri.current)] | order(order asc){    _id,    title,    year,    "uri": uri.current,    shortDescription,    coverImage{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    "prices": variants[].price,    "availabilities": variants[].availability  }
+export type BooksListQResult = Array<{
+  _id: string;
+  title: string | undefined;
+  year: string | undefined;
+  uri: string | undefined;
+  shortDescription: string | undefined;
+  coverImage: {
+    _id: string | undefined;
+    _rev: string | undefined;
+    altText: string | undefined;
+    description: string | undefined;
+    title: string | undefined;
+    lqip: string | undefined;
+    dimensions: SanityImageDimensions | undefined;
+    crop: SanityImageCrop | undefined;
+    hotspot: SanityImageHotspot | undefined;
+  } | undefined;
+  prices: Array<number | undefined> | undefined;
+  availabilities: Array<"available" | "limited" | "soldOut" | undefined> | undefined;
+}>;
 
 // Source: features/page-builder/sections/contact-form-section/actions.ts
 // Variable: SiteNotificationEmailsQ

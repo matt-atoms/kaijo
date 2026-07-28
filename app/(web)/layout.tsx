@@ -8,6 +8,8 @@ import { SharedWebLayout } from "~/app/shared-web-layout";
 import { env } from "~/env";
 import { sanityFetch } from "~/features/sanity/client";
 import { SiteQuery } from "~/features/site/query";
+import { Cart } from "~/features/store/cart";
+import { CartProvider } from "~/features/store/cart-context";
 import { SANITY_SINGLETON_SITE_ID } from "~/sanity/constants";
 import type { SiteQueryResult } from "~/sanity/types";
 
@@ -67,7 +69,10 @@ export default async function Layout(props: { children: React.ReactNode }) {
         </>
       }
     >
-      {props.children}
+      <CartProvider>
+        {props.children}
+        <Cart />
+      </CartProvider>
     </SharedWebLayout>
   );
 }

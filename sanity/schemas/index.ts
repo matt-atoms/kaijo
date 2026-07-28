@@ -1,5 +1,6 @@
 import { article } from "./documents/article";
 import { articleCategory } from "./documents/article-category";
+import { book } from "./documents/book";
 import { contactFormSubmission } from "./documents/contact-form-submission";
 import { page } from "./documents/page";
 import { project } from "./documents/project";
@@ -29,6 +30,7 @@ export const schemaTypes = [
   lottieOptions,
   appColor,
   headerNavItem,
+  book,
   // PLOP: Add Export
   ...sections,
 ];
