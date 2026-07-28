@@ -42,7 +42,6 @@ export function Cart() {
                 <ul className="cart-items">
                   {items.map((item) => (
                     <li key={item.id} className="cart-item">
-                      {/* biome-ignore lint/performance/noImgElement: plain img matches the Webflow-port image approach. */}
                       <img src={item.coverUrl} alt="" className="cart-item_cover" />
                       <div className="cart-item_info">
                         <span className="cart-item_title">{item.title}</span>
