@@ -41,12 +41,12 @@ export async function PrintsGallerySection({ docId, sectionKey }: { docId: strin
     <div className="section_prints section-padding-top section-padding-bottom">
       <div className="container">
         <div className="prints_head">
-          <div className="prints_head-main">
-            {content.heading && (
-              <h1 data-scramble="scroll" className="section_title">
-                {content.heading}
-              </h1>
-            )}
+          {content.heading && (
+            <h1 data-scramble="scroll" className="section_title prints_head-title">
+              {content.heading}
+            </h1>
+          )}
+          <div className="prints_head-body">
             {content.intro && <p className="prints_intro">{content.intro}</p>}
             {content.enquiry?.href && (
               <SanityLink link={content.enquiry} className="prints_enquiry">
@@ -55,8 +55,11 @@ export async function PrintsGallerySection({ docId, sectionKey }: { docId: strin
             )}
           </div>
           {content.editions && content.editions.length > 0 && (
-            <aside className="prints_options">
-              {content.optionsHeading && <div className="prints_options-title">{content.optionsHeading}</div>}
+            <>
+              <div className="prints_options-head">
+                {content.optionsHeading && <div className="prints_options-title">{content.optionsHeading}</div>}
+                {content.priceNote && <p className="prints_options-price">{content.priceNote}</p>}
+              </div>
               <dl className="prints_options-list">
                 {content.editions.map((edition) => (
                   <div key={edition.key} className="prints_options-row">
@@ -65,8 +68,7 @@ export async function PrintsGallerySection({ docId, sectionKey }: { docId: strin
                   </div>
                 ))}
               </dl>
-              {content.priceNote && <p className="prints_options-price">{content.priceNote}</p>}
-            </aside>
+            </>
           )}
         </div>
       </div>

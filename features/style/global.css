@@ -1586,29 +1586,58 @@ img {
  * dimmed to either side, looping seamlessly. The anthracite frame + white mat + wall are built in
  * CSS (works across every image orientation) rather than a fixed-perspective mockup photo.
  */
+/*
+ * Head: the big title sits top-left with the editions header tucked just above the list on the
+ * right, so the intro body (row 2, left) and the editions list (row 2, right) line up level.
+ */
 .prints_head {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  gap: 3em;
+  column-gap: 3em;
+  row-gap: 1.25em;
   align-items: start;
 }
 
-@media screen and (max-width: 767px) {
-  .prints_head {
-    grid-template-columns: 1fr;
-    gap: 2em;
-  }
+.prints_head-title {
+  grid-column: 1;
+  grid-row: 1;
 }
 
-.prints_head-main {
+.prints_head-body {
+  grid-column: 1;
+  grid-row: 2;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
+.prints_options-head {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+}
+
+@media screen and (max-width: 767px) {
+  .prints_head {
+    grid-template-columns: 1fr;
+    row-gap: 1.5em;
+  }
+
+  .prints_head-title,
+  .prints_head-body,
+  .prints_options-head,
+  .prints_options-list {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .prints_options-head {
+    align-self: start;
+  }
+}
+
 .prints_intro {
   max-width: 40em;
-  margin-top: 1em;
   opacity: 1;
   text-align: left;
   font-size: 1.1em;
@@ -1627,25 +1656,30 @@ img {
   color: var(--colors--accent-color);
 }
 
-/* Editions & options panel, right of the intro. */
-.prints_options {
-  padding-top: 1.25em;
-  border-top: 1px solid var(--colors--black);
-}
-
 .prints_options-title {
-  margin-bottom: 1em;
   text-transform: uppercase;
   font-size: 0.85em;
   font-weight: 600;
   letter-spacing: 0.04em;
 }
 
+/* Starting price: quiet body-font line directly under the header. */
+.prints_options-price {
+  margin-top: 0.4em;
+  opacity: 0.55;
+  font-size: 0.82em;
+  line-height: 1.4;
+}
+
 .prints_options-list {
+  grid-column: 2;
+  grid-row: 2;
   display: flex;
   flex-direction: column;
   gap: 0.65em;
   margin: 0;
+  padding-top: 1.1em;
+  border-top: 1px solid var(--colors--black);
 }
 
 .prints_options-row {
@@ -1663,15 +1697,6 @@ img {
   margin: 0;
   opacity: 0.6;
   text-align: right;
-}
-
-.prints_options-price {
-  margin-top: 1.25em;
-  padding-top: 1em;
-  border-top: 1px solid rgb(0 0 0 / 0.15);
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 1.3em;
-  line-height: 1;
 }
 
 .prints_series {
