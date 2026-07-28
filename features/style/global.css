@@ -9,6 +9,53 @@ img {
 }
 
 /*
+ * Background themes (testing switcher — footer dots set data-theme on <html>). Each theme sets the
+ * page background, the "ink" (text + borders) and the mix-blend colour the header uses, so the
+ * "negative over images" effect keeps working on every background. No attribute = the bright green.
+ * Deep green and blue are sampled from the about photo (woman by the shop); the deep blue and green
+ * flip the ink to white for legibility.
+ */
+:root {
+  --page-bg: limegreen;
+  --page-ink: #222;
+  --page-blend: limegreen;
+}
+
+:root[data-theme="white"] {
+  --page-bg: #ffffff;
+  --page-ink: #222;
+  --page-blend: #ffffff;
+}
+
+:root[data-theme="green-dark"] {
+  --page-bg: #35664a;
+  --page-ink: #ffffff;
+  --page-blend: #ffffff;
+}
+
+:root[data-theme="red"] {
+  --page-bg: #b23a30;
+  --page-ink: #222;
+  --page-blend: #b23a30;
+}
+
+:root[data-theme="blue"] {
+  --page-bg: #173a5a;
+  --page-ink: #ffffff;
+  --page-blend: #ffffff;
+}
+
+html {
+  background-color: var(--page-bg);
+}
+
+/* `html body` beats webflow.css's later `body { color: … }` (global.css is @imported first). */
+html body {
+  background-color: var(--page-bg);
+  color: var(--page-ink);
+}
+
+/*
  * Brand wordmark (top-left name) — see features/site/site-header/wordmark.tsx and the
  * --font-wordmark token in features/style/typography.css. Condensed display face, sized to
  * roughly match the presence of the mark it replaced.
@@ -45,11 +92,11 @@ img {
  * areas rather than staying invisible-green.
  */
 .page {
-  background-color: limegreen;
+  background-color: var(--page-bg);
 }
 
 .nav_wrapper {
-  color: limegreen;
+  color: var(--page-blend);
   mix-blend-mode: difference;
 }
 
@@ -307,7 +354,7 @@ img {
 
 .about-preview_credential {
   padding-top: 0.9em;
-  border-top: 1px solid var(--colors--black);
+  border-top: 1px solid var(--page-ink);
   text-transform: uppercase;
   font-size: 0.88em;
   font-weight: 500;
@@ -433,21 +480,21 @@ img {
 
 .footer_newsletter-input {
   padding: 0.5em 0.75em;
-  border: 1px solid var(--colors--black);
+  border: 1px solid var(--page-ink);
   background: transparent;
-  color: var(--colors--black);
+  color: var(--page-ink);
   font: inherit;
   font-size: 0.88em;
 }
 
 .footer_newsletter-input::placeholder {
-  color: var(--colors--black);
+  color: var(--page-ink);
   opacity: 0.5;
 }
 
 .footer_newsletter-button {
   padding: 0.5em 1em;
-  border: 1px solid var(--colors--black);
+  border: 1px solid var(--page-ink);
   background: var(--colors--black);
   color: #fff;
   font: inherit;
@@ -484,7 +531,7 @@ img {
   gap: 1.5em;
   margin-bottom: 4em;
   /* Blend over the content it scrolls past, like the header. */
-  color: limegreen;
+  color: var(--page-blend);
   mix-blend-mode: difference;
 }
 
@@ -638,7 +685,7 @@ img {
 .section_work--project .project_description-wrapper {
   top: 6em;
   width: 34%;
-  color: limegreen;
+  color: var(--page-blend);
   mix-blend-mode: difference;
 }
 
@@ -805,7 +852,7 @@ img {
 
 .about-credentials_col-title {
   padding-bottom: 0.75em;
-  border-bottom: 1px solid var(--colors--black);
+  border-bottom: 1px solid var(--page-ink);
   text-transform: uppercase;
   font-size: 0.88em;
   font-weight: 600;
@@ -890,7 +937,7 @@ img {
 
 .about-contact_button {
   padding: 0.75em 1.5em;
-  border: 1px solid var(--colors--black);
+  border: 1px solid var(--page-ink);
   text-transform: uppercase;
   font-size: 0.88em;
   font-weight: 600;
@@ -944,7 +991,7 @@ img {
   gap: 0.75em;
   max-width: 12em;
   /* Black side bar (overrides the webflow blockquote grey). */
-  border-left: 4px solid var(--colors--black);
+  border-left: 4px solid var(--page-ink);
   padding: 0 0 0 0.6em;
   font-family: "Art Grootfontein", Arial, sans-serif;
   font-size: 2.2em;
@@ -1038,7 +1085,7 @@ img {
   flex-direction: column;
   gap: 0.35em;
   padding-top: 1em;
-  border-top: 1px solid var(--colors--black);
+  border-top: 1px solid var(--page-ink);
 }
 
 .workshop-learn_item-title {
@@ -1098,7 +1145,7 @@ img {
   flex-direction: column;
   gap: 0.5em;
   padding: 1.75em;
-  border: 1px solid var(--colors--black);
+  border: 1px solid var(--page-ink);
 }
 
 .workshop-pricing_tier-price {
@@ -1140,7 +1187,7 @@ img {
   flex-direction: column;
   gap: 1em;
   padding: 1.75em;
-  border: 1px solid var(--colors--black);
+  border: 1px solid var(--page-ink);
   background: var(--colors--black);
   color: #fff;
   text-align: left;
@@ -1270,7 +1317,7 @@ img {
   padding: 0.85em 1.5em;
   border: 1px solid #fff;
   background: #fff;
-  color: var(--colors--black);
+  color: var(--page-ink);
   text-transform: uppercase;
   font-size: 0.88em;
   font-weight: 600;
@@ -1344,7 +1391,7 @@ img {
   flex-direction: column;
   gap: 0.35em;
   padding-top: 1em;
-  border-top: 1px solid var(--colors--black);
+  border-top: 1px solid var(--page-ink);
 }
 
 .workshop-notes_item-title {
@@ -1418,7 +1465,7 @@ img {
 /* Body font, slightly bolder italic, with a black side bar (overrides the webflow blockquote grey). */
 .workshop-testimonials_quote {
   margin: 0;
-  border-left: 4px solid var(--colors--black);
+  border-left: 4px solid var(--page-ink);
   padding: 0.05em 0 0.05em 1.1em;
   font-style: italic;
   font-weight: 600;
@@ -1478,7 +1525,7 @@ img {
   flex-direction: column;
   gap: 1.25em;
   padding: 2em;
-  border: 1px solid var(--colors--black);
+  border: 1px solid var(--page-ink);
 }
 
 .workshop-upcoming_event-head {
@@ -1559,7 +1606,7 @@ img {
   align-items: flex-start;
   gap: 1.25em;
   padding: 2.5em;
-  border: 1px solid var(--colors--black);
+  border: 1px solid var(--page-ink);
 }
 
 .workshop-upcoming_empty-text {
@@ -1679,7 +1726,7 @@ img {
   gap: 0.65em;
   margin: 0;
   padding-top: 1.1em;
-  border-top: 1px solid var(--colors--black);
+  border-top: 1px solid var(--page-ink);
 }
 
 .prints_options-row {
@@ -1843,7 +1890,7 @@ img {
   justify-content: center;
   width: 2.6em;
   height: 2.6em;
-  border: 1px solid var(--colors--black);
+  border: 1px solid var(--page-ink);
   background: transparent;
   font-size: 1em;
   cursor: pointer;
@@ -1934,6 +1981,61 @@ img {
 
 .prints-licensing_thumb:hover .prints-licensing_thumb-img {
   transform: scale(1.05);
+}
+
+/* Background theme switcher (footer) — coloured dots to try each background. */
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.9em;
+  margin-top: 2em;
+  padding-top: 1.5em;
+  border-top: 1px solid var(--page-ink);
+}
+
+.theme-switcher_label {
+  text-transform: uppercase;
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+}
+
+.theme-switcher_dots {
+  display: flex;
+  gap: 0.6em;
+}
+
+.theme-dot {
+  width: 1.15em;
+  height: 1.15em;
+  padding: 0;
+  border: 1px solid var(--page-ink);
+  border-radius: 50%;
+  background-color: var(--dot);
+  cursor: pointer;
+  opacity: 0.5;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.theme-dot:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.theme-dot[data-active] {
+  opacity: 1;
+  box-shadow:
+    0 0 0 2px var(--page-bg),
+    0 0 0 3px var(--page-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-dot {
+    transition: opacity 0.2s ease;
+  }
 }
 
 /*

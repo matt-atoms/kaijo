@@ -1,6 +1,7 @@
 import { sanityFetch } from "~/features/sanity/client";
 import { SanityLink } from "~/features/sanity/link";
 import { SiteFooterQ } from "~/features/site/site-footer/query";
+import { ThemeSwitcher } from "~/features/site/site-footer/theme-switcher";
 import { SANITY_SINGLETON_SITE_ID } from "~/sanity/constants";
 import type { SiteFooterQResult } from "~/sanity/types";
 
@@ -34,6 +35,7 @@ export async function SiteFooter() {
             </div>
           </form>
         </div>
+        <ThemeSwitcher />
       </div>
     </footer>
   );

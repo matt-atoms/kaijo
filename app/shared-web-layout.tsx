@@ -58,6 +58,10 @@ export function SharedWebLayout(props: SharedWebLayoutProps) {
             dangerouslySetInnerHTML={{
               __html: `(function () {
   var d = document.documentElement;
+  try {
+    var t = localStorage.getItem("kaijo-theme");
+    if (t && t !== "green") { d.setAttribute("data-theme", t); }
+  } catch (e) {}
   d.setAttribute("data-reveal", "pending");
   var fonts = document.fonts ? document.fonts.ready : Promise.resolve();
   Promise.race([fonts, new Promise(function (r) { setTimeout(r, 1200); })]).then(function () {
