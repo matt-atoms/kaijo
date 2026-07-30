@@ -2,6 +2,7 @@ import { defineQuery, PortableText } from "next-sanity";
 import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import { sanityFetch } from "~/features/sanity/client";
 import { ImageFragment } from "~/features/sanity/media/fragment";
+import { ContactLinks } from "~/features/site/contact-links";
 import type { AboutIdentitySectionQResult } from "~/sanity/types";
 
 const AboutIdentitySectionQ =
@@ -39,6 +40,7 @@ export async function AboutIdentitySection({ docId, sectionKey }: { docId: strin
             <div className="about-identity_body w-richtext">
               {content.appRichText && <PortableText value={content.appRichText} />}
             </div>
+            <ContactLinks className="about-identity_contact" />
           </div>
           <div className="about-identity_portrait">
             <KaijoImage image={content.portrait} className="image" sizes="(max-width: 991px) 100vw, 42vw" />

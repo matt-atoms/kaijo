@@ -2,6 +2,7 @@ import { defineQuery } from "next-sanity";
 import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import { sanityFetch } from "~/features/sanity/client";
 import { ImageFragment, type ImageFragmentResult } from "~/features/sanity/media/fragment";
+import { ContactLinks } from "~/features/site/contact-links";
 
 const AboutSectionQ = defineQuery(`
   *[_id == $docId][0].pageBuilder.sectionsArray[_type == "aboutSectionField" && _key == $sectionKey][0]{
@@ -45,7 +46,10 @@ export async function AboutSection({ docId, sectionKey }: { docId: string; secti
                 {title}
               </h2>
             )}
-            <p data-scramble="scroll">{text}</p>
+            <p data-scramble="scroll" className="about_intro-text">
+              {text}
+            </p>
+            <ContactLinks className="about_intro-contact" />
           </div>
           <div className="about_image-wrapper">
             <KaijoImage image={image} className="image" sizes="(max-width: 1400px) 100vw, 1400px" />

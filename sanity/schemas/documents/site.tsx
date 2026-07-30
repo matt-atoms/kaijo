@@ -127,6 +127,20 @@ export const site = defineType({
     }),
     defineField({
       group: "contacts",
+      name: "email",
+      type: "string",
+      title: "Public email",
+      description: "Shown as the contact email on the home and info pages (and reusable elsewhere).",
+    }),
+    defineField({
+      group: "contacts",
+      name: "instagram",
+      type: "string",
+      title: "Instagram",
+      description: "An @handle or a full instagram.com URL. Shown next to the email.",
+    }),
+    defineField({
+      group: "contacts",
       name: "contacts",
       type: "array",
       title: "Contacts",

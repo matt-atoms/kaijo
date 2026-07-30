@@ -750,6 +750,38 @@ html body {
   margin-bottom: 0;
 }
 
+/* Email + Instagram at the foot of the info intro text (features/site/contact-links.tsx). */
+.about-identity_contact {
+  margin-top: 0.75em;
+}
+
+/* Home hero — intro sentence left, contact links pushed to the right above the image. */
+.section_about .about_text-wrapper {
+  width: 100%;
+  max-width: none;
+  align-items: flex-start;
+}
+
+.about_intro-text {
+  max-width: 42em;
+}
+
+.about_intro-contact {
+  margin-left: auto;
+  align-self: flex-start;
+}
+
+@media screen and (max-width: 767px) {
+  .section_about .about_text-wrapper {
+    flex-wrap: wrap;
+    gap: 1.5em;
+  }
+
+  .about_intro-contact {
+    margin-left: 0;
+  }
+}
+
 /* Titled text block */
 .about-text_inner {
   display: grid;

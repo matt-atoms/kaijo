@@ -1816,6 +1816,8 @@ export type Site = {
       } & HeaderNavItem
     >;
   };
+  email?: string;
+  instagram?: string;
   contacts?: Array<{
     name?: string;
     appLink?: {
@@ -5619,6 +5621,24 @@ export type WorkshopsSectionQResult = {
     } | undefined;
   } | undefined;
 } | undefined;
+
+// Source: features/site/contact-links.tsx
+// Variable: ContactLinksQ
+// Query: *[_id == "site"][0]{ email, instagram }
+export type ContactLinksQResult =
+  | {
+      email: null;
+      instagram: null;
+    }
+  | {
+      email: string | undefined;
+      instagram: null;
+    }
+  | {
+      email: string | undefined;
+      instagram: string | undefined;
+    }
+  | undefined;
 
 // Source: features/site/query.ts
 // Variable: SiteQuery
