@@ -2155,12 +2155,6 @@ html body {
   font-size: 4em;
 }
 
-.book-year {
-  text-transform: uppercase;
-  font-size: 0.9em;
-  opacity: 0.6;
-}
-
 .book-buy {
   display: flex;
   flex-direction: column;
@@ -2195,10 +2189,13 @@ html body {
   color: var(--page-bg);
 }
 
-.book-variant:disabled {
-  opacity: 0.4;
-  cursor: default;
+.book-variant[data-soldout] {
+  opacity: 0.55;
   text-decoration: line-through;
+}
+
+.book-variant[data-soldout][data-active] {
+  opacity: 1;
 }
 
 .book-variant_name {
@@ -2256,44 +2253,9 @@ html body {
   line-height: 1.6;
 }
 
-.book-images {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4em;
-  margin: 5em 0;
-  padding: 0 2em;
-}
-
-.book-image {
-  margin: 0;
-  width: 100%;
-  max-width: 58em;
-}
-
-.book-image_img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.book-image[data-index="1"] {
-  max-width: 42em;
-  align-self: flex-start;
-}
-
-.book-image[data-index="2"] {
-  max-width: 48em;
-  align-self: flex-end;
-}
-
-.book-image[data-index="3"] {
-  max-width: 40em;
-}
-
 .book-specs {
   max-width: 32em;
-  margin: 0 0 3em;
+  margin: 0.25em 0 0.5em;
   display: flex;
   flex-direction: column;
   gap: 0.5em;

@@ -1209,6 +1209,13 @@ export type Book = {
   variants?: Array<{
     name?: string;
     price?: number;
+    image?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
     availability?: "available" | "limited" | "soldOut";
     sku?: string;
     _type: "bookVariant";
@@ -2522,7 +2529,7 @@ export type ArticlePageUrisQResult = Array<{
 
 // Source: app/(web)/books/[slug]/page.tsx
 // Variable: BookPageQ
-// Query: *[_type == "book" && defined(uri.current) && uri.current == $uri][0]{    _id,    title,    year,    "uri": uri.current,    shortDescription,    variants[]{ "key": _key, name, price, availability },    specifications[]{ "key": _key, label, value },    coverImage{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    images[]{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    "relatedProject": relatedProject->{ title, "uri": "/project/" + slug.current },    "seoMetadata": seoMetadata{  title,  description,  image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},  "robots": select(noIndex => "noindex,nofollow", true => undefined),}  }
+// Query: *[_type == "book" && defined(uri.current) && uri.current == $uri][0]{    _id,    title,    year,    "uri": uri.current,    shortDescription,    variants[]{ "key": _key, name, price, availability, image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,} },    specifications[]{ "key": _key, label, value },    coverImage{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    "relatedProject": relatedProject->{ title, "uri": "/project/" + slug.current },    "seoMetadata": seoMetadata{  title,  description,  image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},  "robots": select(noIndex => "noindex,nofollow", true => undefined),}  }
 export type BookPageQResult = {
   _id: string;
   title: string | undefined;
@@ -2534,6 +2541,17 @@ export type BookPageQResult = {
     name: string | undefined;
     price: number | undefined;
     availability: "available" | "limited" | "soldOut" | undefined;
+    image: {
+      _id: string | undefined;
+      _rev: string | undefined;
+      altText: string | undefined;
+      description: string | undefined;
+      title: string | undefined;
+      lqip: string | undefined;
+      dimensions: SanityImageDimensions | undefined;
+      crop: SanityImageCrop | undefined;
+      hotspot: SanityImageHotspot | undefined;
+    } | undefined;
   }> | undefined;
   specifications: Array<{
     key: string;
@@ -2551,17 +2569,6 @@ export type BookPageQResult = {
     crop: SanityImageCrop | undefined;
     hotspot: SanityImageHotspot | undefined;
   } | undefined;
-  images: Array<{
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  }> | undefined;
   relatedProject: {
     title: string | undefined;
     uri: string | undefined;

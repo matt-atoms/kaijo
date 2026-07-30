@@ -57,6 +57,12 @@ export const book = defineType({
             defineField({ name: "name", type: "string", title: "Edition name", validation: (R) => R.required() }),
             defineField({ name: "price", type: "number", title: "Price (EUR)", validation: (R) => R.required().min(0) }),
             defineField({
+              name: "image",
+              type: "image",
+              title: "Edition image",
+              description: "Shown at the top of the book page when this edition is selected. Falls back to the cover image.",
+            }),
+            defineField({
               name: "availability",
               type: "string",
               title: "Availability",
@@ -73,9 +79,9 @@ export const book = defineType({
             defineField({ name: "sku", type: "string", title: "SKU" }),
           ],
           preview: {
-            select: { title: "name", price: "price" },
-            prepare({ title, price }) {
-              return { title: title || "Edition", subtitle: typeof price === "number" ? `€${price}` : "" };
+            select: { title: "name", price: "price", media: "image" },
+            prepare({ title, price, media }) {
+              return { title: title || "Edition", subtitle: typeof price === "number" ? `€${price}` : "", media };
             },
           },
         }),
