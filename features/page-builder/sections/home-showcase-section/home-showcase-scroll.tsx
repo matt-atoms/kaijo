@@ -290,8 +290,8 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
                   <KaijoImage image={tile.slide.image} className="home-showcase_image" sizes="(max-width: 767px) 90vw, 44vh" />
                 </div>
                 <div className="home-showcase_caption">
-                  <span className="home-showcase_project">{tile.slide.project}</span>
-                  <span className="home-showcase_sub">
+                  <span className="home-showcase_meta">
+                    <span className="home-showcase_project">{tile.slide.project}</span>
                     {tile.slide.type && <span className="home-showcase_type">{tile.slide.type}</span>}
                     {tile.slide.year && <span className="home-showcase_year">{tile.slide.year}</span>}
                   </span>

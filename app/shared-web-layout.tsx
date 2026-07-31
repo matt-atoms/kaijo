@@ -7,6 +7,7 @@ import { KeyboardFocusMode } from "~/features/dom/keyboard-focus-mode";
 import { DraftModeProvider } from "~/features/draft-mode/context";
 import { fonts } from "~/features/fonts";
 import { MotionProvider } from "~/features/motion/lazy-motion";
+import { ThemeCursor } from "~/features/site/theme-cursor";
 import { cx } from "~/features/style/utils";
 import { ViewTransitions } from "~/features/view-transition/app-view-transitions";
 
@@ -58,10 +59,9 @@ export function SharedWebLayout(props: SharedWebLayoutProps) {
             dangerouslySetInnerHTML={{
               __html: `(function () {
   var d = document.documentElement;
-  try {
-    var t = localStorage.getItem("kaijo-theme");
-    if (t && t !== "green") { d.setAttribute("data-theme", t); }
-  } catch (e) {}
+  var t = "white";
+  try { var s = localStorage.getItem("kaijo-theme"); if (s) { t = s; } } catch (e) {}
+  if (t !== "green") { d.setAttribute("data-theme", t); }
   d.setAttribute("data-reveal", "pending");
   var fonts = document.fonts ? document.fonts.ready : Promise.resolve();
   Promise.race([fonts, new Promise(function (r) { setTimeout(r, 1200); })]).then(function () {
@@ -94,6 +94,7 @@ export function SharedWebLayout(props: SharedWebLayoutProps) {
               />
             )}
             {props.bodyEnd}
+            <ThemeCursor />
           </MotionProvider>
         </body>
       </html>

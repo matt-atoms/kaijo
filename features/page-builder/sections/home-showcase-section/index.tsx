@@ -75,7 +75,7 @@ export async function HomeShowcaseSection({ docId, sectionKey }: { docId: string
   const hasHead = Boolean(content.title || content.intro);
 
   return (
-    <section className="section_home-showcase section-padding-top">
+    <section className="section_home-showcase">
       {hasHead && (
         <div className="container">
           <div className="home-showcase_head">

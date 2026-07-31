@@ -45,6 +45,12 @@ img {
   --page-blend: #ffffff;
 }
 
+:root[data-theme="dark"] {
+  --page-bg: #17181a;
+  --page-ink: #f4f4f4;
+  --page-blend: #ffffff;
+}
+
 html {
   background-color: var(--page-bg);
 }
@@ -98,6 +104,52 @@ html body {
 .nav_wrapper {
   color: var(--page-blend);
   mix-blend-mode: difference;
+}
+
+/*
+ * Theme cursor (features/site/theme-cursor.tsx): a big dot that follows the pointer. It uses the
+ * same trick as the header/title — painted in --page-blend with mix-blend-mode: difference — so it
+ * reads as the theme's ink over the background and inverts to a photo-negative over imagery, and it
+ * re-themes for free when the background cycles. Clicking empty space cycles the background theme.
+ */
+.theme-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--page-blend);
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  will-change: transform;
+}
+
+/* On fine-pointer devices the dot replaces the native cursor (kept on text fields for the caret). */
+html.has-theme-cursor,
+html.has-theme-cursor * {
+  cursor: none;
+}
+
+html.has-theme-cursor input,
+html.has-theme-cursor textarea,
+html.has-theme-cursor [contenteditable="true"] {
+  cursor: text;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .theme-cursor {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-cursor {
+    transition: none;
+  }
 }
 
 /*
@@ -380,8 +432,8 @@ html body {
   inset: auto 0 0 0;
   display: flex;
   flex-direction: column;
-  gap: 0.3em;
-  padding: 2em 1em 0.9em;
+  gap: 0.35em;
+  padding: 1.5em 0.85em 0.7em;
   color: #fff;
   background: linear-gradient(to top, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0));
   opacity: 0;
@@ -389,30 +441,28 @@ html body {
   pointer-events: none;
 }
 
-.home-showcase_project {
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 1.35em;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.home-showcase_sub {
+/* One small line — project reads the same as the year, project first (like the old hover label). */
+.home-showcase_meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6em;
+  gap: 0.35em 0.55em;
   text-transform: uppercase;
-  font-size: 0.72em;
+  font-size: 0.68em;
   font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
 }
 
+.home-showcase_type,
 .home-showcase_year {
+  font-weight: 400;
   opacity: 0.7;
 }
 
 .home-showcase_go {
   display: none;
   text-transform: uppercase;
-  font-size: 0.72em;
+  font-size: 0.66em;
   font-weight: 600;
 }
 
@@ -484,8 +534,13 @@ html body {
   padding-top: 5em;
 }
 
+/* Scroll sits close under the intro; the tall track already carries breathing room of its own. */
+.section_home-showcase {
+  padding-top: 4em;
+}
+
 .section_feature-links {
-  padding-top: 7em;
+  padding-top: 4em;
 }
 
 .section_workshops {
