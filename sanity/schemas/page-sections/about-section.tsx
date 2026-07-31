@@ -1,4 +1,5 @@
 import { defineField } from "sanity";
+import { createLinkField } from "../fields/create-link";
 
 export const aboutSection = defineField({
   type: "object",
@@ -23,7 +24,7 @@ export const aboutSection = defineField({
       name: "image",
       type: "image",
       title: "Image",
-      validation: (R) => R.required(),
+      description: "Optional. Leave empty for a text-only hero (e.g. the homepage intro).",
     }),
     defineField({
       name: "secondText",
@@ -31,6 +32,10 @@ export const aboutSection = defineField({
       rows: 5,
       title: "Second text",
       description: "Shown below the image.",
+    }),
+    createLinkField({
+      title: "Read more link",
+      description: "Optional link shown under the intro text (e.g. Read more → /info).",
     }),
   ],
   preview: {

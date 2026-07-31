@@ -32,9 +32,9 @@ const MOBILE_COUNT = 18;
 const MAX_BATCHES = 4; // bound the DOM on an endless desktop scroll (~144 tiles)
 const APPEND_PX = 1400; // append the next batch this far before the end
 
-const H_TIERS = [36, 44, 52, 60];
+const H_TIERS = [30, 44, 58, 72];
 const W_TIERS = [66, 76, 86, 94];
-const MAX_DRIFT = 6;
+const MAX_DRIFT = 7;
 const SIDES = ["start", "center", "end"] as const;
 
 const useIsoLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
@@ -85,6 +85,7 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
   const nextId = React.useRef(1);
   const pendingPrune = React.useRef(0);
   const rafPending = React.useRef(false);
+  const didInitScroll = React.useRef(false);
 
   const [batches, setBatches] = React.useState<Batch[]>(() => [seedBatch(slides, Math.min(BATCH, slides.length))]);
   // Mirror of `batches` so append/prune can compute the next array without a functional updater
@@ -134,6 +135,20 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
       pendingPrune.current = 0;
     }
   }, [batches]);
+
+  // Desktop: start with the first image half off the left edge, so it's obvious the strip scrolls.
+  useIsoLayoutEffect(() => {
+    if (didInitScroll.current || !canHover) {
+      return;
+    }
+    const track = trackRef.current;
+    const firstTile = track?.querySelector<HTMLElement>(".home-showcase_tile");
+    if (track && firstTile) {
+      const pad = Number.parseFloat(getComputedStyle(track).paddingLeft) || 0;
+      track.scrollLeft = pad + firstTile.getBoundingClientRect().width * 0.5;
+      didInitScroll.current = true;
+    }
+  }, [canHover, batches]);
 
   const onScroll = React.useCallback(() => {
     if (!canHover || rafPending.current) {

@@ -615,6 +615,113 @@
   },
   {
     "type": "type",
+    "name": "aboutPreviewSectionField.sectionContent.appLink",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "internal"
+              },
+              {
+                "type": "string",
+                "value": "external"
+              },
+              {
+                "type": "string",
+                "value": "email"
+              },
+              {
+                "type": "string",
+                "value": "phone"
+              },
+              {
+                "type": "string",
+                "value": "file"
+              },
+              {
+                "type": "string",
+                "value": "params"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "external": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "email": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "phone": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "file": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "aboutPreviewSectionField.sectionContent.appLink.file"
+          },
+          "optional": true
+        },
+        "canDownload": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
+        "paramsHref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "internal": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "aboutPreviewSectionField.sectionContent.appLink.internal"
+          },
+          "optional": true
+        },
+        "customText": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "openInNewTab": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
     "name": "workshopsSectionField.sectionContent.appLink",
     "value": {
       "type": "object",
@@ -2631,6 +2738,62 @@
   },
   {
     "type": "type",
+    "name": "aboutPreviewSectionField.sectionContent.appLink.file",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "asset": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "sanity.fileAsset.reference"
+          },
+          "optional": true
+        },
+        "media": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "sectionContent.appLink.file.media"
+          },
+          "optional": true
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "file"
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
+    "name": "aboutPreviewSectionField.sectionContent.appLink.internal",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "link": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "page.reference"
+          },
+          "optional": true
+        },
+        "sectionTarget": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
     "name": "featureLinkItem.image",
     "value": {
       "type": "object",
@@ -2858,7 +3021,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "sectionContent.appLink.file.media"
+            "name": "workshopsSectionField.sectionContent.appLink.file.media"
           },
           "optional": true
         },
@@ -6246,7 +6409,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "sectionContent.appLink"
+            "name": "aboutPreviewSectionField.sectionContent.appLink"
           },
           "optional": true
         },
@@ -6381,6 +6544,14 @@
           "type": "objectAttribute",
           "value": {
             "type": "string"
+          },
+          "optional": true
+        },
+        "appLink": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "sectionContent.appLink"
           },
           "optional": true
         }

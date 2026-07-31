@@ -102,6 +102,19 @@ export type SectionContentAppLink = {
   openInNewTab?: boolean;
 };
 
+export type AboutPreviewSectionFieldSectionContentAppLink = {
+  type?: "internal" | "external" | "email" | "phone" | "file" | "params";
+  external?: string;
+  email?: string;
+  phone?: string;
+  file?: AboutPreviewSectionFieldSectionContentAppLinkFile;
+  canDownload?: boolean;
+  paramsHref?: string;
+  internal?: AboutPreviewSectionFieldSectionContentAppLinkInternal;
+  customText?: string;
+  openInNewTab?: boolean;
+};
+
 export type WorkshopsSectionFieldSectionContentAppLink = {
   type?: "internal" | "external" | "email" | "phone" | "file" | "params";
   external?: string;
@@ -423,6 +436,17 @@ export type SectionContentAppLinkInternal = {
   sectionTarget?: string;
 };
 
+export type AboutPreviewSectionFieldSectionContentAppLinkFile = {
+  asset?: SanityFileAssetReference;
+  media?: unknown; // Unable to locate the referenced type "sectionContent.appLink.file.media" in schema
+  _type: "file";
+};
+
+export type AboutPreviewSectionFieldSectionContentAppLinkInternal = {
+  link?: PageReference;
+  sectionTarget?: string;
+};
+
 export type FeatureLinkItemImage = {
   asset?: SanityImageAssetReference;
   media?: unknown; // Unable to locate the referenced type "featureLinkItem.image.media" in schema
@@ -457,7 +481,7 @@ export type FeatureLinkItemAppLinkInternal = {
 
 export type WorkshopsSectionFieldSectionContentAppLinkFile = {
   asset?: SanityFileAssetReference;
-  media?: unknown; // Unable to locate the referenced type "sectionContent.appLink.file.media" in schema
+  media?: unknown; // Unable to locate the referenced type "workshopsSectionField.sectionContent.appLink.file.media" in schema
   _type: "file";
 };
 
@@ -996,7 +1020,7 @@ export type FeatureLinksSection = {
 export type AboutPreviewSection = {
   _type: "aboutPreviewSection";
   text?: string;
-  appLink?: SectionContentAppLink;
+  appLink?: AboutPreviewSectionFieldSectionContentAppLink;
   credentials?: Array<string>;
 };
 
@@ -1018,6 +1042,7 @@ export type AboutSection = {
     _type: "image";
   };
   secondText?: string;
+  appLink?: SectionContentAppLink;
 };
 
 export type ProjectHeroSection = {
@@ -2389,6 +2414,7 @@ export type AllSanitySchemaTypes =
   | Internal
   | AppLink
   | SectionContentAppLink
+  | AboutPreviewSectionFieldSectionContentAppLink
   | WorkshopsSectionFieldSectionContentAppLink
   | AboutTextSectionFieldSectionContentAppLink
   | WorkshopIntroSectionFieldSectionContentAppLink
@@ -2432,6 +2458,8 @@ export type AllSanitySchemaTypes =
   | MediaLottieDimensions
   | SectionContentAppLinkFile
   | SectionContentAppLinkInternal
+  | AboutPreviewSectionFieldSectionContentAppLinkFile
+  | AboutPreviewSectionFieldSectionContentAppLinkInternal
   | FeatureLinkItemImage
   | FeatureLinkItemAppLink
   | FeatureLinkItemAppLinkFile
@@ -3038,7 +3066,20 @@ export type AgentMarkdownContentQueryResult =
             _type: "aboutSectionField";
             text: null;
             media: null;
-            cta: null;
+            cta: {
+              type:
+                | "email"
+                | "external"
+                | "file"
+                | "internal"
+                | "params"
+                | "phone"
+                | undefined;
+              openInNewTab: boolean | false;
+              canDownload: boolean | false;
+              href: string | "" | "mailto:" | "tel:";
+              text: string | "";
+            } | undefined;
             headline: null;
             caption: null;
           }
@@ -3589,7 +3630,20 @@ export type AgentMarkdownContentQueryResult =
             _type: "aboutSectionField";
             text: null;
             media: null;
-            cta: null;
+            cta: {
+              type:
+                | "email"
+                | "external"
+                | "file"
+                | "internal"
+                | "params"
+                | "phone"
+                | undefined;
+              openInNewTab: boolean | false;
+              canDownload: boolean | false;
+              href: string | "" | "mailto:" | "tel:";
+              text: string | "";
+            } | undefined;
             headline: null;
             caption: null;
           }
@@ -4301,7 +4355,7 @@ export type AboutPreviewSectionQResult = {
 
 // Source: features/page-builder/sections/about-section.tsx
 // Variable: AboutSectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "aboutSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      title,      text,      secondText,      image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "aboutSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      title,      text,      secondText,      image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},      "link": appLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}    }}
 export type AboutSectionQResult = {
   content: {
     title: string | undefined;
@@ -4317,6 +4371,20 @@ export type AboutSectionQResult = {
       dimensions: SanityImageDimensions | undefined;
       crop: SanityImageCrop | undefined;
       hotspot: SanityImageHotspot | undefined;
+    } | undefined;
+    link: {
+      type:
+        | "email"
+        | "external"
+        | "file"
+        | "internal"
+        | "params"
+        | "phone"
+        | undefined;
+      openInNewTab: boolean | false;
+      canDownload: boolean | false;
+      href: string | "" | "mailto:" | "tel:";
+      text: string | "";
     } | undefined;
   } | undefined;
 } | undefined;

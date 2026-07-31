@@ -322,7 +322,7 @@ html body {
   display: flex;
   align-items: center;
   gap: 3vw;
-  height: 76vh;
+  height: 86vh;
   padding-inline: max(var(--container-padding), calc((100vw - var(--size-container)) / 2));
   overflow-x: auto;
   overflow-y: hidden;
@@ -966,8 +966,27 @@ html body {
   align-items: flex-start;
 }
 
+.about_intro-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5em;
+}
+
 .about_intro-text {
   max-width: 42em;
+}
+
+/* "Read more →" under the intro — same treatment as the (removed) about-preview link, sized up a touch. */
+.about_intro-more {
+  text-transform: uppercase;
+  font-size: 0.95em;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.about_intro-more:hover {
+  color: var(--colors--accent-color);
 }
 
 .about_intro-contact {
