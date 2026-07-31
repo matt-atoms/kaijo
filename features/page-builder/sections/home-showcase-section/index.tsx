@@ -72,18 +72,22 @@ export async function HomeShowcaseSection({ docId, sectionKey }: { docId: string
     return null;
   }
 
+  const hasHead = Boolean(content.title || content.intro);
+
   return (
     <section className="section_home-showcase section-padding-top">
-      <div className="container">
-        <div className="home-showcase_head">
-          {content.title && (
-            <h2 data-scramble="scroll" className="section_title">
-              {stegaClean(content.title)}
-            </h2>
-          )}
-          {content.intro && <p className="home-showcase_intro">{content.intro}</p>}
+      {hasHead && (
+        <div className="container">
+          <div className="home-showcase_head">
+            {content.title && (
+              <h2 data-scramble="scroll" className="section_title">
+                {stegaClean(content.title)}
+              </h2>
+            )}
+            {content.intro && <p className="home-showcase_intro">{content.intro}</p>}
+          </div>
         </div>
-      </div>
+      )}
       <HomeShowcaseScroll slides={slides} />
     </section>
   );

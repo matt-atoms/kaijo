@@ -340,6 +340,13 @@ html body {
   cursor: grabbing;
 }
 
+/* Each batch is one "reshuffle unit" (36 tiles); laid out inline so batches read as one strip. */
+.home-showcase_batch {
+  display: flex;
+  align-items: center;
+  gap: 3vw;
+}
+
 .home-showcase_tile {
   position: relative;
   flex: 0 0 auto;
@@ -426,6 +433,13 @@ html body {
     overflow: visible;
     cursor: default;
     user-select: auto;
+  }
+
+  .home-showcase_batch {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.75em;
+    width: 100%;
   }
 
   .home-showcase_tile {
