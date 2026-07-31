@@ -591,6 +591,20 @@ export type ChildrenAppLinkInternal = {
   sectionTarget?: string;
 };
 
+export type PrintsShowcaseSection = {
+  _type: "printsShowcaseSection";
+  heading?: string;
+  intro?: string;
+  optionsHeading?: string;
+  editions?: Array<{
+    size?: string;
+    edition?: string;
+    _type: "edition";
+    _key: string;
+  }>;
+  priceNote?: string;
+};
+
 export type BooksStoreSection = {
   _type: "booksStoreSection";
   heading?: string;
@@ -1518,6 +1532,12 @@ export type Article = {
           _type: "booksStoreSectionField";
           _key: string;
         }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: PrintsShowcaseSection;
+          _type: "printsShowcaseSectionField";
+          _key: string;
+        }
     >;
   };
   seoMetadata?: {
@@ -1707,6 +1727,18 @@ export type Project = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  prints?: Array<{
+    image?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    title?: string;
+    _type: "printItem";
+    _key: string;
+  }>;
 };
 
 export type Redirect = {
@@ -2080,6 +2112,12 @@ export type Page = {
           _type: "booksStoreSectionField";
           _key: string;
         }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: PrintsShowcaseSection;
+          _type: "printsShowcaseSectionField";
+          _key: string;
+        }
     >;
   };
   seoMetadata?: {
@@ -2397,6 +2435,7 @@ export type AllSanitySchemaTypes =
   | Internal1
   | ChildrenAppLinkFile
   | ChildrenAppLinkInternal
+  | PrintsShowcaseSection
   | BooksStoreSection
   | PrintsLicensingSection
   | PrintsGallerySection
@@ -3201,6 +3240,14 @@ export type AgentMarkdownContentQueryResult =
             caption: null;
           }
         | {
+            _type: "printsShowcaseSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
             _type: "projectHeroSectionField";
             text: null;
             media: null;
@@ -3736,6 +3783,14 @@ export type AgentMarkdownContentQueryResult =
             caption: null;
           }
         | {
+            _type: "printsShowcaseSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
             _type: "projectHeroSectionField";
             text: null;
             media: null;
@@ -4012,6 +4067,10 @@ export type PageSectionsQResult = Array<
   | {
       _key: string;
       _type: "printsLicensingSectionField";
+    }
+  | {
+      _key: string;
+      _type: "printsShowcaseSectionField";
     }
   | {
       _key: string;
@@ -4304,12 +4363,13 @@ export type AboutTextSectionQResult = {
 
 // Source: features/page-builder/sections/books-store-section.tsx
 // Variable: BooksStoreSectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "booksStoreSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      intro    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "booksStoreSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      intro    },    "hash": sectionSettings.sectionHash.current}
 export type BooksStoreSectionQResult = {
   content: {
     heading: string | undefined;
     intro: string | undefined;
   } | undefined;
+  hash: string | undefined;
 } | undefined;
 
 // Source: features/page-builder/sections/books-store-section.tsx
@@ -4853,6 +4913,46 @@ export type PrintsLicensingSectionQResult = {
     }> | undefined;
   } | undefined;
 } | undefined;
+
+// Source: features/page-builder/sections/prints-showcase-section.tsx
+// Variable: PrintsShowcaseSectionQ
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "printsShowcaseSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      intro,      optionsHeading,      priceNote,      editions[]{ "key": _key, size, edition }    },    "hash": sectionSettings.sectionHash.current}
+export type PrintsShowcaseSectionQResult = {
+  content: {
+    heading: string | undefined;
+    intro: string | undefined;
+    optionsHeading: string | undefined;
+    priceNote: string | undefined;
+    editions: Array<{
+      key: string;
+      size: string | undefined;
+      edition: string | undefined;
+    }> | undefined;
+  } | undefined;
+  hash: string | undefined;
+} | undefined;
+
+// Source: features/page-builder/sections/prints-showcase-section.tsx
+// Variable: PrintsShowcaseProjectsQ
+// Query: *[_type == "project" && count(prints) > 0] | order(coalesce(gridOrder, 999) asc, date asc){  title,  "slug": slug.current,  "prints": prints[]{ title, image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,} }}
+export type PrintsShowcaseProjectsQResult = Array<{
+  title: string | undefined;
+  slug: string | undefined;
+  prints: Array<{
+    title: string | undefined;
+    image: {
+      _id: string | undefined;
+      _rev: string | undefined;
+      altText: string | undefined;
+      description: string | undefined;
+      title: string | undefined;
+      lqip: string | undefined;
+      dimensions: SanityImageDimensions | undefined;
+      crop: SanityImageCrop | undefined;
+      hotspot: SanityImageHotspot | undefined;
+    } | undefined;
+  }> | undefined;
+}>;
 
 // Source: features/page-builder/sections/project-hero-section.tsx
 // Variable: ProjectHeroQ

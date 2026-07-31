@@ -12,6 +12,7 @@ import { mediaSection } from "./media-section";
 import { portfolioGridSection } from "./portfolio-grid-section";
 import { printsGallerySection } from "./prints-gallery-section";
 import { printsLicensingSection } from "./prints-licensing-section";
+import { printsShowcaseSection } from "./prints-showcase-section";
 import { projectHeroSection } from "./project-hero-section";
 import { textSection } from "./text-section";
 import { workOverviewSection } from "./work-overview-section";
@@ -49,5 +50,6 @@ export const sections = [
   printsGallerySection,
   printsLicensingSection,
   booksStoreSection,
+  printsShowcaseSection,
   // PLOP: Add Export
 ];

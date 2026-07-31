@@ -1950,6 +1950,250 @@ html body {
   }
 }
 
+/* ------------------------------------------------------------------ *
+ * Prints & Books (/store) — showcase carousel with procedural wall mockups.
+ * features/page-builder/sections/prints-showcase-section.tsx + prints-mockup-carousel.tsx
+ * Namespaced .psc* so the archived /oldprints carousel (.prints-*) stays untouched.
+ * ------------------------------------------------------------------ */
+.psc-wrap {
+  margin-top: 1.5em;
+}
+
+.psc {
+  --slide-w: clamp(130px, 17vw, 200px);
+}
+
+.psc_stage {
+  position: relative;
+  height: clamp(400px, 64vh, 640px);
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.psc-slide {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--slide-w);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform: translate(-50%, -50%) translateX(calc(var(--off) * 260%)) scale(0.7);
+  filter: brightness(0.62);
+  z-index: 1;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    filter 0.55s ease;
+}
+
+.psc-slide[data-pos="1"] {
+  transform: translate(-50%, -50%) translateX(calc(var(--off) * 260%)) scale(0.82);
+  filter: brightness(0.82);
+  z-index: 2;
+}
+
+.psc-slide[data-pos="0"] {
+  width: min(84vw, 560px);
+  transform: translate(-50%, -50%) scale(1);
+  filter: none;
+  z-index: 3;
+  cursor: default;
+}
+
+/* Bare, unframed side prints. */
+.psc-plain {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.psc-plain_photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: clamp(300px, 48vh, 460px);
+  object-fit: contain;
+  box-shadow: 0 12px 28px rgb(0 0 0 / 0.28);
+}
+
+/* Procedural room: wall + floor + a framed, matted print. Per-scene vars swap the room + frame. */
+.psc-mockup {
+  --wall: #e8e4db;
+  --wall-2: #d7d1c5;
+  --floor: #cabfad;
+  --frame: #26262b;
+  --frame-w: 0.7em;
+  --frame-aspect: 3 / 4;
+  --frame-h: 64%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  box-shadow: 0 34px 70px rgb(0 0 0 / 0.3);
+  animation: psc-mockup-in 0.5s ease both;
+}
+
+.psc-mockup[data-scene="1"] {
+  --wall: #dacfbd;
+  --wall-2: #c6b8a0;
+  --floor: #a98d6e;
+  --frame: #5a4632;
+  --frame-w: 0.6em;
+  --frame-aspect: 4 / 3;
+  --frame-h: 52%;
+}
+
+.psc-mockup[data-scene="2"] {
+  --wall: #c8cacd;
+  --wall-2: #adb1b6;
+  --floor: #8e9095;
+  --frame: #111214;
+  --frame-w: 0.9em;
+  --frame-aspect: 1 / 1;
+  --frame-h: 72%;
+}
+
+.psc-mockup_room {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(88% 66% at 50% 10%, rgb(255 255 255 / 0.32), rgb(255 255 255 / 0) 55%),
+    linear-gradient(to bottom, rgb(0 0 0 / 0.06) 77.5%, rgb(0 0 0 / 0.14) 78%, rgb(0 0 0 / 0) 80%),
+    linear-gradient(to bottom, transparent 0 78%, var(--floor) 78% 100%), linear-gradient(to bottom, var(--wall), var(--wall-2));
+}
+
+.psc-mockup_frame {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  box-sizing: border-box;
+  height: var(--frame-h);
+  aspect-ratio: var(--frame-aspect);
+  padding: var(--frame-w);
+  background: var(--frame);
+  transform: translateY(-6%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.1),
+    0 2px 3px rgb(0 0 0 / 0.28),
+    0 20px 34px rgb(0 0 0 / 0.32);
+}
+
+.psc-mockup_mat {
+  display: flex;
+  flex: 1;
+  box-sizing: border-box;
+  padding: 6%;
+  background: #f6f4ef;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.06);
+}
+
+.psc-mockup_photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@keyframes psc-mockup-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.psc_controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5em;
+  margin-top: 1.75em;
+}
+
+.psc-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6em;
+  height: 2.6em;
+  border: 1px solid var(--page-ink);
+  background: transparent;
+  color: inherit;
+  font-size: 1em;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.psc-nav:hover {
+  background: var(--colors--black);
+  color: #fff;
+}
+
+.psc-counter {
+  min-width: 5em;
+  text-align: center;
+  font-size: 0.9em;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+.psc_meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25em;
+  max-width: 40em;
+  margin: 2.25em auto 0;
+  text-align: center;
+}
+
+.psc_meta-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.7em;
+}
+
+.psc_meta-project {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.psc_meta-number {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  opacity: 0.55;
+}
+
+.psc_meta-title {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .psc-slide {
+    transition: none;
+  }
+
+  .psc-mockup {
+    animation: none;
+  }
+}
+
 /* Prints licensing — features/page-builder/sections/prints-licensing-section.tsx */
 .prints-licensing_inner {
   display: grid;

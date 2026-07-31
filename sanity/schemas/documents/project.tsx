@@ -33,6 +33,7 @@ export const project = defineType({
   groups: [
     { name: "details", title: "Details", icon: () => <>📄</>, default: true },
     { name: "media", title: "Media", icon: () => <>🖼</> },
+    { name: "prints", title: "Prints", icon: () => <>🏷</> },
   ],
   fields: [
     defineField({
@@ -164,6 +165,35 @@ export const project = defineType({
         description: `Collage slot ${index + 1}: ${slot}. Leave empty to skip this slot, exactly like an unbound Webflow CMS image.`,
       })
     ),
+    defineField({
+      group: "prints",
+      name: "prints",
+      type: "array",
+      title: "Prints",
+      description:
+        "Images from this project available as fine-art prints. These feed the Prints & Books carousel, numbered per project. Add an image and (optionally) a title.",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "printItem",
+          fields: [
+            defineField({ name: "image", type: "image", title: "Image", validation: (R) => R.required() }),
+            defineField({
+              name: "title",
+              type: "string",
+              title: "Title",
+              description: "Shown under the print number in the carousel (e.g. “Reflections, Amsterdam”).",
+            }),
+          ],
+          preview: {
+            select: { title: "title", media: "image" },
+            prepare({ title, media }) {
+              return { title: title || "Untitled print", media };
+            },
+          },
+        }),
+      ],
+    }),
   ],
   orderings: [
     { title: "Date, Old → New", name: "dateAsc", by: [{ field: "date", direction: "asc" }] },

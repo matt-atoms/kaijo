@@ -73,6 +73,9 @@ const _sections = {
   booksStoreSectionField: dynamic(() =>
     import("~/features/page-builder/sections/books-store-section").then((mod) => mod.BooksStoreSection)
   ),
+  printsShowcaseSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/prints-showcase-section").then((mod) => mod.PrintsShowcaseSection)
+  ),
   // PLOP: Add Import
 } as const;
 

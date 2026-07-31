@@ -129,7 +129,7 @@ export default async function BookPage(props: { params: Promise<{ slug: string }
                 </span>
               </a>
             )}
-            <a href="/books" className="book-nav_back">
+            <a href="/store#books" className="book-nav_back">
               ← Back to Books
             </a>
           </nav>

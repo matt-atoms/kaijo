@@ -1,4 +1,4 @@
-import { defineQuery } from "next-sanity";
+import { defineQuery, stegaClean } from "next-sanity";
 import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import { sanityFetch } from "~/features/sanity/client";
 import { ImageFragment } from "~/features/sanity/media/fragment";
@@ -10,7 +10,8 @@ const BooksStoreSectionQ =
     "content": sectionContent{
       heading,
       intro
-    }
+    },
+    "hash": sectionSettings.sectionHash.current
 }`);
 
 const BooksListQ = defineQuery(`
@@ -43,7 +44,7 @@ export async function BooksStoreSection({ docId, sectionKey }: { docId: string; 
   }
 
   return (
-    <div className="section_books section-padding-top section-padding-bottom">
+    <div id={stegaClean(section?.hash) || undefined} className="section_books section-padding-top section-padding-bottom">
       <div className="container">
         <div className="books_head">
           {content.heading && (
