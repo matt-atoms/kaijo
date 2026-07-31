@@ -29,8 +29,8 @@ type Batch = { id: number; tiles: Tile[] };
 /** One reshuffle happens per batch, so a batch is the "every 36 images" unit on desktop. */
 const BATCH = 36;
 const MOBILE_COUNT = 18;
-const MAX_BATCHES = 4; // bound the DOM on an endless desktop scroll (~144 tiles)
-const APPEND_PX = 1400; // append the next batch this far before the end
+const MAX_BATCHES = 6; // bound the DOM on an endless desktop scroll (~216 tiles)
+const EDGE_PX = 1600; // grow the strip this far before reaching either end
 
 const H_TIERS = [30, 44, 58, 72];
 const W_TIERS = [66, 76, 86, 94];
@@ -65,8 +65,14 @@ function seedBatch(pool: HomeShowcaseSlide[], count: number): Batch {
   return { id: 0, tiles };
 }
 
+// Module-level so batch ids stay unique even across a Strict Mode dev remount (which resets refs);
+// a per-instance ref could mint the same id twice and collide React keys.
+let batchSeq = 0;
+
 /** A reshuffled batch: new random selection (subset of the pool), order and per-tile sizes. */
-function randomBatch(pool: HomeShowcaseSlide[], count: number, id: number): Batch {
+function randomBatch(pool: HomeShowcaseSlide[], count: number): Batch {
+  batchSeq += 1;
+  const id = batchSeq;
   const chosen = shuffle(pool).slice(0, Math.min(count, pool.length));
   const tiles = chosen.map((slide, i) => ({
     key: `${id}:${slide.key}:${i}`,
@@ -82,8 +88,8 @@ function randomBatch(pool: HomeShowcaseSlide[], count: number, id: number): Batc
 export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) {
   const trackRef = React.useRef<HTMLDivElement>(null);
   const batchEls = React.useRef(new Map<number, HTMLDivElement>());
-  const nextId = React.useRef(1);
   const pendingPrune = React.useRef(0);
+  const pendingPrependId = React.useRef<number | null>(null);
   const rafPending = React.useRef(false);
   const didInitScroll = React.useRef(false);
 
@@ -106,16 +112,17 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
     setCanHover(hover);
     commitBatches(
       hover
-        ? [randomBatch(slides, BATCH, nextId.current++), randomBatch(slides, BATCH, nextId.current++)]
-        : [randomBatch(slides, MOBILE_COUNT, nextId.current++)]
+        ? [randomBatch(slides, BATCH), randomBatch(slides, BATCH), randomBatch(slides, BATCH)]
+        : [randomBatch(slides, MOBILE_COUNT)]
     );
   }, [slides, commitBatches]);
 
   const drag = React.useRef({ active: false, moved: false, startX: 0, startLeft: 0 });
 
+  // Reaching the right end: add a batch on the right, prune the (off-screen) leftmost.
   const appendBatch = React.useCallback(() => {
     const track = trackRef.current;
-    let next = [...batchesRef.current, randomBatch(slides, BATCH, nextId.current++)];
+    let next = [...batchesRef.current, randomBatch(slides, BATCH)];
     // Prune from the front to bound the DOM, but never mid-drag (it would jump the grab).
     if (next.length > MAX_BATCHES && track && !drag.current.active) {
       const removed = next[0] as Batch;
@@ -127,26 +134,54 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
     commitBatches(next);
   }, [slides, commitBatches]);
 
-  // After a prune, pull scrollLeft back by the removed width so the viewport doesn't jump.
+  // Reaching the left end: add a batch on the left (compensated so nothing jumps), prune the right.
+  const prependBatch = React.useCallback(() => {
+    const batch = randomBatch(slides, BATCH);
+    let next = [batch, ...batchesRef.current];
+    if (next.length > MAX_BATCHES && !drag.current.active) {
+      next = next.slice(0, MAX_BATCHES); // drop from the (off-screen) right
+    }
+    pendingPrependId.current = batch.id;
+    commitBatches(next);
+  }, [slides, commitBatches]);
+
+  // Keep the viewport visually stable when the strip grows: a right-append that pruned the left
+  // pulls scrollLeft back; a left-prepend pushes it forward by the newly added batch's width.
   useIsoLayoutEffect(() => {
     const track = trackRef.current;
-    if (track && pendingPrune.current) {
+    if (!track) {
+      return;
+    }
+    if (pendingPrune.current) {
       track.scrollLeft -= pendingPrune.current;
       pendingPrune.current = 0;
     }
+    if (pendingPrependId.current != null) {
+      const el = batchEls.current.get(pendingPrependId.current);
+      if (el) {
+        const gap = Number.parseFloat(getComputedStyle(track).columnGap) || 0;
+        track.scrollLeft += el.offsetWidth + gap;
+      }
+      pendingPrependId.current = null;
+    }
   }, [batches]);
 
-  // Desktop: start with the first image half off the left edge, so it's obvious the strip scrolls.
+  // Desktop: start one full batch in (left runway for the endless left-scroll) with the first
+  // visible image half off the left edge, so it's obvious the strip scrolls both ways.
   useIsoLayoutEffect(() => {
     if (didInitScroll.current || !canHover) {
       return;
     }
     const track = trackRef.current;
-    const firstTile = track?.querySelector<HTMLElement>(".home-showcase_tile");
-    if (track && firstTile) {
-      const pad = Number.parseFloat(getComputedStyle(track).paddingLeft) || 0;
-      track.scrollLeft = pad + firstTile.getBoundingClientRect().width * 0.5;
-      didInitScroll.current = true;
+    const wraps = track?.querySelectorAll<HTMLElement>(".home-showcase_batch");
+    if (track && wraps && wraps.length >= 2) {
+      const firstVisibleTile = wraps[1]?.querySelector<HTMLElement>(".home-showcase_tile");
+      if (firstVisibleTile) {
+        const tileRect = firstVisibleTile.getBoundingClientRect();
+        const contentX = tileRect.left - track.getBoundingClientRect().left + track.scrollLeft;
+        track.scrollLeft = contentX + tileRect.width * 0.5;
+        didInitScroll.current = true;
+      }
     }
   }, [canHover, batches]);
 
@@ -158,11 +193,16 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
     requestAnimationFrame(() => {
       rafPending.current = false;
       const track = trackRef.current;
-      if (track && track.scrollLeft + track.clientWidth >= track.scrollWidth - APPEND_PX) {
+      if (!track) {
+        return;
+      }
+      if (track.scrollLeft + track.clientWidth >= track.scrollWidth - EDGE_PX) {
         appendBatch();
+      } else if (track.scrollLeft <= EDGE_PX) {
+        prependBatch();
       }
     });
-  }, [canHover, appendBatch]);
+  }, [canHover, appendBatch, prependBatch]);
 
   const onPointerDown = (e: React.PointerEvent) => {
     const track = trackRef.current;

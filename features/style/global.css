@@ -330,6 +330,7 @@ html body {
   cursor: grab;
   user-select: none;
   overscroll-behavior-x: contain;
+  overflow-anchor: none;
 }
 
 .home-showcase_track::-webkit-scrollbar {
