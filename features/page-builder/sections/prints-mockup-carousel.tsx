@@ -17,27 +17,17 @@ export type PrintSlide = {
 /** How many slides either side of the centre are mounted/visible. */
 const WINDOW = 2;
 
-/**
- * Real photographic room mockups (license-free, Unsplash). The print is composited into the frame's
- * opening (percentages measured off each photo) with a thin white mat, mirroring the anthracite
- * frame + small white border the prints actually ship in. A random room is picked on every move.
- */
-const MOCKUPS = [
-  // `spread` sets how far the bare side prints sit from centre — tuned per mockup so the overlap
-  // stays consistent despite the very different frame widths (tall room vs wide cafe).
-  { src: "/mockups/frame-room.jpg", art: { top: 21.5, left: 43, width: 43.5, height: 40 }, spread: "clamp(85px, 12vw, 140px)" },
-  { src: "/mockups/frame-cafe.jpg", art: { top: 5, left: 8.5, width: 78, height: 70 }, spread: "clamp(160px, 22vw, 280px)" },
-] as const;
-
 /** Pad a per-project print number as 01, 02, … */
 function pad(n: number) {
   return n.toString().padStart(2, "0");
 }
 
+/**
+ * Coverflow print carousel: the centre print sits in an anthracite frame + white mat (the side
+ * prints slip in bare as they centre). Caption + a minimal enquiry sit close beneath.
+ */
 export function PrintsMockupCarousel({ slides, sizes }: { slides: PrintSlide[]; sizes: string[] }) {
   const [active, setActive] = React.useState(0);
-  // Deterministic first paint (room 0), then a random room on every move.
-  const [room, setRoom] = React.useState(0);
   const dragX = React.useRef<number | null>(null);
   const n = slides.length;
 
@@ -55,25 +45,7 @@ export function PrintsMockupCarousel({ slides, sizes }: { slides: PrintSlide[]; 
     [active, n]
   );
 
-  const shuffleRoom = React.useCallback(() => {
-    setRoom((r) => (r + 1 + Math.floor(Math.random() * (MOCKUPS.length - 1))) % MOCKUPS.length);
-  }, []);
-
-  const go = React.useCallback(
-    (dir: number) => {
-      setActive((a) => (a + dir + n) % n);
-      shuffleRoom();
-    },
-    [n, shuffleRoom]
-  );
-
-  const jumpTo = React.useCallback(
-    (i: number) => {
-      setActive(i);
-      shuffleRoom();
-    },
-    [shuffleRoom]
-  );
+  const go = React.useCallback((dir: number) => setActive((a) => (a + dir + n) % n), [n]);
 
   function onKeyDown(event: React.KeyboardEvent) {
     if (event.key === "ArrowLeft") {
@@ -100,19 +72,11 @@ export function PrintsMockupCarousel({ slides, sizes }: { slides: PrintSlide[]; 
   }
 
   const current = slides[active];
-  const mockup = MOCKUPS[room] ?? MOCKUPS[0];
 
   return (
     <div className="psc-wrap">
       {/* biome-ignore lint/a11y/useSemanticElements: a labelled group with arrow-key control is the right pattern here. */}
-      <div
-        className="psc"
-        role="group"
-        aria-roledescription="carousel"
-        aria-label="Prints"
-        onKeyDown={onKeyDown}
-        style={{ "--spread": mockup.spread } as React.CSSProperties}
-      >
+      <div className="psc" role="group" aria-roledescription="carousel" aria-label="Prints" onKeyDown={onKeyDown}>
         <div
           className="psc_stage"
           onPointerDown={onPointerDown}
@@ -139,39 +103,18 @@ export function PrintsMockupCarousel({ slides, sizes }: { slides: PrintSlide[]; 
                 aria-label={
                   isActive ? `${slide.project} — print ${pad(slide.number)}` : `Go to ${slide.project} print ${pad(slide.number)}`
                 }
-                onClick={() => jumpTo(i)}
+                onClick={() => setActive(i)}
               >
-                {isActive ? (
-                  <span className="psc-mockup" key={mockup.src}>
-                    {/* biome-ignore lint/performance/noImgElement: static local mockup, not a Sanity asset. */}
-                    <img className="psc-mockup_bg" src={mockup.src} alt="" />
-                    <span
-                      className="psc-mockup_art"
-                      style={{
-                        top: `${mockup.art.top}%`,
-                        left: `${mockup.art.left}%`,
-                        width: `${mockup.art.width}%`,
-                        height: `${mockup.art.height}%`,
-                      }}
-                    >
-                      <KaijoImage
-                        image={slide.image}
-                        className="psc-mockup_photo"
-                        sizes="(max-width: 767px) 60vw, 26vw"
-                        loading="eager"
-                      />
-                    </span>
-                  </span>
-                ) : (
-                  <span className="psc-plain">
+                <span className="psc-frame">
+                  <span className="psc-mat">
                     <KaijoImage
                       image={slide.image}
-                      className="psc-plain_photo"
-                      sizes="(max-width: 767px) 34vw, 15vw"
-                      loading="lazy"
+                      className="psc-photo"
+                      sizes="(max-width: 767px) 80vw, 30vw"
+                      loading={isActive ? "eager" : "lazy"}
                     />
                   </span>
-                )}
+                </span>
               </button>
             );
           })}

@@ -1951,9 +1951,9 @@ html body {
 }
 
 /* ------------------------------------------------------------------ *
- * Prints & Books (/store) — showcase carousel with photographic room mockups.
+ * Prints & Books (/store) — showcase carousel with an anthracite frame centre.
  * features/page-builder/sections/prints-showcase-section.tsx + prints-mockup-carousel.tsx
- * Namespaced .psc* so the archived /oldprints carousel (.prints-*) stays untouched.
+ * Namespaced .psc* so the archived /oldprints carousel (.prints-*) stays independent.
  * ------------------------------------------------------------------ */
 .psc-wrap {
   margin-top: 0.5em;
@@ -1961,14 +1961,12 @@ html body {
 }
 
 .psc {
-  --centre-h: clamp(300px, 48vh, 460px);
-  --side-w: clamp(105px, 13vw, 165px);
-  --spread: clamp(150px, 20vw, 250px);
+  --slide-w: clamp(240px, 32vw, 380px);
 }
 
 .psc_stage {
   position: relative;
-  height: var(--centre-h);
+  height: clamp(360px, 56vh, 560px);
   margin-bottom: 1.1em;
   overflow: hidden;
   touch-action: pan-y;
@@ -1979,6 +1977,7 @@ html body {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: var(--slide-w);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1986,8 +1985,8 @@ html body {
   border: 0;
   background: transparent;
   cursor: pointer;
-  transform: translate(-50%, -50%) translateX(calc(var(--off) * var(--spread))) scale(0.72);
-  filter: brightness(0.58);
+  transform: translate(-50%, -50%) translateX(calc(var(--off) * 58%)) scale(0.66);
+  filter: brightness(0.68);
   z-index: 1;
   transition:
     transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
@@ -1995,8 +1994,8 @@ html body {
 }
 
 .psc-slide[data-pos="1"] {
-  transform: translate(-50%, -50%) translateX(calc(var(--off) * var(--spread))) scale(0.84);
-  filter: brightness(0.82);
+  transform: translate(-50%, -50%) translateX(calc(var(--off) * 58%)) scale(0.82);
+  filter: brightness(0.84);
   z-index: 2;
 }
 
@@ -2007,74 +2006,63 @@ html body {
   cursor: default;
 }
 
-/* Side prints: bare, unframed, narrow so they tuck behind the centre mockup. */
-.psc-plain {
+/*
+ * Fixed 4:5 box (robust before the photo loads). The anthracite frame + white mat only paint on the
+ * centre slide, so the side prints sit bare and appear to slip into the frame as they centre.
+ */
+.psc-frame {
   display: flex;
-  width: var(--side-w);
-  justify-content: center;
-}
-
-.psc-plain_photo {
-  display: block;
+  box-sizing: border-box;
   width: 100%;
-  height: auto;
-  max-height: calc(var(--centre-h) * 0.82);
-  object-fit: contain;
-  box-shadow: 0 12px 26px rgb(0 0 0 / 0.26);
+  aspect-ratio: 4 / 5;
+  padding: 0.7em;
+  background-color: transparent;
+  box-shadow: none;
+  transition:
+    background-color 0.45s ease,
+    box-shadow 0.45s ease;
 }
 
-/* Centre: a real room photo with the print composited into the frame opening. */
-.psc-mockup {
-  position: relative;
-  display: block;
-  height: var(--centre-h);
-  animation: psc-mockup-in 0.5s ease both;
-}
-
-.psc-mockup_bg {
-  display: block;
-  height: 100%;
-  width: auto;
-  max-width: min(90vw, 640px);
-  object-fit: contain;
-}
-
-/* White mat inside the frame opening (positioned per-mockup via inline %). */
-.psc-mockup_art {
-  position: absolute;
-  background: #f7f5f0;
+.psc-slide[data-pos="0"] .psc-frame {
+  background-color: #26262b;
   box-shadow:
-    inset 0 0 0 1px rgb(0 0 0 / 0.05),
-    inset 0 2px 6px rgb(0 0 0 / 0.1);
-  overflow: hidden;
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    0 4px 10px rgb(0 0 0 / 0.4),
+    0 32px 64px rgb(0 0 0 / 0.5);
 }
 
-.psc-mockup_photo {
-  position: absolute;
-  inset: 4%;
-  width: auto;
-  height: auto;
-  object-fit: cover;
+.psc-mat {
+  position: relative;
+  display: flex;
+  flex: 1;
+  box-sizing: border-box;
+  padding: 0.55em;
+  background-color: transparent;
+  transition: background-color 0.45s ease;
 }
 
-/* Subtle museum-glass sheen over the print. */
-.psc-mockup_art::after {
+.psc-slide[data-pos="0"] .psc-mat {
+  background-color: #f5f3ee;
+}
+
+/* Museum-glass sheen over the centre print. */
+.psc-slide[data-pos="0"] .psc-mat::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(125deg, rgb(255 255 255 / 0.16) 0%, rgb(255 255 255 / 0.04) 22%, rgb(255 255 255 / 0) 45%);
+  background: linear-gradient(125deg, rgb(255 255 255 / 0.18) 0%, rgb(255 255 255 / 0.05) 20%, rgb(255 255 255 / 0) 42%);
 }
 
-@keyframes psc-mockup-in {
-  from {
-    opacity: 0;
-    transform: translateY(5px) scale(0.99);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+.psc-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.psc-slide[data-pos="0"] .psc-photo {
+  filter: contrast(1.06) brightness(1.04);
 }
 
 /* Controls: ← project · number · title → */
@@ -2157,10 +2145,6 @@ html body {
 @media (prefers-reduced-motion: reduce) {
   .psc-slide {
     transition: none;
-  }
-
-  .psc-mockup {
-    animation: none;
   }
 }
 
