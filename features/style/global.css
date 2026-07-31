@@ -1951,21 +1951,25 @@ html body {
 }
 
 /* ------------------------------------------------------------------ *
- * Prints & Books (/store) — showcase carousel with procedural wall mockups.
+ * Prints & Books (/store) — showcase carousel with photographic room mockups.
  * features/page-builder/sections/prints-showcase-section.tsx + prints-mockup-carousel.tsx
  * Namespaced .psc* so the archived /oldprints carousel (.prints-*) stays untouched.
  * ------------------------------------------------------------------ */
 .psc-wrap {
-  margin-top: 1.5em;
+  margin-top: 0.5em;
+  text-align: center;
 }
 
 .psc {
-  --slide-w: clamp(130px, 17vw, 200px);
+  --centre-h: clamp(300px, 48vh, 460px);
+  --side-w: clamp(105px, 13vw, 165px);
+  --spread: clamp(150px, 20vw, 250px);
 }
 
 .psc_stage {
   position: relative;
-  height: clamp(400px, 64vh, 640px);
+  height: var(--centre-h);
+  margin-bottom: 1.1em;
   overflow: hidden;
   touch-action: pan-y;
   user-select: none;
@@ -1975,7 +1979,6 @@ html body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: var(--slide-w);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1983,8 +1986,8 @@ html body {
   border: 0;
   background: transparent;
   cursor: pointer;
-  transform: translate(-50%, -50%) translateX(calc(var(--off) * 260%)) scale(0.7);
-  filter: brightness(0.62);
+  transform: translate(-50%, -50%) translateX(calc(var(--off) * var(--spread))) scale(0.72);
+  filter: brightness(0.58);
   z-index: 1;
   transition:
     transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
@@ -1992,23 +1995,22 @@ html body {
 }
 
 .psc-slide[data-pos="1"] {
-  transform: translate(-50%, -50%) translateX(calc(var(--off) * 260%)) scale(0.82);
+  transform: translate(-50%, -50%) translateX(calc(var(--off) * var(--spread))) scale(0.84);
   filter: brightness(0.82);
   z-index: 2;
 }
 
 .psc-slide[data-pos="0"] {
-  width: min(84vw, 560px);
   transform: translate(-50%, -50%) scale(1);
   filter: none;
   z-index: 3;
   cursor: default;
 }
 
-/* Bare, unframed side prints. */
+/* Side prints: bare, unframed, narrow so they tuck behind the centre mockup. */
 .psc-plain {
   display: flex;
-  width: 100%;
+  width: var(--side-w);
   justify-content: center;
 }
 
@@ -2016,96 +2018,58 @@ html body {
   display: block;
   width: 100%;
   height: auto;
-  max-height: clamp(300px, 48vh, 460px);
+  max-height: calc(var(--centre-h) * 0.82);
   object-fit: contain;
-  box-shadow: 0 12px 28px rgb(0 0 0 / 0.28);
+  box-shadow: 0 12px 26px rgb(0 0 0 / 0.26);
 }
 
-/* Procedural room: wall + floor + a framed, matted print. Per-scene vars swap the room + frame. */
+/* Centre: a real room photo with the print composited into the frame opening. */
 .psc-mockup {
-  --wall: #e8e4db;
-  --wall-2: #d7d1c5;
-  --floor: #cabfad;
-  --frame: #26262b;
-  --frame-w: 0.7em;
-  --frame-aspect: 3 / 4;
-  --frame-h: 64%;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  box-shadow: 0 34px 70px rgb(0 0 0 / 0.3);
+  display: block;
+  height: var(--centre-h);
   animation: psc-mockup-in 0.5s ease both;
 }
 
-.psc-mockup[data-scene="1"] {
-  --wall: #dacfbd;
-  --wall-2: #c6b8a0;
-  --floor: #a98d6e;
-  --frame: #5a4632;
-  --frame-w: 0.6em;
-  --frame-aspect: 4 / 3;
-  --frame-h: 52%;
+.psc-mockup_bg {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: min(90vw, 640px);
+  object-fit: contain;
 }
 
-.psc-mockup[data-scene="2"] {
-  --wall: #c8cacd;
-  --wall-2: #adb1b6;
-  --floor: #8e9095;
-  --frame: #111214;
-  --frame-w: 0.9em;
-  --frame-aspect: 1 / 1;
-  --frame-h: 72%;
-}
-
-.psc-mockup_room {
+/* White mat inside the frame opening (positioned per-mockup via inline %). */
+.psc-mockup_art {
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(88% 66% at 50% 10%, rgb(255 255 255 / 0.32), rgb(255 255 255 / 0) 55%),
-    linear-gradient(to bottom, rgb(0 0 0 / 0.06) 77.5%, rgb(0 0 0 / 0.14) 78%, rgb(0 0 0 / 0) 80%),
-    linear-gradient(to bottom, transparent 0 78%, var(--floor) 78% 100%), linear-gradient(to bottom, var(--wall), var(--wall-2));
-}
-
-.psc-mockup_frame {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  box-sizing: border-box;
-  height: var(--frame-h);
-  aspect-ratio: var(--frame-aspect);
-  padding: var(--frame-w);
-  background: var(--frame);
-  transform: translateY(-6%);
+  background: #f7f5f0;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.1),
-    0 2px 3px rgb(0 0 0 / 0.28),
-    0 20px 34px rgb(0 0 0 / 0.32);
-}
-
-.psc-mockup_mat {
-  display: flex;
-  flex: 1;
-  box-sizing: border-box;
-  padding: 6%;
-  background: #f6f4ef;
-  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.06);
+    inset 0 0 0 1px rgb(0 0 0 / 0.05),
+    inset 0 2px 6px rgb(0 0 0 / 0.1);
+  overflow: hidden;
 }
 
 .psc-mockup_photo {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  position: absolute;
+  inset: 4%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Subtle museum-glass sheen over the print. */
+.psc-mockup_art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(125deg, rgb(255 255 255 / 0.16) 0%, rgb(255 255 255 / 0.04) 22%, rgb(255 255 255 / 0) 45%);
 }
 
 @keyframes psc-mockup-in {
   from {
     opacity: 0;
-    transform: translateY(6px) scale(0.985);
+    transform: translateY(5px) scale(0.99);
   }
   to {
     opacity: 1;
@@ -2113,24 +2077,24 @@ html body {
   }
 }
 
+/* Controls: ← project · number · title → */
 .psc_controls {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5em;
-  margin-top: 1.75em;
+  gap: 1.4em;
 }
 
 .psc-nav {
+  flex: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.6em;
-  height: 2.6em;
+  width: 2.4em;
+  height: 2.4em;
   border: 1px solid var(--page-ink);
   background: transparent;
   color: inherit;
-  font-size: 1em;
   cursor: pointer;
   transition:
     background 0.3s ease,
@@ -2142,46 +2106,52 @@ html body {
   color: #fff;
 }
 
-.psc-counter {
-  min-width: 5em;
-  text-align: center;
-  font-size: 0.9em;
-  letter-spacing: 0.04em;
-  opacity: 0.7;
-}
-
 .psc_meta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25em;
-  max-width: 40em;
-  margin: 2.25em auto 0;
-  text-align: center;
-}
-
-.psc_meta-line {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: center;
-  gap: 0.7em;
+  gap: 0.55em;
+  min-width: min(22em, 56vw);
 }
 
 .psc_meta-project {
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 600;
+  letter-spacing: 0.05em;
+  font-size: 0.9em;
 }
 
 .psc_meta-number {
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  opacity: 0.55;
+  font-weight: 700;
 }
 
 .psc_meta-title {
-  font-style: italic;
-  opacity: 0.85;
+  opacity: 0.8;
+}
+
+/* Minimal, link-like inquire trigger. */
+.psc-inquire-trigger {
+  display: inline-block;
+  margin: 1.1em auto 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.92em;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.psc-inquire-trigger:hover {
+  opacity: 0.55;
+}
+
+.psc-wrap .workshop-booking--expanded {
+  max-width: 34em;
+  margin: 1.25em auto 0;
+  text-align: left;
 }
 
 @media (prefers-reduced-motion: reduce) {

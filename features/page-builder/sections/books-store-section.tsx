@@ -3,7 +3,15 @@ import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import { sanityFetch } from "~/features/sanity/client";
 import { ImageFragment } from "~/features/sanity/media/fragment";
 import { AvailabilityLabel, overallAvailability } from "~/features/store/availability";
+import { SANITY_STORE_PAGE_ID } from "~/sanity/constants";
 import type { BooksListQResult, BooksStoreSectionQResult } from "~/sanity/types";
+import { WorkAnchors } from "./work-overview-anchors";
+
+/** The /store sub-nav — Books then Prints, marked at the top like /work. */
+const STORE_ANCHORS = [
+  { id: "books", label: "Books" },
+  { id: "prints", label: "Prints" },
+];
 
 const BooksStoreSectionQ =
   defineQuery(`*[_id == $docId][0].pageBuilder.sectionsArray[_type == "booksStoreSectionField" && _key == $sectionKey][0]{
@@ -46,6 +54,7 @@ export async function BooksStoreSection({ docId, sectionKey }: { docId: string; 
   return (
     <div id={stegaClean(section?.hash) || undefined} className="section_books section-padding-top section-padding-bottom">
       <div className="container">
+        {docId === SANITY_STORE_PAGE_ID && <WorkAnchors anchors={STORE_ANCHORS} />}
         <div className="books_head">
           {content.heading && (
             <h1 data-scramble="scroll" className="section_title">

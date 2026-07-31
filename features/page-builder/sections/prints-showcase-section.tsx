@@ -4,7 +4,6 @@ import { ImageFragment, type ImageFragmentResult } from "~/features/sanity/media
 import { SANITY_PROJECT_DOCUMENT_TYPE } from "~/sanity/constants";
 import type { PrintsShowcaseProjectsQResult, PrintsShowcaseSectionQResult } from "~/sanity/types";
 import { type PrintSlide, PrintsMockupCarousel } from "./prints-mockup-carousel";
-import { WorkAnchors } from "./work-overview-anchors";
 
 const PrintsShowcaseSectionQ =
   defineQuery(`*[_id == $docId][0].pageBuilder.sectionsArray[_type == "printsShowcaseSectionField" && _key == $sectionKey][0]{
@@ -24,12 +23,6 @@ const PrintsShowcaseProjectsQ =
   "slug": slug.current,
   "prints": prints[]{ title, image{${ImageFragment}} }
 }`);
-
-/** The /store sub-nav — the two sections marked at the top, exactly like /work. */
-const STORE_ANCHORS = [
-  { id: "prints", label: "Prints" },
-  { id: "books", label: "Books" },
-];
 
 export async function PrintsShowcaseSection({ docId, sectionKey }: { docId: string; sectionKey: string }) {
   const [section, projects] = await Promise.all([
@@ -77,7 +70,6 @@ export async function PrintsShowcaseSection({ docId, sectionKey }: { docId: stri
       className="section_prints-showcase section-padding-top"
     >
       <div className="container">
-        <WorkAnchors anchors={STORE_ANCHORS} />
         <div className="prints_head">
           {content?.heading && (
             <h1 data-scramble="scroll" className="section_title prints_head-title">

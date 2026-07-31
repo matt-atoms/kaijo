@@ -10,6 +10,9 @@ export const TEMPLATE_IDS = {
 export const SANITY_SINGLETON_SITE_ID = "site";
 export const SANITY_SINGLETON_HOMEPAGE_ID = "homepage";
 
+/** The unified Prints & Books page. The books section renders the store sub-nav when it lives here. */
+export const SANITY_STORE_PAGE_ID = "page-store";
+
 export const SINGLETON_IDS = {
   site: SANITY_SINGLETON_SITE_ID,
   homepage: SANITY_SINGLETON_HOMEPAGE_ID,
