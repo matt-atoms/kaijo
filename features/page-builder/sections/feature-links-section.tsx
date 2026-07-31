@@ -13,6 +13,7 @@ const FeatureLinksSectionQ =
       items[]{
         "key": _key,
         title,
+        caption,
         image{${ImageFragment}},
         "link": appLink{${LinkFragment}}
       }
@@ -46,9 +47,13 @@ export async function FeatureLinksSection({ docId, sectionKey }: { docId: string
               item.link?.href ? (
                 <SanityLink key={item.key} link={item.link} className="feature-links_tile">
                   <div className="feature-links_media">
-                    <KaijoImage image={item.image} className="feature-links_image" sizes="(max-width: 767px) 90vw, 45vw" />
+                    <KaijoImage image={item.image} className="feature-links_image" sizes="(max-width: 767px) 90vw, 30vw" />
                   </div>
-                  <div className="feature-links_label">{item.title}</div>
+                  <div className="feature-links_body">
+                    <span className="feature-links_label">{item.title}</span>
+                    {item.caption && <span className="feature-links_caption">{item.caption}</span>}
+                    <span className="feature-links_cta">{item.link.text || "Explore"} →</span>
+                  </div>
                 </SanityLink>
               ) : null
             )}

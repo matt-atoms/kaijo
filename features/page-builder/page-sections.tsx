@@ -76,6 +76,9 @@ const _sections = {
   printsShowcaseSectionField: dynamic(() =>
     import("~/features/page-builder/sections/prints-showcase-section").then((mod) => mod.PrintsShowcaseSection)
   ),
+  homeShowcaseSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/home-showcase-section").then((mod) => mod.HomeShowcaseSection)
+  ),
   // PLOP: Add Import
 } as const;
 

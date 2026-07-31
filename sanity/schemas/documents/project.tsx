@@ -153,8 +153,29 @@ export const project = defineType({
       type: "array",
       title: "Overview images",
       description:
-        "The images the /work gallery randomly cycles through for this project — curate just your strongest ones here. Leave empty to fall back to the thumbnail + all collage images.",
-      of: [{ type: "image" }],
+        "The images the /work gallery randomly cycles through for this project — curate just your strongest ones here. Leave empty to fall back to the thumbnail + all collage images. Tick “Show on home” on any of these to also let it appear in the homepage scroll.",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "overviewImage",
+          fields: [
+            defineField({ name: "image", type: "image", title: "Image", validation: (R) => R.required() }),
+            defineField({
+              name: "home",
+              type: "boolean",
+              title: "Show on home",
+              description: "Include this image in the homepage scroll (Selected Work).",
+              initialValue: false,
+            }),
+          ],
+          preview: {
+            select: { media: "image", home: "home" },
+            prepare({ media, home }) {
+              return { title: home ? "★ On home" : "Overview image", media };
+            },
+          },
+        }),
+      ],
     }),
     ...PROJECT_IMAGE_SLOTS.map((slot, index) =>
       defineField({

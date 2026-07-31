@@ -36,7 +36,7 @@ export const WorkTileFragment = `
   date,
   "slug": slug.current,
   "images": select(
-    count(overviewImages[defined(asset)]) > 0 => overviewImages[defined(asset)],
+    count(overviewImages[defined(image.asset)]) > 0 => overviewImages[defined(image.asset)].image,
     [thumbnail, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16][defined(@.asset)]
   )[]{
     ${ImageFragment}

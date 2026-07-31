@@ -591,6 +591,12 @@ export type ChildrenAppLinkInternal = {
   sectionTarget?: string;
 };
 
+export type HomeShowcaseSection = {
+  _type: "homeShowcaseSection";
+  title?: string;
+  intro?: string;
+};
+
 export type PrintsShowcaseSection = {
   _type: "printsShowcaseSection";
   heading?: string;
@@ -980,6 +986,7 @@ export type FeatureLinksSection = {
   items?: Array<{
     image?: FeatureLinkItemImage;
     title?: string;
+    caption?: string;
     appLink?: FeatureLinkItemAppLink;
     _type: "featureLinkItem";
     _key: string;
@@ -1538,6 +1545,12 @@ export type Article = {
           _type: "printsShowcaseSectionField";
           _key: string;
         }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: HomeShowcaseSection;
+          _type: "homeShowcaseSectionField";
+          _key: string;
+        }
     >;
   };
   seoMetadata?: {
@@ -1608,11 +1621,15 @@ export type Project = {
     _type: "image";
   };
   overviewImages?: Array<{
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
+    image?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    home?: boolean;
+    _type: "overviewImage";
     _key: string;
   }>;
   image1?: {
@@ -2118,6 +2135,12 @@ export type Page = {
           _type: "printsShowcaseSectionField";
           _key: string;
         }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: HomeShowcaseSection;
+          _type: "homeShowcaseSectionField";
+          _key: string;
+        }
     >;
   };
   seoMetadata?: {
@@ -2435,6 +2458,7 @@ export type AllSanitySchemaTypes =
   | Internal1
   | ChildrenAppLinkFile
   | ChildrenAppLinkInternal
+  | HomeShowcaseSection
   | PrintsShowcaseSection
   | BooksStoreSection
   | PrintsLicensingSection
@@ -3205,6 +3229,14 @@ export type AgentMarkdownContentQueryResult =
             caption: null;
           }
         | {
+            _type: "homeShowcaseSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
             _type: "mediaSectionField";
             text: null;
             media: {
@@ -3748,6 +3780,14 @@ export type AgentMarkdownContentQueryResult =
             caption: null;
           }
         | {
+            _type: "homeShowcaseSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
             _type: "mediaSectionField";
             text: null;
             media: {
@@ -4051,6 +4091,10 @@ export type PageSectionsQResult = Array<
   | {
       _key: string;
       _type: "featureLinksSectionField";
+    }
+  | {
+      _key: string;
+      _type: "homeShowcaseSectionField";
     }
   | {
       _key: string;
@@ -4547,13 +4591,14 @@ export type CtaSectionQResult = {
 
 // Source: features/page-builder/sections/feature-links-section.tsx
 // Variable: FeatureLinksSectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "featureLinksSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      title,      items[]{        "key": _key,        title,        image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},        "link": appLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}      }    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "featureLinksSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      title,      items[]{        "key": _key,        title,        caption,        image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},        "link": appLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}      }    }}
 export type FeatureLinksSectionQResult = {
   content: {
     title: string | undefined;
     items: Array<{
       key: string;
       title: string | undefined;
+      caption: string | undefined;
       image: {
         _id: string | undefined;
         _rev: string | undefined;
@@ -4582,6 +4627,43 @@ export type FeatureLinksSectionQResult = {
     }> | undefined;
   } | undefined;
 } | undefined;
+
+// Source: features/page-builder/sections/home-showcase-section/index.tsx
+// Variable: HomeShowcaseSectionQ
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "homeShowcaseSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      title,      intro    }}
+export type HomeShowcaseSectionQResult = {
+  content: {
+    title: string | undefined;
+    intro: string | undefined;
+  } | undefined;
+} | undefined;
+
+// Source: features/page-builder/sections/home-showcase-section/index.tsx
+// Variable: HomeShowcaseProjectsQ
+// Query: *[_type == "project" && defined(slug.current) && count(overviewImages[home == true && defined(image.asset)]) > 0]    | order(date desc){    _id,    title,    type,    client,    date,    "slug": slug.current,    "images": overviewImages[home == true && defined(image.asset)]{      "key": _key,      "aspectRatio": image.asset->metadata.dimensions.aspectRatio,      "image": image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}    }  }
+export type HomeShowcaseProjectsQResult = Array<{
+  _id: string;
+  title: string | undefined;
+  type: "Commission" | "Editorial" | "Personal Project" | undefined;
+  client: string | undefined;
+  date: string | undefined;
+  slug: string | undefined;
+  images: Array<{
+    key: string;
+    aspectRatio: number | undefined;
+    image: {
+      _id: string;
+      _rev: string;
+      altText: string | undefined;
+      description: string | undefined;
+      title: string | undefined;
+      lqip: string | undefined;
+      dimensions: SanityImageDimensions | undefined;
+      crop: SanityImageCrop | undefined;
+      hotspot: SanityImageHotspot | undefined;
+    };
+  }> | undefined;
+}>;
 
 // Source: features/page-builder/sections/media-section.tsx
 // Variable: MediaSectionQ
@@ -5445,7 +5527,7 @@ export type TextSectionQResult = {
 
 // Source: features/page-builder/sections/work-overview-section.tsx
 // Variable: WorkOverviewSectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workOverviewSectionField" && _key == $sectionKey][0]{    "groups": sectionContent.groups[]{      "key": _key,      heading,      intro,      "projects": *[_type == "project" && defined(slug.current) && category == ^.category] | order(date asc){  _id,  title,  client,  date,  "slug": slug.current,  "images": select(    count(overviewImages[defined(asset)]) > 0 => overviewImages[defined(asset)],    [thumbnail, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16][defined(@.asset)]  )[]{      "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,    "aspectRatio": asset->metadata.dimensions.aspectRatio,  }}    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workOverviewSectionField" && _key == $sectionKey][0]{    "groups": sectionContent.groups[]{      "key": _key,      heading,      intro,      "projects": *[_type == "project" && defined(slug.current) && category == ^.category] | order(date asc){  _id,  title,  client,  date,  "slug": slug.current,  "images": select(    count(overviewImages[defined(image.asset)]) > 0 => overviewImages[defined(image.asset)].image,    [thumbnail, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16][defined(@.asset)]  )[]{      "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,    "aspectRatio": asset->metadata.dimensions.aspectRatio,  }}    }}
 export type WorkOverviewSectionQResult = {
   groups: Array<{
     key: string;

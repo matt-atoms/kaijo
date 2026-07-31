@@ -297,6 +297,171 @@ html body {
 }
 
 /*
+ * Home Showcase — features/page-builder/sections/home-showcase-section/. A full-bleed, reshuffled
+ * scatter of every project image ticked "Show on home". Horizontal scroll (drag / trackpad) on
+ * desktop with hover-revealed captions; a vertical, two-tap stack on mobile. Sizes and vertical
+ * drift are randomized per load in JS via the --h / --dy / --w / --side custom props.
+ */
+.home-showcase_head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.75em 1.5em;
+  margin-bottom: 2.5em;
+}
+
+.home-showcase_intro {
+  max-width: 30em;
+  opacity: 0.7;
+  text-align: left;
+  font-size: 1em;
+  line-height: 1.45;
+}
+
+.home-showcase_track {
+  display: flex;
+  align-items: center;
+  gap: 3vw;
+  height: 76vh;
+  padding-inline: max(var(--container-padding), calc((100vw - var(--size-container)) / 2));
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+  overscroll-behavior-x: contain;
+}
+
+.home-showcase_track::-webkit-scrollbar {
+  display: none;
+}
+
+.home-showcase_track:active {
+  cursor: grabbing;
+}
+
+.home-showcase_tile {
+  position: relative;
+  flex: 0 0 auto;
+  height: var(--h);
+  aspect-ratio: var(--ratio, 1);
+  transform: translateY(var(--dy, 0));
+  color: inherit;
+}
+
+.home-showcase_media {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.home-showcase_image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.home-showcase_tile:hover .home-showcase_image {
+  transform: scale(1.03);
+}
+
+.home-showcase_caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  padding: 2em 1em 0.9em;
+  color: #fff;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.home-showcase_project {
+  font-family: "Art Grootfontein", Arial, sans-serif;
+  font-size: 1.35em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.home-showcase_sub {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  text-transform: uppercase;
+  font-size: 0.72em;
+  font-weight: 600;
+}
+
+.home-showcase_year {
+  opacity: 0.7;
+}
+
+.home-showcase_go {
+  display: none;
+  text-transform: uppercase;
+  font-size: 0.72em;
+  font-weight: 600;
+}
+
+@media (hover: hover) {
+  .home-showcase_tile:hover .home-showcase_caption,
+  .home-showcase_tile:focus-visible .home-showcase_caption {
+    opacity: 1;
+  }
+}
+
+/* Mobile: a vertical, scattered stack; first tap reveals the label + arrow, second tap opens it. */
+@media screen and (max-width: 767px) {
+  .home-showcase_track {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    gap: 1.75em;
+    padding-inline: var(--container-padding);
+    overflow: visible;
+    cursor: default;
+    user-select: auto;
+  }
+
+  .home-showcase_tile {
+    height: auto;
+    width: var(--w, 86%);
+    align-self: var(--side, center);
+    transform: none;
+  }
+
+  .home-showcase_caption {
+    position: static;
+    display: none;
+    padding: 0.7em 0 0;
+    color: inherit;
+    background: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .home-showcase_tile[data-active="true"] .home-showcase_caption {
+    display: flex;
+  }
+
+  .home-showcase_go {
+    display: inline-block;
+    color: var(--colors--accent-color);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-showcase_image {
+    transition: none;
+  }
+}
+
+/*
  * Tighter vertical rhythm for the lower homepage sections (each uses top-only spacing so gaps
  * aren't doubled between sections). Kept smaller than the 12.5em section padding used above.
  */
@@ -375,24 +540,49 @@ html body {
   color: var(--colors--accent-color);
 }
 
-/* Feature links (Books / Prints) — features/page-builder/sections/feature-links-section.tsx */
+/* Explore row (Books / Prints / Workshops) — features/page-builder/sections/feature-links-section.tsx */
 .feature-links_grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2em;
 }
 
 @media screen and (max-width: 767px) {
   .feature-links_grid {
     grid-template-columns: 1fr;
+    gap: 2.5em;
   }
 }
 
 .feature-links_tile {
   display: flex;
   flex-direction: column;
-  gap: 0.75em;
+  gap: 0.9em;
   color: inherit;
+}
+
+.feature-links_body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+.feature-links_caption {
+  font-size: 0.95em;
+  line-height: 1.4;
+  opacity: 0.75;
+}
+
+.feature-links_cta {
+  margin-top: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.82em;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.feature-links_tile:hover .feature-links_cta {
+  color: var(--colors--accent-color);
 }
 
 .feature-links_media {

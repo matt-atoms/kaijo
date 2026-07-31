@@ -21,6 +21,12 @@ export const featureLinksSection = defineField({
           fields: [
             defineField({ name: "image", type: "image", title: "Image" }),
             defineField({ name: "title", type: "string", title: "Title", validation: (R) => R.required() }),
+            defineField({
+              name: "caption",
+              type: "string",
+              title: "Caption",
+              description: "Optional one-line intro shown under the title (e.g. “Signed photobooks & limited editions”).",
+            }),
             createLinkField({ title: "Link", validation: (R) => R.required() }),
           ],
           preview: { select: { title: "title", media: "image" } },
