@@ -1,4 +1,4 @@
-import { defineQuery } from "next-sanity";
+import { defineQuery, stegaClean } from "next-sanity";
 import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import { sanityFetch } from "~/features/sanity/client";
 import { SanityLink } from "~/features/sanity/link";
@@ -13,7 +13,8 @@ const PrintsLicensingSectionQ =
       text,
       "link": link{${LinkFragment}},
       images[]{${ImageFragment}}
-    }
+    },
+    "hash": sectionSettings.sectionHash.current
 }`);
 
 export async function PrintsLicensingSection({ docId, sectionKey }: { docId: string; sectionKey: string }) {
@@ -33,7 +34,10 @@ export async function PrintsLicensingSection({ docId, sectionKey }: { docId: str
   const images = (content.images ?? []).filter((image) => image?._id);
 
   return (
-    <div className="section_prints-licensing section-padding-top section-padding-bottom">
+    <div
+      id={stegaClean(section?.hash) || undefined}
+      className="section_prints-licensing section-padding-top section-padding-bottom"
+    >
       <div className="container">
         <div className="prints-licensing_inner">
           <div className="prints-licensing_text">

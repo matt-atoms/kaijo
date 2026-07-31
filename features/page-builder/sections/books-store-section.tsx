@@ -7,10 +7,11 @@ import { SANITY_STORE_PAGE_ID } from "~/sanity/constants";
 import type { BooksListQResult, BooksStoreSectionQResult } from "~/sanity/types";
 import { WorkAnchors } from "./work-overview-anchors";
 
-/** The /store sub-nav — Books then Prints, marked at the top like /work. */
+/** The /store sub-nav — Books, Prints, Licensing, marked at the top like /work. */
 const STORE_ANCHORS = [
   { id: "books", label: "Books" },
   { id: "prints", label: "Prints" },
+  { id: "licensing", label: "Licensing" },
 ];
 
 const BooksStoreSectionQ =
