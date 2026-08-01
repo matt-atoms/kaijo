@@ -12,7 +12,7 @@ export const workOverviewSection = defineField({
       name: "groups",
       type: "array",
       title: "Groups",
-      description: "One block per category (e.g. Projects, Commissions & Editorials), in display order.",
+      description: "One block per category (e.g. Projects, Commissions), in display order.",
       validation: (R) => R.min(1),
       of: [
         defineArrayMember({

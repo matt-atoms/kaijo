@@ -69,13 +69,11 @@ export const project = defineType({
       name: "type",
       type: "string",
       title: "Type",
-      description:
-        "The individual label shown on the Selected Work tile (e.g. a “Selected Commissions & Editorials” project is labelled either Commission or Editorial). May get its own portfolio-page approach later.",
+      description: "The individual label shown on the Selected Work tile (Project or Commission).",
       options: {
         list: [
-          { title: "Personal Project", value: "Personal Project" },
+          { title: "Project", value: "Project" },
           { title: "Commission", value: "Commission" },
-          { title: "Editorial", value: "Editorial" },
         ],
         layout: "radio",
       },

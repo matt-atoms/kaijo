@@ -6185,7 +6185,7 @@
                       },
                       {
                         "type": "string",
-                        "value": "Selected Commissions & Editorials"
+                        "value": "Commissions"
                       }
                     ]
                   },
@@ -6457,7 +6457,7 @@
               },
               {
                 "type": "string",
-                "value": "Selected Commissions & Editorials"
+                "value": "Commissions"
               }
             ]
           },
@@ -10169,7 +10169,7 @@
             },
             {
               "type": "string",
-              "value": "Selected Commissions & Editorials"
+              "value": "Commissions"
             }
           ]
         },
@@ -10182,15 +10182,11 @@
           "of": [
             {
               "type": "string",
-              "value": "Personal Project"
+              "value": "Project"
             },
             {
               "type": "string",
               "value": "Commission"
-            },
-            {
-              "type": "string",
-              "value": "Editorial"
             }
           ]
         },

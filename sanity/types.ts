@@ -984,7 +984,7 @@ export type WorkOverviewSection = {
   groups?: Array<{
     heading?: string;
     intro?: string;
-    category?: "Projects" | "Selected Commissions & Editorials";
+    category?: "Projects" | "Commissions";
     _type: "workGroup";
     _key: string;
   }>;
@@ -1027,7 +1027,7 @@ export type AboutPreviewSection = {
 export type PortfolioGridSection = {
   _type: "portfolioGridSection";
   note?: string;
-  category?: "Projects" | "Selected Commissions & Editorials";
+  category?: "Projects" | "Commissions";
 };
 
 export type AboutSection = {
@@ -1618,8 +1618,8 @@ export type Project = {
   _rev: string;
   title?: string;
   slug?: Slug;
-  category?: "Projects" | "Selected Commissions & Editorials";
-  type?: "Personal Project" | "Commission" | "Editorial";
+  category?: "Projects" | "Commissions";
+  type?: "Project" | "Commission";
   client?: string;
   date?: string;
   description?: Array<{
@@ -4712,7 +4712,7 @@ export type HomeShowcaseSectionQResult = {
 export type HomeShowcaseProjectsQResult = Array<{
   _id: string;
   title: string | undefined;
-  type: "Commission" | "Editorial" | "Personal Project" | undefined;
+  type: "Commission" | "Project" | undefined;
   client: string | undefined;
   date: string | undefined;
   slug: string | undefined;
@@ -4962,8 +4962,8 @@ export type PortfolioGridQResult = {
   projects: Array<{
     _id: string;
     title: string | undefined;
-    category: "Projects" | "Selected Commissions & Editorials" | undefined;
-    type: "Commission" | "Editorial" | "Personal Project" | undefined;
+    category: "Commissions" | "Projects" | undefined;
+    type: "Commission" | "Project" | undefined;
     client: string | undefined;
     date: string | undefined;
     slug: string | undefined;
@@ -5111,8 +5111,8 @@ export type PrintsShowcaseProjectsQResult = Array<{
 export type ProjectHeroQResult = Array<{
   _id: string;
   title: string | undefined;
-  category: "Projects" | "Selected Commissions & Editorials" | undefined;
-  type: "Commission" | "Editorial" | "Personal Project" | undefined;
+  category: "Commissions" | "Projects" | undefined;
+  type: "Commission" | "Project" | undefined;
   client: string | undefined;
   date: string | undefined;
   slug: string | undefined;

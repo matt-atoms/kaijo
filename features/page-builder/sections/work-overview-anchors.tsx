@@ -8,7 +8,7 @@ type Anchor = { id: string; label: string };
 /**
  * Sticky, centred section nav for the /work page. Underlines the section currently in view via an
  * IntersectionObserver whose trigger band sits near the top third of the viewport, so the active
- * tab updates as you scroll (Projects first, then Commissions & Editorials).
+ * tab updates as you scroll (Projects first, then Commissions).
  */
 export function WorkAnchors({ anchors }: { anchors: Anchor[] }) {
   const [active, setActive] = React.useState(anchors[0]?.id);

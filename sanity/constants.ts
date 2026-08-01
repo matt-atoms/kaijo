@@ -40,7 +40,7 @@ export const SANITY_PROJECT_DOCUMENT_TYPE = "project" as const;
  * what the Portfolio Grid section filters on and the /work sub-pages list. Shared by the project
  * and portfolio-grid schemas so the two stay in sync; add an entry here to introduce a category.
  */
-export const WORK_CATEGORIES = ["Projects", "Selected Commissions & Editorials"] as const;
+export const WORK_CATEGORIES = ["Projects", "Commissions"] as const;
 
 /** `options.list` entries for a Work-category string field. */
 export const WORK_CATEGORY_OPTIONS = WORK_CATEGORIES.map((value) => ({ title: value, value }));

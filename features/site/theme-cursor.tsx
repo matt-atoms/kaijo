@@ -3,23 +3,17 @@
 import * as React from "react";
 
 /**
- * Background themes, in cycle order. "green" is the CSS default (no `data-theme` attribute →
- * limegreen), so applying it clears the attribute. White is the initial default (set by the
- * bootstrap script in shared-web-layout). Clicking empty space advances to the next theme.
+ * Clicking empty space toggles between the two "modes" — white (normal) and dark. The accent
+ * colours (red / blue / greens) stay available from the footer background switcher. White is the
+ * initial default (set by the bootstrap script in shared-web-layout).
  */
-const THEMES = ["white", "red", "blue", "dark", "green"] as const;
 const STORAGE_KEY = "kaijo-theme";
 
-// Elements that should NOT cycle the theme when clicked (interactive controls + media/content).
+// Elements that should NOT toggle the theme when clicked (interactive controls + media/content).
 const NON_EMPTY =
   "a, button, input, textarea, select, label, summary, img, video, [role='button'], [contenteditable='true'], [data-no-cycle]";
 
-function currentTheme(): (typeof THEMES)[number] {
-  const t = document.documentElement.getAttribute("data-theme");
-  return (THEMES as readonly string[]).includes(t ?? "") ? (t as (typeof THEMES)[number]) : "green";
-}
-
-function applyTheme(name: (typeof THEMES)[number]) {
+function applyTheme(name: string) {
   const root = document.documentElement;
   if (name === "green") {
     root.removeAttribute("data-theme");
@@ -67,8 +61,7 @@ export function ThemeCursor() {
       if (target?.closest(NON_EMPTY)) {
         return;
       }
-      const idx = THEMES.indexOf(currentTheme());
-      applyTheme(THEMES[(idx + 1) % THEMES.length] ?? "white");
+      applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "white" : "dark");
     };
 
     window.addEventListener("pointerdown", onPointerDown);
