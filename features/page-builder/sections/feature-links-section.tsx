@@ -1,9 +1,7 @@
 import { defineQuery } from "next-sanity";
-import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import { sanityFetch } from "~/features/sanity/client";
 import { SanityLink } from "~/features/sanity/link";
 import { LinkFragment } from "~/features/sanity/link/fragment";
-import { ImageFragment } from "~/features/sanity/media/fragment";
 import type { FeatureLinksSectionQResult } from "~/sanity/types";
 
 const FeatureLinksSectionQ =
@@ -14,7 +12,6 @@ const FeatureLinksSectionQ =
         "key": _key,
         title,
         caption,
-        image{${ImageFragment}},
         "link": appLink{${LinkFragment}}
       }
     }
@@ -46,9 +43,6 @@ export async function FeatureLinksSection({ docId, sectionKey }: { docId: string
             {content.items.map((item) =>
               item.link?.href ? (
                 <SanityLink key={item.key} link={item.link} className="feature-links_tile">
-                  <div className="feature-links_media">
-                    <KaijoImage image={item.image} className="feature-links_image" sizes="(max-width: 767px) 90vw, 30vw" />
-                  </div>
                   <div className="feature-links_body">
                     <span className="feature-links_label">{item.title}</span>
                     {item.caption && <span className="feature-links_caption">{item.caption}</span>}

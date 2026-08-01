@@ -5,8 +5,8 @@ export const featureLinksSection = defineField({
   type: "object",
   name: "featureLinksSection",
   title: "Feature Links",
-  description: "A small gallery of image tiles that each link out (e.g. Books, Prints).",
-  icon: () => <>🖼️</>,
+  description: "A minimal row of text links (e.g. Books, Prints, Workshops) — title, caption and link.",
+  icon: () => <>🔗</>,
   fields: [
     defineField({ name: "title", type: "string", title: "Title" }),
     defineField({
@@ -19,7 +19,6 @@ export const featureLinksSection = defineField({
           type: "object",
           name: "featureLinkItem",
           fields: [
-            defineField({ name: "image", type: "image", title: "Image" }),
             defineField({ name: "title", type: "string", title: "Title", validation: (R) => R.required() }),
             defineField({
               name: "caption",
@@ -29,7 +28,7 @@ export const featureLinksSection = defineField({
             }),
             createLinkField({ title: "Link", validation: (R) => R.required() }),
           ],
-          preview: { select: { title: "title", media: "image" } },
+          preview: { select: { title: "title", subtitle: "caption" } },
         }),
       ],
     }),

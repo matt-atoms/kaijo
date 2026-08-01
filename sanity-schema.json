@@ -2794,54 +2794,6 @@
   },
   {
     "type": "type",
-    "name": "featureLinkItem.image",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "asset": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "sanity.imageAsset.reference"
-          },
-          "optional": true
-        },
-        "media": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "featureLinkItem.image.media"
-          },
-          "optional": true
-        },
-        "hotspot": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "sanity.imageHotspot"
-          },
-          "optional": true
-        },
-        "crop": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "sanity.imageCrop"
-          },
-          "optional": true
-        },
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "image"
-          }
-        }
-      }
-    }
-  },
-  {
-    "type": "type",
     "name": "featureLinkItem.appLink",
     "value": {
       "type": "object",
@@ -6329,14 +6281,6 @@
             "of": {
               "type": "object",
               "attributes": {
-                "image": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "inline",
-                    "name": "featureLinkItem.image"
-                  },
-                  "optional": true
-                },
                 "title": {
                   "type": "objectAttribute",
                   "value": {

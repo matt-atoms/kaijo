@@ -539,8 +539,9 @@ html.has-theme-cursor [contenteditable="true"] {
   padding-top: 4em;
 }
 
+/* Text-only Explore tiles: sit close under the scroll above. */
 .section_feature-links {
-  padding-top: 4em;
+  padding-top: 2em;
 }
 
 .section_workshops {
@@ -655,22 +656,6 @@ html.has-theme-cursor [contenteditable="true"] {
   color: var(--colors--accent-color);
 }
 
-.feature-links_media {
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-}
-
-.feature-links_image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.feature-links_tile:hover .feature-links_image {
-  transform: scale(1.04);
-}
-
 .feature-links_tile:hover .feature-links_label {
   color: var(--colors--accent-color);
 }
@@ -705,12 +690,6 @@ html.has-theme-cursor [contenteditable="true"] {
   text-align: left;
   font-size: 1.1em;
   line-height: 1.5;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .feature-links_image {
-    transition: none;
-  }
 }
 
 /* Footer + newsletter placeholder — features/site/site-footer/index.tsx */

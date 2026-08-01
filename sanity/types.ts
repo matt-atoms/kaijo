@@ -447,14 +447,6 @@ export type AboutPreviewSectionFieldSectionContentAppLinkInternal = {
   sectionTarget?: string;
 };
 
-export type FeatureLinkItemImage = {
-  asset?: SanityImageAssetReference;
-  media?: unknown; // Unable to locate the referenced type "featureLinkItem.image.media" in schema
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  _type: "image";
-};
-
 export type FeatureLinkItemAppLink = {
   type?: "internal" | "external" | "email" | "phone" | "file" | "params";
   external?: string;
@@ -1008,7 +1000,6 @@ export type FeatureLinksSection = {
   _type: "featureLinksSection";
   title?: string;
   items?: Array<{
-    image?: FeatureLinkItemImage;
     title?: string;
     caption?: string;
     appLink?: FeatureLinkItemAppLink;
@@ -2460,7 +2451,6 @@ export type AllSanitySchemaTypes =
   | SectionContentAppLinkInternal
   | AboutPreviewSectionFieldSectionContentAppLinkFile
   | AboutPreviewSectionFieldSectionContentAppLinkInternal
-  | FeatureLinkItemImage
   | FeatureLinkItemAppLink
   | FeatureLinkItemAppLinkFile
   | FeatureLinkItemAppLinkInternal
@@ -4659,7 +4649,7 @@ export type CtaSectionQResult = {
 
 // Source: features/page-builder/sections/feature-links-section.tsx
 // Variable: FeatureLinksSectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "featureLinksSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      title,      items[]{        "key": _key,        title,        caption,        image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},        "link": appLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}      }    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "featureLinksSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      title,      items[]{        "key": _key,        title,        caption,        "link": appLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}      }    }}
 export type FeatureLinksSectionQResult = {
   content: {
     title: string | undefined;
@@ -4667,17 +4657,6 @@ export type FeatureLinksSectionQResult = {
       key: string;
       title: string | undefined;
       caption: string | undefined;
-      image: {
-        _id: string | undefined;
-        _rev: string | undefined;
-        altText: string | undefined;
-        description: string | undefined;
-        title: string | undefined;
-        lqip: string | undefined;
-        dimensions: SanityImageDimensions | undefined;
-        crop: SanityImageCrop | undefined;
-        hotspot: SanityImageHotspot | undefined;
-      } | undefined;
       link: {
         type:
           | "email"
