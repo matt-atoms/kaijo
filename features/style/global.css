@@ -799,52 +799,16 @@ html.has-theme-cursor [contenteditable="true"] {
   margin-top: 7em;
 }
 
-.work-section_header {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 3em;
-  align-items: end;
-  margin-bottom: 3em;
-}
-
-@media screen and (max-width: 767px) {
-  .work-section_header {
-    grid-template-columns: 1fr;
-    gap: 1.5em;
-    align-items: start;
-  }
-}
-
-/* Alternate groups flip the band: heading on the right, intro on the left. */
-.work-group--reversed .work-section_header {
-  grid-template-columns: 1fr 1.1fr;
-}
-
-.work-group--reversed .work-group_heading {
-  order: 2;
-}
-
-.work-group--reversed .work-group_intro {
-  order: 1;
-}
-
-@media screen and (max-width: 767px) {
-  .work-group--reversed .work-group_heading,
-  .work-group--reversed .work-group_intro {
-    order: 0;
-  }
-}
-
-.work-group_heading {
-  font-size: 5em;
-  line-height: 0.95;
-}
-
+/*
+ * No headers — the sticky Projects/Commissions tabs already name each block. Each group leads with
+ * just its intro, left-aligned and spread wide across the page, styled like the home hero intro.
+ */
 .work-group_intro {
-  max-width: 36em;
+  max-width: 60em;
+  margin-bottom: 4em;
   opacity: 1;
   text-align: left;
-  font-size: 1.1em;
+  font-size: 0.75em;
   line-height: 1.5;
 }
 
