@@ -73,7 +73,6 @@ export function WorkGallery({ items }: { items: WorkGalleryItem[] }) {
   };
 
   return (
-    // biome-ignore lint/a11y/useKeyWithMouseEvents: hover highlight is a pointer affordance; keyboard uses focus below.
     <div className="work-gallery" data-has-active={active ? "true" : undefined} onPointerLeave={() => setActive(null)}>
       <nav className="work-gallery_index" aria-label="Projects">
         {items.map((item) => (
