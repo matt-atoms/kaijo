@@ -5572,9 +5572,9 @@ export type TextSectionQResult = {
   } | undefined;
 } | undefined;
 
-// Source: features/page-builder/sections/work-overview-section.tsx
+// Source: features/page-builder/sections/work-overview-section/index.tsx
 // Variable: WorkOverviewSectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workOverviewSectionField" && _key == $sectionKey][0]{    "groups": sectionContent.groups[]{      "key": _key,      heading,      intro,      "projects": *[_type == "project" && defined(slug.current) && category == ^.category] | order(date asc){  _id,  title,  client,  date,  "slug": slug.current,  "images": select(    count(overviewImages[defined(image.asset)]) > 0 => overviewImages[defined(image.asset)].image,    [thumbnail, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16][defined(@.asset)]  )[]{      "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,    "aspectRatio": asset->metadata.dimensions.aspectRatio,  }}    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workOverviewSectionField" && _key == $sectionKey][0]{    "groups": sectionContent.groups[]{      "key": _key,      heading,      intro,      "projects": *[_type == "project" && defined(slug.current) && category == ^.category] | order(date asc){        _id,        title,        type,        client,        date,        "slug": slug.current,        "image": coalesce(overviewImages[defined(image.asset)][0].image, thumbnail){            "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,          "aspectRatio": asset->metadata.dimensions.aspectRatio        }      }    }}
 export type WorkOverviewSectionQResult = {
   groups: Array<{
     key: string;
@@ -5583,11 +5583,12 @@ export type WorkOverviewSectionQResult = {
     projects: Array<{
       _id: string;
       title: string | undefined;
+      type: "Commission" | "Project" | undefined;
       client: string | undefined;
       date: string | undefined;
       slug: string | undefined;
-      images:
-        | Array<{
+      image:
+        | {
             _id: string;
             _rev: string;
             altText: string | undefined;
@@ -5598,8 +5599,8 @@ export type WorkOverviewSectionQResult = {
             crop: SanityImageCrop | undefined;
             hotspot: SanityImageHotspot | undefined;
             aspectRatio: number | undefined;
-          }>
-        | Array<{
+          }
+        | {
             _id: string | undefined;
             _rev: string | undefined;
             altText: string | undefined;
@@ -5610,7 +5611,7 @@ export type WorkOverviewSectionQResult = {
             crop: SanityImageCrop | undefined;
             hotspot: SanityImageHotspot | undefined;
             aspectRatio: number | undefined;
-          } | undefined>
+          }
         | undefined;
     }>;
   }> | undefined;
