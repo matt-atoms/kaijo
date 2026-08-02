@@ -1,5 +1,6 @@
 import { sanityFetch } from "~/features/sanity/client";
 import { SanityLink } from "~/features/sanity/link";
+import { GetInTouchForm } from "~/features/site/get-in-touch-form";
 import { SiteFooterQ } from "~/features/site/site-footer/query";
 import { ThemeSwitcher } from "~/features/site/site-footer/theme-switcher";
 import { SANITY_SINGLETON_SITE_ID } from "~/sanity/constants";
@@ -23,6 +24,11 @@ export async function SiteFooter() {
                 <div className="footer_link-text">{link.text}</div>
               </SanityLink>
             ))}
+            <GetInTouchForm
+              triggerLabel="Get in touch"
+              triggerClassName="footer_getintouch-trigger"
+              formClassName="footer_getintouch-form"
+            />
           </div>
           {/* Newsletter placeholder — non-functional; wire up to an email provider later. */}
           <form className="footer_newsletter" aria-label="Newsletter sign-up" data-placeholder="true">

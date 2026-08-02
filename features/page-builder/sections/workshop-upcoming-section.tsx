@@ -46,7 +46,7 @@ export async function WorkshopUpcomingSection({ docId, sectionKey }: { docId: st
       <div className="container">
         <div className="workshop-upcoming_head">
           {content.heading && (
-            <h2 data-scramble="scroll" className="section_title">
+            <h2 data-scramble="scroll" className="section-eyebrow">
               {content.heading}
             </h2>
           )}

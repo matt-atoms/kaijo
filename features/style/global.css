@@ -747,6 +747,33 @@ html.has-theme-cursor [contenteditable="true"] {
   opacity: 0.8;
 }
 
+/* Get in touch — shared contact foldout (footer + workshop intro): features/site/get-in-touch-form.tsx */
+.contact-trigger {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.footer_getintouch-trigger {
+  text-transform: uppercase;
+  font-size: 0.88em;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer_getintouch-trigger:hover {
+  color: var(--colors--accent-color);
+}
+
+/* When open, the dark form card wraps onto its own line within the footer link row. */
+.footer_getintouch-form {
+  width: min(26em, 100%);
+}
+
 @media screen and (max-width: 767px) {
   .footer_inner-wrapper {
     flex-direction: column;
@@ -1104,11 +1131,20 @@ html.has-theme-cursor [contenteditable="true"] {
   max-width: 34em;
 }
 
-.about-text_heading {
-  text-transform: uppercase;
+/*
+ * Small bold-caps section header (the "APPROACH" style). `.section-eyebrow` also overrides the
+ * h1/h2 base (Art Grootfontein 6.25em + negative margins) so it can replace `.section_title` on the
+ * workshops/store pages while keeping heading semantics.
+ */
+.about-text_heading,
+.section-eyebrow {
+  margin: 0;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
   font-size: 0.88em;
   font-weight: 600;
+  line-height: 1.4;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .about-text_body p {

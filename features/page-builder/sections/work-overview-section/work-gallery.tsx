@@ -1,9 +1,9 @@
 "use client";
 
-import { useReducedMotion } from "@mantine/hooks";
 import * as React from "react";
 import { Link } from "~/components/link";
 import { KaijoImage } from "~/features/kaijo/kaijo-image";
+import { usePrefersReducedMotion } from "~/features/motion/use-prefers-reduced-motion";
 import type { ImageFragmentResult } from "~/features/sanity/media/fragment";
 
 export type WorkGalleryItem = {
@@ -36,7 +36,7 @@ export function WorkGallery({ items }: { items: WorkGalleryItem[] }) {
   const drag = React.useRef({ active: false, moved: false, startX: 0, startLeft: 0 });
   const [heights, setHeights] = React.useState<number[]>(() => heightsFor(items.length, false));
   const [active, setActive] = React.useState<string | null>(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   // Subtle per-load height variance, applied after mount so SSR and first render match.
   React.useEffect(() => {

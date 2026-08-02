@@ -72,7 +72,7 @@ export async function PrintsShowcaseSection({ docId, sectionKey }: { docId: stri
       <div className="container">
         <div className="prints_head">
           {content?.heading && (
-            <h1 data-scramble="scroll" className="section_title prints_head-title">
+            <h1 data-scramble="scroll" className="section-eyebrow prints_head-title">
               {content.heading}
             </h1>
           )}

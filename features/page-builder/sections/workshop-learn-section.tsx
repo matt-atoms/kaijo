@@ -29,7 +29,7 @@ export async function WorkshopLearnSection({ docId, sectionKey }: { docId: strin
       <div className="container">
         <div className="workshop-learn_head">
           {content.heading && (
-            <h2 data-scramble="scroll" className="section_title">
+            <h2 data-scramble="scroll" className="section-eyebrow">
               {content.heading}
             </h2>
           )}

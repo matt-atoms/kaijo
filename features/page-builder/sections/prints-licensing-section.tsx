@@ -42,7 +42,7 @@ export async function PrintsLicensingSection({ docId, sectionKey }: { docId: str
         <div className="prints-licensing_inner">
           <div className="prints-licensing_text">
             {content.heading && (
-              <h2 data-scramble="scroll" className="section_title">
+              <h2 data-scramble="scroll" className="section-eyebrow">
                 {content.heading}
               </h2>
             )}

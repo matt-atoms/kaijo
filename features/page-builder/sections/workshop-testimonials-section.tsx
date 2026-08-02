@@ -29,7 +29,7 @@ export async function WorkshopTestimonialsSection({ docId, sectionKey }: { docId
       <div className="container">
         <div className="workshop-testimonials_head">
           {content.heading && (
-            <h2 data-scramble="scroll" className="section_title">
+            <h2 data-scramble="scroll" className="section-eyebrow">
               {content.heading}
             </h2>
           )}
