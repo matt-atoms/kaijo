@@ -544,6 +544,44 @@ html.has-theme-cursor [contenteditable="true"] {
   padding-top: 2em;
 }
 
+/*
+ * One-screen homepage (desktop / pointer devices): the whole page fits a single viewport and the
+ * wheel/trackpad/arrow keys drive the reel sideways instead of scrolling the page (JS in
+ * home-showcase-scroll.tsx). Hidden footer + a shorter reel + tighter spacing make it all fit.
+ * Touch devices (hover: none) keep the normal vertical scroll and the footer.
+ */
+@media (hover: hover) {
+  html.home-route .main {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  html.home-route .footer {
+    display: none;
+  }
+
+  html.home-route .section_about.section-padding-top {
+    padding-top: 6.5em;
+  }
+
+  html.home-route .section_home-showcase {
+    padding-top: 1.5em;
+  }
+
+  html.home-route .home-showcase_track {
+    height: 48vh;
+  }
+
+  /* Anchor the Explore row to the bottom of the screen so the page fills cleanly. */
+  html.home-route .section_feature-links {
+    margin-top: auto;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+  }
+}
+
 .section_workshops {
   padding-top: 7em;
   padding-bottom: 7em;

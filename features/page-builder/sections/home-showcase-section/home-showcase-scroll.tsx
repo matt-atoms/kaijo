@@ -32,9 +32,10 @@ const MOBILE_COUNT = 18;
 const MAX_BATCHES = 6; // bound the DOM on an endless desktop scroll (~216 tiles)
 const EDGE_PX = 1600; // grow the strip this far before reaching either end
 
-const H_TIERS = [30, 44, 58, 72];
+// Desktop tiles are kept within the (shorter) one-screen track height; see `.home-showcase_track`.
+const H_TIERS = [30, 36, 42, 46];
 const W_TIERS = [66, 76, 86, 94];
-const MAX_DRIFT = 7;
+const MAX_DRIFT = 1;
 const SIDES = ["start", "center", "end"] as const;
 
 const useIsoLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
@@ -57,7 +58,7 @@ function seedBatch(pool: HomeShowcaseSlide[], count: number): Batch {
   const tiles = pool.slice(0, count).map((slide, i) => ({
     key: `seed:${slide.key}:${i}`,
     slide,
-    h: 52,
+    h: 42,
     dy: 0,
     w: 86,
     side: "center" as const,
@@ -116,6 +117,57 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
         : [randomBatch(slides, MOBILE_COUNT)]
     );
   }, [slides, commitBatches]);
+
+  // Mark the route so the layout can lock the homepage to one screen on desktop (CSS in global.css).
+  // Set at first paint by the bootstrap script too; this keeps it correct across client navigation.
+  React.useEffect(() => {
+    document.documentElement.classList.add("home-route");
+    return () => document.documentElement.classList.remove("home-route");
+  }, []);
+
+  // Desktop one-screen: the page doesn't scroll vertically, so route the wheel, trackpad and arrow
+  // keys into the reel's horizontal scroll (which feeds the endless-batch logic via onScroll).
+  React.useEffect(() => {
+    const track = trackRef.current;
+    if (!canHover || !track) {
+      return;
+    }
+    const onWheel = (event: WheelEvent) => {
+      const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+      if (!delta) {
+        return;
+      }
+      event.preventDefault();
+      track.scrollLeft += delta;
+    };
+    const onKey = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)) {
+        return;
+      }
+      const page = track.clientWidth * 0.9;
+      const map: Record<string, number> = {
+        ArrowRight: 240,
+        ArrowDown: 240,
+        ArrowLeft: -240,
+        ArrowUp: -240,
+        PageDown: page,
+        PageUp: -page,
+      };
+      const delta = map[event.key];
+      if (delta === undefined) {
+        return;
+      }
+      event.preventDefault();
+      track.scrollLeft += delta;
+    };
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [canHover]);
 
   const drag = React.useRef({ active: false, moved: false, startX: 0, startLeft: 0 });
 
