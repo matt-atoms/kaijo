@@ -1109,6 +1109,11 @@ html.has-theme-cursor [contenteditable="true"] {
 }
 
 /* Titled text block */
+/* The body text (not the images) drives this block's height — trim the top padding so it fits ~one viewport. */
+.section_about-text.section-padding-top {
+  padding-top: 6em;
+}
+
 .about-text_inner {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
@@ -1183,6 +1188,7 @@ html.has-theme-cursor [contenteditable="true"] {
   display: flex;
   flex-direction: column;
   gap: 2em;
+  max-width: 20em; /* keep the supporting images modest so the block fits ~one viewport */
 }
 
 .about-text_image {
@@ -2548,7 +2554,7 @@ html.has-theme-cursor [contenteditable="true"] {
 /* Overview */
 .books_head {
   max-width: 40em;
-  margin-bottom: 3em;
+  margin-bottom: 2em;
 }
 
 .books_intro {
@@ -2557,6 +2563,11 @@ html.has-theme-cursor [contenteditable="true"] {
   text-align: left;
   font-size: 1.1em;
   line-height: 1.6;
+}
+
+/* Books is the first /store section — trim its top padding so the block fits ~one viewport. */
+.section_books.section-padding-top {
+  padding-top: 6em;
 }
 
 /* Trim the trailing space so Books sits closer to the Prints block below it. */
@@ -2586,7 +2597,7 @@ html.has-theme-cursor [contenteditable="true"] {
 }
 
 .books_entry-media {
-  max-width: 20em; /* keep covers modest rather than filling the whole column */
+  max-width: 15em; /* keep covers modest rather than filling the whole column */
   overflow: hidden;
 }
 
