@@ -43,6 +43,33 @@ export function WorkGallery({ items }: { items: WorkGalleryItem[] }) {
     setHeights(heightsFor(items.length, true));
   }, [items.length]);
 
+  // Mouse-wheel support: turn a vertical wheel into horizontal scroll while the pointer is over the
+  // wall, and hand off to the page (Lenis) at either end so the reader keeps moving down the page.
+  // `data-lenis-prevent-wheel` on the wall stops Lenis hijacking these; it re-syncs on the native
+  // scroll the hand-off produces. Native (passive:false) listener so we can preventDefault.
+  React.useEffect(() => {
+    const wall = wallRef.current;
+    if (!wall) {
+      return;
+    }
+    const onWheel = (event: WheelEvent) => {
+      const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+      const max = wall.scrollWidth - wall.clientWidth;
+      if (!delta || max <= 0) {
+        return;
+      }
+      const atStart = wall.scrollLeft <= 0;
+      const atEnd = wall.scrollLeft >= max - 1;
+      // Only hijack while there's room to move that way; at the edge, let the page scroll take over.
+      if ((delta > 0 && !atEnd) || (delta < 0 && !atStart)) {
+        event.preventDefault();
+        wall.scrollLeft += delta;
+      }
+    };
+    wall.addEventListener("wheel", onWheel, { passive: false });
+    return () => wall.removeEventListener("wheel", onWheel);
+  }, []);
+
   // Bring a tile into view within the wall (used when hovering the left-hand index) so the
   // highlighted image is always visible. Scrolls only the horizontal wall, never the page.
   const scrollToTile = (index: number) => {
@@ -114,6 +141,7 @@ export function WorkGallery({ items }: { items: WorkGalleryItem[] }) {
       <div
         ref={wallRef}
         className="work-gallery_wall"
+        data-lenis-prevent-wheel="true"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
