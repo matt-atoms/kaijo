@@ -1,5 +1,6 @@
 "use client";
 
+import { useReducedMotion } from "@mantine/hooks";
 import * as React from "react";
 import { Link } from "~/components/link";
 import { KaijoImage } from "~/features/kaijo/kaijo-image";
@@ -35,11 +36,26 @@ export function WorkGallery({ items }: { items: WorkGalleryItem[] }) {
   const drag = React.useRef({ active: false, moved: false, startX: 0, startLeft: 0 });
   const [heights, setHeights] = React.useState<number[]>(() => heightsFor(items.length, false));
   const [active, setActive] = React.useState<string | null>(null);
+  const reduceMotion = useReducedMotion();
 
   // Subtle per-load height variance, applied after mount so SSR and first render match.
   React.useEffect(() => {
     setHeights(heightsFor(items.length, true));
   }, [items.length]);
+
+  // Bring a tile into view within the wall (used when hovering the left-hand index) so the
+  // highlighted image is always visible. Scrolls only the horizontal wall, never the page.
+  const scrollToTile = (index: number) => {
+    const wall = wallRef.current;
+    const tile = wall?.children[index] as HTMLElement | undefined;
+    if (!wall || !tile) {
+      return;
+    }
+    const wallRect = wall.getBoundingClientRect();
+    const tileRect = tile.getBoundingClientRect();
+    const delta = tileRect.left - wallRect.left - (wall.clientWidth - tile.clientWidth) / 2;
+    wall.scrollTo({ left: wall.scrollLeft + delta, behavior: reduceMotion ? "auto" : "smooth" });
+  };
 
   const onPointerDown = (e: React.PointerEvent) => {
     const wall = wallRef.current;
@@ -75,14 +91,20 @@ export function WorkGallery({ items }: { items: WorkGalleryItem[] }) {
   return (
     <div className="work-gallery" data-has-active={active ? "true" : undefined} onPointerLeave={() => setActive(null)}>
       <nav className="work-gallery_index" aria-label="Projects">
-        {items.map((item) => (
+        {items.map((item, index) => (
           <Link
             key={item.key}
             href={`/project/${item.slug}`}
             className="work-gallery_name"
             data-active={active === item.key ? "true" : undefined}
-            onPointerEnter={() => setActive(item.key)}
-            onFocus={() => setActive(item.key)}
+            onPointerEnter={() => {
+              setActive(item.key);
+              scrollToTile(index);
+            }}
+            onFocus={() => {
+              setActive(item.key);
+              scrollToTile(index);
+            }}
             onBlur={() => setActive(null)}
           >
             {item.project}
