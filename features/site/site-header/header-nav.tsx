@@ -23,9 +23,12 @@ export function HeaderNav({ links }: { links: HeaderLinks }) {
 
   React.useEffect(() => setMounted(true), []);
 
-  // Close the mobile menu on navigation.
+  // Close the mobile menu on navigation. Referencing `pathname` in the body keeps it a real
+  // dependency (so the effect re-runs per route) and survives `biome ... --unsafe`.
   React.useEffect(() => {
-    mobileMenu.close();
+    if (pathname) {
+      mobileMenu.close();
+    }
   }, [pathname, mobileMenu.close]);
 
   // Escape closes it; lock body scroll while it's open.
