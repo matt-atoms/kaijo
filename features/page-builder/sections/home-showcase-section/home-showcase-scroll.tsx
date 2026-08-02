@@ -28,7 +28,7 @@ type Batch = { id: number; tiles: Tile[] };
 
 /** One reshuffle happens per batch, so a batch is the "every 36 images" unit on desktop. */
 const BATCH = 36;
-const MOBILE_COUNT = 18;
+const MOBILE_COUNT = 10;
 const MAX_BATCHES = 6; // bound the DOM on an endless desktop scroll (~216 tiles)
 const EDGE_PX = 1600; // grow the strip this far before reaching either end
 

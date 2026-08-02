@@ -91,8 +91,10 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     return await seo({ title: "Not Found" });
   }
 
-  // The original Webflow project pages use the site-wide title ("kaijo").
-  return await seo({ canonical: `${env.NEXT_PUBLIC_URL}/project/${slug}` });
+  return await seo({
+    title: project.title ?? undefined,
+    canonical: `${env.NEXT_PUBLIC_URL}/project/${slug}`,
+  });
 }
 
 export default async function ProjectPage(props: { params: Promise<{ slug: string }> }) {

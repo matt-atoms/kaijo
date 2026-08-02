@@ -9,13 +9,23 @@ import { cx } from "~/features/style/utils";
  * Nav link with Webflow-style current-page state: adds `w--current` and `aria-current="page"`
  * when the pathname matches, mirroring how Webflow marks the active nav item.
  */
-export function KaijoNavLink(props: { href: string; className?: string; children: React.ReactNode }) {
-  const { href, className, children } = props;
+export function KaijoNavLink(props: {
+  href: string;
+  className?: string;
+  children: React.ReactNode;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+}) {
+  const { href, className, children, onClick } = props;
   const pathname = usePathname();
   const isCurrent = pathname === href;
 
   return (
-    <Link href={href} aria-current={isCurrent ? "page" : undefined} className={cx(className, isCurrent && "w--current")}>
+    <Link
+      href={href}
+      onClick={onClick}
+      aria-current={isCurrent ? "page" : undefined}
+      className={cx(className, isCurrent && "w--current")}
+    >
       {children}
     </Link>
   );

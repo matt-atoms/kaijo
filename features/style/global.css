@@ -242,6 +242,138 @@ html.has-theme-cursor [contenteditable="true"] {
 }
 
 /*
+ * Mobile menu (features/site/site-header/header-nav.tsx). The desktop row doesn't fit a phone, so
+ * below 768px it's replaced by a burger that opens a full-screen menu. The panel is portaled to
+ * <body> so it escapes the header's mix-blend-mode and can use a solid themed background.
+ */
+.nav_burger {
+  display: none;
+}
+
+.nav_mobile {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  /* `.nav_inner` prefix out-specifies the base `.nav_link-row { display: flex }` (webflow.css). */
+  .nav_inner .nav_link-row {
+    display: none;
+  }
+
+  .nav_burger {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .nav_burger-line {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: currentColor;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+  }
+
+  .nav_burger[data-open] .nav_burger-line:first-child {
+    transform: translateY(4px) rotate(45deg);
+  }
+
+  .nav_burger[data-open] .nav_burger-line:last-child {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  .nav_mobile {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--container-padding);
+    background: var(--page-bg);
+    color: var(--page-ink);
+  }
+
+  .nav_mobile[hidden] {
+    display: none;
+  }
+
+  /* Close (X) — the header burger sits under the full-screen panel, so the menu needs its own. */
+  .nav_mobile-close {
+    position: absolute;
+    top: var(--container-padding);
+    right: var(--container-padding);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .nav_mobile-close .nav_burger-line {
+    position: absolute;
+  }
+
+  .nav_mobile-close .nav_burger-line:first-child {
+    transform: rotate(45deg);
+  }
+
+  .nav_mobile-close .nav_burger-line:last-child {
+    transform: rotate(-45deg);
+  }
+
+  .nav_mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+  }
+
+  .nav_mobile-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  .nav_mobile-link {
+    font-family: var(--font-wordmark);
+    font-size: 2.2em;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .nav_mobile-sub {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45em;
+  }
+
+  .nav_mobile-sublink {
+    padding: 0.35em 0;
+    font-size: 1em;
+    font-weight: 500;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+}
+
+/*
  * Selected Work — features/page-builder/sections/project-hero-section.tsx. Inverts the old
  * floating-name hero: image + client + type + year are shown, and the project name is revealed as
  * an overlay on hover. A CSS-columns masonry with per-tile aspect ratios gives a dynamic layout.
@@ -1027,7 +1159,7 @@ html.home-route .section_feature-links {
   }
 
   .work-gallery_wall {
-    height: 42vh;
+    height: auto; /* fit the tiles so the images aren't cropped top/bottom on phones */
     padding-inline: 0;
   }
 }
@@ -1061,6 +1193,44 @@ html.home-route .section_feature-links {
   line-height: 1.5;
   text-align: left;
   opacity: 1;
+}
+
+/* On phones the 34% sticky description column is far too narrow — let it span the full width. */
+@media screen and (max-width: 767px) {
+  .section_work--project .project_description-wrapper {
+    position: static;
+    top: auto;
+    width: 100%;
+  }
+}
+
+/* ---- Mobile audit fixes (phones) ----
+ * Selectors are deliberately extra-specific: these base rules live later in the file, so an
+ * equal-specificity override here (earlier) would lose the cascade. */
+@media screen and (max-width: 767px) {
+  /* 16px minimum on form controls stops iOS from zooming the page when a field is focused. */
+  .footer_newsletter-input,
+  .workshop-booking .workshop-booking_select,
+  .workshop-booking .workshop-booking_input,
+  .workshop-booking .workshop-booking_textarea {
+    font-size: 16px;
+  }
+
+  /* Give the footer room so its content clears the fixed cart pill / theme toggle at the corners. */
+  .page .footer {
+    padding-bottom: 5em;
+  }
+
+  /* Book covers can use the full column on a phone rather than the desktop 15em cap. */
+  .books_grid .books_entry-media {
+    max-width: none;
+  }
+
+  /* Comfortable tap targets for the key actions. */
+  .book-buy_button,
+  .workshop-booking_button {
+    min-height: 44px;
+  }
 }
 
 /*

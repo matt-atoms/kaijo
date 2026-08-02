@@ -3,6 +3,7 @@
 import { useClickOutside, useDisclosure } from "@mantine/hooks";
 import { usePathname } from "next/navigation";
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { KaijoNavLink } from "~/features/kaijo/nav-link";
 import type { SiteHeaderQResult } from "~/sanity/types";
 
@@ -10,24 +11,109 @@ type HeaderLinks = NonNullable<NonNullable<NonNullable<SiteHeaderQResult>["heade
 type HeaderItem = HeaderLinks[number];
 
 /**
- * Primary navigation. Flat items render as plain links; an item with `children` renders its top
- * link plus an accessible dropdown (Work → its sub-categories). The dropdown opens on hover/focus
- * for pointer + keyboard users and via the caret button for touch, and closes on outside click,
- * Escape, focus-out, or navigation.
+ * Primary navigation. On desktop it's an inline row (flat links + hover/focus dropdowns). Below the
+ * mobile breakpoint the row is hidden and a burger button opens a full-screen menu (all links, with
+ * each group's children listed under it) — the desktop row simply didn't fit on a phone.
  */
 export function HeaderNav({ links }: { links: HeaderLinks }) {
+  const [mobileOpen, mobileMenu] = useDisclosure(false);
+  const pathname = usePathname();
+  const menuId = React.useId();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => setMounted(true), []);
+
+  // Close the mobile menu on navigation.
+  React.useEffect(() => {
+    mobileMenu.close();
+  }, [pathname, mobileMenu.close]);
+
+  // Escape closes it; lock body scroll while it's open.
+  React.useEffect(() => {
+    if (!mobileOpen) {
+      return;
+    }
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        mobileMenu.close();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [mobileOpen, mobileMenu.close]);
+
   return (
-    <nav className="nav_link-row" aria-label="Primary">
-      {links.map((item) =>
-        item.children && item.children.length > 0 ? (
-          <NavGroup key={item.key} item={item} />
-        ) : item.link?.href ? (
-          <KaijoNavLink key={item.key} href={item.link.href} className="nav_link w-inline-block">
-            <div className="nav_link-text">{item.link.text}</div>
-          </KaijoNavLink>
-        ) : null
-      )}
-    </nav>
+    <>
+      <nav className="nav_link-row" aria-label="Primary">
+        {links.map((item) =>
+          item.children && item.children.length > 0 ? (
+            <NavGroup key={item.key} item={item} />
+          ) : item.link?.href ? (
+            <KaijoNavLink key={item.key} href={item.link.href} className="nav_link w-inline-block">
+              <div className="nav_link-text">{item.link.text}</div>
+            </KaijoNavLink>
+          ) : null
+        )}
+      </nav>
+
+      <button
+        type="button"
+        className="nav_burger"
+        aria-label={mobileOpen ? "Close menu" : "Open menu"}
+        aria-expanded={mobileOpen}
+        aria-controls={menuId}
+        data-open={mobileOpen || undefined}
+        onClick={mobileMenu.toggle}
+      >
+        <span className="nav_burger-line" />
+        <span className="nav_burger-line" />
+      </button>
+
+      {mounted &&
+        createPortal(
+          <div id={menuId} className="nav_mobile" data-open={mobileOpen || undefined} hidden={!mobileOpen}>
+            <button type="button" className="nav_mobile-close" aria-label="Close menu" onClick={mobileMenu.close}>
+              <span className="nav_burger-line" />
+              <span className="nav_burger-line" />
+            </button>
+            <nav className="nav_mobile-list" aria-label="Primary">
+              {links.map((item) => (
+                <div key={item.key} className="nav_mobile-group">
+                  {item.link?.href ? (
+                    <KaijoNavLink href={item.link.href} className="nav_mobile-link" onClick={mobileMenu.close}>
+                      {item.link.text}
+                    </KaijoNavLink>
+                  ) : item.link?.text ? (
+                    <span className="nav_mobile-link">{item.link.text}</span>
+                  ) : null}
+                  {item.children && item.children.length > 0 && (
+                    <div className="nav_mobile-sub">
+                      {item.children.map((child) =>
+                        child.href ? (
+                          <KaijoNavLink
+                            key={child.key}
+                            href={child.href}
+                            className="nav_mobile-sublink"
+                            onClick={mobileMenu.close}
+                          >
+                            {child.text}
+                          </KaijoNavLink>
+                        ) : null
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </nav>
+          </div>,
+          document.body
+        )}
+    </>
   );
 }
 
