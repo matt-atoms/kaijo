@@ -32,10 +32,11 @@ const MOBILE_COUNT = 18;
 const MAX_BATCHES = 6; // bound the DOM on an endless desktop scroll (~216 tiles)
 const EDGE_PX = 1600; // grow the strip this far before reaching either end
 
-// Desktop tiles are kept within the (shorter) one-screen track height; see `.home-showcase_track`.
-const H_TIERS = [30, 36, 42, 46];
+// Desktop `--h` is a PERCENT of the reel track, which fills the one-screen homepage — so the images
+// are as large as the space allows, with a little height variety. (Mobile ignores --h; see CSS.)
+const H_TIERS = [82, 90, 96, 100];
 const W_TIERS = [66, 76, 86, 94];
-const MAX_DRIFT = 1;
+const MAX_DRIFT = 0;
 const SIDES = ["start", "center", "end"] as const;
 
 const useIsoLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
@@ -58,7 +59,7 @@ function seedBatch(pool: HomeShowcaseSlide[], count: number): Batch {
   const tiles = pool.slice(0, count).map((slide, i) => ({
     key: `seed:${slide.key}:${i}`,
     slide,
-    h: 42,
+    h: 92,
     dy: 0,
     w: 86,
     side: "center" as const,
@@ -329,7 +330,7 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
                 data-active={isActive ? "true" : undefined}
                 style={
                   {
-                    "--h": `${tile.h}vh`,
+                    "--h": `${tile.h}%`,
                     "--dy": `${tile.dy}vh`,
                     "--w": `${tile.w}%`,
                     "--ratio": tile.slide.aspectRatio ?? 1,

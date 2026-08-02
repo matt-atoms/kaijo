@@ -550,6 +550,11 @@ html.has-theme-cursor [contenteditable="true"] {
  * home-showcase-scroll.tsx). Hidden footer + a shorter reel + tighter spacing make it all fit.
  * Touch devices (hover: none) keep the normal vertical scroll and the footer.
  */
+/* Explore links (Books/Prints/Workshops) duplicate the nav — drop them on the homepage entirely. */
+html.home-route .section_feature-links {
+  display: none;
+}
+
 @media (hover: hover) {
   html.home-route .main {
     display: flex;
@@ -562,23 +567,32 @@ html.has-theme-cursor [contenteditable="true"] {
     display: none;
   }
 
+  /* Compact hero so the reel gets the rest of the screen. */
   html.home-route .section_about.section-padding-top {
-    padding-top: 6.5em;
+    padding-top: 4.75em;
+    padding-bottom: 0.5em;
   }
 
+  html.home-route .about_intro-text {
+    max-width: 34em;
+    font-size: 0.9em;
+  }
+
+  /* The reel fills all remaining vertical space; each tile is a % of the track height (H_TIERS). */
   html.home-route .section_home-showcase {
-    padding-top: 1.5em;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding-top: 1em;
+    padding-bottom: 1em;
   }
 
   html.home-route .home-showcase_track {
-    height: 48vh;
+    height: 100%;
+    align-items: stretch; /* stretch batches to the track height so tile % heights resolve against it */
   }
 
-  /* Anchor the Explore row to the bottom of the screen so the page fills cleanly. */
-  html.home-route .section_feature-links {
-    margin-top: auto;
-    padding-top: 1.5em;
-    padding-bottom: 1.5em;
+  html.home-route .home-showcase_batch {
+    align-items: center;
   }
 }
 
