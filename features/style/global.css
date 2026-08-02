@@ -2291,7 +2291,7 @@ html.has-theme-cursor [contenteditable="true"] {
  * Namespaced .psc* so the archived /oldprints carousel (.prints-*) stays independent.
  * ------------------------------------------------------------------ */
 .psc-wrap {
-  margin-top: 0.5em;
+  margin-top: 2.5em;
   text-align: center;
 }
 
@@ -2485,20 +2485,6 @@ html.has-theme-cursor [contenteditable="true"] {
 }
 
 /* Prints licensing — features/page-builder/sections/prints-licensing-section.tsx */
-.prints-licensing_inner {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 3em;
-  align-items: start;
-}
-
-@media screen and (max-width: 767px) {
-  .prints-licensing_inner {
-    grid-template-columns: 1fr;
-    gap: 2em;
-  }
-}
-
 .prints-licensing_text {
   display: flex;
   flex-direction: column;
@@ -2524,29 +2510,6 @@ html.has-theme-cursor [contenteditable="true"] {
 
 .prints-licensing_cta:hover {
   color: var(--colors--accent-color);
-}
-
-.prints-licensing_thumbs {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75em;
-}
-
-.prints-licensing_thumb {
-  display: block;
-  overflow: hidden;
-}
-
-.prints-licensing_thumb-img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.prints-licensing_thumb:hover .prints-licensing_thumb-img {
-  transform: scale(1.05);
 }
 
 /*
@@ -2596,6 +2559,11 @@ html.has-theme-cursor [contenteditable="true"] {
   line-height: 1.6;
 }
 
+/* Trim the trailing space so Books sits closer to the Prints block below it. */
+.section_books.section-padding-bottom {
+  padding-bottom: 4em;
+}
+
 .books_grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2618,6 +2586,7 @@ html.has-theme-cursor [contenteditable="true"] {
 }
 
 .books_entry-media {
+  max-width: 20em; /* keep covers modest rather than filling the whole column */
   overflow: hidden;
 }
 
@@ -2715,10 +2684,6 @@ html.has-theme-cursor [contenteditable="true"] {
   flex-direction: column;
   align-items: flex-start;
   gap: 1em;
-}
-
-.book-title.section_title {
-  font-size: 4em;
 }
 
 .book-buy {

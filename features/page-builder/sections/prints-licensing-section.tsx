@@ -1,9 +1,7 @@
 import { defineQuery, stegaClean } from "next-sanity";
-import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import { sanityFetch } from "~/features/sanity/client";
 import { SanityLink } from "~/features/sanity/link";
 import { LinkFragment } from "~/features/sanity/link/fragment";
-import { ImageFragment } from "~/features/sanity/media/fragment";
 import type { PrintsLicensingSectionQResult } from "~/sanity/types";
 
 const PrintsLicensingSectionQ =
@@ -11,8 +9,7 @@ const PrintsLicensingSectionQ =
     "content": sectionContent{
       heading,
       text,
-      "link": link{${LinkFragment}},
-      images[]{${ImageFragment}}
+      "link": link{${LinkFragment}}
     },
     "hash": sectionSettings.sectionHash.current
 }`);
@@ -31,7 +28,6 @@ export async function PrintsLicensingSection({ docId, sectionKey }: { docId: str
   }
 
   const link = content.link;
-  const images = (content.images ?? []).filter((image) => image?._id);
 
   return (
     <div
@@ -53,15 +49,6 @@ export async function PrintsLicensingSection({ docId, sectionKey }: { docId: str
               </SanityLink>
             )}
           </div>
-          {images.length > 0 && link?.href && (
-            <div className="prints-licensing_thumbs">
-              {images.map((image) => (
-                <SanityLink key={image._id} link={link} className="prints-licensing_thumb">
-                  <KaijoImage image={image} className="prints-licensing_thumb-img" sizes="(max-width: 767px) 40vw, 16vw" />
-                </SanityLink>
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </div>

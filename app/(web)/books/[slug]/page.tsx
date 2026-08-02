@@ -91,7 +91,7 @@ export default async function BookPage(props: { params: Promise<{ slug: string }
             coverImage={book.coverImage}
             variants={variants}
           >
-            <h1 data-scramble="scroll" className="section_title book-title">
+            <h1 data-scramble="scroll" className="section-eyebrow book-title">
               {book.title}
             </h1>
             {book.specifications && book.specifications.length > 0 && (
