@@ -54,13 +54,13 @@ export async function AboutSection({ docId, sectionKey }: { docId: string; secti
               <p data-scramble="scroll" className="about_intro-text">
                 {text}
               </p>
+              <ContactLinks className="about_intro-contact" />
               {link?.href && (
                 <SanityLink link={link} className="about_intro-more">
                   {link.text || "Read more"} →
                 </SanityLink>
               )}
             </div>
-            <ContactLinks className="about_intro-contact" />
           </div>
           {(image?._id || secondText) && (
             <div className="about_image-wrapper">

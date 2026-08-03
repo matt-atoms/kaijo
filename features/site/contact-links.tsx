@@ -41,6 +41,11 @@ export async function ContactLinks({ className }: { className?: string }) {
           {email}
         </a>
       )}
+      {email && ig && (
+        <span className="about-contact_sep" aria-hidden="true">
+          /
+        </span>
+      )}
       {ig && (
         <a href={ig.url} target="_blank" rel="noopener noreferrer" className="about-contact_link">
           {ig.label}

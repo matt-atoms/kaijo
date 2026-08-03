@@ -31,9 +31,9 @@ const BATCH = 36;
 const MAX_BATCHES = 6; // bound the DOM on an endless scroll (~216 tiles)
 const EDGE_PX = 1600; // grow the strip this far before reaching either end
 
-// Desktop `--h` is a PERCENT of the reel track, which fills the one-screen homepage — so the images
-// are as large as the space allows, with a little height variety. (Mobile ignores --h; see CSS.)
-const H_TIERS = [82, 90, 96, 100];
+// `--h` is a PERCENT of the reel track height. Max stays 100 (fill), but a wide spread down to ~half
+// gives real size variance so the strip never reads as a uniform grid.
+const H_TIERS = [50, 64, 78, 90, 100];
 const W_TIERS = [66, 76, 86, 94];
 const MAX_DRIFT = 0;
 const SIDES = ["start", "center", "end"] as const;
@@ -42,6 +42,19 @@ const useIsoLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect
 
 function pick<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)] as T;
+}
+
+/** Heights for a batch, never repeating the same size more than twice in a row (avoids a grid look). */
+function pickHeights(count: number): number[] {
+  const out: number[] = [];
+  for (let i = 0; i < count; i++) {
+    let h = pick(H_TIERS);
+    if (i >= 2 && out[i - 1] === out[i - 2] && h === out[i - 1]) {
+      h = pick(H_TIERS.filter((v) => v !== h));
+    }
+    out.push(h);
+  }
+  return out;
 }
 
 function shuffle<T>(arr: T[]): T[] {
@@ -75,10 +88,11 @@ function randomBatch(pool: HomeShowcaseSlide[], count: number): Batch {
   batchSeq += 1;
   const id = batchSeq;
   const chosen = shuffle(pool).slice(0, Math.min(count, pool.length));
+  const heights = pickHeights(chosen.length);
   const tiles = chosen.map((slide, i) => ({
     key: `${id}:${slide.key}:${i}`,
     slide,
-    h: pick(H_TIERS),
+    h: heights[i] as number,
     dy: Math.round((Math.random() * 2 - 1) * MAX_DRIFT),
     w: pick(W_TIERS),
     side: pick(SIDES),

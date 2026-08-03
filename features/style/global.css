@@ -349,10 +349,36 @@ html.has-theme-cursor [contenteditable="true"] {
     text-transform: uppercase;
   }
 
+  /* Group label is a toggle: label + a caret that flips when its sub-links are shown. */
+  .nav_mobile-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .nav_mobile-caret {
+    font-size: 0.4em;
+    transition: transform 0.25s ease;
+  }
+
+  .nav_mobile-toggle[aria-expanded="true"] .nav_mobile-caret {
+    transform: rotate(180deg);
+  }
+
   .nav_mobile-sub {
     display: flex;
     flex-direction: column;
     gap: 0.45em;
+    margin-top: 0.5em;
+  }
+
+  .nav_mobile-sub[hidden] {
+    display: none;
   }
 
   .nav_mobile-sublink {
@@ -1285,19 +1311,30 @@ html.home-route .section_feature-links {
   color: var(--colors--accent-color);
 }
 
-.about_intro-contact {
-  margin-left: auto;
+/* Home hero: email / instagram on one line under the intro, before "Read more". The compound
+   selector out-specifies the base `.about-contact_details { flex-direction: column }` (defined later). */
+.about-contact_details.about_intro-contact {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.4em;
   align-self: flex-start;
+  font-size: 0.82em;
+}
+
+.about-contact_sep {
+  color: #9a9a9a;
+  font-weight: 400;
+}
+
+/* Info page keeps email + instagram stacked, so no inline separator there. */
+.about-identity_contact .about-contact_sep {
+  display: none;
 }
 
 @media screen and (max-width: 767px) {
   .section_about .about_text-wrapper {
     flex-wrap: wrap;
     gap: 1.5em;
-  }
-
-  .about_intro-contact {
-    margin-left: 0;
   }
 }
 
@@ -2208,25 +2245,53 @@ html.home-route .section_feature-links {
  * right, so the intro body (row 2, left) and the editions list (row 2, right) line up level.
  */
 /* Intro sits above the carousel (title + lead paragraph, stacked). */
+/* Desktop: title + intro on the left, editions/sizes on the right, above the carousel. */
 .prints_head {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-areas:
+    "title options"
+    "intro options";
+  column-gap: 3em;
+  row-gap: 1em;
+  align-items: start;
 }
 
-/* Editions + sizes sit BELOW the carousel: heading/price on the left, the size list on the right. */
+.prints_head-title {
+  grid-area: title;
+}
+
+.prints_head .prints_intro {
+  grid-area: intro;
+}
+
+.prints_options--top {
+  grid-area: options;
+}
+
 .prints_options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 3em;
-  row-gap: 1.25em;
-  align-items: start;
-  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1em;
+}
+
+/* The below-the-carousel copy is mobile-only; the beside-the-intro copy is desktop-only. */
+.prints_options--bottom {
+  display: none;
 }
 
 @media screen and (max-width: 767px) {
-  .prints_options {
-    grid-template-columns: 1fr;
+  .prints_head {
+    display: block;
+  }
+
+  .prints_options--top {
+    display: none;
+  }
+
+  .prints_options--bottom {
+    display: flex;
+    margin-top: 2.5em;
   }
 }
 

@@ -53,15 +53,18 @@ export function HeaderNav({ links }: { links: HeaderLinks }) {
   return (
     <>
       <nav className="nav_link-row" aria-label="Primary">
-        {links.map((item) =>
-          item.children && item.children.length > 0 ? (
-            <NavGroup key={item.key} item={item} />
-          ) : item.link?.href ? (
-            <KaijoNavLink key={item.key} href={item.link.href} className="nav_link w-inline-block">
-              <div className="nav_link-text">{item.link.text}</div>
-            </KaijoNavLink>
-          ) : null
-        )}
+        {/* Home is dropped on desktop — the wordmark already links home. The mobile menu keeps it. */}
+        {links
+          .filter((item) => item.link?.href !== "/")
+          .map((item) =>
+            item.children && item.children.length > 0 ? (
+              <NavGroup key={item.key} item={item} />
+            ) : item.link?.href ? (
+              <KaijoNavLink key={item.key} href={item.link.href} className="nav_link w-inline-block">
+                <div className="nav_link-text">{item.link.text}</div>
+              </KaijoNavLink>
+            ) : null
+          )}
       </nav>
 
       <button
@@ -85,38 +88,45 @@ export function HeaderNav({ links }: { links: HeaderLinks }) {
               <span className="nav_burger-line" />
             </button>
             <nav className="nav_mobile-list" aria-label="Primary">
-              {links.map((item) => (
-                <div key={item.key} className="nav_mobile-group">
-                  {item.link?.href ? (
-                    <KaijoNavLink href={item.link.href} className="nav_mobile-link" onClick={mobileMenu.close}>
-                      {item.link.text}
-                    </KaijoNavLink>
-                  ) : item.link?.text ? (
-                    <span className="nav_mobile-link">{item.link.text}</span>
-                  ) : null}
-                  {item.children && item.children.length > 0 && (
-                    <div className="nav_mobile-sub">
-                      {item.children.map((child) =>
-                        child.href ? (
-                          <KaijoNavLink
-                            key={child.key}
-                            href={child.href}
-                            className="nav_mobile-sublink"
-                            onClick={mobileMenu.close}
-                          >
-                            {child.text}
-                          </KaijoNavLink>
-                        ) : null
-                      )}
-                    </div>
-                  )}
-                </div>
-              ))}
+              {links.map((item) =>
+                item.children && item.children.length > 0 ? (
+                  <MobileNavGroup key={item.key} item={item} onNavigate={mobileMenu.close} />
+                ) : item.link?.href ? (
+                  <KaijoNavLink key={item.key} href={item.link.href} className="nav_mobile-link" onClick={mobileMenu.close}>
+                    {item.link.text}
+                  </KaijoNavLink>
+                ) : null
+              )}
             </nav>
           </div>,
           document.body
         )}
     </>
+  );
+}
+
+/** A mobile menu item with children: the label toggles its sub-links open/closed (single tap). */
+function MobileNavGroup({ item, onNavigate }: { item: HeaderItem; onNavigate: () => void }) {
+  const [open, { toggle }] = useDisclosure(false);
+
+  return (
+    <div className="nav_mobile-group" data-open={open || undefined}>
+      <button type="button" className="nav_mobile-link nav_mobile-toggle" aria-expanded={open} onClick={toggle}>
+        {item.link?.text}
+        <span className="nav_mobile-caret" aria-hidden="true">
+          ▾
+        </span>
+      </button>
+      <div className="nav_mobile-sub" hidden={!open}>
+        {item.children?.map((child) =>
+          child.href ? (
+            <KaijoNavLink key={child.key} href={child.href} className="nav_mobile-sublink" onClick={onNavigate}>
+              {child.text}
+            </KaijoNavLink>
+          ) : null
+        )}
+      </div>
+    </div>
   );
 }
 
