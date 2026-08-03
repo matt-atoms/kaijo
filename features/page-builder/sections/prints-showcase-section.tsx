@@ -76,27 +76,30 @@ export async function PrintsShowcaseSection({ docId, sectionKey }: { docId: stri
               {content.heading}
             </h1>
           )}
-          <div className="prints_head-body">{content?.intro && <p className="prints_intro">{content.intro}</p>}</div>
-          {editions.length > 0 && (
-            <>
-              <div className="prints_options-head">
-                {content?.optionsHeading && <div className="prints_options-title">{content.optionsHeading}</div>}
-                {content?.priceNote && <p className="prints_options-price">{content.priceNote}</p>}
-              </div>
-              <dl className="prints_options-list">
-                {editions.map((edition) => (
-                  <div key={edition.key} className="prints_options-row">
-                    <dt>{edition.size}</dt>
-                    {edition.edition && <dd>{edition.edition}</dd>}
-                  </div>
-                ))}
-              </dl>
-            </>
-          )}
+          {content?.intro && <p className="prints_intro">{content.intro}</p>}
         </div>
       </div>
 
       <PrintsMockupCarousel slides={slides} sizes={sizes} />
+
+      {editions.length > 0 && (
+        <div className="container">
+          <div className="prints_options">
+            <div className="prints_options-head">
+              {content?.optionsHeading && <div className="prints_options-title">{content.optionsHeading}</div>}
+              {content?.priceNote && <p className="prints_options-price">{content.priceNote}</p>}
+            </div>
+            <dl className="prints_options-list">
+              {editions.map((edition) => (
+                <div key={edition.key} className="prints_options-row">
+                  <dt>{edition.size}</dt>
+                  {edition.edition && <dd>{edition.edition}</dd>}
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

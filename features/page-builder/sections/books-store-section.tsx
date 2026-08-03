@@ -55,7 +55,7 @@ export async function BooksStoreSection({ docId, sectionKey }: { docId: string; 
   return (
     <div id={stegaClean(section?.hash) || undefined} className="section_books section-padding-top section-padding-bottom">
       <div className="container">
-        {docId === SANITY_STORE_PAGE_ID && <WorkAnchors anchors={STORE_ANCHORS} />}
+        {docId === SANITY_STORE_PAGE_ID && <WorkAnchors anchors={STORE_ANCHORS} spanMain />}
         <div className="books_head">
           {content.heading && (
             <h1 data-scramble="scroll" className="section-eyebrow">

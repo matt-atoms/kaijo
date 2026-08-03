@@ -28,8 +28,7 @@ type Batch = { id: number; tiles: Tile[] };
 
 /** One reshuffle happens per batch, so a batch is the "every 36 images" unit on desktop. */
 const BATCH = 36;
-const MOBILE_COUNT = 10;
-const MAX_BATCHES = 6; // bound the DOM on an endless desktop scroll (~216 tiles)
+const MAX_BATCHES = 6; // bound the DOM on an endless scroll (~216 tiles)
 const EDGE_PX = 1600; // grow the strip this far before reaching either end
 
 // Desktop `--h` is a PERCENT of the reel track, which fills the one-screen homepage — so the images
@@ -107,16 +106,12 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
   const [canHover, setCanHover] = React.useState(true);
   const [activeKey, setActiveKey] = React.useState<string | null>(null);
 
-  // On mount: detect pointer type, then reshuffle. Desktop gets two batches (runway for the endless
-  // scroll); touch gets a single finite, vertical selection.
+  // On mount: detect pointer type, then reshuffle. Both desktop and touch get the endless horizontal
+  // reel (3-batch runway); only the input method (drag/wheel vs native touch swipe) and the caption
+  // reveal (hover vs tap) differ by `canHover`.
   React.useEffect(() => {
-    const hover = window.matchMedia("(hover: hover)").matches;
-    setCanHover(hover);
-    commitBatches(
-      hover
-        ? [randomBatch(slides, BATCH), randomBatch(slides, BATCH), randomBatch(slides, BATCH)]
-        : [randomBatch(slides, MOBILE_COUNT)]
-    );
+    setCanHover(window.matchMedia("(hover: hover)").matches);
+    commitBatches([randomBatch(slides, BATCH), randomBatch(slides, BATCH), randomBatch(slides, BATCH)]);
   }, [slides, commitBatches]);
 
   // Mark the route so the layout can lock the homepage to one screen on desktop (CSS in global.css).
@@ -219,10 +214,10 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
     }
   }, [batches]);
 
-  // Desktop: start one full batch in (left runway for the endless left-scroll) with the first
-  // visible image half off the left edge, so it's obvious the strip scrolls both ways.
+  // Start one full batch in (runway for the endless left-scroll) with the first visible image half
+  // off the left edge, so it's obvious the strip scrolls both ways (desktop and touch alike).
   useIsoLayoutEffect(() => {
-    if (didInitScroll.current || !canHover) {
+    if (didInitScroll.current) {
       return;
     }
     const track = trackRef.current;
@@ -236,10 +231,10 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
         didInitScroll.current = true;
       }
     }
-  }, [canHover, batches]);
+  }, [batches]);
 
   const onScroll = React.useCallback(() => {
-    if (!canHover || rafPending.current) {
+    if (rafPending.current) {
       return;
     }
     rafPending.current = true;
@@ -255,7 +250,7 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
         prependBatch();
       }
     });
-  }, [canHover, appendBatch, prependBatch]);
+  }, [appendBatch, prependBatch]);
 
   const onPointerDown = (e: React.PointerEvent) => {
     const track = trackRef.current;
@@ -340,7 +335,7 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
                 onClick={(e) => onTileClick(e, tile.key)}
               >
                 <div className="home-showcase_media">
-                  <KaijoImage image={tile.slide.image} className="home-showcase_image" sizes="(max-width: 767px) 90vw, 44vh" />
+                  <KaijoImage image={tile.slide.image} className="home-showcase_image" sizes="(max-width: 767px) 60vh, 44vh" />
                 </div>
                 <div className="home-showcase_caption">
                   <span className="home-showcase_meta">

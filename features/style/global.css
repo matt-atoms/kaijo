@@ -260,12 +260,10 @@ html.has-theme-cursor [contenteditable="true"] {
     display: none;
   }
 
+  /* Trigger is a plus sign (two centred lines, one rotated vertical). */
   .nav_burger {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 6px;
+    display: block;
+    position: relative;
     width: 44px;
     height: 44px;
     padding: 0;
@@ -276,21 +274,18 @@ html.has-theme-cursor [contenteditable="true"] {
   }
 
   .nav_burger-line {
-    display: block;
-    width: 26px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22px;
     height: 2px;
     background: currentColor;
-    transition:
-      transform 0.3s ease,
-      opacity 0.3s ease;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
   }
 
-  .nav_burger[data-open] .nav_burger-line:first-child {
-    transform: translateY(4px) rotate(45deg);
-  }
-
-  .nav_burger[data-open] .nav_burger-line:last-child {
-    transform: translateY(-4px) rotate(-45deg);
+  .nav_burger .nav_burger-line:last-child {
+    transform: translate(-50%, -50%) rotate(90deg);
   }
 
   .nav_mobile {
@@ -326,16 +321,12 @@ html.has-theme-cursor [contenteditable="true"] {
     cursor: pointer;
   }
 
-  .nav_mobile-close .nav_burger-line {
-    position: absolute;
-  }
-
   .nav_mobile-close .nav_burger-line:first-child {
-    transform: rotate(45deg);
+    transform: translate(-50%, -50%) rotate(45deg);
   }
 
   .nav_mobile-close .nav_burger-line:last-child {
-    transform: rotate(-45deg);
+    transform: translate(-50%, -50%) rotate(-45deg);
   }
 
   .nav_mobile-list {
@@ -504,7 +495,8 @@ html.has-theme-cursor [contenteditable="true"] {
 
 .home-showcase_track {
   display: flex;
-  align-items: center;
+  /* stretch so batches fill the track height and the tiles' % heights (--h) resolve against it */
+  align-items: stretch;
   gap: 3vw;
   height: 86vh;
   padding-inline: max(var(--container-padding), calc((100vw - var(--size-container)) / 2));
@@ -605,50 +597,24 @@ html.has-theme-cursor [contenteditable="true"] {
   }
 }
 
-/* Mobile: a vertical, scattered stack; first tap reveals the label + arrow, second tap opens it. */
+/* Touch: first tap reveals the caption + "View project" cue, second tap opens it (JS onTileClick). */
+.home-showcase_tile[data-active="true"] .home-showcase_caption {
+  opacity: 1;
+}
+
+.home-showcase_tile[data-active="true"] .home-showcase_go {
+  display: inline-block;
+  color: var(--colors--accent-color);
+}
+
+/* Mobile: the same endless horizontal reel, sized as a swipeable band within the scrolling page. */
 @media screen and (max-width: 767px) {
   .home-showcase_track {
-    flex-direction: column;
-    align-items: stretch;
-    height: auto;
-    gap: 1.75em;
+    height: 62vh;
+    gap: 4vw;
     padding-inline: var(--container-padding);
-    overflow: visible;
     cursor: default;
     user-select: auto;
-  }
-
-  .home-showcase_batch {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1.75em;
-    width: 100%;
-  }
-
-  .home-showcase_tile {
-    height: auto;
-    width: var(--w, 86%);
-    align-self: var(--side, center);
-    transform: none;
-  }
-
-  .home-showcase_caption {
-    position: static;
-    display: none;
-    padding: 0.7em 0 0;
-    color: inherit;
-    background: none;
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .home-showcase_tile[data-active="true"] .home-showcase_caption {
-    display: flex;
-  }
-
-  .home-showcase_go {
-    display: inline-block;
-    color: var(--colors--accent-color);
   }
 }
 
@@ -720,11 +686,6 @@ html.home-route .section_feature-links {
 
   html.home-route .home-showcase_track {
     height: 100%;
-    align-items: stretch; /* stretch batches to the track height so tile % heights resolve against it */
-  }
-
-  html.home-route .home-showcase_batch {
-    align-items: center;
   }
 }
 
@@ -983,6 +944,16 @@ html.home-route .section_feature-links {
   /* Blend over the content it scrolls past, like the header. */
   color: var(--page-blend);
   mix-blend-mode: difference;
+}
+
+/*
+ * Store variant: portaled to the top of <main> so it sticks across all three store sections. It sits
+ * above the first section's padding, so it needs its own top clearance for the fixed header and no
+ * bottom margin (the Books section's top padding provides the gap to the first heading).
+ */
+.work-anchors--span {
+  margin-top: 5.5em;
+  margin-bottom: -2.5em;
 }
 
 .work-anchor {
@@ -1812,9 +1783,11 @@ html.home-route .section_feature-links {
 }
 
 .workshop-booking_title {
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 1.6em;
-  line-height: 1;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
 }
 
 .workshop-booking_intro {
@@ -1912,7 +1885,9 @@ html.home-route .section_feature-links {
   padding: 0.85em 1.5em;
   border: 1px solid #fff;
   background: #fff;
-  color: var(--page-ink);
+  /* Fixed dark ink — the card is always dark, and `--page-ink` flips to near-white in dark theme
+     (which made the label white-on-white). The button bg is a literal white, so pin the text dark. */
+  color: var(--colors--black);
   text-transform: uppercase;
   font-size: 0.88em;
   font-weight: 600;
@@ -2232,49 +2207,26 @@ html.home-route .section_feature-links {
  * Head: the big title sits top-left with the editions header tucked just above the list on the
  * right, so the intro body (row 2, left) and the editions list (row 2, right) line up level.
  */
+/* Intro sits above the carousel (title + lead paragraph, stacked). */
 .prints_head {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+/* Editions + sizes sit BELOW the carousel: heading/price on the left, the size list on the right. */
+.prints_options {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 1fr 1fr;
   column-gap: 3em;
   row-gap: 1.25em;
   align-items: start;
-}
-
-.prints_head-title {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.prints_head-body {
-  grid-column: 1;
-  grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.prints_options-head {
-  grid-column: 2;
-  grid-row: 1;
-  align-self: end;
+  margin-top: 3em;
 }
 
 @media screen and (max-width: 767px) {
-  .prints_head {
+  .prints_options {
     grid-template-columns: 1fr;
-    row-gap: 1.5em;
-  }
-
-  .prints_head-title,
-  .prints_head-body,
-  .prints_options-head,
-  .prints_options-list {
-    grid-column: 1;
-    grid-row: auto;
-  }
-
-  .prints_options-head {
-    align-self: start;
   }
 }
 
@@ -2314,8 +2266,6 @@ html.home-route .section_feature-links {
 }
 
 .prints_options-list {
-  grid-column: 2;
-  grid-row: 2;
   display: flex;
   flex-direction: column;
   gap: 0.65em;

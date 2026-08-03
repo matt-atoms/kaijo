@@ -37,6 +37,13 @@ export function WorkGallery({ items }: { items: WorkGalleryItem[] }) {
   const [heights, setHeights] = React.useState<number[]>(() => heightsFor(items.length, false));
   const [active, setActive] = React.useState<string | null>(null);
   const reduceMotion = usePrefersReducedMotion();
+  // Touch has no hover: an index name's first tap focuses its image, a second tap navigates.
+  const [canHover, setCanHover] = React.useState(true);
+  const tapArmed = React.useRef<string | null>(null);
+
+  React.useEffect(() => {
+    setCanHover(window.matchMedia("(hover: hover)").matches);
+  }, []);
 
   // Subtle per-load height variance, applied after mount so SSR and first render match.
   React.useEffect(() => {
@@ -115,8 +122,30 @@ export function WorkGallery({ items }: { items: WorkGalleryItem[] }) {
     }
   };
 
+  // Touch two-tap on an index name: first tap highlights + scrolls the image into view, second tap
+  // on the same name navigates. Desktop (hover) navigates on the first click as usual.
+  const onNameClick = (e: React.MouseEvent, key: string, index: number) => {
+    if (canHover) {
+      return;
+    }
+    if (tapArmed.current !== key) {
+      e.preventDefault();
+      tapArmed.current = key;
+      setActive(key);
+      scrollToTile(index);
+    }
+  };
+
   return (
-    <div className="work-gallery" data-has-active={active ? "true" : undefined} onPointerLeave={() => setActive(null)}>
+    <div
+      className="work-gallery"
+      data-has-active={active ? "true" : undefined}
+      onPointerLeave={() => {
+        if (canHover) {
+          setActive(null);
+        }
+      }}
+    >
       <nav className="work-gallery_index" aria-label="Projects">
         {items.map((item, index) => (
           <Link
@@ -132,7 +161,12 @@ export function WorkGallery({ items }: { items: WorkGalleryItem[] }) {
               setActive(item.key);
               scrollToTile(index);
             }}
-            onBlur={() => setActive(null)}
+            onBlur={() => {
+              if (canHover) {
+                setActive(null);
+              }
+            }}
+            onClick={(e) => onNameClick(e, item.key, index)}
           >
             {item.project}
           </Link>
