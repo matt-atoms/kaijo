@@ -18,10 +18,8 @@ export type HomeShowcaseSlide = {
 type Tile = {
   key: string;
   slide: HomeShowcaseSlide;
-  h: number; // desktop tile height, vh
-  dy: number; // desktop vertical drift, vh
-  w: number; // mobile tile width, %
-  side: "start" | "center" | "end"; // mobile horizontal alignment
+  h: number; // height as a fraction of the reel band (H_TIERS)
+  vy: number; // vertical position within the band, -1 (top) .. 0 (centered) .. 1 (bottom)
 };
 
 type Batch = { id: number; tiles: Tile[] };
@@ -36,9 +34,6 @@ const EDGE_PX = 1600; // grow the strip this far before reaching either end
 // Unitless (not `%`) so mobile can size tiles in real viewport units — iOS Safari doesn't resolve a
 // percentage height against a flex-stretched parent, which made mobile tiles collapse and overlap.
 const H_TIERS = [0.5, 0.64, 0.78, 0.9, 1];
-const W_TIERS = [66, 76, 86, 94];
-const MAX_DRIFT = 0;
-const SIDES = ["start", "center", "end"] as const;
 
 const useIsoLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
@@ -46,13 +41,13 @@ function pick<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)] as T;
 }
 
-/** Heights for a batch, never repeating the same size more than twice in a row (avoids a grid look). */
+/** Heights for a batch: two tiles of the exact same size are never placed next to each other. */
 function pickHeights(count: number): number[] {
   const out: number[] = [];
   for (let i = 0; i < count; i++) {
     let h = pick(H_TIERS);
-    if (i >= 2 && out[i - 1] === out[i - 2] && h === out[i - 1]) {
-      h = pick(H_TIERS.filter((v) => v !== h));
+    if (i >= 1 && h === out[i - 1]) {
+      h = pick(H_TIERS.filter((v) => v !== out[i - 1]));
     }
     out.push(h);
   }
@@ -74,9 +69,7 @@ function seedBatch(pool: HomeShowcaseSlide[], count: number): Batch {
     key: `seed:${slide.key}:${i}`,
     slide,
     h: 0.92,
-    dy: 0,
-    w: 86,
-    side: "center" as const,
+    vy: 0,
   }));
   return { id: 0, tiles };
 }
@@ -95,9 +88,8 @@ function randomBatch(pool: HomeShowcaseSlide[], count: number): Batch {
     key: `${id}:${slide.key}:${i}`,
     slide,
     h: heights[i] as number,
-    dy: Math.round((Math.random() * 2 - 1) * MAX_DRIFT),
-    w: pick(W_TIERS),
-    side: pick(SIDES),
+    // Randomly nudge shorter tiles up or down within the band (taller tiles have little room to move).
+    vy: Math.random() * 2 - 1,
   }));
   return { id, tiles };
 }
@@ -342,10 +334,8 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
                 style={
                   {
                     "--h": `${tile.h}`,
-                    "--dy": `${tile.dy}vh`,
-                    "--w": `${tile.w}%`,
+                    "--vy": `${tile.vy}`,
                     "--ratio": tile.slide.aspectRatio ?? 1,
-                    "--side": tile.side,
                   } as React.CSSProperties
                 }
                 onClick={(e) => onTileClick(e, tile.key)}

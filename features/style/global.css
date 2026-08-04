@@ -500,8 +500,8 @@ html.has-theme-cursor [contenteditable="true"] {
 /*
  * Home Showcase — features/page-builder/sections/home-showcase-section/. A full-bleed, reshuffled
  * scatter of every project image ticked "Show on home". Horizontal scroll (drag / trackpad) on
- * desktop with hover-revealed captions; a vertical, two-tap stack on mobile. Sizes and vertical
- * drift are randomized per load in JS via the --h / --dy / --w / --side custom props.
+ * desktop with hover-revealed captions; a one-screen swipeable band on mobile. Per-tile height and
+ * vertical position within the band are randomized per load in JS via the --h / --vy custom props.
  */
 .home-showcase_head {
   display: flex;
@@ -556,7 +556,14 @@ html.has-theme-cursor [contenteditable="true"] {
   /* `--h` is a unitless fraction; desktop resolves it against the flex-stretched batch height. */
   height: calc(var(--h) * 100%);
   aspect-ratio: var(--ratio, 1);
-  transform: translateY(var(--dy, 0));
+  /*
+   * Tiles are centered in the band (batch `align-items: center`), then nudged up/down by `--vy`
+   * (-1..1). The available slack each way is half the empty space above+below the tile; as a
+   * fraction of the tile's OWN height that's (1 - --h) / (2 · --h), so `--vy = ±1` lands the tile
+   * flush against the top/bottom of the band and it never spills past the tallest tile. Because it's
+   * relative to the tile's own height, the same rule holds on desktop and mobile.
+   */
+  transform: translateY(calc(var(--vy, 0) * (1 - var(--h)) / (2 * var(--h)) * 100%));
   color: inherit;
 }
 
