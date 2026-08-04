@@ -553,7 +553,8 @@ html.has-theme-cursor [contenteditable="true"] {
 .home-showcase_tile {
   position: relative;
   flex: 0 0 auto;
-  height: var(--h);
+  /* `--h` is a unitless fraction; desktop resolves it against the flex-stretched batch height. */
+  height: calc(var(--h) * 100%);
   aspect-ratio: var(--ratio, 1);
   transform: translateY(var(--dy, 0));
   color: inherit;
@@ -633,14 +634,59 @@ html.has-theme-cursor [contenteditable="true"] {
   color: var(--colors--accent-color);
 }
 
-/* Mobile: the same endless horizontal reel, sized as a swipeable band within the scrolling page. */
+/*
+ * Mobile home = one screen, everything fixed except the reel (mirrors the desktop lock, but touch).
+ * The reel band has a DEFINITE height (`--reel-h`, a dvh length) and each tile is sized in real
+ * viewport units — `height: var(--h) * --reel-h`, width from the aspect ratio. This avoids the
+ * percentage-height-in-a-flex-parent path, which iOS Safari fails to resolve (tiles collapsed and
+ * stacked on top of each other). See home-showcase-scroll.tsx.
+ */
 @media screen and (max-width: 767px) {
+  html.home-route .main {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  /* Nothing below the reel on the homepage: no footer, no about-preview tail. */
+  html.home-route .footer,
+  html.home-route .section_about-preview {
+    display: none;
+  }
+
+  /* Compact hero so the reel gets the rest of the screen; smaller intro type. */
+  html.home-route .section_about.section-padding-top {
+    padding-top: 4.75em;
+    padding-bottom: 0.5em;
+  }
+
+  html.home-route .about_intro-main {
+    gap: 1em;
+  }
+
+  html.home-route .about_intro-text {
+    font-size: 0.82em;
+    line-height: 1.5;
+  }
+
+  html.home-route .section_home-showcase {
+    padding-top: 1em;
+    padding-bottom: 0;
+  }
+
   .home-showcase_track {
-    height: 62vh;
+    --reel-h: 64dvh;
+    height: var(--reel-h);
     gap: 4vw;
     padding-inline: var(--container-padding);
     cursor: default;
     user-select: auto;
+  }
+
+  .home-showcase_tile {
+    /* Explicit box in dvh units — both dimensions definite, no aspect-ratio/% ambiguity on iOS. */
+    height: calc(var(--h) * var(--reel-h));
+    width: calc(var(--h) * var(--reel-h) * var(--ratio, 1));
+    aspect-ratio: auto;
   }
 }
 

@@ -31,9 +31,11 @@ const BATCH = 36;
 const MAX_BATCHES = 6; // bound the DOM on an endless scroll (~216 tiles)
 const EDGE_PX = 1600; // grow the strip this far before reaching either end
 
-// `--h` is a PERCENT of the reel track height. Max stays 100 (fill), but a wide spread down to ~half
-// gives real size variance so the strip never reads as a uniform grid.
-const H_TIERS = [50, 64, 78, 90, 100];
+// `--h` is a UNITLESS FRACTION of the reel track height (CSS multiplies it: desktop `* 100%`, mobile
+// `* --reel-h`). Max stays 1 (fill), with a spread down to ~half so the strip never reads as a grid.
+// Unitless (not `%`) so mobile can size tiles in real viewport units — iOS Safari doesn't resolve a
+// percentage height against a flex-stretched parent, which made mobile tiles collapse and overlap.
+const H_TIERS = [0.5, 0.64, 0.78, 0.9, 1];
 const W_TIERS = [66, 76, 86, 94];
 const MAX_DRIFT = 0;
 const SIDES = ["start", "center", "end"] as const;
@@ -71,7 +73,7 @@ function seedBatch(pool: HomeShowcaseSlide[], count: number): Batch {
   const tiles = pool.slice(0, count).map((slide, i) => ({
     key: `seed:${slide.key}:${i}`,
     slide,
-    h: 92,
+    h: 0.92,
     dy: 0,
     w: 86,
     side: "center" as const,
@@ -339,7 +341,7 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
                 data-active={isActive ? "true" : undefined}
                 style={
                   {
-                    "--h": `${tile.h}%`,
+                    "--h": `${tile.h}`,
                     "--dy": `${tile.dy}vh`,
                     "--w": `${tile.w}%`,
                     "--ratio": tile.slide.aspectRatio ?? 1,
