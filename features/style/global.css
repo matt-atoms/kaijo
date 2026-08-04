@@ -460,9 +460,11 @@ html.has-theme-cursor [contenteditable="true"] {
 }
 
 .selected_name {
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 2em;
-  line-height: 1;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.25em;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
   color: #fff;
   text-transform: uppercase;
 }
@@ -1489,9 +1491,10 @@ html.home-route .section_feature-links {
 
 .about-text_quote {
   max-width: 16em;
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 2.2em;
-  line-height: 1.05;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.5em;
+  font-weight: 500;
+  line-height: 1.3;
   opacity: 1;
   text-align: left;
 }
@@ -2424,8 +2427,15 @@ html.home-route .section_feature-links {
   align-items: start;
 }
 
-.prints_head-title {
+/* Compound selector out-specifies webflow's `.section_title` (display font), which lands later. */
+.section_title.prints_head-title {
   grid-area: title;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .prints_head .prints_intro {
@@ -2532,9 +2542,12 @@ html.home-route .section_feature-links {
 }
 
 .prints_series-title {
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 2.4em;
-  line-height: 1;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .prints_series-desc {
@@ -3164,9 +3177,12 @@ html.home-route .section_feature-links {
 }
 
 .book-buy_price {
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 1.8em;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.4em;
+  font-weight: 600;
   line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .book-buy_button {
@@ -3243,8 +3259,11 @@ html.home-route .section_feature-links {
 }
 
 .book-related_link {
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 1.6em;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.1em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   transition: color 0.3s ease;
 }
 
@@ -3373,8 +3392,12 @@ html.home-route .section_feature-links {
 }
 
 .cart-panel_title {
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 1.6em;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.05em;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .cart-panel_close {
@@ -3482,8 +3505,11 @@ html.home-route .section_feature-links {
 .cart-panel_subtotal {
   display: flex;
   justify-content: space-between;
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 1.3em;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.05em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .cart-panel_checkout {
