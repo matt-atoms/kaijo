@@ -666,7 +666,8 @@ html.has-theme-cursor [contenteditable="true"] {
     padding-bottom: 0.5em;
   }
 
-  html.home-route .about_intro-main {
+  html.home-route .about_intro-main,
+  html.home-route .about_intro-meta {
     gap: 1em;
   }
 
@@ -746,21 +747,47 @@ html.home-route .section_feature-links {
 
   /* Compact hero so the reel gets the rest of the screen. */
   html.home-route .section_about.section-padding-top {
-    padding-top: 4.75em;
-    padding-bottom: 0.5em;
+    padding-top: 4.5em;
+    padding-bottom: 0.25em;
   }
 
+  /* Smaller and a touch wider so the intro runs further across and takes fewer lines. */
   html.home-route .about_intro-text {
-    max-width: 34em;
-    font-size: 0.9em;
+    max-width: 46em;
+    font-size: 0.82em;
+  }
+
+  /*
+   * Email / Instagram and "Read more" share one line that spans the exact width of the intro text
+   * block above: `align-self: stretch` + the same max-width pins the row's right edge to the intro's
+   * right edge, and space-between pushes the links to the left limit, "Read more" to the right limit.
+   */
+  html.home-route .about_intro-meta {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    align-self: stretch;
+    max-width: 46em;
+    gap: 1em;
+  }
+
+  /* "Read more" matches the links' size and gets a light dash lead-in (echoing the "/" separator). */
+  html.home-route .about_intro-more {
+    font-size: 0.82em;
+  }
+
+  html.home-route .about_intro-more::before {
+    content: "– ";
+    color: #9a9a9a;
+    font-weight: 400;
   }
 
   /* The reel fills all remaining vertical space; each tile is a % of the track height (H_TIERS). */
   html.home-route .section_home-showcase {
     flex: 1 1 auto;
     min-height: 0;
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.75em;
   }
 
   html.home-route .home-showcase_track {
@@ -1350,6 +1377,17 @@ html.home-route .section_feature-links {
 
 .about_intro-text {
   max-width: 42em;
+}
+
+/*
+ * Wraps the contact links + "Read more". Stacked by default (info page, mobile home); the desktop
+ * home hero turns it into one space-between row spanning the intro width (see the home-route block).
+ */
+.about_intro-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5em;
 }
 
 /* "Read more →" under the intro — same treatment as the (removed) about-preview link, sized up a touch. */
