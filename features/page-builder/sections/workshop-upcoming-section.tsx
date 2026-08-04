@@ -58,7 +58,14 @@ export async function WorkshopUpcomingSection({ docId, sectionKey }: { docId: st
             {events.map((event) => (
               <div key={event.key} className="workshop-upcoming_event">
                 <div className="workshop-upcoming_event-head">
-                  {event.title && <span className="workshop-upcoming_title">{event.title}</span>}
+                  {event.title &&
+                    (event.link?.href ? (
+                      <SanityLink link={event.link} className="workshop-upcoming_title workshop-upcoming_title--link">
+                        {event.title}
+                      </SanityLink>
+                    ) : (
+                      <span className="workshop-upcoming_title">{event.title}</span>
+                    ))}
                   <span className="workshop-upcoming_date">{event.date}</span>
                   {event.location && <span className="workshop-upcoming_location">{event.location}</span>}
                 </div>

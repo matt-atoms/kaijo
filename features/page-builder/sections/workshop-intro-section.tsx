@@ -51,12 +51,15 @@ export async function WorkshopIntroSection({ docId, sectionKey }: { docId: strin
           </div>
           <div className="workshop-intro_body">
             <div className="w-richtext">{content.appRichText && <PortableText value={content.appRichText} />}</div>
-            <GetInTouchForm
-              triggerLabel={content.link?.text || "Request info"}
-              triggerClassName="workshop-intro_cta"
-              title="Request info"
-              defaultSubject="Workshop enquiry"
-            />
+            {/* Only when a CTA link is set (the main workshops page); detail pages book at the bottom. */}
+            {content.link?.text && (
+              <GetInTouchForm
+                triggerLabel={content.link.text}
+                triggerClassName="workshop-intro_cta"
+                title="Request info"
+                defaultSubject="Workshop enquiry"
+              />
+            )}
           </div>
         </div>
       </div>

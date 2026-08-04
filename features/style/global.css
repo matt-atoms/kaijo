@@ -1736,6 +1736,20 @@ html.home-route .section_feature-links {
   margin-bottom: 0;
 }
 
+/* Section headers inside the intro copy ("Who's it for") — bold-caps mono, overriding the h2/h3
+   webflow display base so they match the site's section headers. */
+.workshop-intro_body .w-richtext h2,
+.workshop-intro_body .w-richtext h3,
+.workshop-intro_body .w-richtext h4 {
+  margin: 1.4em 0 0.6em;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 0.88em;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .workshop-intro_cta {
   text-transform: uppercase;
   font-size: 0.88em;
@@ -2348,6 +2362,15 @@ html.home-route .section_feature-links {
   font-size: 0.95em;
   font-weight: 600;
   letter-spacing: 0.03em;
+}
+
+/* When the name links to its detail page. */
+.workshop-upcoming_title--link {
+  transition: color 0.3s ease;
+}
+
+.workshop-upcoming_title--link:hover {
+  color: var(--colors--accent-color);
 }
 
 /*
