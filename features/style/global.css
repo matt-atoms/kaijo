@@ -1244,7 +1244,7 @@ html.home-route .section_feature-links {
 /*
  * Project detail page — app/(web)/project/[slug]/page.tsx. Tighter top spacing; the sticky
  * description pins higher so it stays fully visible; it blends over the collage like the header;
- * larger/bolder body text; and a display-font title.
+ * larger/bolder body text; and a bold-caps mono title (matching the site's section headers).
  */
 .section_work.section_work--project {
   padding-top: 6em;
@@ -1258,10 +1258,12 @@ html.home-route .section_feature-links {
 }
 
 .section_work--project .project_name-text {
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 3em;
-  font-weight: 400;
-  line-height: 1.05;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.25em;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .section_work--project .w-richtext p {
@@ -1687,9 +1689,10 @@ html.home-route .section_feature-links {
   /* Black side bar (overrides the webflow blockquote grey). */
   border-left: 4px solid var(--page-ink);
   padding: 0 0 0 0.6em;
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 2.2em;
-  line-height: 1.05;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.5em;
+  font-weight: 500;
+  line-height: 1.3;
 }
 
 .workshop-intro_quote p {
@@ -1703,7 +1706,8 @@ html.home-route .section_feature-links {
 .workshop-intro_quote cite {
   font-family: inherit;
   font-style: normal;
-  font-size: 0.4em;
+  font-size: 0.58em;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   opacity: 0.6;
@@ -1843,9 +1847,12 @@ html.home-route .section_feature-links {
 }
 
 .workshop-pricing_tier-price {
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 2.4em;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.4em;
+  font-weight: 600;
   line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .workshop-pricing_tier-title {
@@ -2233,9 +2240,12 @@ html.home-route .section_feature-links {
 }
 
 .workshop-upcoming_date {
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 2em;
-  line-height: 1;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.3em;
+  font-weight: 600;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .workshop-upcoming_location {
@@ -2282,9 +2292,12 @@ html.home-route .section_feature-links {
 }
 
 .workshop-upcoming_price {
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 1.6em;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.2em;
+  font-weight: 600;
   line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .workshop-upcoming_book {
@@ -2308,10 +2321,11 @@ html.home-route .section_feature-links {
 }
 
 .workshop-upcoming_empty-text {
-  max-width: 16em;
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 1.8em;
-  line-height: 1.1;
+  max-width: 20em;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.2em;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
 .workshop-upcoming_empty-cta {
@@ -2948,9 +2962,12 @@ html.home-route .section_feature-links {
 }
 
 .books_entry-title {
-  font-family: "Art Grootfontein", Arial, sans-serif;
-  font-size: 2.4em;
-  line-height: 1;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .books_entry-year {
