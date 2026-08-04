@@ -19,6 +19,7 @@ export const workshopUpcomingSection = defineField({
           type: "object",
           name: "workshopEvent",
           fields: [
+            defineField({ name: "title", type: "string", title: "Workshop name" }),
             defineField({ name: "date", type: "string", title: "Date", validation: (R) => R.required() }),
             defineField({ name: "time", type: "string", title: "Time", description: "e.g. 10:00–14:30" }),
             defineField({ name: "location", type: "string", title: "Location" }),
@@ -34,7 +35,10 @@ export const workshopUpcomingSection = defineField({
             createLinkField({ title: "Booking / details link" }),
           ],
           preview: {
-            select: { title: "date", subtitle: "location" },
+            select: { title: "title", date: "date", subtitle: "location" },
+            prepare({ title, date, subtitle }) {
+              return { title: title || date || "Workshop", subtitle: [date, subtitle].filter(Boolean).join(" · ") };
+            },
           },
         }),
       ],

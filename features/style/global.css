@@ -2339,6 +2339,68 @@ html.home-route .section_feature-links {
   color: var(--colors--accent-color);
 }
 
+/* Workshop name above the date on an upcoming card (bold-caps mono, the site's header style). */
+.workshop-upcoming_title {
+  text-transform: uppercase;
+  font-size: 0.95em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/*
+ * Workshop detail gallery — features/page-builder/sections/workshop-gallery-section/. A finite,
+ * side-scrolling wall of example images (mirrors the work wall). The wall is full-bleed; its inline
+ * padding lines the first/last image up with the container edges.
+ */
+.workshop-gallery_heading {
+  margin-bottom: 1.5em;
+}
+
+.workshop-gallery_wall {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+  height: 60vh;
+  padding-inline: max(var(--container-padding), calc((100vw - var(--size-container)) / 2));
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+  overscroll-behavior-x: contain;
+}
+
+.workshop-gallery_wall::-webkit-scrollbar {
+  display: none;
+}
+
+.workshop-gallery_wall:active {
+  cursor: grabbing;
+}
+
+.workshop-gallery_tile {
+  position: relative;
+  flex: 0 0 auto;
+  height: var(--h, 52vh);
+  aspect-ratio: var(--ratio, 1);
+  overflow: hidden;
+}
+
+.workshop-gallery_image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 767px) {
+  .workshop-gallery_wall {
+    height: auto; /* fit the tiles so the images aren't cropped top/bottom on phones */
+    padding-inline: var(--container-padding);
+  }
+}
+
 /*
  * Prints — features/page-builder/sections/prints-gallery-section.tsx + prints-carousel.tsx.
  * A framed-print coverflow per series: the centre print is lit on a gallery wall, its neighbours

@@ -49,6 +49,9 @@ const _sections = {
   workshopIntroSectionField: dynamic(() =>
     import("~/features/page-builder/sections/workshop-intro-section").then((mod) => mod.WorkshopIntroSection)
   ),
+  workshopGallerySectionField: dynamic(() =>
+    import("~/features/page-builder/sections/workshop-gallery-section").then((mod) => mod.WorkshopGallerySection)
+  ),
   workshopLearnSectionField: dynamic(() =>
     import("~/features/page-builder/sections/workshop-learn-section").then((mod) => mod.WorkshopLearnSection)
   ),

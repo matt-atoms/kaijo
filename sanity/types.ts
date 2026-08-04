@@ -682,6 +682,7 @@ export type WorkshopUpcomingSection = {
   heading?: string;
   lead?: string;
   events?: Array<{
+    title?: string;
     date?: string;
     time?: string;
     location?: string;
@@ -750,6 +751,19 @@ export type WorkshopLearnSection = {
     _type: "learnItem";
     _key: string;
   }>;
+};
+
+export type ProjectReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "project";
+};
+
+export type WorkshopGallerySection = {
+  _type: "workshopGallerySection";
+  heading?: string;
+  project?: ProjectReference;
 };
 
 export type WorkshopIntroSection = {
@@ -1226,13 +1240,6 @@ export type MediaSection = {
   caption?: string;
 };
 
-export type ProjectReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "project";
-};
-
 export type Book = {
   _id: string;
   _type: "book";
@@ -1505,6 +1512,12 @@ export type Article = {
           sectionSettings?: SectionSettings;
           sectionContent?: WorkshopIntroSection;
           _type: "workshopIntroSectionField";
+          _key: string;
+        }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: WorkshopGallerySection;
+          _type: "workshopGallerySectionField";
           _key: string;
         }
       | {
@@ -2099,6 +2112,12 @@ export type Page = {
         }
       | {
           sectionSettings?: SectionSettings;
+          sectionContent?: WorkshopGallerySection;
+          _type: "workshopGallerySectionField";
+          _key: string;
+        }
+      | {
+          sectionSettings?: SectionSettings;
           sectionContent?: WorkshopLearnSection;
           _type: "workshopLearnSectionField";
           _key: string;
@@ -2486,6 +2505,8 @@ export type AllSanitySchemaTypes =
   | WorkshopNotesSection
   | WorkshopPricingSection
   | WorkshopLearnSection
+  | ProjectReference
+  | WorkshopGallerySection
   | WorkshopIntroSection
   | AboutContactSection
   | AboutCredentialsSection
@@ -2502,7 +2523,6 @@ export type AllSanitySchemaTypes =
   | TextSection
   | CtaSection
   | MediaSection
-  | ProjectReference
   | Book
   | SanityImageCrop
   | SanityImageHotspot
@@ -3389,6 +3409,14 @@ export type AgentMarkdownContentQueryResult =
             caption: null;
           }
         | {
+            _type: "workshopGallerySectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
             _type: "workshopIntroSectionField";
             text: Array<{
               _type: "block";
@@ -3953,6 +3981,14 @@ export type AgentMarkdownContentQueryResult =
             caption: null;
           }
         | {
+            _type: "workshopGallerySectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
             _type: "workshopIntroSectionField";
             text: Array<{
               _type: "block";
@@ -4171,6 +4207,10 @@ export type PageSectionsQResult = Array<
   | {
       _key: string;
       _type: "workOverviewSectionField";
+    }
+  | {
+      _key: string;
+      _type: "workshopGallerySectionField";
     }
   | {
       _key: string;
@@ -5606,6 +5646,37 @@ export type WorkOverviewSectionQResult = {
   }> | undefined;
 } | undefined;
 
+// Source: features/page-builder/sections/workshop-gallery-section/index.tsx
+// Variable: WorkshopGallerySectionQ
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopGallerySectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      "prints": project->prints[defined(image.asset)].image{   "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot, },      "overview": project->overviewImages[defined(image.asset)].image{   "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot, }    }}
+export type WorkshopGallerySectionQResult = {
+  content: {
+    heading: string | undefined;
+    prints: Array<{
+      _id: string;
+      _rev: string;
+      altText: string | undefined;
+      description: string | undefined;
+      title: string | undefined;
+      lqip: string | undefined;
+      dimensions: SanityImageDimensions | undefined;
+      crop: SanityImageCrop | undefined;
+      hotspot: SanityImageHotspot | undefined;
+    }> | undefined;
+    overview: Array<{
+      _id: string;
+      _rev: string;
+      altText: string | undefined;
+      description: string | undefined;
+      title: string | undefined;
+      lqip: string | undefined;
+      dimensions: SanityImageDimensions | undefined;
+      crop: SanityImageCrop | undefined;
+      hotspot: SanityImageHotspot | undefined;
+    }> | undefined;
+  } | undefined;
+} | undefined;
+
 // Source: features/page-builder/sections/workshop-intro-section.tsx
 // Variable: WorkshopIntroSectionQ
 // Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopIntroSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},      quote,      quoteAttribution,      appRichText,      "link": appLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}    }}
@@ -5759,13 +5830,14 @@ export type WorkshopTestimonialsSectionQResult = {
 
 // Source: features/page-builder/sections/workshop-upcoming-section.tsx
 // Variable: WorkshopUpcomingSectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopUpcomingSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      lead,      events[]{        "key": _key,        date,        time,        location,        language,        availability,        price,        deadline,        "link": appLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}      },      emptyMessage,      emptyCtaLabel,      "emptyCtaLink": emptyCtaLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopUpcomingSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      lead,      events[]{        "key": _key,        title,        date,        time,        location,        language,        availability,        price,        deadline,        "link": appLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}      },      emptyMessage,      emptyCtaLabel,      "emptyCtaLink": emptyCtaLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )}    }}
 export type WorkshopUpcomingSectionQResult = {
   content: {
     heading: string | undefined;
     lead: string | undefined;
     events: Array<{
       key: string;
+      title: string | undefined;
       date: string | undefined;
       time: string | undefined;
       location: string | undefined;

@@ -11,6 +11,7 @@ const WorkshopUpcomingSectionQ =
       lead,
       events[]{
         "key": _key,
+        title,
         date,
         time,
         location,
@@ -57,6 +58,7 @@ export async function WorkshopUpcomingSection({ docId, sectionKey }: { docId: st
             {events.map((event) => (
               <div key={event.key} className="workshop-upcoming_event">
                 <div className="workshop-upcoming_event-head">
+                  {event.title && <span className="workshop-upcoming_title">{event.title}</span>}
                   <span className="workshop-upcoming_date">{event.date}</span>
                   {event.location && <span className="workshop-upcoming_location">{event.location}</span>}
                 </div>

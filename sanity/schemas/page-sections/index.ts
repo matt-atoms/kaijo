@@ -17,6 +17,7 @@ import { printsShowcaseSection } from "./prints-showcase-section";
 import { projectHeroSection } from "./project-hero-section";
 import { textSection } from "./text-section";
 import { workOverviewSection } from "./work-overview-section";
+import { workshopGallerySection } from "./workshop-gallery-section";
 import { workshopIntroSection } from "./workshop-intro-section";
 import { workshopLearnSection } from "./workshop-learn-section";
 import { workshopNotesSection } from "./workshop-notes-section";
@@ -43,6 +44,7 @@ export const sections = [
   aboutCredentialsSection,
   aboutContactSection,
   workshopIntroSection,
+  workshopGallerySection,
   workshopLearnSection,
   workshopPricingSection,
   workshopNotesSection,
