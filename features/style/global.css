@@ -745,10 +745,16 @@ html.home-route .section_feature-links {
     display: none;
   }
 
-  /* Compact hero so the reel gets the rest of the screen. */
+  /* Compact hero so the reel gets the rest of the screen. Extra top padding balances the wordmark →
+     intro gap against the (tightened) intro → social gap below. */
   html.home-route .section_about.section-padding-top {
-    padding-top: 4.5em;
+    padding-top: 5.4em;
     padding-bottom: 0.25em;
+  }
+
+  /* Equal breathing room above and below the intro: wordmark → intro (padding-top) ≈ intro → social. */
+  html.home-route .about_intro-main {
+    gap: 1em;
   }
 
   /* Smaller and a touch wider so the intro runs further across and takes fewer lines. */
@@ -771,15 +777,9 @@ html.home-route .section_feature-links {
     gap: 1em;
   }
 
-  /* "Read more" matches the links' size and gets a light dash lead-in (echoing the "/" separator). */
+  /* "Read more" matches the links' size; it keeps its right-limit position via the space-between row. */
   html.home-route .about_intro-more {
     font-size: 0.82em;
-  }
-
-  html.home-route .about_intro-more::before {
-    content: "– ";
-    color: #9a9a9a;
-    font-weight: 400;
   }
 
   /* The reel fills all remaining vertical space; each tile is a % of the track height (H_TIERS). */
