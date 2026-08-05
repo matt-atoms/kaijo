@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { defineQuery, PortableText, stegaClean } from "next-sanity";
-import { Link } from "~/components/link";
 import { env } from "~/env";
 import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import { sanityFetch } from "~/features/sanity/client";
@@ -10,6 +9,7 @@ import { DevelopLens } from "~/features/site/develop-lens";
 import { seo } from "~/features/site/seo/utils";
 import { SiteShell } from "~/features/site/site-shell";
 import { SANITY_PROJECT_DOCUMENT_TYPE } from "~/sanity/constants";
+import { ProjectCategoryGallery } from "./category-gallery";
 
 const ProjectQ = defineQuery(`
   *[_type == "${SANITY_PROJECT_DOCUMENT_TYPE}" && slug.current == $slug][0]{
@@ -24,7 +24,6 @@ const ProjectQ = defineQuery(`
     availability,
     credits,
     date,
-    "nextProject": nextProject->{ title, "slug": slug.current, category },
     image1{${ImageFragment}},
     image2{${ImageFragment}},
     image3{${ImageFragment}},
@@ -58,7 +57,6 @@ type ProjectResult =
       availability: string | null;
       credits: string | null;
       date: string | null;
-      nextProject: { title: string | null; slug: string | null; category: string | null } | null;
     } & { [K in `image${number}`]?: ImageFragmentResult | null })
   | null;
 
@@ -145,8 +143,8 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
     metaRows.push({ label: "Availability", value: project.availability });
   }
 
+  const category = stegaClean(project.category ?? "");
   const backHref = isCommission ? "/work#commissions" : "/work#projects";
-  const nextSlug = stegaClean(project.nextProject?.slug ?? "");
 
   return (
     <SiteShell>
@@ -172,48 +170,39 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
               )}
               <div className="w-richtext">{project.description && <PortableText value={project.description} />}</div>
             </div>
-            {SECTION_LAYOUT.map((section, sectionIndex) => (
-              <div key={section.className} className={section.className}>
-                {sectionIndex === 0 && <div className="project_description-wrapper" />}
-                {section.slots.map((slotClassName) => {
-                  const image = images[slotIndex];
-                  slotIndex += 1;
+            <div className="portfolio_images">
+              {SECTION_LAYOUT.map((section) => (
+                <div key={section.className} className={section.className}>
+                  {section.slots.map((slotClassName) => {
+                    const image = images[slotIndex];
+                    slotIndex += 1;
 
-                  if (!image) {
-                    return null;
-                  }
+                    if (!image) {
+                      return null;
+                    }
 
-                  return (
-                    <KaijoImage
-                      key={image._id}
-                      image={image}
-                      className={slotClassName}
-                      sizes="(max-width: 767px) 100vw, (max-width: 991px) 90vw, 84vw"
-                    />
-                  );
-                })}
-              </div>
-            ))}
+                    return (
+                      <KaijoImage
+                        key={image._id}
+                        image={image}
+                        className={slotClassName}
+                        sizes="(max-width: 767px) 100vw, (max-width: 991px) 62vw"
+                      />
+                    );
+                  })}
+                </div>
+              ))}
 
-            {isCommission && project.credits && (
-              <div className="project_credits">
-                <h2 className="section-eyebrow">Credits</h2>
-                <p className="project_credits-text">{project.credits}</p>
-              </div>
-            )}
-
-            <nav className="project_next" aria-label="More work">
-              {nextSlug && (
-                <Link href={`/project/${nextSlug}`} className="project_next-primary">
-                  <span className="project_next-label">Next project</span>
-                  <span className="project_next-title">{project.nextProject?.title} →</span>
-                </Link>
+              {isCommission && project.credits && (
+                <div className="project_credits">
+                  <h2 className="section-eyebrow">Credits</h2>
+                  <p className="project_credits-text">{project.credits}</p>
+                </div>
               )}
-              <Link href={backHref} className="project_next-back">
-                ← Back to Work
-              </Link>
-            </nav>
+            </div>
           </div>
+
+          <ProjectCategoryGallery category={category} currentSlug={slug} backHref={backHref} />
         </div>
       </div>
     </SiteShell>

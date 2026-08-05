@@ -180,22 +180,6 @@ export const project = defineType({
       description: "Sort order in the portfolio grid (homepage bottom grid and /work). Lower comes first.",
     }),
     defineField({
-      group: "details",
-      name: "nextProject",
-      type: "reference",
-      title: "Next project",
-      description:
-        "Manually pick the project shown as “Next project →” at the foot of this page. Leave empty to only show “Back to Work”.",
-      to: [{ type: "project" }],
-      weak: true,
-      options: {
-        filter: ({ document }) => {
-          const id = (typeof document?._id === "string" ? document._id : "").replace(/^drafts\./, "");
-          return { filter: "!(_id in [$id, $draft])", params: { id, draft: `drafts.${id}` } };
-        },
-      },
-    }),
-    defineField({
       group: "media",
       name: "thumbnail",
       type: "image",

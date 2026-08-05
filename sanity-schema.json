@@ -10422,14 +10422,6 @@
         },
         "optional": true
       },
-      "nextProject": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "project.reference"
-        },
-        "optional": true
-      },
       "thumbnail": {
         "type": "objectAttribute",
         "value": {
