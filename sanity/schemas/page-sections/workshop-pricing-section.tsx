@@ -10,6 +10,23 @@ export const workshopPricingSection = defineField({
     defineField({ name: "heading", type: "string", title: "Heading" }),
     defineField({ name: "lead", type: "text", rows: 3, title: "Lead" }),
     defineField({
+      name: "purchase",
+      type: "object",
+      title: "Add to cart (bookable workshop)",
+      description:
+        "Set on a specific workshop's page so visitors can book & pay — it adds this workshop to the same cart as books. Leave empty to keep the section enquiry-only.",
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({
+          name: "name",
+          type: "string",
+          title: "Cart name",
+          description: "How it reads in the cart, e.g. “Cityscapes and Abstracts workshop”.",
+        }),
+        defineField({ name: "price", type: "number", title: "Price (€)" }),
+      ],
+    }),
+    defineField({
       name: "tiers",
       type: "array",
       title: "Tiers",

@@ -1971,6 +1971,50 @@ html.home-route .section_feature-links {
   border: 1px solid var(--page-ink);
 }
 
+/* Booking cell — on a bookable workshop page it stacks the Book & pay action above the "ask first"
+   enquiry form; on the overview it just holds the enquiry form. */
+.workshop-booking-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.workshop-purchase {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.workshop-purchase_button {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1em;
+  padding: 1em 1.25em;
+  border: 1px solid var(--page-ink);
+  background: var(--page-ink);
+  color: var(--page-bg);
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.workshop-purchase_button:hover {
+  opacity: 0.85;
+}
+
+.workshop-purchase_price {
+  font-size: 1.1em;
+}
+
+.workshop-purchase_session {
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
 .workshop-pricing_tier-price {
   font-family: "Basier Circle Mono", Arial, sans-serif;
   font-size: 1.4em;
@@ -3563,6 +3607,12 @@ html.home-route .section_feature-links {
   height: auto;
   object-fit: cover;
   flex-shrink: 0;
+}
+
+/* Placeholder box for cart items without a cover (e.g. a workshop booking). */
+.cart-item_cover--none {
+  height: 4.5em;
+  background: color-mix(in srgb, var(--page-ink) 12%, transparent);
 }
 
 .cart-item_info {

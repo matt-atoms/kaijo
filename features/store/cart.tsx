@@ -42,7 +42,11 @@ export function Cart() {
                 <ul className="cart-items">
                   {items.map((item) => (
                     <li key={item.id} className="cart-item">
-                      <img src={item.coverUrl} alt="" className="cart-item_cover" />
+                      {item.coverUrl ? (
+                        <img src={item.coverUrl} alt="" className="cart-item_cover" />
+                      ) : (
+                        <span className="cart-item_cover cart-item_cover--none" aria-hidden="true" />
+                      )}
                       <div className="cart-item_info">
                         <span className="cart-item_title">{item.title}</span>
                         <span className="cart-item_variant">{item.variantName}</span>

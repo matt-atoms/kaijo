@@ -1,5 +1,6 @@
-import { defineQuery } from "next-sanity";
+import { defineQuery, stegaClean } from "next-sanity";
 import { sanityFetch } from "~/features/sanity/client";
+import { WorkshopPurchase } from "~/features/store/workshop-purchase";
 import type { WorkshopPricingSectionQResult } from "~/sanity/types";
 import { WorkshopBookingForm } from "./workshop-booking-form";
 
@@ -8,6 +9,7 @@ const WorkshopPricingSectionQ =
     "content": sectionContent{
       heading,
       lead,
+      purchase,
       tiers[]{ "key": _key, title, price, description },
       note,
       bookingHeading,
@@ -35,6 +37,12 @@ export async function WorkshopPricingSection({ docId, sectionKey }: { docId: str
   const extraOptions = (content.bookingExtraOptions ?? []).filter((option): option is string => Boolean(option));
   const options = [...tierOptions, ...extraOptions];
 
+  // A bookable workshop (name + price set) shows a "Book & pay" → cart action; the enquiry form then
+  // becomes the "ask a question first" path. Without it the section stays enquiry-only (the overview).
+  const purchaseName = stegaClean(content.purchase?.name ?? "");
+  const purchasePrice = content.purchase?.price;
+  const purchasable = Boolean(purchaseName) && typeof purchasePrice === "number";
+
   return (
     <div id="enquire" className="section_workshop-pricing section-padding-top">
       <div className="container">
@@ -54,7 +62,16 @@ export async function WorkshopPricingSection({ docId, sectionKey }: { docId: str
               {tier.description && <p className="workshop-pricing_tier-desc">{tier.description}</p>}
             </div>
           ))}
-          <WorkshopBookingForm heading={content.bookingHeading} intro={content.bookingIntro} options={options} />
+          <div className="workshop-booking-cell">
+            {purchasable && purchasePrice != null && (
+              <WorkshopPurchase id={docId} name={purchaseName} session={content.lead} price={purchasePrice} />
+            )}
+            <WorkshopBookingForm
+              heading={purchasable ? "Prefer to ask first?" : content.bookingHeading}
+              intro={purchasable ? "Not ready to book — send a question and I'll reply by email." : content.bookingIntro}
+              options={options}
+            />
+          </div>
         </div>
         {content.note && <p className="workshop-pricing_note">{content.note}</p>}
       </div>

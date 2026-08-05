@@ -3,14 +3,18 @@
 import * as React from "react";
 
 export type CartItem = {
-  /** Unique per book+edition, e.g. `${bookId}:${variantKey}`. */
+  /** Unique per product+variant, e.g. `${bookId}:${variantKey}` or `workshop:${id}`. */
   id: string;
+  /** "book" (default) or "workshop" — the cart holds both. */
+  kind?: "book" | "workshop";
+  /** Grouping id of the source product (book id or workshop id). */
   bookId: string;
   slug: string;
   title: string;
   variantName: string;
   price: number;
-  coverUrl: string;
+  /** Optional — books have a cover; workshops may not. */
+  coverUrl?: string;
   qty: number;
 };
 

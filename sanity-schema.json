@@ -1043,6 +1043,29 @@
   },
   {
     "type": "type",
+    "name": "purchase",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "name": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "price": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
     "name": "emptyCtaLink",
     "value": {
       "type": "object",
@@ -4502,6 +4525,14 @@
           "type": "objectAttribute",
           "value": {
             "type": "string"
+          },
+          "optional": true
+        },
+        "purchase": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "purchase"
           },
           "optional": true
         },
