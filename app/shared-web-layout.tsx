@@ -7,6 +7,7 @@ import { KeyboardFocusMode } from "~/features/dom/keyboard-focus-mode";
 import { DraftModeProvider } from "~/features/draft-mode/context";
 import { fonts } from "~/features/fonts";
 import { MotionProvider } from "~/features/motion/lazy-motion";
+import { HashScroll } from "~/features/site/hash-scroll";
 import { ThemeCursor } from "~/features/site/theme-cursor";
 import { cx } from "~/features/style/utils";
 import { ViewTransitions } from "~/features/view-transition/app-view-transitions";
@@ -75,6 +76,7 @@ export function SharedWebLayout(props: SharedWebLayoutProps) {
           />
           <MotionProvider>
             <KeyboardFocusMode />
+            <HashScroll />
             {props.bodyStart}
             <DraftModeProvider isDraft={props.isDraft}>
               {props.isDraft && (
