@@ -41,7 +41,7 @@ Apply when: running a Lighthouse/PSI pass, investigating a Core Web Vitals regre
 ## Scope Guidance
 
 - **react-performance**: owns waterfalls, RSC serialization patterns, re-renders, bundle hygiene as coding patterns. This skill tells you *which* of those to reach for from audit evidence.
-- **design-engineering** / **frontend**: own the reveal/motion implementations this skill constrains (LazyMotion, Lenis, split-text systems). Perf fixes to animations must keep the choreography identical.
+- **design-engineering** / **frontend**: own the reveal/motion implementations this skill constrains (LazyMotion, split-text systems). Perf fixes to animations must keep the choreography identical.
 - **mantine-hooks**: prefer Mantine hooks when adding intersection/intent listeners for the gating patterns here.
 - **docs-maintenance**: when a pass changes behavior or env expectations, update the docs in the same change.
 

@@ -1,7 +1,6 @@
 /*
- * The boilerplate styled html/body as a fixed-height Lenis scroll container with its own
- * dark theme. Kaijo is a 1:1 Webflow port: native scrolling, and features/style/webflow.css
- * owns the page look (background, typography, layout).
+ * Kaijo scrolls natively on the document (no smooth-scroll library). It's a 1:1 Webflow port:
+ * features/style/webflow.css owns the page look (background, typography, layout).
  */
 
 img {

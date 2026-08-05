@@ -1,7 +1,6 @@
 "use client";
 
 import type { UrlObject } from "node:url";
-import { useLenis } from "lenis/react";
 import { stegaClean } from "next-sanity";
 import type * as ReactTypes from "react";
 import {
@@ -13,8 +12,8 @@ import {
 
 /**
  * True when a link points at the page we are already on (same path and query, no hash anchor), so the
- * click should smooth-scroll to the top instead of navigating. Hash anchors return `false` (they scroll
- * to a section). This is a scroll behavior, not a view transition. Client-only (reads `window`).
+ * click should scroll to the top instead of navigating. Hash anchors return `false` (they scroll to a
+ * section). This is a scroll behavior, not a view transition. Client-only (reads `window`).
  */
 function isSamePagePath(href: string | UrlObject, as?: string | UrlObject): boolean {
   const s = hrefToString(as || href);
@@ -36,8 +35,6 @@ function isSamePagePath(href: string | UrlObject, as?: string | UrlObject): bool
 }
 
 export function Link({ onClick, href: rawHref, as: rawAs, ...rest }: ReactTypes.ComponentProps<typeof VTLink>) {
-  const lenis = useLenis();
-
   // In Sanity preview (Draft Mode) stega encodes invisible characters into string hrefs. They break
   // hash-to-id matching (the section id carries its own payload) and same-page URL comparison, so
   // strip them before routing or rendering. No-op outside preview.
@@ -58,12 +55,7 @@ export function Link({ onClick, href: rawHref, as: rawAs, ...rest }: ReactTypes.
     // All transition behavior (cross-page nav, same-page hash, modal params) lives inside `VTLink`.
     if (isSamePagePath(href, as)) {
       e.preventDefault();
-
-      if (lenis) {
-        lenis.scrollTo(0);
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 

@@ -25,7 +25,7 @@ Apply when implementing **custom client behavior** that would otherwise use `use
 
 ## Scope Guidance
 
-- Pair with **frontend** when the change is broader runtime UI (Lenis, Motion, layout).
+- Pair with **frontend** when the change is broader runtime UI (scroll, Motion, layout).
 - Pair with **code-style** when refactoring conditional JSX or `run()` patterns; mantine-hooks does not own `run()`.
 
 ## Non-Goals

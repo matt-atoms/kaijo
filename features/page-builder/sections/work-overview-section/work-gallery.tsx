@@ -51,9 +51,8 @@ export function WorkGallery({ items }: { items: WorkGalleryItem[] }) {
   }, [items.length]);
 
   // Mouse-wheel support: turn a vertical wheel into horizontal scroll while the pointer is over the
-  // wall, and hand off to the page (Lenis) at either end so the reader keeps moving down the page.
-  // `data-lenis-prevent-wheel` on the wall stops Lenis hijacking these; it re-syncs on the native
-  // scroll the hand-off produces. Native (passive:false) listener so we can preventDefault.
+  // wall, and hand off to the page at either end so the reader keeps moving down the page. Native
+  // (passive:false) listener so we can preventDefault.
   React.useEffect(() => {
     const wall = wallRef.current;
     if (!wall) {
@@ -175,7 +174,6 @@ export function WorkGallery({ items }: { items: WorkGalleryItem[] }) {
       <div
         ref={wallRef}
         className="work-gallery_wall"
-        data-lenis-prevent-wheel="true"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}

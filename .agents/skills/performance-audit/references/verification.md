@@ -6,7 +6,7 @@ Lighthouse says nothing about whether animations still play. In one pass, two re
 
 - **Probe mid-flight, not end state.** Sampling computed opacities after the fact reads `1` for both "animated correctly" and "never animated" (un-animated split spans have no inline opacity, so they compute to 1). Instead, creep the scroll position and burst-sample target opacities at 45-90ms intervals: a correct stagger reads `0,0,0,0` then `1,0,0,0` then `1,1,0,0`; a broken one reads `1,1,1,1` from the first sample.
 - **Bisect against the original build.** `git diff file > patch; git checkout -- file; build; probe; git apply patch; build; probe`. Comparing stagger timelines between builds (137/229/320/458ms vs 140/232/325/417ms) is definitive in a way reasoning about effects is not.
-- **Know your scroller.** With Lenis or any custom scroll container, `window.scrollTo` silently does nothing and "after scroll" assertions test the un-scrolled page. Find the `.overflow-auto` container and scroll that.
+- **Know your scroller.** This project scrolls natively on the document, so `window.scrollTo` / `document.scrollingElement.scrollTop` work. (General caution: if a project ever uses a custom scroll container, `window.scrollTo` silently does nothing — find that container and scroll it instead.)
 - **MutationObserver on style attributes** pinpoints exactly when a reveal fires relative to element position (record `getBoundingClientRect()` in the callback).
 - Headless Chrome's `--dump-dom --virtual-time-budget=N` is cheap but unreliable for animation-driven flows (CSS `animationend` may never fire under virtual time). Use real time via CDP/playwright for anything choreography-related.
 

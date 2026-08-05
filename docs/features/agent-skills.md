@@ -14,7 +14,7 @@ Current skills:
 
 - `modern-web-guidance`: search tool (Google Chrome team) for framework-agnostic platform patterns: accessibility, performance/Core Web Vitals, forms, CSS, view transitions, passkeys, security/privacy. Use `search`/`retrieve`, then defer to the repo skills below for the project's chosen abstractions
 - `sanity` — CMS schema, GROQ, Studio, typegen, content components
-- `frontend` — runtime UI, components, Lenis, Motion
+- `frontend` — runtime UI, components, native scroll, Motion
 - `design-engineering` — UI craft, motion, easing, micro-interactions, transforms, gestures, animation a11y
 - `mantine-hooks` — prefer `@mantine/hooks` for listeners and client patterns before ad-hoc `useEffect` + `addEventListener`
 - `scaffolding-plop` — Plop generators for routes, sections, rich text blocks

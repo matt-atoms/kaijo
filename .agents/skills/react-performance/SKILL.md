@@ -23,12 +23,12 @@ Apply when profiling, reviewing, or refactoring for **latency**, **bundle size**
 
 1. Confirm the bottleneck (network waterfall, bundle, RSC serialization, client re-render, layout thrash, etc.).
 2. Read the relevant file(s) under Reference Files—start with the category that matches the bottleneck.
-3. Prefer patterns that match this stack: App Router, `sanityFetch` / RSC, Lenis/Motion; use **mantine-hooks** and **frontend** for client listeners and UI primitives.
+3. Prefer patterns that match this stack: App Router, `sanityFetch` / RSC, Motion; use **mantine-hooks** and **frontend** for client listeners and UI primitives.
 4. After behavior changes, run `npm run check.types` and `npm run check` when edits are broad.
 
 ## Scope Guidance
 
-- **frontend** — owns Lenis/Motion and client boundaries; pair when the change is mostly product UI with a performance angle.
+- **frontend** — owns Motion, native scroll, and client boundaries; pair when the change is mostly product UI with a performance angle.
 - **code-style** — owns **`run()`** and formatting; this skill does not replace braced `if` / readability rules.
 - **mantine-hooks** — prefer Mantine for listeners/disclosure before hand-rolling `useEffect` + DOM APIs.
 - **sanity** — owns schema/GROQ/typegen; only overlap when minimizing serialized props or parallelizing fetches in server components.

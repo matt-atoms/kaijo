@@ -13,7 +13,7 @@ description: Use when changing App Router view transitions, `app-view-transition
 - **`useViewTransitionLoadingCursor`** (inside `ViewTransitions`) patches `document.startViewTransition` once to toggle **`data-vt-loading`** on `<html>` while a transition runs (links, programmatic, back/forward). DOM-only, no React state.
 - **`router.push` / `replace`** run inside **`startTransition`** in `app-view-transitions.tsx` so React can schedule the route update with other concurrent work.
 - **`triggerTransition`**: without **`document.startViewTransition`**, the wrapped navigation still runs inside **`React.startTransition`**. With the API, **`onTransitionReady`** uses **`transition.ready`** with **`.catch(() => {})`** so a rejected ready promise is not an unhandled rejection.
-- **`Link` separation:** all transition logic lives in `Link` (VTLink) in `app-view-transitions.tsx`; the app-facing `components/link.tsx` is a thin wrapper that adds only the non-transition Lenis scroll-to-top for a same-page link (`isSamePagePath`).
+- **`Link` separation:** all transition logic lives in `Link` (VTLink) in `app-view-transitions.tsx`; the app-facing `components/link.tsx` is a thin wrapper that adds only the non-transition (native) scroll-to-top for a same-page link (`isSamePagePath`).
 
 ## Trigger Conditions
 
@@ -37,7 +37,7 @@ Apply when the work touches **view transitions**, **`app-view-transitions.tsx`**
 | `features/view-transition/view-transition.css` | Root cross-fade (`::view-transition-old/new(root)`); `--vt-duration-out` / `--vt-duration-in` / `--vt-easing` on `:root`; `html[data-vt-loading]` wait cursor; `prefers-reduced-motion` opt-out. |
 | `features/view-transition/context.tsx` | `ViewTransitionProvider` + `useViewTransition`: `isViewTransitionComplete` state (patches `startViewTransition` to observe finish; pathname + bfcache fallbacks) and `beginViewTransition` for manual transitions (e.g. theme sweeps). Does not touch `data-vt-loading` (owned by the loading-cursor hook). |
 | `features/use-content-ready.ts` | `useContentReady`: the gate intro animations read (`AnimatedText` uses it). Projects extend it with site-intro conditions. |
-| `components/link.tsx` | App-facing `Link` wrapping VTLink; owns only the same-page Lenis scroll-to-top (`isSamePagePath`). |
+| `components/link.tsx` | App-facing `Link` wrapping VTLink; owns only the same-page (native) scroll-to-top (`isSamePagePath`). |
 
 - **frontend**: Pairs when the change is mostly conditional UI or animation without transition API concerns.
 - **docs-maintenance**: When updating `docs/features/view-transitions.md` or onboarding text.
@@ -46,7 +46,7 @@ Apply when the work touches **view transitions**, **`app-view-transitions.tsx`**
 
 - Adding a third-party view-transition npm package without an explicit decision (would change `startTransition` and resolver behavior).
 - Changing `view-transition.css` (`--vt-duration-out` / `--vt-duration-in` / cross-fade) without checking motion timing and reduced-motion behavior.
-- General UI, Lenis, or Motion work with no view-transition or route-transition angle (use **frontend**).
+- General UI, scroll, or Motion work with no view-transition or route-transition angle (use **frontend**).
 
 ## Done Criteria
 

@@ -35,8 +35,8 @@ export function WorkshopGallery({ images }: { images: WorkshopGalleryImage[] }) 
     setHeights(heightsFor(images.length, true));
   }, [images.length]);
 
-  // Wheel → horizontal while there's room; hand off to the page (Lenis) at the edges. Native
-  // (passive:false) listener so we can preventDefault; `data-lenis-prevent-wheel` stops Lenis hijack.
+  // Wheel → horizontal while there's room; hand off to the page at the edges. Native
+  // (passive:false) listener so we can preventDefault.
   React.useEffect(() => {
     const wall = wallRef.current;
     if (!wall) {
@@ -83,7 +83,6 @@ export function WorkshopGallery({ images }: { images: WorkshopGalleryImage[] }) 
     <div
       ref={wallRef}
       className="workshop-gallery_wall"
-      data-lenis-prevent-wheel="true"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}

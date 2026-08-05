@@ -77,7 +77,7 @@ export function shouldSkipLinkViewTransition(href: string | UrlObject, as?: stri
   }
 }
 
-/** True for a hash link to a section on the current page (scroll via Lenis, no transition); cross-page hash links return `false`. Client-only. */
+/** True for a hash link to a section on the current page (native scroll, no transition); cross-page hash links return `false`. Client-only. */
 export function isSamePageHash(href: string | UrlObject, as?: string | UrlObject): boolean {
   const s = hrefToString(as || href);
 
@@ -347,7 +347,7 @@ export function Link(props: React.ComponentProps<typeof NextLink>) {
         return;
       }
 
-      // Same-page hash/anchor: let Lenis scroll to the section, no view transition.
+      // Same-page hash/anchor: let the browser scroll to the section natively, no view transition.
       if (isSamePageHash(href, as)) {
         return;
       }

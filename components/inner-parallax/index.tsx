@@ -1,7 +1,6 @@
 "use client";
 
 import { composeRefs } from "@radix-ui/react-compose-refs";
-import { useLenis } from "lenis/react";
 import { type MotionStyle, useScroll, useTransform } from "motion/react";
 import * as m from "motion/react-m";
 import * as React from "react";
@@ -23,13 +22,8 @@ export function InnerParallax({
   const internalRef = React.useRef<HTMLDivElement>(null);
   const { styles: overflowStyles, className: overflowClasses } = createResponsiveOverflow(overflow);
 
-  // The page scrolls inside the Lenis container, not the window, so point
-  // `useScroll` at Lenis' scroll surface instead of the default viewport.
-  const lenis = useLenis();
-  const container = React.useMemo(() => (lenis?.rootElement ? { current: lenis.rootElement } : undefined), [lenis]);
-
+  // The page scrolls natively on the viewport, so `useScroll` tracks its default (the window).
   const { scrollYProgress } = useScroll({
-    container,
     target: internalRef,
     offset: ["start end", "end start"],
   });

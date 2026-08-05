@@ -1,6 +1,6 @@
 ---
 name: frontend
-description: Use when implementing runtime UI behavior in app/features/components, including scroll (Lenis), animations (Motion), and Server/Client Component patterns. Do NOT use when the primary task is schema/GROQ/Studio or generator-first scaffolding.
+description: Use when implementing runtime UI behavior in app/features/components, including scroll, animations (Motion), and Server/Client Component patterns. Do NOT use when the primary task is schema/GROQ/Studio or generator-first scaffolding.
 ---
 
 # Frontend
@@ -9,7 +9,7 @@ description: Use when implementing runtime UI behavior in app/features/component
 
 - Prefer Server Components; add `'use client'` only for interactivity, hooks, or browser APIs. Use the client boundary as far down as possible.
 - For **DOM/window listeners, outside-click, Escape-to-close, open/close state**, prefer **`@mantine/hooks`** per **mantine-hooks** (`.agents/skills/mantine-hooks/SKILL.md`) before hand-rolling `useEffect` + `addEventListener`.
-- Use existing global Lenis instance via `useLenis` from `lenis/react`; do not create additional Lenis instances.
+- The site scrolls **natively** on the document (no smooth-scroll library — Lenis was removed). Use `window.scrollTo` / `scrollIntoView` / native scroll APIs; cross-page hash links are handled by `features/site/hash-scroll.tsx`.
 - Use Motion in Client Components only. Components come from `import * as m from 'motion/react-m'` (`m.div`, never `motion.div`); the app-wide `LazyMotion` provider (`~/features/motion/lazy-motion.tsx`) loads features async and is `strict`, so a full `motion.*` component throws. Hooks and `AnimatePresence` still come from `'motion/react'`.
 - For **`prefers-reduced-motion`** in JS (forking JSX), use **`usePrefersReducedMotion`** from **`~/features/motion/use-prefers-reduced-motion`**, not **`useReducedMotion`** from **`motion/react`**.
 
@@ -22,7 +22,7 @@ Apply this skill when the work is primarily **runtime UI** in `app/`, `features/
 1. Identify if the task is runtime UI behavior (this skill) vs schema/scaffold (handoff).
 2. Read only the needed files listed under Reference Files.
 3. Keep Server/Client boundaries minimal and explicit.
-4. Reuse existing primitives (`Lenis`, shared hooks) before adding new abstractions.
+4. Reuse existing primitives (shared hooks) before adding new abstractions.
 5. Validate behavior and run relevant checks (`npm run check.types`, optionally `npm run check` for broader edits).
 
 ## Scope Guidance
@@ -43,14 +43,12 @@ Apply this skill when the work is primarily **runtime UI** in `app/`, `features/
 
 ## Done Criteria
 
-- No extra Lenis instances introduced
 - Client-only APIs/hooks stay in Client Components
 - Imports use `~/` alias and existing shared primitives
 - Changes remain scoped to runtime UI behavior
 
 ## Reference Files
 
-- Read `references/lenis.md` for smooth scrolling, `useLenis`, scrollTo, stop/start.
 - Read `references/motion.md` for Motion usage and performance.
 - Read `references/component-architecture.md` for Server/Client split, cva/cx, path alias, hooks.
 - Do not load unrelated reference files.

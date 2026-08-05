@@ -75,7 +75,7 @@ Use this mapping as a default when deciding which docs to touch. Create or exten
 - `features/site/**` (header, footer, SEO fragments or site singleton queries) -> `docs/sanity/schema-and-content-model.md` or `fetching-groq-and-types.md` when site shell content or GROQ changes
 - `features/umami/**` -> `docs/features/umami-tracking.md`
 
-Smaller infra under `features/` (for example Lenis, Mux, DOM hooks, global style) has no dedicated `docs/features/*` page unless you add one; update `README.md` / `AGENTS.md` or an existing feature doc if the change affects onboarding or visible behavior.
+Smaller infra under `features/` (for example Mux, DOM hooks, global style) has no dedicated `docs/features/*` page unless you add one; update `README.md` / `AGENTS.md` or an existing feature doc if the change affects onboarding or visible behavior.
 
 ### Root `sanity/` and Studio
 

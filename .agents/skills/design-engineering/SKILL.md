@@ -1,6 +1,6 @@
 ---
 name: design-engineering
-description: Use when polishing UI craft—motion, micro-interactions, easing, CSS transforms, gestures, perceived performance, and accessibility for animation—so interfaces feel intentional and cohesive. Pair with frontend for Lenis/Motion stack details. Do NOT use as the primary skill for CMS schema, Plop scaffolding, or pure code-style formatting without a UI craft angle.
+description: Use when polishing UI craft—motion, micro-interactions, easing, CSS transforms, gestures, perceived performance, and accessibility for animation—so interfaces feel intentional and cohesive. Pair with frontend for Motion stack details. Do NOT use as the primary skill for CMS schema, Plop scaffolding, or pure code-style formatting without a UI craft angle.
 ---
 
 # Design engineering
@@ -27,7 +27,7 @@ Apply when the task is **interaction design**, **CSS/motion polish**, **animatio
 
 ## Scope Guidance
 
-- **frontend** — Lenis, Motion usage, Server/Client boundaries; this skill does not replace scroll architecture.
+- **frontend** — Motion usage, native scroll, Server/Client boundaries; this skill does not replace scroll architecture.
 - **view-transitions** — route/view transition timing and gating; pair when polish touches navigation transitions.
 - **code-style** — readability and `run()`; pair when conditional JSX structure is part of the change.
 - **react-performance** — bundle/async/RSC perf; pair when motion work collides with performance budgets.
