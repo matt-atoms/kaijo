@@ -1,6 +1,8 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import * as React from "react";
+import { isDevelopOn, onDevelopChange, setDevelop } from "~/features/site/develop-mode";
 
 const STORAGE_KEY = "kaijo-theme";
 
@@ -25,10 +27,19 @@ function applyTheme(id: string) {
 
 export function ThemeSwitcher() {
   const [active, setActive] = React.useState("green");
+  const pathname = usePathname();
+  const onProjectPage = pathname?.startsWith("/project/") ?? false;
+  const [develop, setDevelopState] = React.useState(false);
 
   React.useEffect(() => {
     const current = document.documentElement.getAttribute("data-theme");
     setActive(current || "green");
+  }, []);
+
+  // Keep the toggle's label in sync with the mode (the lens clears it when leaving the page).
+  React.useEffect(() => {
+    setDevelopState(isDevelopOn());
+    return onDevelopChange(setDevelopState);
   }, []);
 
   function pick(id: string) {
@@ -59,6 +70,18 @@ export function ThemeSwitcher() {
           />
         ))}
       </div>
+      {/* Easter egg: only on the individual project pages. Turns the darkroom "Develop" loupe on/off. */}
+      {onProjectPage && (
+        <button
+          type="button"
+          className="theme-develop"
+          data-active={develop || undefined}
+          aria-pressed={develop}
+          onClick={() => setDevelop(!isDevelopOn())}
+        >
+          Develop
+        </button>
+      )}
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { env } from "~/env";
 import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import { sanityFetch } from "~/features/sanity/client";
 import { ImageFragment, type ImageFragmentResult } from "~/features/sanity/media/fragment";
+import { DevelopLens } from "~/features/site/develop-lens";
 import { seo } from "~/features/site/seo/utils";
 import { SiteShell } from "~/features/site/site-shell";
 import { SANITY_PROJECT_DOCUMENT_TYPE } from "~/sanity/constants";
@@ -110,6 +111,7 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
 
   return (
     <SiteShell>
+      <DevelopLens />
       <div className="section_work section_work--project">
         <div className="container">
           <div className="portfolio_wrapper">
