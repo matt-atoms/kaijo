@@ -10220,7 +10220,28 @@
         },
         "optional": true
       },
+      "role": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "date": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "status": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "availability": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -10339,6 +10360,13 @@
         },
         "optional": true
       },
+      "credits": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "gridStyle": {
         "type": "objectAttribute",
         "value": {
@@ -10360,6 +10388,14 @@
         "type": "objectAttribute",
         "value": {
           "type": "number"
+        },
+        "optional": true
+      },
+      "nextProject": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "project.reference"
         },
         "optional": true
       },
