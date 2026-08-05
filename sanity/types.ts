@@ -1625,7 +1625,10 @@ export type Project = {
   category?: "Projects" | "Commissions";
   type?: "Project" | "Commission";
   client?: string;
+  role?: string;
   date?: string;
+  status?: string;
+  availability?: string;
   description?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -1640,8 +1643,10 @@ export type Project = {
     _type: "block";
     _key: string;
   }>;
+  credits?: string;
   gridStyle?: "normal" | "wide";
   gridOrder?: number;
+  nextProject?: ProjectReference;
   thumbnail?: {
     asset?: SanityImageAssetReference;
     media?: unknown;

@@ -1276,6 +1276,115 @@ html.home-route .section_feature-links {
   opacity: 1;
 }
 
+/* Editorial meta — inside the blended description column, so it inherits its colour + difference
+   blend. Kind-aware: client/year/role for commissions, year or status for personal projects. */
+.section_work--project .project_meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 1.6em;
+  margin: 1.1em 0 1.4em;
+}
+
+.section_work--project .project_meta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+}
+
+.section_work--project .project_meta-label {
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.section_work--project .project_meta-value {
+  font-size: 0.95em;
+  line-height: 1.3;
+}
+
+/* Foot of the page — commission credits + the way-forward block. They sit below the collage,
+   outside the blended column, so they paint in --page-blend with difference to stay legible over
+   any theme (and the Develop easter egg's black). */
+.section_work--project .project_credits,
+.section_work--project .project_next {
+  color: var(--page-blend);
+  mix-blend-mode: difference;
+}
+
+.section_work--project .project_credits {
+  margin-top: 4em;
+  max-width: 34em;
+}
+
+.section_work--project .project_credits .section-eyebrow {
+  margin-bottom: 0.6em;
+}
+
+.section_work--project .project_credits-text {
+  font-size: 0.95em;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.section_work--project .project_next {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.4em;
+  margin-top: 4.5em;
+  padding-top: 2em;
+  border-top: 1px solid var(--page-blend);
+}
+
+.section_work--project .project_next-primary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  text-decoration: none;
+  color: inherit;
+}
+
+.section_work--project .project_next-label {
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.section_work--project .project_next-title {
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 1.25em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease;
+}
+
+.section_work--project .project_next-primary:hover .project_next-title {
+  opacity: 0.6;
+}
+
+.section_work--project .project_next-back {
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 0.85em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.section_work--project .project_next-back:hover {
+  opacity: 1;
+}
+
 /* On phones the 34% sticky description column is far too narrow — let it span the full width. */
 @media screen and (max-width: 767px) {
   .section_work--project .project_description-wrapper {

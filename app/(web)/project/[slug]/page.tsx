@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { defineQuery, PortableText } from "next-sanity";
+import { defineQuery, PortableText, stegaClean } from "next-sanity";
+import { Link } from "~/components/link";
 import { env } from "~/env";
 import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import { sanityFetch } from "~/features/sanity/client";
@@ -16,6 +17,14 @@ const ProjectQ = defineQuery(`
     title,
     description,
     "slug": slug.current,
+    category,
+    client,
+    role,
+    status,
+    availability,
+    credits,
+    date,
+    "nextProject": nextProject->{ title, "slug": slug.current, category },
     image1{${ImageFragment}},
     image2{${ImageFragment}},
     image3{${ImageFragment}},
@@ -42,6 +51,14 @@ type ProjectResult =
       // biome-ignore lint/suspicious/noExplicitAny: portable text payload rendered by PortableText.
       description: any;
       slug: string | null;
+      category: "Projects" | "Commissions" | null;
+      client: string | null;
+      role: string | null;
+      status: string | null;
+      availability: string | null;
+      credits: string | null;
+      date: string | null;
+      nextProject: { title: string | null; slug: string | null; category: string | null } | null;
     } & { [K in `image${number}`]?: ImageFragmentResult | null })
   | null;
 
@@ -109,6 +126,28 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
   const images = Array.from({ length: 16 }, (_, i) => project[`image${i + 1}`] ?? null);
   let slotIndex = 0;
 
+  // stegaClean before comparing: draft/preview strings carry invisible click-to-edit payload.
+  const isCommission = stegaClean(project.category ?? "") === "Commissions";
+  const year = project.date ? project.date.slice(0, 4) : null;
+
+  // Editorial meta by kind — commissions lead with the client/role, personal projects with year/status.
+  const metaRows = (
+    isCommission
+      ? [
+          { label: "Client", value: project.client },
+          { label: "Year", value: year },
+          { label: "Role", value: project.role },
+        ]
+      : [{ label: project.status ? "Status" : "Year", value: project.status || year }]
+  ).filter((row) => row.value);
+
+  if (project.availability) {
+    metaRows.push({ label: "Availability", value: project.availability });
+  }
+
+  const backHref = isCommission ? "/work#commissions" : "/work#projects";
+  const nextSlug = stegaClean(project.nextProject?.slug ?? "");
+
   return (
     <SiteShell>
       <DevelopLens />
@@ -121,6 +160,16 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
                   <div className="project_name-text">{project.title}</div>
                 </div>
               </div>
+              {metaRows.length > 0 && (
+                <dl className="project_meta">
+                  {metaRows.map((row) => (
+                    <div key={row.label} className="project_meta-row">
+                      <dt className="project_meta-label">{row.label}</dt>
+                      <dd className="project_meta-value">{row.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
               <div className="w-richtext">{project.description && <PortableText value={project.description} />}</div>
             </div>
             {SECTION_LAYOUT.map((section, sectionIndex) => (
@@ -145,6 +194,25 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
                 })}
               </div>
             ))}
+
+            {isCommission && project.credits && (
+              <div className="project_credits">
+                <h2 className="section-eyebrow">Credits</h2>
+                <p className="project_credits-text">{project.credits}</p>
+              </div>
+            )}
+
+            <nav className="project_next" aria-label="More work">
+              {nextSlug && (
+                <Link href={`/project/${nextSlug}`} className="project_next-primary">
+                  <span className="project_next-label">Next project</span>
+                  <span className="project_next-title">{project.nextProject?.title} →</span>
+                </Link>
+              )}
+              <Link href={backHref} className="project_next-back">
+                ← Back to Work
+              </Link>
+            </nav>
           </div>
         </div>
       </div>

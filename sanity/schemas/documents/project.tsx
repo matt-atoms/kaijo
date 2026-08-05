@@ -1,5 +1,9 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { WORK_CATEGORY_OPTIONS } from "../../constants";
+import { requiredIf, visibleIf } from "../../utils";
+
+/** Source of truth for a project's kind — drives conditional fields, the /work grouping, and nav. */
+const isCommission = "Commissions";
 
 /**
  * The Webflow project template lays 16 CMS image fields into 10 fixed collage rows.
@@ -58,11 +62,12 @@ export const project = defineType({
       type: "string",
       title: "Category",
       description:
-        "Groups the project under a Work sub-category. Drives the /work sub-menu listing pages and nav (it is NOT shown on the tile — the Type field below is).",
+        "The kind of work — the source of truth that drives the /work grouping and nav, and which fields below are required (Commissions require a client, role and year; personal Projects never require a client).",
       options: {
         list: [...WORK_CATEGORY_OPTIONS],
         layout: "radio",
       },
+      validation: (R) => R.required(),
     }),
     defineField({
       group: "details",
@@ -83,7 +88,18 @@ export const project = defineType({
       name: "client",
       type: "string",
       title: "Client",
-      description: "Shown first on the Selected Work tile label (before Type and year). Defaults to the project name for now.",
+      description:
+        "The commissioning client, shown on commission pages. Required for commissions; personal projects don't use it.",
+      ...requiredIf("category")(isCommission),
+    }),
+    defineField({
+      group: "details",
+      name: "role",
+      type: "string",
+      title: "Role",
+      description: "Joep's role on the commission (e.g. Photographer, Director). Shown on commission pages.",
+      ...visibleIf("category")(isCommission),
+      ...requiredIf("category")(isCommission),
     }),
     defineField({
       group: "details",
@@ -95,10 +111,26 @@ export const project = defineType({
     }),
     defineField({
       group: "details",
+      name: "status",
+      type: "string",
+      title: "Status",
+      description:
+        "Optional — shown in place of the year on a project page when the work is ongoing (e.g. “Ongoing”, “In progress”). Leave empty to show the year.",
+    }),
+    defineField({
+      group: "details",
+      name: "availability",
+      type: "string",
+      title: "Availability",
+      description: "Optional availability note (e.g. “Prints available”, “Available for commissions”, “Archive”).",
+    }),
+    defineField({
+      group: "details",
       name: "description",
       type: "array",
       title: "Description",
-      description: "The project brief shown on the project page.",
+      description:
+        "The intro shown on the project page. Aim for ~40–100 words for a personal project, ~60–140 words of context for a commission.",
       of: [
         defineArrayMember({
           type: "block",
@@ -113,6 +145,16 @@ export const project = defineType({
           },
         }),
       ],
+    }),
+    defineField({
+      group: "details",
+      name: "credits",
+      type: "text",
+      rows: 3,
+      title: "Credits",
+      description:
+        "Optional production credits shown at the foot of a commission page (e.g. “Styling — …”, “Set — …”). One per line.",
+      ...visibleIf("category")(isCommission),
     }),
     defineField({
       group: "details",
@@ -136,6 +178,22 @@ export const project = defineType({
       type: "number",
       title: "Grid order",
       description: "Sort order in the portfolio grid (homepage bottom grid and /work). Lower comes first.",
+    }),
+    defineField({
+      group: "details",
+      name: "nextProject",
+      type: "reference",
+      title: "Next project",
+      description:
+        "Manually pick the project shown as “Next project →” at the foot of this page. Leave empty to only show “Back to Work”.",
+      to: [{ type: "project" }],
+      weak: true,
+      options: {
+        filter: ({ document }) => {
+          const id = (typeof document?._id === "string" ? document._id : "").replace(/^drafts\./, "");
+          return { filter: "!(_id in [$id, $draft])", params: { id, draft: `drafts.${id}` } };
+        },
+      },
     }),
     defineField({
       group: "media",
