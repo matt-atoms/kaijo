@@ -2734,7 +2734,7 @@ export type BookUrisQResult = Array<{
 
 // Source: app/(web)/project/[slug]/category-gallery.tsx
 // Variable: CategoryProjectsQ
-// Query: *[_type == "project" && defined(slug.current) && category == $category && slug.current != $currentSlug] | order(date asc){    _id,    title,    type,    date,    "slug": slug.current,    "image": coalesce(overviewImages[defined(image.asset)][0].image, thumbnail){        "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,      "aspectRatio": asset->metadata.dimensions.aspectRatio    }  }
+// Query: *[_type == "project" && defined(slug.current) && category == $category && slug.current != $currentSlug] | order(coalesce(gridOrder, 9999) asc, date asc){    _id,    title,    type,    date,    "slug": slug.current,    "image": coalesce(overviewImages[defined(image.asset)][0].image, thumbnail){        "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,      "aspectRatio": asset->metadata.dimensions.aspectRatio    }  }
 export type CategoryProjectsQResult = Array<{
   _id: string;
   title: string | undefined;
@@ -5666,7 +5666,7 @@ export type TextSectionQResult = {
 
 // Source: features/page-builder/sections/work-overview-section/index.tsx
 // Variable: WorkOverviewSectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workOverviewSectionField" && _key == $sectionKey][0]{    "groups": sectionContent.groups[]{      "key": _key,      heading,      intro,      "projects": *[_type == "project" && defined(slug.current) && category == ^.category] | order(date asc){        _id,        title,        type,        client,        date,        "slug": slug.current,        "image": coalesce(overviewImages[defined(image.asset)][0].image, thumbnail){            "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,          "aspectRatio": asset->metadata.dimensions.aspectRatio        }      }    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workOverviewSectionField" && _key == $sectionKey][0]{    "groups": sectionContent.groups[]{      "key": _key,      heading,      intro,      "projects": *[_type == "project" && defined(slug.current) && category == ^.category] | order(coalesce(gridOrder, 9999) asc, date asc){        _id,        title,        type,        client,        date,        "slug": slug.current,        "image": coalesce(overviewImages[defined(image.asset)][0].image, thumbnail){            "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,          "aspectRatio": asset->metadata.dimensions.aspectRatio        }      }    }}
 export type WorkOverviewSectionQResult = {
   groups: Array<{
     key: string;
