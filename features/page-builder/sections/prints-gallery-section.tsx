@@ -42,9 +42,9 @@ export async function PrintsGallerySection({ docId, sectionKey }: { docId: strin
       <div className="container">
         <div className="prints_head">
           {content.heading && (
-            <h1 data-scramble="scroll" className="section_title prints_head-title">
+            <h2 data-scramble="scroll" className="section_title prints_head-title">
               {content.heading}
-            </h1>
+            </h2>
           )}
           <div className="prints_head-body">
             {content.intro && <p className="prints_intro">{content.intro}</p>}

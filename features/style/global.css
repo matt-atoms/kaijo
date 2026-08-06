@@ -1308,6 +1308,8 @@ html.home-route .section_feature-links {
 }
 
 .section_work--project .project_name-text {
+  /* Reset the huge webflow h1/h2 base margins — this is now the page <h1>, styled as small mono. */
+  margin: 0;
   font-family: "Basier Circle Mono", Arial, sans-serif;
   font-size: 1.05em;
   font-weight: 600;
@@ -2206,6 +2208,21 @@ html.home-route .section_feature-links {
   margin: -1px;
   overflow: hidden;
   clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Screen-reader-only utility: removes an element from the visual layout while keeping it in the
+   accessibility tree (used for the per-page descriptive <h1> that must not change what's on screen). */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }

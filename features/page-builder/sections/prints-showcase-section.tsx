@@ -91,9 +91,9 @@ export async function PrintsShowcaseSection({ docId, sectionKey }: { docId: stri
       <div className="container">
         <div className="prints_head">
           {content?.heading && (
-            <h1 data-scramble="scroll" className="section-eyebrow prints_head-title">
+            <h2 data-scramble="scroll" className="section-eyebrow prints_head-title">
               {content.heading}
-            </h1>
+            </h2>
           )}
           {content?.intro && <p className="prints_intro">{content.intro}</p>}
           {editions.length > 0 && <div className="prints_options prints_options--top">{renderOptions()}</div>}

@@ -32,9 +32,12 @@ export async function SiteFooter() {
           </div>
           {/* Newsletter placeholder — non-functional; wire up to an email provider later. */}
           <form className="footer_newsletter" aria-label="Newsletter sign-up" data-placeholder="true">
-            <span className="footer_newsletter-label">Newsletter</span>
+            {/* Persistent, associated label (not the placeholder) provides the field's accessible name. */}
+            <label className="footer_newsletter-label" htmlFor="footer-newsletter-email">
+              Newsletter
+            </label>
             <div className="footer_newsletter-row">
-              <input type="email" className="footer_newsletter-input" placeholder="your@email.com" aria-label="Email address" />
+              <input type="email" id="footer-newsletter-email" className="footer_newsletter-input" placeholder="your@email.com" />
               <button type="button" className="footer_newsletter-button">
                 Subscribe
               </button>

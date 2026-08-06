@@ -89,8 +89,14 @@ export default async function Page(props: { params: Promise<{ uri?: string[] }> 
     notFound();
   }
 
+  // Every page needs exactly one descriptive <h1>. These page-builder pages have no single visible
+  // title element, so the H1 is visually hidden (screen readers/crawlers only) — the homepage doc
+  // carries no title, hence the brand fallback.
+  const heading = page.title || "Joep Hijwegen — Photographer in Amsterdam";
+
   return (
     <SiteShell showHeader={page.showHeader} showFooter={page.showFooter}>
+      <h1 className="visually-hidden">{heading}</h1>
       <PageSections docId={page._id} />
     </SiteShell>
   );

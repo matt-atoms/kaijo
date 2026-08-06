@@ -158,7 +158,7 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
             <div className="project_description-wrapper">
               <div className="project_name-wrapper">
                 <div>
-                  <div className="project_name-text">{project.title}</div>
+                  <h1 className="project_name-text">{project.title}</h1>
                 </div>
               </div>
               {metaRows.length > 0 && (

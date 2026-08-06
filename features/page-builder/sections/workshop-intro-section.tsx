@@ -34,9 +34,9 @@ export async function WorkshopIntroSection({ docId, sectionKey }: { docId: strin
   return (
     <div className="section_workshop-intro section-padding-top">
       <div className="container">
-        <h1 data-scramble="scroll" className="section-eyebrow">
+        <h2 data-scramble="scroll" className="section-eyebrow">
           {content.heading}
-        </h1>
+        </h2>
         <div className="workshop-intro_inner">
           <div className="workshop-intro_lede">
             {content.image && (

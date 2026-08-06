@@ -58,9 +58,9 @@ export async function BooksStoreSection({ docId, sectionKey }: { docId: string; 
         {docId === SANITY_STORE_PAGE_ID && <WorkAnchors anchors={STORE_ANCHORS} spanMain />}
         <div className="books_head">
           {content.heading && (
-            <h1 data-scramble="scroll" className="section-eyebrow">
+            <h2 data-scramble="scroll" className="section-eyebrow">
               {content.heading}
-            </h1>
+            </h2>
           )}
           {content.intro && <p className="books_intro">{content.intro}</p>}
         </div>

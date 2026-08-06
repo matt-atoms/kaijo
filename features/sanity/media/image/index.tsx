@@ -125,7 +125,9 @@ export function SanityImage({
   const src = getImageSrc(image, imageOptions);
   const srcSet = getImageSrcSet(image, imageOptions);
   const placeholderStyle = !hasLoaded && !noPlaceholder ? getLqipBackgroundStyle(image) : undefined;
-  const altText = alt ?? image.altText ?? image.description ?? image.title ?? "";
+  // Alt comes only from the intended alt field; empty string = decorative (skipped by assistive tech).
+  // Never fall back to the asset's title/description, which hold generic labels ("Image", a filename).
+  const altText = alt ?? image.altText ?? "";
 
   const imageStyles = {
     "--desired-width": width ? `${width}px` : "auto",
