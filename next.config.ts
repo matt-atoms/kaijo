@@ -62,6 +62,16 @@ const nextConfig: NextConfig = {
     };
   },
 
+  // Keep non-production deployments (Vercel preview URLs) out of the search index so they never
+  // compete with the live domain. Production (VERCEL_ENV === "production") and local dev are unaffected.
+  async headers() {
+    const isPreview = process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production";
+    if (!isPreview) {
+      return [];
+    }
+    return [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }];
+  },
+
   // Redirects are only fetched at build time.
   async redirects() {
     try {

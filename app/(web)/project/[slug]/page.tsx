@@ -9,6 +9,7 @@ import { DevelopLens } from "~/features/site/develop-lens";
 import { seo } from "~/features/site/seo/utils";
 import { SiteShell } from "~/features/site/site-shell";
 import { SANITY_PROJECT_DOCUMENT_TYPE } from "~/sanity/constants";
+import { createExcerptFromPortableText } from "~/sanity/utils";
 import { ProjectCategoryGallery } from "./category-gallery";
 
 const ProjectQ = defineQuery(`
@@ -109,6 +110,8 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
 
   return await seo({
     title: project.title ?? undefined,
+    description: project.description ? createExcerptFromPortableText(project.description, 160) : undefined,
+    image: project.image1 ?? project.image2 ?? undefined,
     canonical: `${env.NEXT_PUBLIC_URL}/project/${slug}`,
   });
 }

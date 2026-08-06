@@ -101,7 +101,16 @@ export async function seo(
   });
 
   // Draft Mode strings carry invisible stega payloads; metadata must stay clean text.
-  const title = stegaClean(props.title ?? site?.seoMetadata?.title);
+  const brand = stegaClean(site?.name ?? "") || "Joep Hijwegen";
+  const pageTitle = props.title ? stegaClean(props.title) : "";
+  // Per-page titles get a consistent "<Page> — <brand>" suffix (skipped if the title already carries
+  // the brand). Bare calls — the homepage — fall back to the site-level SEO title, which is brand-first
+  // ("Joep Hijwegen — …"), so every page identifies consistently.
+  const title = pageTitle
+    ? pageTitle.includes(brand)
+      ? pageTitle
+      : `${pageTitle} — ${brand}`
+    : stegaClean(site?.seoMetadata?.title);
   const description = stegaClean(props.description ?? site?.seoMetadata?.description);
   const image = props.image ?? site?.seoMetadata?.image;
   const robots = props.robots ?? site?.seoMetadata?.robots;
