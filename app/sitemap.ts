@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 import { defineQuery } from "next-sanity";
 import { env } from "~/env";
 import { sanityFetch } from "~/features/sanity/client";
-import { SANITY_SINGLETON_HOMEPAGE_ID } from "~/sanity/constants";
-import type { SitemapQResult } from "~/sanity/types";
+import { SANITY_PROJECT_DOCUMENT_TYPE, SANITY_SINGLETON_HOMEPAGE_ID } from "~/sanity/constants";
+import type { ProjectSitemapQResult, SitemapQResult } from "~/sanity/types";
 
 const SitemapQ = defineQuery(`
   *[defined(uri.current) && seoMetadata.noIndex != true && passwordProtected != true]{
@@ -20,21 +20,40 @@ const SitemapQ = defineQuery(`
   }
 `);
 
+// Projects live at /project/<slug> (they carry a slug, not a uri), so they need their own entries.
+const ProjectSitemapQ = defineQuery(`
+  *[_type == "${SANITY_PROJECT_DOCUMENT_TYPE}" && defined(slug.current)]{
+    "slug": slug.current,
+    "updatedAt": _updatedAt,
+  }
+`);
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const entries = await sanityFetch<SitemapQResult>({
-    query: SitemapQ,
-    // Refresh at most hourly via the Data Cache instead of hitting Sanity every request.
-    options: { next: { revalidate: 3600 } },
-  });
+  const [entries, projects] = await Promise.all([
+    sanityFetch<SitemapQResult>({
+      query: SitemapQ,
+      // Refresh at most hourly via the Data Cache instead of hitting Sanity every request.
+      options: { next: { revalidate: 3600 } },
+    }),
+    sanityFetch<ProjectSitemapQResult>({
+      query: ProjectSitemapQ,
+      options: { next: { revalidate: 3600 } },
+    }),
+  ]);
 
-  const sitemapEntries: MetadataRoute.Sitemap = entries.map((entry) => {
-    return {
-      url: `${env.NEXT_PUBLIC_URL}${entry.uri}`,
-      lastModified: new Date(entry.updatedAt),
-      changeFrequency: entry.freq,
-      priority: entry.priority,
-    };
-  });
+  const pageEntries: MetadataRoute.Sitemap = entries.map((entry) => ({
+    url: `${env.NEXT_PUBLIC_URL}${entry.uri}`,
+    lastModified: new Date(entry.updatedAt),
+    changeFrequency: entry.freq,
+    priority: entry.priority,
+  }));
 
-  return sitemapEntries;
+  const projectEntries: MetadataRoute.Sitemap = projects.map((project) => ({
+    url: `${env.NEXT_PUBLIC_URL}/project/${project.slug}`,
+    lastModified: new Date(project.updatedAt),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...pageEntries, ...projectEntries];
 }

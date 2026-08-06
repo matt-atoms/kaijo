@@ -2992,6 +2992,14 @@ export type SitemapQResult = Array<{
   priority: 0.8 | 1;
 }>;
 
+// Source: app/sitemap.ts
+// Variable: ProjectSitemapQ
+// Query: *[_type == "project" && defined(slug.current)]{    "slug": slug.current,    "updatedAt": _updatedAt,  }
+export type ProjectSitemapQResult = Array<{
+  slug: string | undefined;
+  updatedAt: string;
+}>;
+
 // Source: features/agents/query.ts
 // Variable: LlmsTxtServeQuery
 // Query: *[_type == "site"][0]{  "enabled": llms.enabled,  "content": llms.content}
