@@ -94,7 +94,12 @@ export function WorkshopGallery({ images }: { images: WorkshopGalleryImage[] }) 
           className="workshop-gallery_tile"
           style={{ "--h": `${heights[index]}vh`, "--ratio": item.aspectRatio ?? 1 } as React.CSSProperties}
         >
-          <KaijoImage image={item.image} className="workshop-gallery_image" sizes="(max-width: 767px) 80vw, 40vh" />
+          {/* Height-constrained tile: rendered width = height (`--h`vh) × the image's aspect ratio. */}
+          <KaijoImage
+            image={item.image}
+            className="workshop-gallery_image"
+            sizes={`(max-width: 767px) 80vw, ${Math.round((heights[index] ?? 52) * (item.aspectRatio ?? 1))}vh`}
+          />
         </div>
       ))}
     </div>

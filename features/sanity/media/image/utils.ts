@@ -26,7 +26,7 @@ export const builder = createImageUrlBuilder({
 
 const defaultBuilderOptions = {
   auto: "format",
-  quality: 85,
+  quality: 90,
   maxWidth: DEFAULT_MAX_WIDTH,
   maxHeight: DEFAULT_MAX_HEIGHT,
   sourceWidths: DEFAULT_SOURCE_WIDTHS,

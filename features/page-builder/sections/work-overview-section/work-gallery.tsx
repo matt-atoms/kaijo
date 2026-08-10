@@ -192,7 +192,13 @@ export function WorkGallery({ items }: { items: WorkGalleryItem[] }) {
             onClick={onTileClick}
           >
             <div className="work-gallery_media">
-              <KaijoImage image={item.image} className="work-gallery_image" sizes="(max-width: 767px) 70vw, 30vh" />
+              {/* Tiles are height-constrained (`--h`vh) with the image's own aspect ratio, so the
+                  rendered WIDTH is height × ratio — hint that exactly rather than a flat vh. */}
+              <KaijoImage
+                image={item.image}
+                className="work-gallery_image"
+                sizes={`(max-width: 767px) 70vw, ${Math.round((heights[index] ?? 52) * (item.aspectRatio ?? 1))}vh`}
+              />
             </div>
             <div className="work-gallery_caption">
               <span className="work-gallery_meta">

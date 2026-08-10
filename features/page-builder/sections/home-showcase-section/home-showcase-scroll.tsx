@@ -341,7 +341,13 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
                 onClick={(e) => onTileClick(e, tile.key)}
               >
                 <div className="home-showcase_media">
-                  <KaijoImage image={tile.slide.image} className="home-showcase_image" sizes="(max-width: 767px) 60vh, 44vh" />
+                  {/* Tile height = `--h` (fraction) × the reel track (86vh desktop, 64dvh mobile); the
+                      rendered width is that height × the image's aspect ratio, hinted precisely below. */}
+                  <KaijoImage
+                    image={tile.slide.image}
+                    className="home-showcase_image"
+                    sizes={`(max-width: 767px) ${Math.round(64 * tile.h * (tile.slide.aspectRatio ?? 1))}vh, ${Math.round(86 * tile.h * (tile.slide.aspectRatio ?? 1))}vh`}
+                  />
                 </div>
                 <div className="home-showcase_caption">
                   <span className="home-showcase_meta">
