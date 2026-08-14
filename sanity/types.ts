@@ -1659,7 +1659,7 @@ export type Project = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  overviewImages?: Array<{
+  images?: Array<{
     image?: {
       asset?: SanityImageAssetReference;
       media?: unknown;
@@ -1667,122 +1667,11 @@ export type Project = {
       crop?: SanityImageCrop;
       _type: "image";
     };
+    best?: boolean;
     home?: boolean;
-    _type: "overviewImage";
+    _type: "projectImage";
     _key: string;
   }>;
-  image1?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image2?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image3?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image4?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image5?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image6?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image7?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image8?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image9?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image10?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image11?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image12?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image13?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image14?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image15?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  image16?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
   prints?: Array<{
     image?: {
       asset?: SanityImageAssetReference;
@@ -2734,7 +2623,7 @@ export type BookUrisQResult = Array<{
 
 // Source: app/(web)/project/[slug]/category-gallery.tsx
 // Variable: CategoryProjectsQ
-// Query: *[_type == "project" && defined(slug.current) && category == $category && slug.current != $currentSlug] | order(coalesce(gridOrder, 9999) asc, date asc){    _id,    title,    type,    date,    "slug": slug.current,    "image": coalesce(overviewImages[defined(image.asset)][0].image, thumbnail){        "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,      "aspectRatio": asset->metadata.dimensions.aspectRatio    }  }
+// Query: *[_type == "project" && defined(slug.current) && category == $category && slug.current != $currentSlug] | order(coalesce(gridOrder, 9999) asc, date asc){    _id,    title,    type,    date,    "slug": slug.current,    "image": coalesce(images[best == true && defined(image.asset)][0].image, thumbnail){        "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,      "aspectRatio": asset->metadata.dimensions.aspectRatio    }  }
 export type CategoryProjectsQResult = Array<{
   _id: string;
   title: string | undefined;
@@ -2771,7 +2660,7 @@ export type CategoryProjectsQResult = Array<{
 
 // Source: app/(web)/project/[slug]/page.tsx
 // Variable: ProjectQ
-// Query: *[_type == "project" && slug.current == $slug][0]{    _id,    title,    description,    "slug": slug.current,    category,    client,    role,    status,    availability,    credits,    date,    image1{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image2{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image3{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image4{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image5{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image6{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image7{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image8{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image9{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image10{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image11{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image12{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image13{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image14{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image15{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},    image16{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}  }
+// Query: *[_type == "project" && slug.current == $slug][0]{    _id,    title,    description,    "slug": slug.current,    category,    client,    role,    status,    availability,    credits,    date,    "images": images[defined(image.asset)]{      "image": image{   "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot, },      "aspectRatio": image.asset->metadata.dimensions.aspectRatio,      "best": best == true    }  }
 export type ProjectQResult = {
   _id: string;
   title: string | undefined;
@@ -2797,182 +2686,21 @@ export type ProjectQResult = {
   availability: string | undefined;
   credits: string | undefined;
   date: string | undefined;
-  image1: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image2: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image3: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image4: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image5: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image6: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image7: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image8: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image9: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image10: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image11: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image12: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image13: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image14: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image15: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
-  image16: {
-    _id: string | undefined;
-    _rev: string | undefined;
-    altText: string | undefined;
-    description: string | undefined;
-    title: string | undefined;
-    lqip: string | undefined;
-    dimensions: SanityImageDimensions | undefined;
-    crop: SanityImageCrop | undefined;
-    hotspot: SanityImageHotspot | undefined;
-  } | undefined;
+  images: Array<{
+    image: {
+      _id: string;
+      _rev: string;
+      altText: string | undefined;
+      description: string | undefined;
+      title: string | undefined;
+      lqip: string | undefined;
+      dimensions: SanityImageDimensions | undefined;
+      crop: SanityImageCrop | undefined;
+      hotspot: SanityImageHotspot | undefined;
+    };
+    aspectRatio: number | undefined;
+    best: boolean | false;
+  }> | undefined;
 } | undefined;
 
 // Source: app/(web)/project/[slug]/page.tsx
@@ -4790,7 +4518,7 @@ export type HomeShowcaseSectionQResult = {
 
 // Source: features/page-builder/sections/home-showcase-section/index.tsx
 // Variable: HomeShowcaseProjectsQ
-// Query: *[_type == "project" && defined(slug.current) && count(overviewImages[home == true && defined(image.asset)]) > 0]    | order(date desc){    _id,    title,    type,    client,    date,    "slug": slug.current,    "images": overviewImages[home == true && defined(image.asset)]{      "key": _key,      "aspectRatio": image.asset->metadata.dimensions.aspectRatio,      "image": image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}    }  }
+// Query: *[_type == "project" && defined(slug.current) && count(images[best == true && home == true && defined(image.asset)]) > 0]    | order(date desc){    _id,    title,    type,    client,    date,    "slug": slug.current,    "images": images[best == true && home == true && defined(image.asset)]{      "key": _key,      "aspectRatio": image.asset->metadata.dimensions.aspectRatio,      "image": image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,}    }  }
 export type HomeShowcaseProjectsQResult = Array<{
   _id: string;
   title: string | undefined;
@@ -5666,7 +5394,7 @@ export type TextSectionQResult = {
 
 // Source: features/page-builder/sections/work-overview-section/index.tsx
 // Variable: WorkOverviewSectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workOverviewSectionField" && _key == $sectionKey][0]{    "groups": sectionContent.groups[]{      "key": _key,      heading,      intro,      "projects": *[_type == "project" && defined(slug.current) && category == ^.category] | order(coalesce(gridOrder, 9999) asc, date asc){        _id,        title,        type,        client,        date,        "slug": slug.current,        "image": coalesce(overviewImages[defined(image.asset)][0].image, thumbnail){            "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,          "aspectRatio": asset->metadata.dimensions.aspectRatio        }      }    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workOverviewSectionField" && _key == $sectionKey][0]{    "groups": sectionContent.groups[]{      "key": _key,      heading,      intro,      "projects": *[_type == "project" && defined(slug.current) && category == ^.category] | order(coalesce(gridOrder, 9999) asc, date asc){        _id,        title,        type,        client,        date,        "slug": slug.current,        "image": coalesce(images[best == true && defined(image.asset)][0].image, thumbnail){            "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,          "aspectRatio": asset->metadata.dimensions.aspectRatio        }      }    }}
 export type WorkOverviewSectionQResult = {
   groups: Array<{
     key: string;
@@ -5711,7 +5439,7 @@ export type WorkOverviewSectionQResult = {
 
 // Source: features/page-builder/sections/workshop-gallery-section/index.tsx
 // Variable: WorkshopGallerySectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopGallerySectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      "prints": project->prints[defined(image.asset)].image{   "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot, },      "overview": project->overviewImages[defined(image.asset)].image{   "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot, }    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "workshopGallerySectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      "prints": project->prints[defined(image.asset)].image{   "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot, },      "overview": project->images[defined(image.asset)].image{   "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot, }    }}
 export type WorkshopGallerySectionQResult = {
   content: {
     heading: string | undefined;

@@ -1406,6 +1406,52 @@ html.home-route .section_feature-links {
   opacity: 1;
 }
 
+/* Foot-of-page horizontal strip of every image NOT flagged "Best". Scrolls natively; the images
+   themselves render normally — only the heading gets the mix-blend treatment for legibility. */
+.project-series {
+  margin-top: 6em;
+}
+
+.project-series_head {
+  margin-bottom: 1.4em;
+  color: var(--page-blend);
+  mix-blend-mode: difference;
+}
+
+.project-series_track {
+  display: flex;
+  gap: 1.5vw;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  padding-bottom: 0.5em;
+}
+
+.project-series_track::-webkit-scrollbar {
+  display: none;
+}
+
+.project-series_tile {
+  position: relative;
+  flex: 0 0 auto;
+  height: 56vh;
+  overflow: hidden;
+}
+
+.project-series_image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 767px) {
+  .project-series_tile {
+    height: 44vh;
+  }
+}
+
 /* On phones the collage stacks: text on top (full width), images below. */
 @media screen and (max-width: 767px) {
   .section_work--project .portfolio_wrapper {

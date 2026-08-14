@@ -5,28 +5,8 @@ import { requiredIf, visibleIf } from "../../utils";
 /** Source of truth for a project's kind — drives conditional fields, the /work grouping, and nav. */
 const isCommission = "Commissions";
 
-/**
- * The Webflow project template lays 16 CMS image fields into 10 fixed collage rows.
- * Slot styles, in order (rows: 2-1-2-1-3-1-1-2-1-2 images).
- */
-const PROJECT_IMAGE_SLOTS = [
-  "normal",
-  "smaller",
-  "large",
-  "smaller",
-  "medium",
-  "full",
-  "smaller alt",
-  "normal",
-  "smaller",
-  "large",
-  "full",
-  "smaller",
-  "medium",
-  "large",
-  "smaller",
-  "medium",
-] as const;
+/** Ceiling on how many images can be flagged "Best" — the fixed collage has 16 slots. */
+const MAX_BEST = 16;
 
 export const project = defineType({
   __experimental_formPreviewTitle: false,
@@ -189,43 +169,53 @@ export const project = defineType({
     }),
     defineField({
       group: "media",
-      name: "overviewImages",
+      name: "images",
       type: "array",
-      title: "Overview images",
+      title: "Images",
       description:
-        "The images the /work gallery randomly cycles through for this project — curate just your strongest ones here. Leave empty to fall back to the thumbnail + all collage images. Tick “Show on home” on any of these to also let it appear in the homepage scroll.",
+        "All images for this project. Tick “Best” on up to 16 to feature them in the main layout at the top of the page — these are also the only images eligible as hero images on Work and the homepage. Every other image appears in the scrolling gallery at the foot of the page. Drag to reorder; the Best images fill the collage in this order.",
       of: [
         defineArrayMember({
           type: "object",
-          name: "overviewImage",
+          name: "projectImage",
           fields: [
             defineField({ name: "image", type: "image", title: "Image", validation: (R) => R.required() }),
+            defineField({
+              name: "best",
+              type: "boolean",
+              title: "Best 16",
+              description: "Feature in the main layout at the top of the page (max 16).",
+              initialValue: false,
+            }),
             defineField({
               name: "home",
               type: "boolean",
               title: "Show on home",
-              description: "Include this image in the homepage scroll (Selected Work).",
+              description: "Include in the homepage scroll. Only “Best” images can be used here.",
               initialValue: false,
             }),
           ],
           preview: {
-            select: { media: "image", home: "home" },
-            prepare({ media, home }) {
-              return { title: home ? "★ On home" : "Overview image", media };
+            select: { media: "image", best: "best", home: "home" },
+            prepare({ media, best, home }) {
+              const tags = [best ? "★ Best" : null, home ? "Home" : null].filter(Boolean).join(" · ");
+              return { title: tags || "Image", media };
             },
           },
         }),
       ],
+      validation: (R) =>
+        R.custom((items) => {
+          const list = (items ?? []) as Array<{ best?: boolean; home?: boolean }>;
+          if (list.filter((i) => i?.best).length > MAX_BEST) {
+            return `Mark at most ${MAX_BEST} images as “Best”.`;
+          }
+          if (list.some((i) => i?.home && !i?.best)) {
+            return "Only “Best” images can be shown on the homepage.";
+          }
+          return true;
+        }),
     }),
-    ...PROJECT_IMAGE_SLOTS.map((slot, index) =>
-      defineField({
-        group: "media",
-        name: `image${index + 1}`,
-        type: "image",
-        title: `Image ${index + 1} (${slot})`,
-        description: `Collage slot ${index + 1}: ${slot}. Leave empty to skip this slot, exactly like an unbound Webflow CMS image.`,
-      })
-    ),
     defineField({
       group: "prints",
       name: "prints",

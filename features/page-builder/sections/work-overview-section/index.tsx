@@ -19,7 +19,7 @@ const WorkOverviewSectionQ =
         client,
         date,
         "slug": slug.current,
-        "image": coalesce(overviewImages[defined(image.asset)][0].image, thumbnail){
+        "image": coalesce(images[best == true && defined(image.asset)][0].image, thumbnail){
           ${ImageFragment}
           "aspectRatio": asset->metadata.dimensions.aspectRatio
         }

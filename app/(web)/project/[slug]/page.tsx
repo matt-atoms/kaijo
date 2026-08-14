@@ -11,6 +11,7 @@ import { SiteShell } from "~/features/site/site-shell";
 import { SANITY_PROJECT_DOCUMENT_TYPE } from "~/sanity/constants";
 import { createExcerptFromPortableText } from "~/sanity/utils";
 import { ProjectCategoryGallery } from "./category-gallery";
+import { ProjectSeriesGallery } from "./project-series-gallery";
 
 const ProjectQ = defineQuery(`
   *[_type == "${SANITY_PROJECT_DOCUMENT_TYPE}" && slug.current == $slug][0]{
@@ -25,50 +26,43 @@ const ProjectQ = defineQuery(`
     availability,
     credits,
     date,
-    image1{${ImageFragment}},
-    image2{${ImageFragment}},
-    image3{${ImageFragment}},
-    image4{${ImageFragment}},
-    image5{${ImageFragment}},
-    image6{${ImageFragment}},
-    image7{${ImageFragment}},
-    image8{${ImageFragment}},
-    image9{${ImageFragment}},
-    image10{${ImageFragment}},
-    image11{${ImageFragment}},
-    image12{${ImageFragment}},
-    image13{${ImageFragment}},
-    image14{${ImageFragment}},
-    image15{${ImageFragment}},
-    image16{${ImageFragment}}
+    "images": images[defined(image.asset)]{
+      "image": image{ ${ImageFragment} },
+      "aspectRatio": image.asset->metadata.dimensions.aspectRatio,
+      "best": best == true
+    }
   }
 `);
 
-type ProjectResult =
-  | ({
-      _id: string;
-      title: string | null;
-      // biome-ignore lint/suspicious/noExplicitAny: portable text payload rendered by PortableText.
-      description: any;
-      slug: string | null;
-      category: "Projects" | "Commissions" | null;
-      client: string | null;
-      role: string | null;
-      status: string | null;
-      availability: string | null;
-      credits: string | null;
-      date: string | null;
-    } & { [K in `image${number}`]?: ImageFragmentResult | null })
-  | null;
+type ProjectImage = {
+  image: ImageFragmentResult | null;
+  aspectRatio: number | null;
+  best: boolean;
+};
+
+type ProjectResult = {
+  _id: string;
+  title: string | null;
+  // biome-ignore lint/suspicious/noExplicitAny: portable text payload rendered by PortableText.
+  description: any;
+  slug: string | null;
+  category: "Projects" | "Commissions" | null;
+  client: string | null;
+  role: string | null;
+  status: string | null;
+  availability: string | null;
+  credits: string | null;
+  date: string | null;
+  images: ProjectImage[] | null;
+} | null;
 
 const ProjectSlugsQ = defineQuery(`
   *[_type == "${SANITY_PROJECT_DOCUMENT_TYPE}" && defined(slug.current)]{"slug": slug.current}
 `);
 
 /**
- * The Webflow project page places up to 16 CMS image slots into 10 fixed collage rows.
- * Uploaded images fill the slots in order; missing trailing images leave their slots empty,
- * exactly like unbound Webflow CMS fields.
+ * The "Best" images fill this fixed 10-row collage (up to 16), in their CMS order. Missing trailing
+ * images just leave their slot empty. Every non-best image drops into the scrolling series gallery.
  */
 const SECTION_LAYOUT: Array<{ className: string; slots: string[] }> = [
   { className: "portfolio_section-1", slots: ["work_image", "work_image is-smaller"] },
@@ -82,6 +76,8 @@ const SECTION_LAYOUT: Array<{ className: string; slots: string[] }> = [
   { className: "portfolio_section-9", slots: ["work_image is-large"] },
   { className: "portfolio_section-10 section-padding-bottom", slots: ["work_image is-smaller", "work_image is-medium"] },
 ];
+
+const MAX_BEST = 16;
 
 async function fetchProject(slug: string) {
   return sanityFetch<ProjectResult>({
@@ -108,10 +104,12 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     return await seo({ title: "Not Found" });
   }
 
+  const ogImage = project.images?.find((i) => i.best && i.image?._id)?.image ?? project.images?.find((i) => i.image?._id)?.image;
+
   return await seo({
     title: project.title ?? undefined,
     description: project.description ? createExcerptFromPortableText(project.description, 160) : undefined,
-    image: project.image1 ?? project.image2 ?? undefined,
+    image: ogImage ?? undefined,
     canonical: `${env.NEXT_PUBLIC_URL}/project/${slug}`,
   });
 }
@@ -124,7 +122,13 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
     notFound();
   }
 
-  const images = Array.from({ length: 16 }, (_, i) => project[`image${i + 1}`] ?? null);
+  const allImages = (project.images ?? []).filter((i) => i.image?._id);
+  // Best images fill the top collage (in CMS order); everything else flows into the series gallery.
+  const bestImages = allImages
+    .filter((i) => i.best)
+    .slice(0, MAX_BEST)
+    .map((i) => i.image);
+  const restImages = allImages.filter((i) => !i.best);
   let slotIndex = 0;
 
   // stegaClean before comparing: draft/preview strings carry invisible click-to-edit payload.
@@ -177,7 +181,7 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
               {SECTION_LAYOUT.map((section) => (
                 <div key={section.className} className={section.className}>
                   {section.slots.map((slotClassName) => {
-                    const image = images[slotIndex];
+                    const image = bestImages[slotIndex];
                     slotIndex += 1;
 
                     if (!image) {
@@ -204,6 +208,8 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
               )}
             </div>
           </div>
+
+          <ProjectSeriesGallery images={restImages} />
 
           <ProjectCategoryGallery category={category} currentSlug={slug} backHref={backHref} />
         </div>

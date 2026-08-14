@@ -19,7 +19,7 @@ const HomeShowcaseSectionQ =
  * way. The client component scatters + reshuffles the pool on each load.
  */
 const HomeShowcaseProjectsQ = defineQuery(`
-  *[_type == "${SANITY_PROJECT_DOCUMENT_TYPE}" && defined(slug.current) && count(overviewImages[home == true && defined(image.asset)]) > 0]
+  *[_type == "${SANITY_PROJECT_DOCUMENT_TYPE}" && defined(slug.current) && count(images[best == true && home == true && defined(image.asset)]) > 0]
     | order(date desc){
     _id,
     title,
@@ -27,7 +27,7 @@ const HomeShowcaseProjectsQ = defineQuery(`
     client,
     date,
     "slug": slug.current,
-    "images": overviewImages[home == true && defined(image.asset)]{
+    "images": images[best == true && home == true && defined(image.asset)]{
       "key": _key,
       "aspectRatio": image.asset->metadata.dimensions.aspectRatio,
       "image": image{${ImageFragment}}

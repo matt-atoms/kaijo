@@ -10,7 +10,7 @@ const WorkshopGallerySectionQ =
     "content": sectionContent{
       heading,
       "prints": project->prints[defined(image.asset)].image{ ${ImageFragment} },
-      "overview": project->overviewImages[defined(image.asset)].image{ ${ImageFragment} }
+      "overview": project->images[defined(image.asset)].image{ ${ImageFragment} }
     }
 }`);
 
