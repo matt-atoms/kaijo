@@ -1120,6 +1120,9 @@ html.home-route .section_feature-links {
 }
 
 .work-gallery_name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45em;
   color: inherit;
   text-transform: uppercase;
   font-size: 0.75em;
@@ -1127,6 +1130,15 @@ html.home-route .section_feature-links {
   letter-spacing: 0.01em;
   line-height: 1.2;
   transition: opacity 0.25s ease;
+}
+
+/* Year sits just right of the name, sized down and dimmed like a footnote, aligned to the name's
+   baseline (its bottom) rather than its middle. */
+.work-gallery_name-year {
+  font-size: 0.82em;
+  font-weight: 400;
+  letter-spacing: 0;
+  opacity: 0.45;
 }
 
 .work-gallery[data-has-active="true"] .work-gallery_name {
@@ -1243,6 +1255,127 @@ html.home-route .section_feature-links {
 }
 
 /*
+ * One-screen /work (desktop / pointer devices, `work-route` on <html>): each group — Projects,
+ * Commissions — fills a single viewport as a full-height filmstrip, and the wheel drives the wall
+ * sideways (WorkGallery's wheel hand-off). At a wall's end the wheel bubbles to the snap track,
+ * which jumps to the next group; the Projects/Commissions tabs jump too. Uses maximum vertical real
+ * estate (tiles fill the panel height) and kills the old top whitespace. Touch keeps normal flow.
+ */
+@media (hover: hover) {
+  html.work-route .main {
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* The locked filmstrip owns the whole viewport — no footer to scroll to (like the home reel). */
+  html.work-route .footer {
+    display: none;
+  }
+
+  /* Fill the locked main; clear only the fixed header (no more tall top padding / empty space). */
+  html.work-route .section_work.section-padding-top {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding-top: 4.5em;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  html.work-route .section_work .container {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Tabs live in the fixed top strip now (not sticky within a scroll) — they just jump between panels. */
+  html.work-route .work-anchors {
+    position: static;
+    top: auto;
+    flex: 0 0 auto;
+    margin-bottom: 1.1em;
+  }
+
+  /* The vertical snap track: exactly one group per screen. */
+  html.work-route .work-scroller {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-y: contain;
+  }
+
+  html.work-route .work-scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  html.work-route .work-group {
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    scroll-margin-top: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  html.work-route .work-group + .work-group {
+    margin-top: 0;
+  }
+
+  /* Compact intro pinned to the top of each panel; the gallery gets the rest of the height. */
+  html.work-route .work-group_intro {
+    flex: 0 0 auto;
+    margin-bottom: 1.1em;
+    font-size: 0.72em;
+  }
+
+  /* Gallery fills the panel as a flex row; index + wall are the same (definite) height, so their
+     top and bottom edges line up. */
+  html.work-route .work-gallery {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+    gap: 2.5em;
+    /* Override the base `align-items: start` so the index stretches to the wall's full height and
+       its top/bottom edges line up with the filmstrip. */
+    align-items: stretch;
+  }
+
+  html.work-route .work-gallery_index {
+    flex: 0 0 clamp(9em, 12vw, 14em);
+    /* Spread the names across the full height so the first name's top and the last name's bottom
+       meet the wall's top and bottom edges. Scrolls if a group has too many to fit. */
+    justify-content: space-between;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  html.work-route .work-gallery_index::-webkit-scrollbar {
+    display: none;
+  }
+
+  html.work-route .work-gallery_wall {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 100%;
+    align-items: stretch;
+  }
+
+  /* Tiles fill the panel height; width follows each image's own aspect ratio (never cropped). A
+     uniform full height gives the biggest images the screen allows, on any display size. */
+  html.work-route .work-gallery_tile {
+    height: 100%;
+    aspect-ratio: var(--ratio, 1);
+  }
+}
+
+/*
  * Project detail page — app/(web)/project/[slug]/page.tsx. Tighter top spacing; the sticky
  * description pins higher so it stays fully visible; it blends over the collage like the header;
  * larger/bolder body text; and a bold-caps mono title (matching the site's section headers).
@@ -1251,60 +1384,156 @@ html.home-route .section_feature-links {
   padding-top: 6em;
 }
 
-/* Two columns: a sticky text column on the left and the image collage on the right, so a project
-   always opens cleanly (text with the first images beside it) rather than images stacking under a
-   tall text block. The text keeps its z-index + difference blend, so images that run wide still pass
-   behind it lower down — the overlap/dynamism, just with a tidy start. */
-.section_work--project .portfolio_wrapper {
-  display: flex;
-  align-items: flex-start;
-  gap: 3em;
+/*
+ * Full-width "Best" collage — app/(web)/project/[slug]/project-collage.tsx. CSS multi-column masonry
+ * so images sit beside each other at their own aspect ratios (never cropped) without lining up on a
+ * shared top/bottom line; `is-wide` / `is-mid` feature images span the columns for size variation.
+ */
+.project-collage {
+  column-count: 3;
+  column-gap: 1.4vw;
+  margin-top: 0.5em;
 }
 
-.section_work--project .project_description-wrapper {
-  position: sticky;
-  top: 6em;
-  align-self: flex-start;
-  flex: 0 0 30%;
-  width: auto;
-  z-index: 2;
+.project-collage_item {
+  break-inside: avoid;
+  margin: 0 0 1.4vw;
+}
+
+.project-collage_item.is-wide,
+.project-collage_item.is-mid {
+  column-span: all;
+  margin-top: 2.4vw;
+  margin-bottom: 2.4vw;
+}
+
+.project-collage_item.is-mid {
+  width: 66%;
+}
+
+/* Narrower than its column — a smaller scale + negative space, nudged to one side. This is the main
+   source of size variation for portrait-heavy series (where full-bleed features would tower). */
+.project-collage_item.is-inset {
+  width: 74%;
+}
+
+.project-collage_item.is-mid.is-right,
+.project-collage_item.is-inset.is-right {
+  margin-left: auto;
+}
+
+.project-collage_item.is-mid.is-left,
+.project-collage_item.is-inset.is-left {
+  margin-right: auto;
+}
+
+.project-collage_item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 991px) {
+  .project-collage {
+    column-count: 2;
+  }
+  .project-collage_item.is-mid {
+    width: 82%;
+  }
+  .project-collage_item.is-inset {
+    width: 84%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .project-collage {
+    column-count: 1;
+    column-gap: 0;
+  }
+  .project-collage_item.is-mid,
+  .project-collage_item.is-inset {
+    width: 100%;
+  }
+}
+
+/*
+ * Editorial block between the Best collage and the full series (text moved to the foot of the page):
+ * title + meta as a header row, then the description. Painted in --page-blend with difference so it
+ * stays legible on any theme (and the Develop easter egg's black background).
+ */
+.project_bottom {
+  max-width: 62em;
+  margin: 5.5em auto 0;
   color: var(--page-blend);
   mix-blend-mode: difference;
 }
 
-.section_work--project .portfolio_images {
-  flex: 1 1 0;
-  min-width: 0;
+.project_bottom-head {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6em 2em;
+  margin-bottom: 1.4em;
 }
 
-/* Row 1 no longer needs to pull up under the (now side-by-side) text. */
-.section_work--project .portfolio_images .portfolio_section-1 {
-  margin-top: 0;
+.project_bottom .project_meta {
+  margin: 0;
 }
 
-/* Image sizes: relative to the right column now, with a wider spread of widths but a lower ceiling,
-   and a viewport cap so no single image runs past one screen on desktop. */
-.section_work--project .portfolio_images .work_image {
-  width: 48%;
-  max-height: 80vh;
+.project_bottom-copy {
+  max-width: 44em;
 }
 
-.section_work--project .portfolio_images .work_image.is-smaller {
-  width: 30%;
+/* Already inside the blended block — don't blend a second time (nested difference double-inverts). */
+.project_bottom .project_credits {
+  margin-top: 2.5em;
+  color: inherit;
+  mix-blend-mode: normal;
 }
 
-.section_work--project .portfolio_images .work_image.is-medium {
-  width: 58%;
+/*
+ * Lightbox thumbnails — the click target wrapping each collage/series image (bare button so the
+ * image fills it; `zoom-in` cursor hints the expand).
+ */
+.lightbox-thumb {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: zoom-in;
 }
 
-.section_work--project .portfolio_images .work_image.is-large {
-  width: 72%;
+/* In the height-constrained series strip the button must fill the tile so the image's 100% resolves. */
+.project-series_tile .lightbox-thumb {
+  height: 100%;
 }
 
-.section_work--project .portfolio_images .work_image.is-full {
-  width: 90%;
+/*
+ * Expanded-image overlay — app/(web)/project/[slug]/lightbox.tsx. Fills the viewport with the
+ * opposite tone of the current theme (set inline) and shows the image fit-to-screen (never cropped).
+ * The seamless zoom from the thumbnail is a FLIP animation via the Web Animations API.
+ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.lightbox_image {
+  display: block;
+  max-width: 92vw;
+  max-height: 90vh;
+  object-fit: contain;
+  box-shadow: 0 30px 80px rgb(0 0 0 / 0.28);
+  will-change: transform;
 }
 
 .section_work--project .project_name-text {
@@ -1449,21 +1678,6 @@ html.home-route .section_feature-links {
 @media screen and (max-width: 767px) {
   .project-series_tile {
     height: 44vh;
-  }
-}
-
-/* On phones the collage stacks: text on top (full width), images below. */
-@media screen and (max-width: 767px) {
-  .section_work--project .portfolio_wrapper {
-    flex-direction: column;
-    gap: 2em;
-  }
-
-  .section_work--project .project_description-wrapper {
-    position: static;
-    top: auto;
-    flex-basis: auto;
-    width: 100%;
   }
 }
 
@@ -3908,7 +4122,8 @@ html.home-route .section_feature-links {
   --page-bg: #000000;
 }
 
-html.develop .section_work--project .work_image {
+html.develop .section_work--project .project-collage_item img,
+html.develop .section_work--project .project-series_image {
   filter: invert(1);
   transition: none;
 }

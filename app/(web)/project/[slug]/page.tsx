@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { defineQuery, PortableText, stegaClean } from "next-sanity";
 import { env } from "~/env";
-import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import { sanityFetch } from "~/features/sanity/client";
 import { ImageFragment, type ImageFragmentResult } from "~/features/sanity/media/fragment";
 import { DevelopLens } from "~/features/site/develop-lens";
@@ -11,6 +10,8 @@ import { SiteShell } from "~/features/site/site-shell";
 import { SANITY_PROJECT_DOCUMENT_TYPE } from "~/sanity/constants";
 import { createExcerptFromPortableText } from "~/sanity/utils";
 import { ProjectCategoryGallery } from "./category-gallery";
+import { LightboxProvider } from "./lightbox";
+import { ProjectCollage } from "./project-collage";
 import { ProjectSeriesGallery } from "./project-series-gallery";
 
 const ProjectQ = defineQuery(`
@@ -60,23 +61,6 @@ const ProjectSlugsQ = defineQuery(`
   *[_type == "${SANITY_PROJECT_DOCUMENT_TYPE}" && defined(slug.current)]{"slug": slug.current}
 `);
 
-/**
- * The "Best" images fill this fixed 10-row collage (up to 16), in their CMS order. Missing trailing
- * images just leave their slot empty. Every non-best image drops into the scrolling series gallery.
- */
-const SECTION_LAYOUT: Array<{ className: string; slots: string[] }> = [
-  { className: "portfolio_section-1", slots: ["work_image", "work_image is-smaller"] },
-  { className: "portfolio_section-2", slots: ["work_image is-large"] },
-  { className: "portfolio_section-3", slots: ["work_image is-smaller", "work_image is-medium"] },
-  { className: "portfolio_section-4", slots: ["work_image is-full"] },
-  { className: "portfolio_section-5", slots: ["work_image is-smaller is-alt", "work_image", "work_image is-smaller"] },
-  { className: "portfolio_section-6", slots: ["work_image is-large"] },
-  { className: "portfolio_section-7", slots: ["work_image is-full"] },
-  { className: "portfolio_section-8", slots: ["work_image is-smaller", "work_image is-medium"] },
-  { className: "portfolio_section-9", slots: ["work_image is-large"] },
-  { className: "portfolio_section-10 section-padding-bottom", slots: ["work_image is-smaller", "work_image is-medium"] },
-];
-
 const MAX_BEST = 16;
 
 async function fetchProject(slug: string) {
@@ -123,13 +107,9 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
   }
 
   const allImages = (project.images ?? []).filter((i) => i.image?._id);
-  // Best images fill the top collage (in CMS order); everything else flows into the series gallery.
-  const bestImages = allImages
-    .filter((i) => i.best)
-    .slice(0, MAX_BEST)
-    .map((i) => i.image);
+  // Best images fill the full-width collage (in CMS order); everything else flows into the series gallery.
+  const bestImages = allImages.filter((i) => i.best).slice(0, MAX_BEST);
   const restImages = allImages.filter((i) => !i.best);
-  let slotIndex = 0;
 
   // stegaClean before comparing: draft/preview strings carry invisible click-to-edit payload.
   const isCommission = stegaClean(project.category ?? "") === "Commissions";
@@ -158,48 +138,28 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
       <DevelopLens />
       <div className="section_work section_work--project">
         <div className="container">
-          <div className="portfolio_wrapper">
-            <div className="project_description-wrapper">
-              <div className="project_name-wrapper">
-                <div>
-                  <h1 className="project_name-text">{project.title}</h1>
-                </div>
+          <LightboxProvider>
+            {/* Full-bleed, flowing collage of the Best images — the page opens with photography. */}
+            <ProjectCollage images={bestImages} />
+
+            {/* The editorial block sits between the Best collage and the full series. */}
+            <div className="project_bottom">
+              <div className="project_bottom-head">
+                <h1 className="project_name-text">{project.title}</h1>
+                {metaRows.length > 0 && (
+                  <dl className="project_meta">
+                    {metaRows.map((row) => (
+                      <div key={row.label} className="project_meta-row">
+                        <dt className="project_meta-label">{row.label}</dt>
+                        <dd className="project_meta-value">{row.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
               </div>
-              {metaRows.length > 0 && (
-                <dl className="project_meta">
-                  {metaRows.map((row) => (
-                    <div key={row.label} className="project_meta-row">
-                      <dt className="project_meta-label">{row.label}</dt>
-                      <dd className="project_meta-value">{row.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-              )}
-              <div className="w-richtext">{project.description && <PortableText value={project.description} />}</div>
-            </div>
-            <div className="portfolio_images">
-              {SECTION_LAYOUT.map((section) => (
-                <div key={section.className} className={section.className}>
-                  {section.slots.map((slotClassName) => {
-                    const image = bestImages[slotIndex];
-                    slotIndex += 1;
-
-                    if (!image) {
-                      return null;
-                    }
-
-                    return (
-                      <KaijoImage
-                        key={image._id}
-                        image={image}
-                        className={slotClassName}
-                        sizes="(max-width: 767px) 100vw, (max-width: 991px) 62vw"
-                      />
-                    );
-                  })}
-                </div>
-              ))}
-
+              <div className="project_bottom-copy w-richtext">
+                {project.description && <PortableText value={project.description} />}
+              </div>
               {isCommission && project.credits && (
                 <div className="project_credits">
                   <h2 className="section-eyebrow">Credits</h2>
@@ -207,9 +167,9 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
                 </div>
               )}
             </div>
-          </div>
 
-          <ProjectSeriesGallery images={restImages} />
+            <ProjectSeriesGallery images={restImages} />
+          </LightboxProvider>
 
           <ProjectCategoryGallery category={category} currentSlug={slug} backHref={backHref} />
         </div>

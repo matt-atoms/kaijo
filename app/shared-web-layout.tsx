@@ -64,6 +64,7 @@ export function SharedWebLayout(props: SharedWebLayoutProps) {
   try { var s = localStorage.getItem("kaijo-theme"); if (s) { t = s; } } catch (e) {}
   if (t !== "green") { d.setAttribute("data-theme", t); }
   if (location.pathname === "/") { d.classList.add("home-route"); }
+  if (location.pathname === "/work") { d.classList.add("work-route"); }
   d.setAttribute("data-reveal", "pending");
   var fonts = document.fonts ? document.fonts.ready : Promise.resolve();
   Promise.race([fonts, new Promise(function (r) { setTimeout(r, 1200); })]).then(function () {

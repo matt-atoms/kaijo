@@ -5,6 +5,7 @@ import { ImageFragment } from "~/features/sanity/media/fragment";
 import { SANITY_PROJECT_DOCUMENT_TYPE } from "~/sanity/constants";
 import type { WorkOverviewSectionQResult } from "~/sanity/types";
 import { WorkGallery, type WorkGalleryItem } from "./work-gallery";
+import { WorkRouteLock } from "./work-route-lock";
 
 const WorkOverviewSectionQ =
   defineQuery(`*[_id == $docId][0].pageBuilder.sectionsArray[_type == "workOverviewSectionField" && _key == $sectionKey][0]{
@@ -53,32 +54,37 @@ export async function WorkOverviewSection({ docId, sectionKey }: { docId: string
 
   return (
     <div className="section_work section-padding-top" data-page-builder-section="workOverviewSection">
+      <WorkRouteLock />
       <div className="container">
         <WorkAnchors anchors={anchors} />
-        {groups.map((group) => {
-          const items: WorkGalleryItem[] = (group.projects ?? [])
-            .filter((project) => project.image?._id)
-            .map((project) => ({
-              key: project._id,
-              image: project.image ?? null,
-              aspectRatio: project.image?.aspectRatio ?? null,
-              project: project.title ?? "",
-              type: project.type ?? null,
-              year: project.date ? project.date.slice(0, 4) : null,
-              slug: project.slug ?? "",
-            }));
+        {/* On pointer devices `work-route` turns this into a vertical scroll-snap track: each group
+            below fills one viewport and snaps into view (see the .work-scroller CSS). */}
+        <div className="work-scroller">
+          {groups.map((group) => {
+            const items: WorkGalleryItem[] = (group.projects ?? [])
+              .filter((project) => project.image?._id)
+              .map((project) => ({
+                key: project._id,
+                image: project.image ?? null,
+                aspectRatio: project.image?.aspectRatio ?? null,
+                project: project.title ?? "",
+                type: project.type ?? null,
+                year: project.date ? project.date.slice(0, 4) : null,
+                slug: project.slug ?? "",
+              }));
 
-          return (
-            <section key={group.key} id={anchorId(group.heading)} className="work-group">
-              {group.intro && (
-                <p data-scramble="scroll" className="work-group_intro">
-                  {group.intro}
-                </p>
-              )}
-              {items.length > 0 && <WorkGallery items={items} />}
-            </section>
-          );
-        })}
+            return (
+              <section key={group.key} id={anchorId(group.heading)} className="work-group">
+                {group.intro && (
+                  <p data-scramble="scroll" className="work-group_intro">
+                    {group.intro}
+                  </p>
+                )}
+                {items.length > 0 && <WorkGallery items={items} />}
+              </section>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
-import { KaijoImage } from "~/features/kaijo/kaijo-image";
 import type { ImageFragmentResult } from "~/features/sanity/media/fragment";
+import { LightboxImage } from "./lightbox";
 
 export type SeriesImage = {
   image: ImageFragmentResult | null;
@@ -28,7 +28,7 @@ export function ProjectSeriesGallery({ images }: { images: SeriesImage[] }) {
           const ratio = item.aspectRatio ?? 1;
           return (
             <div key={item.image?._id} className="project-series_tile" style={{ aspectRatio: `${ratio}` }}>
-              <KaijoImage
+              <LightboxImage
                 image={item.image}
                 className="project-series_image"
                 sizes={`(max-width: 767px) 80vw, ${Math.round(TILE_VH * ratio)}vh`}
