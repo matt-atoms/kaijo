@@ -115,20 +115,16 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
   const isCommission = stegaClean(project.category ?? "") === "Commissions";
   const year = project.date ? project.date.slice(0, 4) : null;
 
-  // Editorial meta by kind — commissions lead with the client/role, personal projects with year/status.
-  const metaRows = (
-    isCommission
-      ? [
-          { label: "Client", value: project.client },
-          { label: "Year", value: year },
-          { label: "Role", value: project.role },
-        ]
-      : [{ label: project.status ? "Status" : "Year", value: project.status || year }]
-  ).filter((row) => row.value);
+  // Beside the title at the top: a quick-glance status + starting year (small, light).
+  const topMeta = [project.status, year].filter(Boolean).join(" · ") || null;
 
-  if (project.availability) {
-    metaRows.push({ label: "Availability", value: project.availability });
+  // The fuller meta stays at the foot with the description — minus the year/status already shown up top.
+  const metaRows: Array<{ label: string; value: string | null | undefined }> = [];
+  if (isCommission) {
+    metaRows.push({ label: "Client", value: project.client }, { label: "Role", value: project.role });
   }
+  metaRows.push({ label: "Availability", value: project.availability });
+  const bottomRows = metaRows.filter((row) => row.value);
 
   const category = stegaClean(project.category ?? "");
   const backHref = isCommission ? "/work#commissions" : "/work#projects";
@@ -138,25 +134,28 @@ export default async function ProjectPage(props: { params: Promise<{ slug: strin
       <DevelopLens />
       <div className="section_work section_work--project">
         <div className="container">
+          {/* Title at the top, with a small light status · year beside it. */}
+          <header className="project_top">
+            <h1 className="project_name-text">{project.title}</h1>
+            {topMeta && <p className="project_top-meta">{topMeta}</p>}
+          </header>
+
           <LightboxProvider>
-            {/* Full-bleed, flowing collage of the Best images — the page opens with photography. */}
+            {/* Full-bleed, flowing collage of the Best images. */}
             <ProjectCollage images={bestImages} />
 
-            {/* The editorial block sits between the Best collage and the full series. */}
+            {/* The rest of the editorial text sits between the Best collage and the full series. */}
             <div className="project_bottom">
-              <div className="project_bottom-head">
-                <h1 className="project_name-text">{project.title}</h1>
-                {metaRows.length > 0 && (
-                  <dl className="project_meta">
-                    {metaRows.map((row) => (
-                      <div key={row.label} className="project_meta-row">
-                        <dt className="project_meta-label">{row.label}</dt>
-                        <dd className="project_meta-value">{row.value}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                )}
-              </div>
+              {bottomRows.length > 0 && (
+                <dl className="project_meta">
+                  {bottomRows.map((row) => (
+                    <div key={row.label} className="project_meta-row">
+                      <dt className="project_meta-label">{row.label}</dt>
+                      <dd className="project_meta-value">{row.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
               <div className="project_bottom-copy w-richtext">
                 {project.description && <PortableText value={project.description} />}
               </div>

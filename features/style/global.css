@@ -1390,41 +1390,38 @@ html.home-route .section_feature-links {
  * shared top/bottom line; `is-wide` / `is-mid` feature images span the columns for size variation.
  */
 .project-collage {
-  column-count: 3;
-  column-gap: 1.4vw;
+  column-count: 2;
+  column-gap: 2vw;
   margin-top: 0.5em;
 }
 
+/* Plain images: a per-image width (fraction of the column, from --w) and a small top offset (--mt)
+   so neighbouring images don't share a column edge or a horizontal line — they flow past each other. */
 .project-collage_item {
   break-inside: avoid;
-  margin: 0 0 1.4vw;
+  width: calc(var(--w, 1) * 100%);
+  margin: var(--mt, 0) 0 2vw;
 }
 
+.project-collage_item.is-right {
+  margin-left: auto;
+}
+
+.project-collage_item.is-left {
+  margin-right: auto;
+}
+
+/* Feature images span both columns (full-bleed / two-thirds), overriding the --w width. */
 .project-collage_item.is-wide,
 .project-collage_item.is-mid {
   column-span: all;
-  margin-top: 2.4vw;
-  margin-bottom: 2.4vw;
+  width: 100%;
+  margin-top: 3vw;
+  margin-bottom: 3vw;
 }
 
 .project-collage_item.is-mid {
   width: 66%;
-}
-
-/* Narrower than its column — a smaller scale + negative space, nudged to one side. This is the main
-   source of size variation for portrait-heavy series (where full-bleed features would tower). */
-.project-collage_item.is-inset {
-  width: 74%;
-}
-
-.project-collage_item.is-mid.is-right,
-.project-collage_item.is-inset.is-right {
-  margin-left: auto;
-}
-
-.project-collage_item.is-mid.is-left,
-.project-collage_item.is-inset.is-left {
-  margin-right: auto;
 }
 
 .project-collage_item img {
@@ -1433,25 +1430,19 @@ html.home-route .section_feature-links {
   height: auto;
 }
 
-@media screen and (max-width: 991px) {
-  .project-collage {
-    column-count: 2;
-  }
-  .project-collage_item.is-mid {
-    width: 82%;
-  }
-  .project-collage_item.is-inset {
-    width: 84%;
-  }
-}
-
 @media screen and (max-width: 767px) {
   .project-collage {
     column-count: 1;
     column-gap: 0;
   }
-  .project-collage_item.is-mid,
-  .project-collage_item.is-inset {
+  /* Single column on phones: full width, no side-hug or offset games. */
+  .project-collage_item {
+    width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .project-collage_item.is-mid {
     width: 100%;
   }
 }
@@ -1468,17 +1459,29 @@ html.home-route .section_feature-links {
   mix-blend-mode: difference;
 }
 
-.project_bottom-head {
+/* Title + small, light status · year at the very top of a project page (above the collage). */
+.project_top {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 0.6em 2em;
-  margin-bottom: 1.4em;
+  gap: 0.75em;
+  margin-bottom: 1.8em;
+  color: var(--page-blend);
+  mix-blend-mode: difference;
+}
+
+.project_top-meta {
+  margin: 0;
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 0.78em;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.5;
 }
 
 .project_bottom .project_meta {
-  margin: 0;
+  margin: 0 0 1.4em;
 }
 
 .project_bottom-copy {
