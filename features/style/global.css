@@ -1296,7 +1296,7 @@ html.home-route .section_feature-links {
     position: static;
     top: auto;
     flex: 0 0 auto;
-    margin-bottom: 1.1em;
+    margin-bottom: 2.4em;
   }
 
   /* The vertical snap track: exactly one group per screen. */
@@ -1314,9 +1314,12 @@ html.home-route .section_feature-links {
   }
 
   html.work-route .work-group {
+    box-sizing: border-box;
     height: 100%;
     min-height: 0;
     margin: 0;
+    /* A little empty space at the foot of each panel so the filmstrip doesn't touch the very bottom. */
+    padding-bottom: 2.6em;
     scroll-snap-align: start;
     scroll-snap-stop: always;
     scroll-margin-top: 0;
@@ -1331,7 +1334,7 @@ html.home-route .section_feature-links {
   /* Compact intro pinned to the top of each panel; the gallery gets the rest of the height. */
   html.work-route .work-group_intro {
     flex: 0 0 auto;
-    margin-bottom: 1.1em;
+    margin-bottom: 2em;
     font-size: 0.72em;
   }
 
