@@ -10398,6 +10398,13 @@
         },
         "optional": true
       },
+      "hidden": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
+      },
       "gridStyle": {
         "type": "objectAttribute",
         "value": {

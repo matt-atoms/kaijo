@@ -6,7 +6,7 @@ import { ImageFragment, type ImageFragmentResult } from "~/features/sanity/media
 import { SANITY_PROJECT_DOCUMENT_TYPE } from "~/sanity/constants";
 
 const CategoryProjectsQ = defineQuery(`
-  *[_type == "${SANITY_PROJECT_DOCUMENT_TYPE}" && defined(slug.current) && category == $category && slug.current != $currentSlug] | order(coalesce(gridOrder, 9999) asc, date asc){
+  *[_type == "${SANITY_PROJECT_DOCUMENT_TYPE}" && defined(slug.current) && category == $category && slug.current != $currentSlug && !(hidden == true)] | order(coalesce(gridOrder, 9999) asc, date asc){
     _id,
     title,
     type,

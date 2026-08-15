@@ -22,7 +22,7 @@ const SitemapQ = defineQuery(`
 
 // Projects live at /project/<slug> (they carry a slug, not a uri), so they need their own entries.
 const ProjectSitemapQ = defineQuery(`
-  *[_type == "${SANITY_PROJECT_DOCUMENT_TYPE}" && defined(slug.current)]{
+  *[_type == "${SANITY_PROJECT_DOCUMENT_TYPE}" && defined(slug.current) && !(hidden == true)]{
     "slug": slug.current,
     "updatedAt": _updatedAt,
   }

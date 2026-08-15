@@ -138,6 +138,15 @@ export const project = defineType({
     }),
     defineField({
       group: "details",
+      name: "hidden",
+      type: "boolean",
+      title: "Archived (hidden)",
+      description:
+        "Hide this project from the Work galleries, the homepage scroll and the sitemap. The project doc is kept but unlisted — untick to bring it back.",
+      initialValue: false,
+    }),
+    defineField({
+      group: "details",
       name: "gridStyle",
       type: "string",
       title: "Grid style",
