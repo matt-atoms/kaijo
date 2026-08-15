@@ -1120,9 +1120,6 @@ html.home-route .section_feature-links {
 }
 
 .work-gallery_name {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.45em;
   color: inherit;
   text-transform: uppercase;
   font-size: 0.75em;
@@ -1130,15 +1127,6 @@ html.home-route .section_feature-links {
   letter-spacing: 0.01em;
   line-height: 1.2;
   transition: opacity 0.25s ease;
-}
-
-/* Year sits just right of the name, sized down and dimmed like a footnote, aligned to the name's
-   baseline (its bottom) rather than its middle. */
-.work-gallery_name-year {
-  font-size: 0.82em;
-  font-weight: 400;
-  letter-spacing: 0;
-  opacity: 0.45;
 }
 
 .work-gallery[data-has-active="true"] .work-gallery_name {

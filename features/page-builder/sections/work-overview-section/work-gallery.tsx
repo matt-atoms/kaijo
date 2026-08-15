@@ -167,8 +167,7 @@ export function WorkGallery({ items }: { items: WorkGalleryItem[] }) {
             }}
             onClick={(e) => onNameClick(e, item.key, index)}
           >
-            <span className="work-gallery_name-label">{item.project}</span>
-            {item.year && <span className="work-gallery_name-year">{item.year}</span>}
+            {item.project}
           </Link>
         ))}
       </nav>
