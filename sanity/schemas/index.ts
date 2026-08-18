@@ -1,5 +1,3 @@
-import { article } from "./documents/article";
-import { articleCategory } from "./documents/article-category";
 import { book } from "./documents/book";
 import { contactFormSubmission } from "./documents/contact-form-submission";
 import { page } from "./documents/page";
@@ -22,8 +20,6 @@ export const schemaTypes = [
   page,
   project,
   contactFormSubmission,
-  article,
-  articleCategory,
   aspectRatio,
   videoOptions,
   riveOptions,

@@ -53,7 +53,7 @@ Site name: $siteName
 Site summary: $summary
 Editor guidance (optional; obey it unless it is "(none)"): $guidance
 
-Site entries (JSON array; each has type, title, url, and optional description, publishedAt, categories):
+Site entries (JSON array; each has type, title, url, and optional description, publishedAt):
 $content`;
 
 /** Strip a wrapping markdown code fence if the model added one despite instructions. */
@@ -102,12 +102,11 @@ export async function POST(req: NextRequest) {
         const uri = page.uri ?? "/";
 
         return {
-          type: page._type === "article" ? "article" : "page",
+          type: "page" as const,
           title: page.title?.trim() || routeLabel(uri),
           url: `${baseUrl}${uri}`,
           description: page.description?.trim() || undefined,
           publishedAt: page.publishedAt || undefined,
-          categories: page.categories?.filter((category): category is string => Boolean(category)) ?? undefined,
         };
       })
       .filter((entry) => {

@@ -1,5 +1,5 @@
 import { GeistMono } from "geist/font/mono";
-import { GeistPixelCircle, GeistPixelGrid, GeistPixelLine, GeistPixelSquare, GeistPixelTriangle } from "geist/font/pixel";
+import { GeistPixelSquare } from "geist/font/pixel";
 import { GeistSans } from "geist/font/sans";
 import { Big_Shoulders } from "next/font/google";
 
@@ -16,15 +16,7 @@ const BigShoulders = Big_Shoulders({
 
 /**
  * Loaded on `<html>` so `--font-geist-*` variables exist for Tailwind `font-sans`, `font-mono`,
- * and `font-pixel-*` utilities.
+ * and the `font-pixel-square` utility. Only the `square` pixel face is used (captions / eyebrow
+ * labels); the other pixel variants were dropped to save four webfont downloads per page.
  */
-export const fonts = [
-  GeistSans,
-  GeistMono,
-  GeistPixelSquare,
-  GeistPixelGrid,
-  GeistPixelCircle,
-  GeistPixelTriangle,
-  GeistPixelLine,
-  BigShoulders,
-];
+export const fonts = [GeistSans, GeistMono, GeistPixelSquare, BigShoulders];

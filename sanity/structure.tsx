@@ -85,19 +85,6 @@ export function buildStructure(S: StructureBuilder) {
 
       S.divider(),
 
-      // Articles
-      S.listItem()
-        .title("Articles")
-        .icon(() => <>📖</>)
-        .child(S.documentTypeList("article").title("Articles")),
-
-      S.listItem()
-        .title("Article Categories")
-        .icon(() => <>🔍</>)
-        .child(S.documentTypeList("articleCategory").title("Article Categories")),
-
-      S.divider(),
-
       // Form Submissions (driven by API_ONLY_DOCUMENTS)
       S.listItem()
         .title("Form Submissions")

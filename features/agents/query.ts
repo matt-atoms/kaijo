@@ -1,6 +1,6 @@
 import { defineQuery } from "next-sanity";
 import { LinkFragment } from "~/features/sanity/link/fragment";
-import { SANITY_ARTICLE_DOCUMENT_TYPE, SANITY_PAGE_DOCUMENT_TYPE, SANITY_SINGLETON_SITE_ID } from "~/sanity/constants";
+import { SANITY_PAGE_DOCUMENT_TYPE, SANITY_SINGLETON_SITE_ID } from "~/sanity/constants";
 
 /**
  * Content served at `/llms.txt`. Read from the published `site` singleton.
@@ -12,8 +12,8 @@ export const LlmsTxtServeQuery = defineQuery(`*[_type == "${SANITY_SINGLETON_SIT
 }`);
 
 /**
- * Everything the AI needs to draft an llms.txt: site identity plus the indexable pages and
- * articles (same visibility rules as the sitemap: has a URI, not noindex, not password protected).
+ * Everything the AI needs to draft an llms.txt: site identity plus the indexable pages
+ * (same visibility rules as the sitemap: has a URI, not noindex, not password protected).
  * Fetched server-side with an edit token so it can run under the `drafts` perspective.
  */
 export const LlmsTxtInventoryQuery = defineQuery(`{
@@ -23,7 +23,7 @@ export const LlmsTxtInventoryQuery = defineQuery(`{
     "guidance": llms.guidance
   },
   "pages": *[
-    _type in ["${SANITY_PAGE_DOCUMENT_TYPE}", "${SANITY_ARTICLE_DOCUMENT_TYPE}"]
+    _type == "${SANITY_PAGE_DOCUMENT_TYPE}"
     && defined(uri.current)
     && seoMetadata.noIndex != true
     && passwordProtected != true
@@ -32,8 +32,7 @@ export const LlmsTxtInventoryQuery = defineQuery(`{
     "uri": uri.current,
     "title": coalesce(seoMetadata.title, title),
     "description": seoMetadata.description,
-    "publishedAt": publishedAt,
-    "categories": categories[]->name
+    "publishedAt": publishedAt
   }
 }`);
 

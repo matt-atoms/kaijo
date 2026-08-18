@@ -63,7 +63,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "file1"
+            "name": "link.file"
           },
           "optional": true
         },
@@ -85,7 +85,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "internal1"
+            "name": "link.internal"
           },
           "optional": true
         },
@@ -463,7 +463,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "appLink.file"
+            "name": "file1"
           },
           "optional": true
         },
@@ -485,7 +485,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "appLink.internal"
+            "name": "internal1"
           },
           "optional": true
         },
@@ -570,7 +570,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "sectionContent.appLink.file"
+            "name": "appLink.file1"
           },
           "optional": true
         },
@@ -592,7 +592,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "sectionContent.appLink.internal"
+            "name": "appLink.internal1"
           },
           "optional": true
         },
@@ -677,7 +677,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "aboutPreviewSectionField.sectionContent.appLink.file"
+            "name": "file2"
           },
           "optional": true
         },
@@ -699,7 +699,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "aboutPreviewSectionField.sectionContent.appLink.internal"
+            "name": "internal2"
           },
           "optional": true
         },
@@ -784,7 +784,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "workshopsSectionField.sectionContent.appLink.file"
+            "name": "appLink.file2"
           },
           "optional": true
         },
@@ -806,7 +806,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "workshopsSectionField.sectionContent.appLink.internal"
+            "name": "appLink.internal2"
           },
           "optional": true
         },
@@ -891,7 +891,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "aboutTextSectionField.sectionContent.appLink.file"
+            "name": "file3"
           },
           "optional": true
         },
@@ -913,7 +913,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "aboutTextSectionField.sectionContent.appLink.internal"
+            "name": "internal3"
           },
           "optional": true
         },
@@ -998,7 +998,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "workshopIntroSectionField.sectionContent.appLink.file"
+            "name": "appLink.file3"
           },
           "optional": true
         },
@@ -1020,7 +1020,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "workshopIntroSectionField.sectionContent.appLink.internal"
+            "name": "appLink.internal3"
           },
           "optional": true
         },
@@ -1342,7 +1342,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "link.file"
+            "name": "link.file1"
           },
           "optional": true
         },
@@ -1364,7 +1364,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "link.internal"
+            "name": "link.internal1"
           },
           "optional": true
         },
@@ -1379,6 +1379,118 @@
           "type": "objectAttribute",
           "value": {
             "type": "boolean"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
+    "name": "link.file",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "asset": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "sanity.fileAsset.reference"
+          },
+          "optional": true
+        },
+        "media": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "file.media"
+          },
+          "optional": true
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "file"
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
+    "name": "link.internal",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "link": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "page.reference"
+          },
+          "optional": true
+        },
+        "sectionTarget": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
+    "name": "appLink.file",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "asset": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "sanity.fileAsset.reference"
+          },
+          "optional": true
+        },
+        "media": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "appLink.file.media"
+          },
+          "optional": true
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "file"
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
+    "name": "appLink.internal",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "link": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "page.reference"
+          },
+          "optional": true
+        },
+        "sectionTarget": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
           },
           "optional": true
         }
@@ -1731,7 +1843,7 @@
   },
   {
     "type": "type",
-    "name": "appLink.file",
+    "name": "file1",
     "value": {
       "type": "object",
       "attributes": {
@@ -1747,7 +1859,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "file.media"
+            "name": "media1"
           },
           "optional": true
         },
@@ -1763,7 +1875,7 @@
   },
   {
     "type": "type",
-    "name": "appLink.internal",
+    "name": "internal1",
     "value": {
       "type": "object",
       "attributes": {
@@ -2705,7 +2817,7 @@
   },
   {
     "type": "type",
-    "name": "sectionContent.appLink.file",
+    "name": "appLink.file1",
     "value": {
       "type": "object",
       "attributes": {
@@ -2721,7 +2833,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "appLink.file.media"
+            "name": "file.media1"
           },
           "optional": true
         },
@@ -2737,7 +2849,7 @@
   },
   {
     "type": "type",
-    "name": "sectionContent.appLink.internal",
+    "name": "appLink.internal1",
     "value": {
       "type": "object",
       "attributes": {
@@ -2761,7 +2873,7 @@
   },
   {
     "type": "type",
-    "name": "aboutPreviewSectionField.sectionContent.appLink.file",
+    "name": "file2",
     "value": {
       "type": "object",
       "attributes": {
@@ -2777,7 +2889,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "sectionContent.appLink.file.media"
+            "name": "appLink.file.media1"
           },
           "optional": true
         },
@@ -2793,7 +2905,7 @@
   },
   {
     "type": "type",
-    "name": "aboutPreviewSectionField.sectionContent.appLink.internal",
+    "name": "internal2",
     "value": {
       "type": "object",
       "attributes": {
@@ -2980,7 +3092,7 @@
   },
   {
     "type": "type",
-    "name": "workshopsSectionField.sectionContent.appLink.file",
+    "name": "appLink.file2",
     "value": {
       "type": "object",
       "attributes": {
@@ -2996,7 +3108,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "workshopsSectionField.sectionContent.appLink.file.media"
+            "name": "file.media2"
           },
           "optional": true
         },
@@ -3012,7 +3124,7 @@
   },
   {
     "type": "type",
-    "name": "workshopsSectionField.sectionContent.appLink.internal",
+    "name": "appLink.internal2",
     "value": {
       "type": "object",
       "attributes": {
@@ -3036,7 +3148,7 @@
   },
   {
     "type": "type",
-    "name": "aboutTextSectionField.sectionContent.appLink.file",
+    "name": "file3",
     "value": {
       "type": "object",
       "attributes": {
@@ -3052,7 +3164,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "aboutTextSectionField.sectionContent.appLink.file.media"
+            "name": "appLink.file.media2"
           },
           "optional": true
         },
@@ -3068,7 +3180,7 @@
   },
   {
     "type": "type",
-    "name": "aboutTextSectionField.sectionContent.appLink.internal",
+    "name": "internal3",
     "value": {
       "type": "object",
       "attributes": {
@@ -3255,7 +3367,7 @@
   },
   {
     "type": "type",
-    "name": "workshopIntroSectionField.sectionContent.appLink.file",
+    "name": "appLink.file3",
     "value": {
       "type": "object",
       "attributes": {
@@ -3271,7 +3383,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "workshopIntroSectionField.sectionContent.appLink.file.media"
+            "name": "media3"
           },
           "optional": true
         },
@@ -3287,7 +3399,7 @@
   },
   {
     "type": "type",
-    "name": "workshopIntroSectionField.sectionContent.appLink.internal",
+    "name": "appLink.internal3",
     "value": {
       "type": "object",
       "attributes": {
@@ -3586,7 +3698,7 @@
   },
   {
     "type": "type",
-    "name": "link.file",
+    "name": "link.file1",
     "value": {
       "type": "object",
       "attributes": {
@@ -3618,119 +3730,7 @@
   },
   {
     "type": "type",
-    "name": "link.internal",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "link": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "page.reference"
-          },
-          "optional": true
-        },
-        "sectionTarget": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        }
-      }
-    }
-  },
-  {
-    "type": "type",
-    "name": "file1",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "asset": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "sanity.fileAsset.reference"
-          },
-          "optional": true
-        },
-        "media": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "media1"
-          },
-          "optional": true
-        },
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "file"
-          }
-        }
-      }
-    }
-  },
-  {
-    "type": "type",
-    "name": "internal1",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "link": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "page.reference"
-          },
-          "optional": true
-        },
-        "sectionTarget": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        }
-      }
-    }
-  },
-  {
-    "type": "type",
-    "name": "children.appLink.file",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "asset": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "sanity.fileAsset.reference"
-          },
-          "optional": true
-        },
-        "media": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "children.appLink.file.media"
-          },
-          "optional": true
-        },
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "file"
-          }
-        }
-      }
-    }
-  },
-  {
-    "type": "type",
-    "name": "children.appLink.internal",
+    "name": "link.internal1",
     "value": {
       "type": "object",
       "attributes": {
@@ -8467,7 +8467,7 @@
                   "type": "objectAttribute",
                   "value": {
                     "type": "inline",
-                    "name": "children.appLink.file"
+                    "name": "appLink.file"
                   },
                   "optional": true
                 },
@@ -8489,7 +8489,7 @@
                   "type": "objectAttribute",
                   "value": {
                     "type": "inline",
-                    "name": "children.appLink.internal"
+                    "name": "appLink.internal"
                   },
                   "optional": true
                 },
@@ -8675,1424 +8675,6 @@
           "value": 0.7142857142857143
         }
       ]
-    }
-  },
-  {
-    "name": "articleCategory",
-    "type": "document",
-    "attributes": {
-      "_id": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string",
-          "value": "articleCategory"
-        }
-      },
-      "_createdAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_updatedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_rev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "name": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      }
-    }
-  },
-  {
-    "type": "type",
-    "name": "articleCategory.reference",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_ref": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          }
-        },
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "reference"
-          }
-        },
-        "_weak": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        }
-      },
-      "dereferencesTo": "articleCategory"
-    }
-  },
-  {
-    "name": "article",
-    "type": "document",
-    "attributes": {
-      "_id": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string",
-          "value": "article"
-        }
-      },
-      "_createdAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_updatedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_rev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "title": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "uri": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "slug"
-        },
-        "optional": true
-      },
-      "passwordProtected": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
-        },
-        "optional": true
-      },
-      "showHeader": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
-        },
-        "optional": true
-      },
-      "showFooter": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
-        },
-        "optional": true
-      },
-      "categories": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "array",
-          "of": {
-            "type": "object",
-            "attributes": {
-              "_key": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                }
-              }
-            },
-            "rest": {
-              "type": "inline",
-              "name": "articleCategory.reference"
-            }
-          }
-        },
-        "optional": true
-      },
-      "publishedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "author": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "image": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "object",
-          "attributes": {
-            "asset": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "inline",
-                "name": "sanity.imageAsset.reference"
-              },
-              "optional": true
-            },
-            "media": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "unknown"
-              },
-              "optional": true
-            },
-            "hotspot": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "inline",
-                "name": "sanity.imageHotspot"
-              },
-              "optional": true
-            },
-            "crop": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "inline",
-                "name": "sanity.imageCrop"
-              },
-              "optional": true
-            },
-            "_type": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string",
-                "value": "image"
-              }
-            }
-          }
-        },
-        "optional": true
-      },
-      "pageBuilder": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "object",
-          "attributes": {
-            "sectionsArray": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "array",
-                "of": {
-                  "type": "union",
-                  "of": [
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "mediaSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "mediaSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "ctaSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "ctaSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "textSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "textSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "contactFormSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "contactFormSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "projectHeroSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "projectHeroSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "aboutSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "aboutSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "portfolioGridSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "portfolioGridSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "aboutPreviewSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "aboutPreviewSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "featureLinksSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "featureLinksSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "workshopsSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "workshopsSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "workOverviewSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "workOverviewSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "aboutIdentitySection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "aboutIdentitySectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "aboutTextSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "aboutTextSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "aboutCredentialsSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "aboutCredentialsSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "aboutContactSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "aboutContactSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "workshopIntroSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "workshopIntroSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "workshopGallerySection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "workshopGallerySectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "workshopLearnSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "workshopLearnSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "workshopPricingSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "workshopPricingSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "workshopNotesSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "workshopNotesSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "workshopTestimonialsSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "workshopTestimonialsSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "workshopUpcomingSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "workshopUpcomingSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "printsGallerySection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "printsGallerySectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "printsLicensingSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "printsLicensingSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "booksStoreSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "booksStoreSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "printsShowcaseSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "printsShowcaseSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    {
-                      "type": "object",
-                      "attributes": {
-                        "sectionSettings": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "sectionSettings"
-                          },
-                          "optional": true
-                        },
-                        "sectionContent": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "inline",
-                            "name": "homeShowcaseSection"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "homeShowcaseSectionField"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              },
-              "optional": true
-            }
-          }
-        },
-        "optional": true
-      },
-      "seoMetadata": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "object",
-          "attributes": {
-            "noIndex": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "boolean"
-              },
-              "optional": true
-            },
-            "title": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "description": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "sourceUrl": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "screenshotWaitSeconds": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "number"
-              },
-              "optional": true
-            },
-            "image": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "object",
-                "attributes": {
-                  "asset": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "sanity.imageAsset.reference"
-                    },
-                    "optional": true
-                  },
-                  "media": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "unknown"
-                    },
-                    "optional": true
-                  },
-                  "hotspot": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "sanity.imageHotspot"
-                    },
-                    "optional": true
-                  },
-                  "crop": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "sanity.imageCrop"
-                    },
-                    "optional": true
-                  },
-                  "_type": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string",
-                      "value": "image"
-                    }
-                  }
-                }
-              },
-              "optional": true
-            }
-          }
-        },
-        "optional": true
-      },
-      "agentMarkdown": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "object",
-          "attributes": {
-            "enabled": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "boolean"
-              },
-              "optional": true
-            },
-            "content": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            }
-          }
-        },
-        "optional": true
-      }
     }
   },
   {

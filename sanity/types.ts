@@ -20,10 +20,10 @@ export type Link = {
   external?: string;
   email?: string;
   phone?: string;
-  file?: File1;
+  file?: LinkFile;
   canDownload?: boolean;
   paramsHref?: string;
-  internal?: Internal1;
+  internal?: LinkInternal;
   customText?: string;
   openInNewTab?: boolean;
 };
@@ -81,10 +81,10 @@ export type AppLink = {
   external?: string;
   email?: string;
   phone?: string;
-  file?: AppLinkFile;
+  file?: File1;
   canDownload?: boolean;
   paramsHref?: string;
-  internal?: AppLinkInternal;
+  internal?: Internal1;
   customText?: string;
   openInNewTab?: boolean;
 };
@@ -94,10 +94,10 @@ export type SectionContentAppLink = {
   external?: string;
   email?: string;
   phone?: string;
-  file?: SectionContentAppLinkFile;
+  file?: AppLinkFile1;
   canDownload?: boolean;
   paramsHref?: string;
-  internal?: SectionContentAppLinkInternal;
+  internal?: AppLinkInternal1;
   customText?: string;
   openInNewTab?: boolean;
 };
@@ -107,10 +107,10 @@ export type AboutPreviewSectionFieldSectionContentAppLink = {
   external?: string;
   email?: string;
   phone?: string;
-  file?: AboutPreviewSectionFieldSectionContentAppLinkFile;
+  file?: File2;
   canDownload?: boolean;
   paramsHref?: string;
-  internal?: AboutPreviewSectionFieldSectionContentAppLinkInternal;
+  internal?: Internal2;
   customText?: string;
   openInNewTab?: boolean;
 };
@@ -120,10 +120,10 @@ export type WorkshopsSectionFieldSectionContentAppLink = {
   external?: string;
   email?: string;
   phone?: string;
-  file?: WorkshopsSectionFieldSectionContentAppLinkFile;
+  file?: AppLinkFile2;
   canDownload?: boolean;
   paramsHref?: string;
-  internal?: WorkshopsSectionFieldSectionContentAppLinkInternal;
+  internal?: AppLinkInternal2;
   customText?: string;
   openInNewTab?: boolean;
 };
@@ -133,10 +133,10 @@ export type AboutTextSectionFieldSectionContentAppLink = {
   external?: string;
   email?: string;
   phone?: string;
-  file?: AboutTextSectionFieldSectionContentAppLinkFile;
+  file?: File3;
   canDownload?: boolean;
   paramsHref?: string;
-  internal?: AboutTextSectionFieldSectionContentAppLinkInternal;
+  internal?: Internal3;
   customText?: string;
   openInNewTab?: boolean;
 };
@@ -146,10 +146,10 @@ export type WorkshopIntroSectionFieldSectionContentAppLink = {
   external?: string;
   email?: string;
   phone?: string;
-  file?: WorkshopIntroSectionFieldSectionContentAppLinkFile;
+  file?: AppLinkFile3;
   canDownload?: boolean;
   paramsHref?: string;
-  internal?: WorkshopIntroSectionFieldSectionContentAppLinkInternal;
+  internal?: AppLinkInternal3;
   customText?: string;
   openInNewTab?: boolean;
 };
@@ -190,12 +190,34 @@ export type SectionContentLink = {
   external?: string;
   email?: string;
   phone?: string;
-  file?: LinkFile;
+  file?: LinkFile1;
   canDownload?: boolean;
   paramsHref?: string;
-  internal?: LinkInternal;
+  internal?: LinkInternal1;
   customText?: string;
   openInNewTab?: boolean;
+};
+
+export type LinkFile = {
+  asset?: SanityFileAssetReference;
+  media?: unknown; // Unable to locate the referenced type "file.media" in schema
+  _type: "file";
+};
+
+export type LinkInternal = {
+  link?: PageReference;
+  sectionTarget?: string;
+};
+
+export type AppLinkFile = {
+  asset?: SanityFileAssetReference;
+  media?: unknown; // Unable to locate the referenced type "appLink.file.media" in schema
+  _type: "file";
+};
+
+export type AppLinkInternal = {
+  link?: PageReference;
+  sectionTarget?: string;
 };
 
 export type VideoFile = {
@@ -265,13 +287,13 @@ export type LottieDimensions = {
   height?: number;
 };
 
-export type AppLinkFile = {
+export type File1 = {
   asset?: SanityFileAssetReference;
-  media?: unknown; // Unable to locate the referenced type "file.media" in schema
+  media?: unknown; // Unable to locate the referenced type "media1" in schema
   _type: "file";
 };
 
-export type AppLinkInternal = {
+export type Internal1 = {
   link?: PageReference;
   sectionTarget?: string;
 };
@@ -430,24 +452,24 @@ export type MediaLottieDimensions = {
   height?: number;
 };
 
-export type SectionContentAppLinkFile = {
+export type AppLinkFile1 = {
   asset?: SanityFileAssetReference;
-  media?: unknown; // Unable to locate the referenced type "appLink.file.media" in schema
+  media?: unknown; // Unable to locate the referenced type "file.media1" in schema
   _type: "file";
 };
 
-export type SectionContentAppLinkInternal = {
+export type AppLinkInternal1 = {
   link?: PageReference;
   sectionTarget?: string;
 };
 
-export type AboutPreviewSectionFieldSectionContentAppLinkFile = {
+export type File2 = {
   asset?: SanityFileAssetReference;
-  media?: unknown; // Unable to locate the referenced type "sectionContent.appLink.file.media" in schema
+  media?: unknown; // Unable to locate the referenced type "appLink.file.media1" in schema
   _type: "file";
 };
 
-export type AboutPreviewSectionFieldSectionContentAppLinkInternal = {
+export type Internal2 = {
   link?: PageReference;
   sectionTarget?: string;
 };
@@ -476,24 +498,24 @@ export type FeatureLinkItemAppLinkInternal = {
   sectionTarget?: string;
 };
 
-export type WorkshopsSectionFieldSectionContentAppLinkFile = {
+export type AppLinkFile2 = {
   asset?: SanityFileAssetReference;
-  media?: unknown; // Unable to locate the referenced type "workshopsSectionField.sectionContent.appLink.file.media" in schema
+  media?: unknown; // Unable to locate the referenced type "file.media2" in schema
   _type: "file";
 };
 
-export type WorkshopsSectionFieldSectionContentAppLinkInternal = {
+export type AppLinkInternal2 = {
   link?: PageReference;
   sectionTarget?: string;
 };
 
-export type AboutTextSectionFieldSectionContentAppLinkFile = {
+export type File3 = {
   asset?: SanityFileAssetReference;
-  media?: unknown; // Unable to locate the referenced type "aboutTextSectionField.sectionContent.appLink.file.media" in schema
+  media?: unknown; // Unable to locate the referenced type "appLink.file.media2" in schema
   _type: "file";
 };
 
-export type AboutTextSectionFieldSectionContentAppLinkInternal = {
+export type Internal3 = {
   link?: PageReference;
   sectionTarget?: string;
 };
@@ -522,13 +544,13 @@ export type InquiryButtonAppLinkInternal = {
   sectionTarget?: string;
 };
 
-export type WorkshopIntroSectionFieldSectionContentAppLinkFile = {
+export type AppLinkFile3 = {
   asset?: SanityFileAssetReference;
-  media?: unknown; // Unable to locate the referenced type "workshopIntroSectionField.sectionContent.appLink.file.media" in schema
+  media?: unknown; // Unable to locate the referenced type "media3" in schema
   _type: "file";
 };
 
-export type WorkshopIntroSectionFieldSectionContentAppLinkInternal = {
+export type AppLinkInternal3 = {
   link?: PageReference;
   sectionTarget?: string;
 };
@@ -579,35 +601,13 @@ export type EnquiryLinkInternal = {
   sectionTarget?: string;
 };
 
-export type LinkFile = {
+export type LinkFile1 = {
   asset?: SanityFileAssetReference;
   media?: unknown; // Unable to locate the referenced type "link.file.media" in schema
   _type: "file";
 };
 
-export type LinkInternal = {
-  link?: PageReference;
-  sectionTarget?: string;
-};
-
-export type File1 = {
-  asset?: SanityFileAssetReference;
-  media?: unknown; // Unable to locate the referenced type "media1" in schema
-  _type: "file";
-};
-
-export type Internal1 = {
-  link?: PageReference;
-  sectionTarget?: string;
-};
-
-export type ChildrenAppLinkFile = {
-  asset?: SanityFileAssetReference;
-  media?: unknown; // Unable to locate the referenced type "children.appLink.file.media" in schema
-  _type: "file";
-};
-
-export type ChildrenAppLinkInternal = {
+export type LinkInternal1 = {
   link?: PageReference;
   sectionTarget?: string;
 };
@@ -1340,10 +1340,10 @@ export type HeaderNavItem = {
     external?: string;
     email?: string;
     phone?: string;
-    file?: ChildrenAppLinkFile;
+    file?: AppLinkFile;
     canDownload?: boolean;
     paramsHref?: string;
-    internal?: ChildrenAppLinkInternal;
+    internal?: AppLinkInternal;
     customText?: string;
     openInNewTab?: boolean;
     _type: "appLink";
@@ -1380,233 +1380,6 @@ export type AspectRatio =
   | 1.3333333333333333
   | 1.4
   | 0.7142857142857143;
-
-export type ArticleCategory = {
-  _id: string;
-  _type: "articleCategory";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-};
-
-export type ArticleCategoryReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "articleCategory";
-};
-
-export type Article = {
-  _id: string;
-  _type: "article";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  uri?: Slug;
-  passwordProtected?: boolean;
-  showHeader?: boolean;
-  showFooter?: boolean;
-  categories?: Array<
-    {
-      _key: string;
-    } & ArticleCategoryReference
-  >;
-  publishedAt?: string;
-  author?: string;
-  image?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  pageBuilder?: {
-    sectionsArray?: Array<
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: MediaSection;
-          _type: "mediaSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: CtaSection;
-          _type: "ctaSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: TextSection;
-          _type: "textSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: ContactFormSection;
-          _type: "contactFormSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: ProjectHeroSection;
-          _type: "projectHeroSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: AboutSection;
-          _type: "aboutSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: PortfolioGridSection;
-          _type: "portfolioGridSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: AboutPreviewSection;
-          _type: "aboutPreviewSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: FeatureLinksSection;
-          _type: "featureLinksSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: WorkshopsSection;
-          _type: "workshopsSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: WorkOverviewSection;
-          _type: "workOverviewSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: AboutIdentitySection;
-          _type: "aboutIdentitySectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: AboutTextSection;
-          _type: "aboutTextSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: AboutCredentialsSection;
-          _type: "aboutCredentialsSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: AboutContactSection;
-          _type: "aboutContactSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: WorkshopIntroSection;
-          _type: "workshopIntroSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: WorkshopGallerySection;
-          _type: "workshopGallerySectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: WorkshopLearnSection;
-          _type: "workshopLearnSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: WorkshopPricingSection;
-          _type: "workshopPricingSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: WorkshopNotesSection;
-          _type: "workshopNotesSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: WorkshopTestimonialsSection;
-          _type: "workshopTestimonialsSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: WorkshopUpcomingSection;
-          _type: "workshopUpcomingSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: PrintsGallerySection;
-          _type: "printsGallerySectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: PrintsLicensingSection;
-          _type: "printsLicensingSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: BooksStoreSection;
-          _type: "booksStoreSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: PrintsShowcaseSection;
-          _type: "printsShowcaseSectionField";
-          _key: string;
-        }
-      | {
-          sectionSettings?: SectionSettings;
-          sectionContent?: HomeShowcaseSection;
-          _type: "homeShowcaseSectionField";
-          _key: string;
-        }
-    >;
-  };
-  seoMetadata?: {
-    noIndex?: boolean;
-    title?: string;
-    description?: string;
-    sourceUrl?: string;
-    screenshotWaitSeconds?: number;
-    image?: {
-      asset?: SanityImageAssetReference;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
-  agentMarkdown?: {
-    enabled?: boolean;
-    content?: string;
-  };
-};
 
 export type ContactFormSubmission = {
   _id: string;
@@ -2332,6 +2105,10 @@ export type AllSanitySchemaTypes =
   | EmptyCtaLink
   | EnquiryLink
   | SectionContentLink
+  | LinkFile
+  | LinkInternal
+  | AppLinkFile
+  | AppLinkInternal
   | VideoFile
   | VideoFileDimensions
   | VideoUrlDimensions
@@ -2343,8 +2120,8 @@ export type AllSanitySchemaTypes =
   | RiveDimensions
   | LottieFile
   | LottieDimensions
-  | AppLinkFile
-  | AppLinkInternal
+  | File1
+  | Internal1
   | MediaBlockAppMedia
   | AppMediaVideoFile
   | AppMediaVideoFileDimensions
@@ -2367,22 +2144,22 @@ export type AllSanitySchemaTypes =
   | MediaRiveDimensions
   | MediaLottieFile
   | MediaLottieDimensions
-  | SectionContentAppLinkFile
-  | SectionContentAppLinkInternal
-  | AboutPreviewSectionFieldSectionContentAppLinkFile
-  | AboutPreviewSectionFieldSectionContentAppLinkInternal
+  | AppLinkFile1
+  | AppLinkInternal1
+  | File2
+  | Internal2
   | FeatureLinkItemAppLink
   | FeatureLinkItemAppLinkFile
   | FeatureLinkItemAppLinkInternal
-  | WorkshopsSectionFieldSectionContentAppLinkFile
-  | WorkshopsSectionFieldSectionContentAppLinkInternal
-  | AboutTextSectionFieldSectionContentAppLinkFile
-  | AboutTextSectionFieldSectionContentAppLinkInternal
+  | AppLinkFile2
+  | AppLinkInternal2
+  | File3
+  | Internal3
   | InquiryButtonAppLink
   | InquiryButtonAppLinkFile
   | InquiryButtonAppLinkInternal
-  | WorkshopIntroSectionFieldSectionContentAppLinkFile
-  | WorkshopIntroSectionFieldSectionContentAppLinkInternal
+  | AppLinkFile3
+  | AppLinkInternal3
   | WorkshopEventAppLink
   | WorkshopEventAppLinkFile
   | WorkshopEventAppLinkInternal
@@ -2390,12 +2167,8 @@ export type AllSanitySchemaTypes =
   | EmptyCtaLinkInternal
   | EnquiryLinkFile
   | EnquiryLinkInternal
-  | LinkFile
-  | LinkInternal
-  | File1
-  | Internal1
-  | ChildrenAppLinkFile
-  | ChildrenAppLinkInternal
+  | LinkFile1
+  | LinkInternal1
   | HomeShowcaseSection
   | PrintsShowcaseSection
   | BooksStoreSection
@@ -2434,9 +2207,6 @@ export type AllSanitySchemaTypes =
   | RiveOptions
   | VideoOptions
   | AspectRatio
-  | ArticleCategory
-  | ArticleCategoryReference
-  | Article
   | ContactFormSubmission
   | Project
   | Redirect
@@ -2494,41 +2264,6 @@ export type PageQResult = {
 // Query: *[_type == "page" && defined(uri.current)]{  "uri": coalesce(uri.current, "/")}
 export type PageUrisQResult = Array<{
   uri: string | "/";
-}>;
-
-// Source: app/(web)/articles/[slug]/page.tsx
-// Variable: ArticlePageQ
-// Query: *[_type == "article" && defined(uri.current) && uri.current == $uri][0]{    _id,    _type,    title,    "uri": coalesce(uri.current, "/articles"),    "showHeader": coalesce(showHeader, true),    "showFooter": coalesce(showFooter, true),    seoMetadata{  title,  description,  image{  "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot,},  "robots": select(noIndex => "noindex,nofollow", true => undefined),},  }
-export type ArticlePageQResult = {
-  _id: string;
-  _type: "article";
-  title: string | undefined;
-  uri: string | "/articles";
-  showHeader: boolean | true;
-  showFooter: boolean | true;
-  seoMetadata: {
-    title: string | undefined;
-    description: string | undefined;
-    image: {
-      _id: string | undefined;
-      _rev: string | undefined;
-      altText: string | undefined;
-      description: string | undefined;
-      title: string | undefined;
-      lqip: string | undefined;
-      dimensions: SanityImageDimensions | undefined;
-      crop: SanityImageCrop | undefined;
-      hotspot: SanityImageHotspot | undefined;
-    } | undefined;
-    robots: "noindex,nofollow" | undefined;
-  } | undefined;
-} | undefined;
-
-// Source: app/(web)/articles/[slug]/page.tsx
-// Variable: ArticlePageUrisQ
-// Query: *[_type == "article" && defined(uri.current)]{    "uri": coalesce(uri.current, "/articles")  }
-export type ArticlePageUrisQResult = Array<{
-  uri: string | "/articles";
 }>;
 
 // Source: app/(web)/books/[slug]/page.tsx
@@ -2739,599 +2474,26 @@ export type LlmsTxtServeQueryResult = {
 
 // Source: features/agents/query.ts
 // Variable: LlmsTxtInventoryQuery
-// Query: {  "site": *[_type == "site"][0]{    name,    "summary": seoMetadata.description,    "guidance": llms.guidance  },  "pages": *[    _type in ["page", "article"]    && defined(uri.current)    && seoMetadata.noIndex != true    && passwordProtected != true  ] | order(_type asc, coalesce(publishedAt, _createdAt) desc) {    _type,    "uri": uri.current,    "title": coalesce(seoMetadata.title, title),    "description": seoMetadata.description,    "publishedAt": publishedAt,    "categories": categories[]->name  }}
+// Query: {  "site": *[_type == "site"][0]{    name,    "summary": seoMetadata.description,    "guidance": llms.guidance  },  "pages": *[    _type == "page"    && defined(uri.current)    && seoMetadata.noIndex != true    && passwordProtected != true  ] | order(_type asc, coalesce(publishedAt, _createdAt) desc) {    _type,    "uri": uri.current,    "title": coalesce(seoMetadata.title, title),    "description": seoMetadata.description,    "publishedAt": publishedAt  }}
 export type LlmsTxtInventoryQueryResult = {
   site: {
     name: string | undefined;
     summary: string | undefined;
     guidance: string | undefined;
   } | undefined;
-  pages: Array<
-    | {
-        _type: "article";
-        uri: string | undefined;
-        title: string | undefined;
-        description: string | undefined;
-        publishedAt: string | undefined;
-        categories: Array<string | undefined> | undefined;
-      }
-    | {
-        _type: "page";
-        uri: string | undefined;
-        title: string | undefined;
-        description: string | undefined;
-        publishedAt: null;
-        categories: null;
-      }
-  >;
+  pages: Array<{
+    _type: "page";
+    uri: string | undefined;
+    title: string | undefined;
+    description: string | undefined;
+    publishedAt: null;
+  }>;
 };
 
 // Source: features/agents/query.ts
 // Variable: AgentMarkdownContentQuery
 // Query: *[  defined(uri.current)  && uri.current == $uri][0]{  _type,  "uri": coalesce(uri.current, "/"),  "title": coalesce(seoMetadata.title, title),  "description": seoMetadata.description,  publishedAt,  author,  "categories": categories[]->name,  "sections": pageBuilder.sectionsArray[]{    _type,        "text": sectionContent.appRichText[]{  _type,  _type == "block" => {    style,    listItem,    level,    "children": children[]{ _type, text, marks },    "markDefs": markDefs[]{      _key,      _type,      _type == "linkField" => {   type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  ) }    }  },  _type == "mediaBlock" => {    "alt": appMedia.image.asset->altText,    "imageUrl": appMedia.image.asset->url  }},  "media": sectionContent.appMedia{    "alt": image.asset->altText,    "imageUrl": image.asset->url  },  "cta": sectionContent.appLink{  type,  "openInNewTab": coalesce(openInNewTab, false),  "canDownload": select(    type == "file" => coalesce(canDownload, false),    true => false  ),  "href": select(    type == "internal" => coalesce(      select(        defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => internal.link->uri.current + '#' + coalesce(          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionHash.current,          internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0]._key,        ),        true => internal.link->uri.current,      ),      ""    ),    type == "external" => coalesce(external, ""),    type == "email" => "mailto:" + coalesce(email, ""),    type == "phone" => "tel:" + coalesce(phone, ""),    type == "file" => coalesce(file.asset->url, ""),    type == "params" => coalesce(paramsHref, ""),    true => ""  ),  "text": coalesce(    customText,    select(      type == "internal" => coalesce(        select(          defined(internal.sectionTarget) && defined(internal.link->pageBuilder.sectionsArray) => coalesce(            internal.link->pageBuilder.sectionsArray[_key == ^.internal.sectionTarget][0].sectionSettings.sectionTitle,            internal.link->title,          ),          true => internal.link->title,        ),        internal.link->uri.current,        ""      ),      type == "external" => coalesce(external, ""),      type == "email" => coalesce(email, ""),      type == "phone" => coalesce(phone, ""),      type == "file" => coalesce(file.asset->originalFilename, ""),      type == "params" => coalesce(paramsHref, ""),      true => ""    ),    "",  )},  "headline": sectionContent.headline,  "caption": sectionContent.caption  }}
 export type AgentMarkdownContentQueryResult =
-  | {
-      _type: "article";
-      uri: string | "/";
-      title: string | undefined;
-      description: string | undefined;
-      publishedAt: string | undefined;
-      author: string | undefined;
-      categories: Array<string | undefined> | undefined;
-      sections: Array<
-        | {
-            _type: "aboutContactSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "aboutCredentialsSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "aboutIdentitySectionField";
-            text: Array<{
-              _type: "block";
-              style: "caption" | "normal" | undefined;
-              listItem: null;
-              level: number | undefined;
-              children: Array<{
-                _type: "span";
-                text: string | undefined;
-                marks: Array<string> | undefined;
-              }> | undefined;
-              markDefs: Array<
-                | {
-                    _key: string;
-                    _type: "highlightColorField";
-                  }
-                | {
-                    _key: string;
-                    _type: "indentField";
-                  }
-                | {
-                    _key: string;
-                    _type: "linkField";
-                    type:
-                      | "email"
-                      | "external"
-                      | "file"
-                      | "internal"
-                      | "params"
-                      | "phone"
-                      | undefined;
-                    openInNewTab: boolean | false;
-                    canDownload: boolean | false;
-                    href: string | "" | "mailto:" | "tel:";
-                    text: string | "";
-                  }
-                | {
-                    _key: string;
-                    _type: "textColorField";
-                  }
-              > | undefined;
-            }> | undefined;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "aboutPreviewSectionField";
-            text: null;
-            media: null;
-            cta: {
-              type:
-                | "email"
-                | "external"
-                | "file"
-                | "internal"
-                | "params"
-                | "phone"
-                | undefined;
-              openInNewTab: boolean | false;
-              canDownload: boolean | false;
-              href: string | "" | "mailto:" | "tel:";
-              text: string | "";
-            } | undefined;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "aboutSectionField";
-            text: null;
-            media: null;
-            cta: {
-              type:
-                | "email"
-                | "external"
-                | "file"
-                | "internal"
-                | "params"
-                | "phone"
-                | undefined;
-              openInNewTab: boolean | false;
-              canDownload: boolean | false;
-              href: string | "" | "mailto:" | "tel:";
-              text: string | "";
-            } | undefined;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "aboutTextSectionField";
-            text: Array<{
-              _type: "block";
-              style: "caption" | "normal" | undefined;
-              listItem: null;
-              level: number | undefined;
-              children: Array<{
-                _type: "span";
-                text: string | undefined;
-                marks: Array<string> | undefined;
-              }> | undefined;
-              markDefs: Array<
-                | {
-                    _key: string;
-                    _type: "highlightColorField";
-                  }
-                | {
-                    _key: string;
-                    _type: "indentField";
-                  }
-                | {
-                    _key: string;
-                    _type: "linkField";
-                    type:
-                      | "email"
-                      | "external"
-                      | "file"
-                      | "internal"
-                      | "params"
-                      | "phone"
-                      | undefined;
-                    openInNewTab: boolean | false;
-                    canDownload: boolean | false;
-                    href: string | "" | "mailto:" | "tel:";
-                    text: string | "";
-                  }
-                | {
-                    _key: string;
-                    _type: "textColorField";
-                  }
-              > | undefined;
-            }> | undefined;
-            media: null;
-            cta: {
-              type:
-                | "email"
-                | "external"
-                | "file"
-                | "internal"
-                | "params"
-                | "phone"
-                | undefined;
-              openInNewTab: boolean | false;
-              canDownload: boolean | false;
-              href: string | "" | "mailto:" | "tel:";
-              text: string | "";
-            } | undefined;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "booksStoreSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "contactFormSectionField";
-            text: Array<{
-              _type: "block";
-              style: "caption" | "normal" | undefined;
-              listItem: null;
-              level: number | undefined;
-              children: Array<{
-                _type: "span";
-                text: string | undefined;
-                marks: Array<string> | undefined;
-              }> | undefined;
-              markDefs: Array<
-                | {
-                    _key: string;
-                    _type: "highlightColorField";
-                  }
-                | {
-                    _key: string;
-                    _type: "indentField";
-                  }
-                | {
-                    _key: string;
-                    _type: "linkField";
-                    type:
-                      | "email"
-                      | "external"
-                      | "file"
-                      | "internal"
-                      | "params"
-                      | "phone"
-                      | undefined;
-                    openInNewTab: boolean | false;
-                    canDownload: boolean | false;
-                    href: string | "" | "mailto:" | "tel:";
-                    text: string | "";
-                  }
-                | {
-                    _key: string;
-                    _type: "textColorField";
-                  }
-              > | undefined;
-            }> | undefined;
-            media: null;
-            cta: null;
-            headline: string | undefined;
-            caption: null;
-          }
-        | {
-            _type: "ctaSectionField";
-            text: Array<{
-              _type: "block";
-              style: "caption" | "normal" | undefined;
-              listItem: null;
-              level: number | undefined;
-              children: Array<{
-                _type: "span";
-                text: string | undefined;
-                marks: Array<string> | undefined;
-              }> | undefined;
-              markDefs: Array<
-                | {
-                    _key: string;
-                    _type: "highlightColorField";
-                  }
-                | {
-                    _key: string;
-                    _type: "indentField";
-                  }
-                | {
-                    _key: string;
-                    _type: "linkField";
-                    type:
-                      | "email"
-                      | "external"
-                      | "file"
-                      | "internal"
-                      | "params"
-                      | "phone"
-                      | undefined;
-                    openInNewTab: boolean | false;
-                    canDownload: boolean | false;
-                    href: string | "" | "mailto:" | "tel:";
-                    text: string | "";
-                  }
-                | {
-                    _key: string;
-                    _type: "textColorField";
-                  }
-              > | undefined;
-            }> | undefined;
-            media: null;
-            cta: {
-              type:
-                | "email"
-                | "external"
-                | "file"
-                | "internal"
-                | "params"
-                | "phone"
-                | undefined;
-              openInNewTab: boolean | false;
-              canDownload: boolean | false;
-              href: string | "" | "mailto:" | "tel:";
-              text: string | "";
-            } | undefined;
-            headline: string | undefined;
-            caption: null;
-          }
-        | {
-            _type: "featureLinksSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "homeShowcaseSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "mediaSectionField";
-            text: null;
-            media: {
-              alt: string | undefined;
-              imageUrl: string | undefined;
-            } | undefined;
-            cta: null;
-            headline: null;
-            caption: string | undefined;
-          }
-        | {
-            _type: "portfolioGridSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "printsGallerySectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "printsLicensingSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "printsShowcaseSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "projectHeroSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "textSectionField";
-            text: Array<
-              | {
-                  _type: "block";
-                  style: "caption" | "h2" | "h3" | "h4" | "normal" | undefined;
-                  listItem: "bullet" | "number" | undefined;
-                  level: number | undefined;
-                  children: Array<
-                    | {
-                        _type: "inlineMediaField";
-                        text: null;
-                        marks: null;
-                      }
-                    | {
-                        _type: "span";
-                        text: string | undefined;
-                        marks: Array<string> | undefined;
-                      }
-                  > | undefined;
-                  markDefs: Array<
-                    | {
-                        _key: string;
-                        _type: "highlightColorField";
-                      }
-                    | {
-                        _key: string;
-                        _type: "indentField";
-                      }
-                    | {
-                        _key: string;
-                        _type: "linkField";
-                        type:
-                          | "email"
-                          | "external"
-                          | "file"
-                          | "internal"
-                          | "params"
-                          | "phone"
-                          | undefined;
-                        openInNewTab: boolean | false;
-                        canDownload: boolean | false;
-                        href: string | "" | "mailto:" | "tel:";
-                        text: string | "";
-                      }
-                    | {
-                        _key: string;
-                        _type: "textColorField";
-                      }
-                  > | undefined;
-                }
-              | {
-                  _type: "mediaBlock";
-                  alt: string | undefined;
-                  imageUrl: string | undefined;
-                }
-            > | undefined;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "workOverviewSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "workshopGallerySectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "workshopIntroSectionField";
-            text: Array<{
-              _type: "block";
-              style: "caption" | "normal" | undefined;
-              listItem: null;
-              level: number | undefined;
-              children: Array<{
-                _type: "span";
-                text: string | undefined;
-                marks: Array<string> | undefined;
-              }> | undefined;
-              markDefs: Array<
-                | {
-                    _key: string;
-                    _type: "highlightColorField";
-                  }
-                | {
-                    _key: string;
-                    _type: "indentField";
-                  }
-                | {
-                    _key: string;
-                    _type: "linkField";
-                    type:
-                      | "email"
-                      | "external"
-                      | "file"
-                      | "internal"
-                      | "params"
-                      | "phone"
-                      | undefined;
-                    openInNewTab: boolean | false;
-                    canDownload: boolean | false;
-                    href: string | "" | "mailto:" | "tel:";
-                    text: string | "";
-                  }
-                | {
-                    _key: string;
-                    _type: "textColorField";
-                  }
-              > | undefined;
-            }> | undefined;
-            media: null;
-            cta: {
-              type:
-                | "email"
-                | "external"
-                | "file"
-                | "internal"
-                | "params"
-                | "phone"
-                | undefined;
-              openInNewTab: boolean | false;
-              canDownload: boolean | false;
-              href: string | "" | "mailto:" | "tel:";
-              text: string | "";
-            } | undefined;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "workshopLearnSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "workshopNotesSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "workshopPricingSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "workshopsSectionField";
-            text: null;
-            media: null;
-            cta: {
-              type:
-                | "email"
-                | "external"
-                | "file"
-                | "internal"
-                | "params"
-                | "phone"
-                | undefined;
-              openInNewTab: boolean | false;
-              canDownload: boolean | false;
-              href: string | "" | "mailto:" | "tel:";
-              text: string | "";
-            } | undefined;
-            headline: string | undefined;
-            caption: null;
-          }
-        | {
-            _type: "workshopTestimonialsSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-        | {
-            _type: "workshopUpcomingSectionField";
-            text: null;
-            media: null;
-            cta: null;
-            headline: null;
-            caption: null;
-          }
-      > | undefined;
-    }
   | {
       _type: "book";
       uri: string | "/";
