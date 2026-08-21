@@ -20,9 +20,10 @@ tested. Nothing blocking except the store-checkout decision. The domain move is 
   risk), or wire Stripe checkout + orders + stock + confirmation emails first. Always planned last.
 
 ### Fix before launch
-- **Empty alt text on every photo.** All project images render `alt=""` because `altText` isn't
-  filled in Studio. Real miss for Google Image search + screen readers. *(Being addressed — see the
-  alt-text pass.)*
+- **Empty alt text on every photo** — ✅ **done** (Aug 2026): all **777** non-hidden project image
+  assets now carry a descriptive `altText`, written by viewing each photo. Stored on the image asset,
+  so it applies everywhere the photo appears and survives Best/home re-picks. Refine wording anytime
+  in Studio (image asset → Alt text). Archived projects' images were skipped (unlisted).
 - **Four unused fonts** — ✅ **done** (`d2a1975`): only `GeistPixelSquare` is used; dropped
   Grid/Circle/Triangle/Line — four fewer webfont downloads per page.
 - **Dead `/articles` route + schema** — ✅ **done** (`d2a1975`): removed route, schema, Studio
@@ -73,7 +74,7 @@ tested. Nothing blocking except the store-checkout decision. The domain move is 
 - [ ] Finish the commission **Best-16** selects.
 - [ ] Add real images to the two new collection pages — **Behind the Scenes** and **Events** (both use
       the placeholder thumbnail now).
-- [ ] Fill `altText` on images (Best-16 + homepage picks first) — SEO + accessibility.
+- [x] Fill `altText` on images — done for all 777 non-hidden project images (auto-written, refine in Studio if wanted).
 - [ ] Curate homepage "Show on home" picks across projects.
 - [ ] Proofread the new collection blurbs + all commission descriptions.
 - [ ] Decide the store model: email-order interim vs. finish Stripe checkout.
