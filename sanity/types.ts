@@ -1246,6 +1246,24 @@ export type MediaSection = {
   caption?: string;
 };
 
+export type Portfolio = {
+  _id: string;
+  _type: "portfolio";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  password?: string;
+  intro?: string;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
 export type Book = {
   _id: string;
   _type: "book";
@@ -1326,12 +1344,6 @@ export type SanityImageHotspot = {
   width?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type HeaderNavItem = {
   _type: "headerNavItem";
   link?: Link;
@@ -1393,6 +1405,13 @@ export type ContactFormSubmission = {
   message?: string;
 };
 
+export type PortfolioReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "portfolio";
+};
+
 export type Project = {
   _id: string;
   _type: "project";
@@ -1443,6 +1462,12 @@ export type Project = {
     };
     best?: boolean;
     home?: boolean;
+    inPortfolio?: boolean;
+    portfolios?: Array<
+      {
+        _key: string;
+      } & PortfolioReference
+    >;
     _type: "projectImage";
     _key: string;
   }>;
@@ -2197,10 +2222,11 @@ export type AllSanitySchemaTypes =
   | TextSection
   | CtaSection
   | MediaSection
+  | Portfolio
+  | Slug
   | Book
   | SanityImageCrop
   | SanityImageHotspot
-  | Slug
   | HeaderNavItem
   | AppColor
   | LottieOptions
@@ -2208,6 +2234,7 @@ export type AllSanitySchemaTypes =
   | VideoOptions
   | AspectRatio
   | ContactFormSubmission
+  | PortfolioReference
   | Project
   | Redirect
   | Site
@@ -2355,6 +2382,36 @@ export type BookNavQResult = Array<{
 // Query: *[_type == "book" && defined(uri.current)]{ "uri": uri.current }
 export type BookUrisQResult = Array<{
   uri: string | undefined;
+}>;
+
+// Source: app/(web)/portfolio/[slug]/page.tsx
+// Variable: PortfolioMetaQ
+// Query: *[_type == "portfolio" && slug.current == $slug][0]{    _id,    title,    intro,    "slug": slug.current  }
+export type PortfolioMetaQResult = {
+  _id: string;
+  title: string | undefined;
+  intro: string | undefined;
+  slug: string | undefined;
+} | undefined;
+
+// Source: app/(web)/portfolio/[slug]/page.tsx
+// Variable: PortfolioImagesQ
+// Query: *[_type == "project" && count(images[inPortfolio == true && $pid in portfolios[]._ref]) > 0]    | order(date desc){      "items": images[inPortfolio == true && $pid in portfolios[]._ref]{        "image": image{   "_id": asset->._id,  "_rev": asset->._rev,  "altText": asset->.altText,  "description": asset->.description,  "title": asset->.title,  "lqip": asset->.metadata.lqip,  "dimensions": asset->.metadata.dimensions,  crop,  hotspot, },        "aspectRatio": image.asset->metadata.dimensions.aspectRatio      }    }
+export type PortfolioImagesQResult = Array<{
+  items: Array<{
+    image: {
+      _id: string | undefined;
+      _rev: string | undefined;
+      altText: string | undefined;
+      description: string | undefined;
+      title: string | undefined;
+      lqip: string | undefined;
+      dimensions: SanityImageDimensions | undefined;
+      crop: SanityImageCrop | undefined;
+      hotspot: SanityImageHotspot | undefined;
+    } | undefined;
+    aspectRatio: number | undefined;
+  }> | undefined;
 }>;
 
 // Source: app/(web)/project/[slug]/category-gallery.tsx

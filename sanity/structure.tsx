@@ -83,6 +83,12 @@ export function buildStructure(S: StructureBuilder) {
             .defaultOrdering([{ field: "date", direction: "asc" }])
         ),
 
+      // Private client lookbooks (password-gated, unlisted)
+      S.listItem()
+        .title("Portfolios")
+        .icon(() => <>🔒</>)
+        .child(S.documentTypeList("portfolio").title("Portfolios")),
+
       S.divider(),
 
       // Form Submissions (driven by API_ONLY_DOCUMENTS)

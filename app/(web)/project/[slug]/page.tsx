@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { defineQuery, PortableText, stegaClean } from "next-sanity";
+import { LightboxProvider } from "~/components/lightbox";
 import { env } from "~/env";
 import { sanityFetch } from "~/features/sanity/client";
 import { ImageFragment, type ImageFragmentResult } from "~/features/sanity/media/fragment";
@@ -10,7 +11,6 @@ import { SiteShell } from "~/features/site/site-shell";
 import { SANITY_PROJECT_DOCUMENT_TYPE } from "~/sanity/constants";
 import { createExcerptFromPortableText } from "~/sanity/utils";
 import { ProjectCategoryGallery } from "./category-gallery";
-import { LightboxProvider } from "./lightbox";
 import { ProjectCollage } from "./project-collage";
 import { ProjectSeriesGallery } from "./project-series-gallery";
 

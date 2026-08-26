@@ -1,5 +1,5 @@
+import { LightboxImage } from "~/components/lightbox";
 import type { ImageFragmentResult } from "~/features/sanity/media/fragment";
-import { LightboxImage } from "./lightbox";
 
 export type SeriesImage = {
   image: ImageFragmentResult | null;

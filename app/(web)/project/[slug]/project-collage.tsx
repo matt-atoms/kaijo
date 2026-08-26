@@ -1,7 +1,7 @@
 import type * as React from "react";
+import { LightboxImage } from "~/components/lightbox";
 import type { ImageFragmentResult } from "~/features/sanity/media/fragment";
 import { cx } from "~/features/style/utils";
-import { LightboxImage } from "./lightbox";
 
 export type CollageImage = {
   image: ImageFragmentResult | null;

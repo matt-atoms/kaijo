@@ -191,9 +191,9 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
 }
 
 /**
- * A project image that expands into the lightbox on click (seamless FLIP zoom). Renders the same
- * `<img>` as KaijoImage inside a button; the click reads the rendered thumbnail for the zoom origin
- * and hands the full image fragment to the overlay.
+ * An image that expands into the lightbox on click (seamless FLIP zoom). Renders the same `<img>` as
+ * KaijoImage inside a button; the click reads the rendered thumbnail for the zoom origin and hands the
+ * full image fragment to the overlay. Shared by the project collage/series and the client portfolios.
  */
 export function LightboxImage(props: {
   image: ImageFragmentResult | null | undefined;

@@ -1,6 +1,7 @@
 import { book } from "./documents/book";
 import { contactFormSubmission } from "./documents/contact-form-submission";
 import { page } from "./documents/page";
+import { portfolio } from "./documents/portfolio";
 import { project } from "./documents/project";
 import { redirect } from "./documents/redirect";
 import { site } from "./documents/site";
@@ -27,6 +28,7 @@ export const schemaTypes = [
   appColor,
   headerNavItem,
   book,
+  portfolio,
   // PLOP: Add Export
   ...sections,
 ];

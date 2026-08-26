@@ -23,7 +23,8 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: ["/"],
-        disallow: ["/api/", "/_next/", ...studioPathPrefixesForRobots()],
+        // `/portfolio/` are private, password-gated client lookbooks — keep them out of the index.
+        disallow: ["/api/", "/_next/", "/portfolio/", ...studioPathPrefixesForRobots()],
       },
     ],
     sitemap: `${env.NEXT_PUBLIC_URL}/sitemap.xml`,

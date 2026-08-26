@@ -203,11 +203,37 @@ export const project = defineType({
               description: "Include in the homepage scroll. Only “Best” images can be used here.",
               initialValue: false,
             }),
+            defineField({
+              name: "inPortfolio",
+              type: "boolean",
+              title: "In portfolio",
+              description: "Add this photo to one or more private client lookbooks (works for archived projects too).",
+              initialValue: false,
+            }),
+            defineField({
+              name: "portfolios",
+              type: "array",
+              title: "Portfolios",
+              description: "Which client lookbook(s) this photo appears in.",
+              of: [{ type: "reference", to: [{ type: "portfolio" }] }],
+              // Only relevant once the photo is flagged for a portfolio.
+              hidden: ({ parent }) => !(parent as { inPortfolio?: boolean } | undefined)?.inPortfolio,
+              validation: (R) =>
+                R.custom((refs, ctx) => {
+                  const parent = ctx.parent as { inPortfolio?: boolean } | undefined;
+                  if (parent?.inPortfolio && (!refs || (refs as unknown[]).length === 0)) {
+                    return "Pick at least one portfolio, or untick “In portfolio”.";
+                  }
+                  return true;
+                }),
+            }),
           ],
           preview: {
-            select: { media: "image", best: "best", home: "home" },
-            prepare({ media, best, home }) {
-              const tags = [best ? "★ Best" : null, home ? "Home" : null].filter(Boolean).join(" · ");
+            select: { media: "image", best: "best", home: "home", inPortfolio: "inPortfolio" },
+            prepare({ media, best, home, inPortfolio }) {
+              const tags = [best ? "★ Best" : null, home ? "Home" : null, inPortfolio ? "🔒 Portfolio" : null]
+                .filter(Boolean)
+                .join(" · ");
               return { title: tags || "Image", media };
             },
           },

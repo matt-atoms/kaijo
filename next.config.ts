@@ -65,11 +65,16 @@ const nextConfig: NextConfig = {
   // Keep non-production deployments (Vercel preview URLs) out of the search index so they never
   // compete with the live domain. Production (VERCEL_ENV === "production") and local dev are unaffected.
   async headers() {
+    // Private client lookbooks are always kept out of the index, in every environment.
+    const portfolioNoIndex = {
+      source: "/portfolio/:path*",
+      headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+    };
     const isPreview = process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production";
     if (!isPreview) {
-      return [];
+      return [portfolioNoIndex];
     }
-    return [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }];
+    return [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }, portfolioNoIndex];
   },
 
   // Redirects are only fetched at build time.

@@ -33,6 +33,8 @@ export const API_ONLY_DOCUMENTS = {
 /** Routed non-singleton `_type` names; use these literal bindings in `defineQuery` interpolations (typegen won't resolve member access). Site's `_type` is `SANITY_SINGLETON_SITE_ID`, also its `revalidateTag`. */
 export const SANITY_PAGE_DOCUMENT_TYPE = "page" as const;
 export const SANITY_PROJECT_DOCUMENT_TYPE = "project" as const;
+/** Password-gated client lookbooks at /portfolio/<slug>. Never indexed, never in nav; images are opted in per-photo. */
+export const SANITY_PORTFOLIO_DOCUMENT_TYPE = "portfolio" as const;
 
 /**
  * The fixed Work sub-categories. The value is also the label shown under a project title, and is

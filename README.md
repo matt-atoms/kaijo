@@ -11,6 +11,7 @@ A modern Next.js 16 starter with Sanity CMS integration.
 - Draft mode with Sanity Live, SEO helpers, and ISR revalidation
 - **HTTP Basic Auth (optional)** — `proxy.ts` gates the site or individual URLs using **`BASIC_AUTH_*` environment variables** and **CMS toggles** (Site → Security, per-entry “Password protect”). See [`docs/features/basic-auth.md`](docs/features/basic-auth.md).
 - Feature modules for redirects, Umami analytics, and spam prevention
+- **Private client portfolios**: password-gated, `noindex` lookbooks at `/portfolio/<slug>`, curated by ticking "In portfolio" on any photo. See [`docs/features/portfolios.md`](docs/features/portfolios.md).
 - **llms.txt for AI assistants**: an editable, AI-generated [`/llms.txt`](https://llmstxt.org) drafted from your content with Sanity Agent Actions (Site, Agents tab). See [`docs/features/llms-txt.md`](docs/features/llms-txt.md).
 - **Agent Markdown (content negotiation)**: pages and articles serve a token-light Markdown version to agents that send `Accept: text/markdown`, on the same URL. Generated and stored per page from the Agents tab (one click), then served verbatim. See [`docs/features/agent-markdown.md`](docs/features/agent-markdown.md).
 - Scaffolding via Plop for repeatable section/block generation
@@ -88,6 +89,7 @@ Feature-level docs now live in `docs/` so the root README stays lightweight.
 - Documentation hub: `docs/README.md`
 - Sanity setup overview: `docs/sanity/README.md`
 - **HTTP Basic Auth** (env + CMS toggles, `proxy.ts`): `docs/features/basic-auth.md`
+- **Private client portfolios** (password-gated `/portfolio/<slug>` lookbooks): `docs/features/portfolios.md`
 - Redirects: `docs/features/redirects.md`
 - Code generation (Plop): `docs/features/code-generation.md`
 - Spam prevention: `docs/features/spam-prevention.md`
