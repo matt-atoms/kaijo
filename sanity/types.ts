@@ -612,6 +612,23 @@ export type LinkInternal1 = {
   sectionTarget?: string;
 };
 
+export type ServiceShopSection = {
+  _type: "serviceShopSection";
+  heading?: string;
+  intro?: string;
+  items?: Array<{
+    name?: string;
+    price?: number;
+    note?: string;
+    _type: "serviceShopItem";
+    _key: string;
+  }>;
+  customEnabled?: boolean;
+  customLabel?: string;
+  customNote?: string;
+  footnote?: string;
+};
+
 export type HomeShowcaseSection = {
   _type: "homeShowcaseSection";
   title?: string;
@@ -1874,6 +1891,12 @@ export type Page = {
           _type: "homeShowcaseSectionField";
           _key: string;
         }
+      | {
+          sectionSettings?: SectionSettings;
+          sectionContent?: ServiceShopSection;
+          _type: "serviceShopSectionField";
+          _key: string;
+        }
     >;
   };
   seoMetadata?: {
@@ -2194,6 +2217,7 @@ export type AllSanitySchemaTypes =
   | EnquiryLinkInternal
   | LinkFile1
   | LinkInternal1
+  | ServiceShopSection
   | HomeShowcaseSection
   | PrintsShowcaseSection
   | BooksStoreSection
@@ -2922,6 +2946,14 @@ export type AgentMarkdownContentQueryResult =
             caption: null;
           }
         | {
+            _type: "serviceShopSectionField";
+            text: null;
+            media: null;
+            cta: null;
+            headline: null;
+            caption: null;
+          }
+        | {
             _type: "textSectionField";
             text: Array<
               | {
@@ -3210,6 +3242,10 @@ export type PageSectionsQResult = Array<
   | {
       _key: string;
       _type: "projectHeroSectionField";
+    }
+  | {
+      _key: string;
+      _type: "serviceShopSectionField";
     }
   | {
       _key: string;
@@ -4148,6 +4184,28 @@ export type ProjectHeroQResult = Array<{
     hotspot: SanityImageHotspot | undefined;
   } | undefined;
 }>;
+
+// Source: features/page-builder/sections/service-shop-section.tsx
+// Variable: ServiceShopSectionQ
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "serviceShopSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      intro,      items[]{ name, price, note },      customEnabled,      customLabel,      customNote,      footnote,    },    "settings": sectionSettings{      "hash": coalesce(sectionHash.current, _key),    },}
+export type ServiceShopSectionQResult = {
+  content: {
+    heading: string | undefined;
+    intro: string | undefined;
+    items: Array<{
+      name: string | undefined;
+      price: number | undefined;
+      note: string | undefined;
+    }> | undefined;
+    customEnabled: boolean | undefined;
+    customLabel: string | undefined;
+    customNote: string | undefined;
+    footnote: string | undefined;
+  } | undefined;
+  settings: {
+    hash: string | undefined;
+  } | undefined;
+} | undefined;
 
 // Source: features/page-builder/sections/text-section.tsx
 // Variable: TextSectionQ

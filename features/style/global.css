@@ -1730,6 +1730,112 @@ html.home-route .section_feature-links {
   }
 }
 
+/* ==========================================================================
+   Service shop (hidden /book page) — buyable workshops/services + custom amount.
+   Card grid themed with the site's --page-bg / --page-ink tokens.
+   ========================================================================== */
+.service-shop_intro {
+  max-width: 42em;
+}
+
+.service-shop {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1rem;
+  margin-top: 2em;
+}
+
+.service-shop_item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55em;
+  padding: 1.2em 1.2em 1.3em;
+  border: 1px solid var(--page-ink);
+}
+
+.service-shop_item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+}
+
+.service-shop_item-name {
+  font-weight: 600;
+}
+
+.service-shop_item-price {
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+.service-shop_item-note {
+  margin: 0;
+  font-size: 0.85em;
+  line-height: 1.4;
+  opacity: 0.7;
+}
+
+.service-shop_custom-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.5em 0.7em;
+  border: 1px solid var(--page-ink);
+}
+
+.service-shop_custom-euro {
+  opacity: 0.6;
+}
+
+.service-shop_custom-input {
+  width: 100%;
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: var(--page-ink);
+  font: inherit;
+}
+
+.service-shop_custom-input:focus {
+  outline: none;
+}
+
+.service-shop_add {
+  margin-top: auto;
+  padding: 0.65em 1em;
+  border: 1px solid var(--page-ink);
+  background: var(--page-ink);
+  color: var(--page-bg);
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.service-shop_add:hover:not(:disabled) {
+  background: transparent;
+  color: var(--page-ink);
+}
+
+.service-shop_add:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.service-shop_footnote {
+  margin-top: 1.6em;
+  max-width: 42em;
+  font-size: 0.8em;
+  line-height: 1.5;
+  opacity: 0.6;
+}
+
 .section_work--project .project_name-text {
   /* Reset the huge webflow h1/h2 base margins — this is now the page <h1>, styled as small mono. */
   margin: 0;

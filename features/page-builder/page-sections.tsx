@@ -82,6 +82,9 @@ const _sections = {
   homeShowcaseSectionField: dynamic(() =>
     import("~/features/page-builder/sections/home-showcase-section").then((mod) => mod.HomeShowcaseSection)
   ),
+  serviceShopSectionField: dynamic(() =>
+    import("~/features/page-builder/sections/service-shop-section").then((mod) => mod.ServiceShopSection)
+  ),
   // PLOP: Add Import
 } as const;
 
