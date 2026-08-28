@@ -872,6 +872,7 @@ export type AboutCredentialsSection = {
   heading?: string;
   columns?: Array<{
     title?: string;
+    flow?: boolean;
     entries?: Array<{
       name?: string;
       year?: string;
@@ -3321,13 +3322,14 @@ export type AboutContactSectionQResult = {
 
 // Source: features/page-builder/sections/about-credentials-section.tsx
 // Variable: AboutCredentialsSectionQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "aboutCredentialsSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      columns[]{        "key": _key,        title,        entries[]{ "key": _key, name, year }      }    }}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[_type == "aboutCredentialsSectionField" && _key == $sectionKey][0]{    "content": sectionContent{      heading,      columns[]{        "key": _key,        title,        flow,        entries[]{ "key": _key, name, year }      }    }}
 export type AboutCredentialsSectionQResult = {
   content: {
     heading: string | undefined;
     columns: Array<{
       key: string;
       title: string | undefined;
+      flow: boolean | undefined;
       entries: Array<{
         key: string;
         name: string | undefined;

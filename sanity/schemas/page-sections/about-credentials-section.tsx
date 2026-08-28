@@ -20,6 +20,14 @@ export const aboutCredentialsSection = defineField({
           fields: [
             defineField({ name: "title", type: "string", title: "Title", validation: (R) => R.required() }),
             defineField({
+              name: "flow",
+              type: "boolean",
+              title: "Flowing layout",
+              description:
+                "Render this column's entries as a flowing block with alternating bold/thin weight (good for a long client roster) instead of a stacked list. Years are ignored.",
+              initialValue: false,
+            }),
+            defineField({
               name: "entries",
               type: "array",
               title: "Entries",

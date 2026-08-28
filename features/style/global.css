@@ -2278,6 +2278,27 @@ html.home-route .section_feature-links {
   opacity: 0.6;
 }
 
+/* Flowing roster (e.g. clients): names wrap inline; alternating weight separates neighbours so it
+   reads as one flowing block rather than a long stacked list, keeping the column's height in line
+   with the others. */
+.about-credentials_flow {
+  margin: 0;
+  font-size: 0.88em;
+  line-height: 1.7;
+}
+
+.about-credentials_flow span {
+  margin-right: 0.5em;
+}
+
+.about-credentials_flow span:nth-of-type(odd) {
+  font-weight: 700;
+}
+
+.about-credentials_flow span:nth-of-type(even) {
+  font-weight: 300;
+}
+
 /* Contact */
 .about-contact_inner {
   display: grid;

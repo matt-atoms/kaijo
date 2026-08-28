@@ -5407,6 +5407,13 @@
                   },
                   "optional": true
                 },
+                "flow": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "boolean"
+                  },
+                  "optional": true
+                },
                 "entries": {
                   "type": "objectAttribute",
                   "value": {

@@ -9,6 +9,7 @@ const AboutCredentialsSectionQ =
       columns[]{
         "key": _key,
         title,
+        flow,
         entries[]{ "key": _key, name, year }
       }
     }
@@ -40,14 +41,23 @@ export async function AboutCredentialsSection({ docId, sectionKey }: { docId: st
             {content.columns.map((column) => (
               <div key={column.key} className="about-credentials_col">
                 <div className="about-credentials_col-title">{column.title}</div>
-                <ul className="about-credentials_list">
-                  {column.entries?.map((entry) => (
-                    <li key={entry.key} className="about-credentials_entry">
-                      <span className="about-credentials_name">{entry.name}</span>
-                      {entry.year && <span className="about-credentials_year">{entry.year}</span>}
-                    </li>
-                  ))}
-                </ul>
+                {column.flow ? (
+                  // Flowing roster: alternating bold/thin weight separates adjacent names (no bullets).
+                  <p className="about-credentials_flow">
+                    {column.entries?.map((entry) => (
+                      <span key={entry.key}>{entry.name}</span>
+                    ))}
+                  </p>
+                ) : (
+                  <ul className="about-credentials_list">
+                    {column.entries?.map((entry) => (
+                      <li key={entry.key} className="about-credentials_entry">
+                        <span className="about-credentials_name">{entry.name}</span>
+                        {entry.year && <span className="about-credentials_year">{entry.year}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             ))}
           </div>
