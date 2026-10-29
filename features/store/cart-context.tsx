@@ -5,8 +5,8 @@ import * as React from "react";
 export type CartItem = {
   /** Unique per product+variant, e.g. `${bookId}:${variantKey}` or `workshop:${id}`. */
   id: string;
-  /** "book" (default) or "workshop" — the cart holds both. */
-  kind?: "book" | "workshop";
+  /** "book" (default), "workshop" or "print" — the cart holds all three. */
+  kind?: "book" | "workshop" | "print";
   /** Grouping id of the source product (book id or workshop id). */
   bookId: string;
   slug: string;

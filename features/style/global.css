@@ -1836,6 +1836,381 @@ html.home-route .section_feature-links {
   opacity: 0.6;
 }
 
+/* ==========================================================================
+   Wonders of Reflection — hidden exhibition landing + print shop (/wonders-of-reflection).
+   Standalone dark page; its own palette, independent of the global theme tokens.
+   ========================================================================== */
+.wor {
+  --wor-ink: #f3f2ef;
+  --wor-bg: #0b0b0c;
+  --wor-line: rgb(243 242 239 / 0.16);
+  min-height: 100dvh;
+  background: var(--wor-bg);
+  color: var(--wor-ink);
+  font-size: 16px;
+}
+
+.wor a {
+  color: inherit;
+}
+
+.wor-mono,
+.wor-eyebrow,
+.wor-meta,
+.wor-h2,
+.wor-card_foot,
+.wor-set_price,
+.wor-voucher_toggle,
+.wor-buy,
+.wor-cta,
+.wor-links,
+.wor-foot {
+  font-family: "Basier Circle Mono", Arial, sans-serif;
+}
+
+/* --- Hero --- */
+.wor-hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 80vh;
+  overflow: hidden;
+}
+
+.wor-hero_media {
+  position: absolute;
+  inset: 0;
+}
+
+.wor-hero_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wor-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.88) 0%, rgb(0 0 0 / 0.2) 50%, rgb(0 0 0 / 0.55) 100%);
+  pointer-events: none;
+}
+
+.wor-hero_text {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 4rem) clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.wor-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.wor-title {
+  margin: 0;
+  font-family: var(--font-wordmark);
+  font-weight: 700;
+  font-size: clamp(3rem, 12vw, 8.5rem);
+  line-height: 0.9;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+
+.wor-lead {
+  max-width: 34em;
+  margin: 1.3rem 0 0;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.5;
+  opacity: 0.92;
+}
+
+.wor-meta {
+  margin: 1.3rem 0 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.wor-cta {
+  display: inline-block;
+  margin-top: 1.8rem;
+  padding: 0.8em 1.9em;
+  border: 1px solid var(--wor-ink);
+  background: var(--wor-ink);
+  color: var(--wor-bg);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.wor-cta:hover {
+  background: transparent;
+  color: var(--wor-ink);
+}
+
+/* --- Sections --- */
+.wor-section {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem) 0;
+}
+
+.wor-h2 {
+  margin: 0 0 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--wor-line);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.wor-prose {
+  max-width: 42em;
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.wor-prose p {
+  margin: 0 0 1em;
+}
+
+.wor-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.wor-prose em {
+  font-style: italic;
+}
+
+.wor-prose--narrow {
+  max-width: 38em;
+  opacity: 0.85;
+}
+
+/* --- Voucher --- */
+.wor-voucher {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.4rem;
+  margin: 2rem 0;
+}
+
+.wor-voucher_toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.wor-voucher_toggle input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--wor-ink);
+}
+
+.wor-voucher_note {
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+/* --- Works grid (gallery + shop) --- */
+.wor-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.wor-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.wor-card_image {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: #141416;
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+.wor-card_image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.wor-card_image:hover img {
+  transform: scale(1.03);
+}
+
+.wor-card_foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wor-card_no {
+  opacity: 0.55;
+}
+
+.wor-buy {
+  padding: 0.65em 1em;
+  border: 1px solid var(--wor-line);
+  background: transparent;
+  color: var(--wor-ink);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.wor-buy:hover {
+  background: var(--wor-ink);
+  color: var(--wor-bg);
+  border-color: var(--wor-ink);
+}
+
+.wor-buy--solid {
+  background: var(--wor-ink);
+  color: var(--wor-bg);
+  border-color: var(--wor-ink);
+}
+
+.wor-buy--solid:hover {
+  background: transparent;
+  color: var(--wor-ink);
+}
+
+/* --- Complete set --- */
+.wor-set {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--wor-line);
+}
+
+.wor-set_text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-width: 34em;
+}
+
+.wor-set_title {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.wor-set_desc {
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
+.wor-set_buy {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.wor-set_price {
+  font-size: 1.3rem;
+}
+
+/* --- Explore links + footer --- */
+.wor-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 2rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wor-links a {
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.wor-links a:hover {
+  opacity: 1;
+}
+
+.wor-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 76rem;
+  margin: clamp(3rem, 8vw, 6rem) auto 0;
+  padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 5vw, 4rem) clamp(3rem, 7vw, 5rem);
+  border-top: 1px solid var(--wor-line);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* --- Lightbox --- */
+.wor-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vmin;
+  background: rgb(6 6 7 / 0.94);
+  cursor: zoom-out;
+}
+
+.wor-lightbox img {
+  max-width: 92vw;
+  max-height: 92vh;
+  object-fit: contain;
+  box-shadow: 0 30px 80px rgb(0 0 0 / 0.5);
+}
+
+@media screen and (max-width: 900px) {
+  .wor-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .section_work--project .project_name-text {
   /* Reset the huge webflow h1/h2 base margins — this is now the page <h1>, styled as small mono. */
   margin: 0;
