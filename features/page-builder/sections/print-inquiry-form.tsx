@@ -47,7 +47,7 @@ export function PrintInquiryForm({ reference, sizes }: { reference: string; size
   if (!expanded) {
     return (
       <button type="button" className="psc-inquire-trigger" onClick={open} aria-expanded={false}>
-        Inquire about this print →
+        Enquire about this print →
       </button>
     );
   }

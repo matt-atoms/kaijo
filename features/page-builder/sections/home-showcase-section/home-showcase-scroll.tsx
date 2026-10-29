@@ -356,7 +356,7 @@ export function HomeShowcaseScroll({ slides }: { slides: HomeShowcaseSlide[] }) 
                     {tile.slide.year && <span className="home-showcase_year">{tile.slide.year}</span>}
                   </span>
                   <span className="home-showcase_go" aria-hidden="true">
-                    View project ↗
+                    View project →
                   </span>
                 </div>
               </Link>
