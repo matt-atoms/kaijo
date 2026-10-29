@@ -123,6 +123,14 @@ const sectionSettings = defineField({
       description: "Used internally to identify the section.",
     }),
     defineField({
+      type: "boolean",
+      name: "hidden",
+      title: "Hidden",
+      description:
+        "Hide this section from the published page. It stays in the CMS, so you can show it again later by unticking this.",
+      initialValue: false,
+    }),
+    defineField({
       type: "slug",
       name: "sectionHash",
       title: "Section Hash",

@@ -2400,6 +2400,39 @@ html.home-route .section_feature-links {
   object-fit: cover;
 }
 
+/* Quote-over-image: the image holds the quote, lifted above a bottom gradient scrim for legibility. */
+.workshop-intro_media {
+  position: relative;
+  display: block;
+  margin: 0;
+}
+
+.workshop-intro_media::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 62%;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.72), rgb(0 0 0 / 0.28) 55%, transparent);
+  pointer-events: none;
+}
+
+.workshop-intro_quote--overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  max-width: none;
+  margin: 0;
+  padding: 1.4em 1.4em 1.3em;
+  border-left: 0;
+  color: #fff;
+  font-size: 1.25em;
+}
+
+.workshop-intro_quote--overlay cite {
+  color: #fff;
+  opacity: 0.85;
+}
+
 .workshop-intro_quote {
   margin: 0;
   display: flex;
@@ -2451,6 +2484,12 @@ html.home-route .section_feature-links {
 
 .workshop-intro_body .w-richtext p:last-child {
   margin-bottom: 0;
+}
+
+/* The opening lede paragraph (third person) sits slightly bolder, separating it from the
+   first-person copy that follows. */
+.workshop-intro_body .w-richtext p:first-of-type {
+  font-weight: 500;
 }
 
 /* Section headers inside the intro copy ("Who's it for") — bold-caps mono, overriding the h2/h3

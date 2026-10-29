@@ -48,6 +48,7 @@ export type AppMedia = {
 
 export type SectionSettings = {
   sectionTitle?: string;
+  hidden?: boolean;
   sectionHash?: Slug;
 };
 
@@ -3174,7 +3175,7 @@ export type AgentMarkdownServeQueryResult =
 
 // Source: features/page-builder/page-sections.tsx
 // Variable: PageSectionsQ
-// Query: *[_id == $docId][0].pageBuilder.sectionsArray[]{  _key,  _type}
+// Query: *[_id == $docId][0].pageBuilder.sectionsArray[sectionSettings.hidden != true]{  _key,  _type}
 export type PageSectionsQResult = Array<
   | {
       _key: string;

@@ -3,7 +3,7 @@ import { defineQuery } from "next-sanity";
 import { sanityFetch } from "~/features/sanity/client";
 import type { PageSectionsQResult } from "~/sanity/types";
 
-const PageSectionsQ = defineQuery(`*[_id == $docId][0].pageBuilder.sectionsArray[]{
+const PageSectionsQ = defineQuery(`*[_id == $docId][0].pageBuilder.sectionsArray[sectionSettings.hidden != true]{
   _key,
   _type
 }`);

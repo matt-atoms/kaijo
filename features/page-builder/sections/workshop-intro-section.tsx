@@ -39,14 +39,24 @@ export async function WorkshopIntroSection({ docId, sectionKey }: { docId: strin
         </h2>
         <div className="workshop-intro_inner">
           <div className="workshop-intro_lede">
-            {content.image && (
-              <KaijoImage image={content.image} className="workshop-intro_image" sizes="(max-width: 991px) 100vw, 45vw" />
-            )}
-            {content.quote && (
-              <blockquote className="workshop-intro_quote">
-                <p>“{content.quote}”</p>
-                {content.quoteAttribution && <cite>— {content.quoteAttribution}</cite>}
-              </blockquote>
+            {content.image ? (
+              // Quote sits over the image, lifted above a darker gradient scrim for legibility.
+              <figure className="workshop-intro_media">
+                <KaijoImage image={content.image} className="workshop-intro_image" sizes="(max-width: 991px) 100vw, 45vw" />
+                {content.quote && (
+                  <blockquote className="workshop-intro_quote workshop-intro_quote--overlay">
+                    <p>“{content.quote}”</p>
+                    {content.quoteAttribution && <cite>— {content.quoteAttribution}</cite>}
+                  </blockquote>
+                )}
+              </figure>
+            ) : (
+              content.quote && (
+                <blockquote className="workshop-intro_quote">
+                  <p>“{content.quote}”</p>
+                  {content.quoteAttribution && <cite>— {content.quoteAttribution}</cite>}
+                </blockquote>
+              )
             )}
           </div>
           <div className="workshop-intro_body">

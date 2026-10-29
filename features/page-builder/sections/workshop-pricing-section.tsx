@@ -43,8 +43,12 @@ export async function WorkshopPricingSection({ docId, sectionKey }: { docId: str
   const purchasePrice = content.purchase?.price;
   const purchasable = Boolean(purchaseName) && typeof purchasePrice === "number";
 
+  // The booking cell (and the #enquire anchor) only show when this block is an enquiry/booking block;
+  // a second pricing block (e.g. "Coaching options") without a booking heading renders as tiers only.
+  const showBooking = Boolean(content.bookingHeading) || purchasable;
+
   return (
-    <div id="enquire" className="section_workshop-pricing section-padding-top">
+    <div id={showBooking ? "enquire" : undefined} className="section_workshop-pricing section-padding-top">
       <div className="container">
         <div className="workshop-pricing_head">
           {content.heading && (
@@ -62,16 +66,18 @@ export async function WorkshopPricingSection({ docId, sectionKey }: { docId: str
               {tier.description && <p className="workshop-pricing_tier-desc">{tier.description}</p>}
             </div>
           ))}
-          <div className="workshop-booking-cell">
-            {purchasable && purchasePrice != null && (
-              <WorkshopPurchase id={docId} name={purchaseName} session={content.lead} price={purchasePrice} />
-            )}
-            <WorkshopBookingForm
-              heading={purchasable ? "Prefer to ask first?" : content.bookingHeading}
-              intro={purchasable ? "Not ready to book — send a question and I'll reply by email." : content.bookingIntro}
-              options={options}
-            />
-          </div>
+          {showBooking && (
+            <div className="workshop-booking-cell">
+              {purchasable && purchasePrice != null && (
+                <WorkshopPurchase id={docId} name={purchaseName} session={content.lead} price={purchasePrice} />
+              )}
+              <WorkshopBookingForm
+                heading={purchasable ? "Prefer to ask first?" : content.bookingHeading}
+                intro={purchasable ? "Not ready to book — send a question and I'll reply by email." : content.bookingIntro}
+                options={options}
+              />
+            </div>
+          )}
         </div>
         {content.note && <p className="workshop-pricing_note">{content.note}</p>}
       </div>

@@ -272,6 +272,13 @@
           },
           "optional": true
         },
+        "hidden": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
         "sectionHash": {
           "type": "objectAttribute",
           "value": {
