@@ -21,19 +21,17 @@ function WorkCard({ work, onAdd }: { work: ReflectionWork; onAdd: (w: Reflection
         <img className="wor-card_photo" src={work.src} alt={`${work.cocktail} — ${work.place}`} loading="lazy" />
       </button>
       <figcaption className="wor-card_foot">
+        {/* Numbered at rest; on hover/active it cross-fades to the cocktail title. */}
         <span className="wor-card_meta">
-          <span className="wor-card_title">
-            <span className="wor-card_no">{work.id}</span>
-            {work.cocktail}
+          <span className="wor-card_rest">
+            <span className="wor-card_no">№ {work.id}</span>
+            <span className="wor-card_price">€{PRICE_SINGLE}</span>
           </span>
-          <span className="wor-card_place">{work.place}</span>
+          <span className="wor-card_title">{work.cocktail}</span>
         </span>
-        <span className="wor-card_buy">
-          <span className="wor-card_price">€{PRICE_SINGLE}</span>
-          <button type="button" className="wor-buy" onClick={() => onAdd(work)}>
-            Add to cart
-          </button>
-        </span>
+        <button type="button" className="wor-buy" onClick={() => onAdd(work)}>
+          Add to cart
+        </button>
       </figcaption>
     </figure>
   );
