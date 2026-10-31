@@ -1838,15 +1838,13 @@ html.home-route .section_feature-links {
 
 /* ==========================================================================
    Wonders of Reflection — hidden exhibition landing + print shop (/wonders-of-reflection).
-   Standalone dark page; its own palette, independent of the global theme tokens.
+   Theme-adaptive: uses the site's --page-bg / --page-ink so it toggles light/dark like the rest.
    ========================================================================== */
 .wor {
-  --wor-ink: #f3f2ef;
-  --wor-bg: #0b0b0c;
-  --wor-line: rgb(243 242 239 / 0.16);
+  --wor-line: color-mix(in srgb, var(--page-ink) 18%, transparent);
   min-height: 100dvh;
-  background: var(--wor-bg);
-  color: var(--wor-ink);
+  background: var(--page-bg);
+  color: var(--page-ink);
   font-size: 16px;
 }
 
@@ -1854,21 +1852,21 @@ html.home-route .section_feature-links {
   color: inherit;
 }
 
-.wor-mono,
 .wor-eyebrow,
 .wor-meta,
 .wor-h2,
+.wor-card_no,
 .wor-card_foot,
 .wor-set_price,
-.wor-voucher_toggle,
 .wor-buy,
 .wor-cta,
 .wor-links,
-.wor-foot {
+.wor-foot,
+.wor-aside {
   font-family: "Basier Circle Mono", Arial, sans-serif;
 }
 
-/* --- Hero --- */
+/* --- Hero: text + CTA sit over the image, so they stay light in both themes --- */
 .wor-hero {
   position: relative;
   display: flex;
@@ -1892,8 +1890,8 @@ html.home-route .section_feature-links {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgb(0 0 0 / 0.88) 0%, rgb(0 0 0 / 0.2) 50%, rgb(0 0 0 / 0.55) 100%);
   pointer-events: none;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.88) 0%, rgb(0 0 0 / 0.2) 50%, rgb(0 0 0 / 0.55) 100%);
 }
 
 .wor-hero_text {
@@ -1903,6 +1901,7 @@ html.home-route .section_feature-links {
   max-width: 76rem;
   margin: 0 auto;
   padding: 0 clamp(1.25rem, 5vw, 4rem) clamp(2.5rem, 6vw, 4.5rem);
+  color: #fff;
 }
 
 .wor-eyebrow {
@@ -1910,7 +1909,7 @@ html.home-route .section_feature-links {
   font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .wor-title {
@@ -1924,11 +1923,11 @@ html.home-route .section_feature-links {
 }
 
 .wor-lead {
-  max-width: 34em;
+  max-width: 36em;
   margin: 1.3rem 0 0;
   font-size: clamp(1rem, 1.5vw, 1.2rem);
   line-height: 1.5;
-  opacity: 0.92;
+  opacity: 0.95;
 }
 
 .wor-meta {
@@ -1936,28 +1935,30 @@ html.home-route .section_feature-links {
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
 .wor-cta {
   display: inline-block;
   margin-top: 1.8rem;
   padding: 0.8em 1.9em;
-  border: 1px solid var(--wor-ink);
-  background: var(--wor-ink);
-  color: var(--wor-bg);
+  border: 1px solid rgb(255 255 255 / 0.7);
+  background: transparent;
+  color: #fff;
   font-size: 0.78rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
   transition:
     background 0.2s ease,
-    color 0.2s ease;
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .wor-cta:hover {
-  background: transparent;
-  color: var(--wor-ink);
+  background: #fff;
+  color: #111;
+  border-color: #fff;
 }
 
 /* --- Sections --- */
@@ -2000,90 +2001,116 @@ html.home-route .section_feature-links {
   opacity: 0.85;
 }
 
-/* --- Voucher --- */
-.wor-voucher {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.6rem 1.4rem;
-  margin: 2rem 0;
-}
-
-.wor-voucher_toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  cursor: pointer;
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.wor-voucher_toggle input {
-  width: 1rem;
-  height: 1rem;
-  accent-color: var(--wor-ink);
-}
-
-.wor-voucher_note {
-  font-size: 0.85rem;
-  opacity: 0.6;
-}
-
 /* --- Works grid (gallery + shop) --- */
 .wor-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: clamp(1rem, 2vw, 1.75rem);
+  margin-top: 2.5rem;
 }
 
 .wor-card {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.85rem;
   margin: 0;
 }
 
-.wor-card_image {
+/* The frame is the "paper": a white sheet. The photo fills it at rest and, on hover (desktop) or
+   tap (.is-active, mobile), insets to reveal 16.7x25-on-20x30 white borders — a print mockup — while
+   the sheet lifts forward. */
+.wor-card_frame {
+  position: relative;
   display: block;
   width: 100%;
+  aspect-ratio: 2 / 3;
   padding: 0;
   border: 0;
-  background: #141416;
-  cursor: zoom-in;
+  background: #fff;
   overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 0.61, 0.19, 1),
+    box-shadow 0.45s ease;
 }
 
-.wor-card_image img {
-  display: block;
-  width: 100%;
-  height: 100%;
+.wor-card_photo {
+  position: absolute;
+  inset: 0;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: inset 0.45s cubic-bezier(0.22, 0.61, 0.19, 1);
 }
 
-.wor-card_image:hover img {
-  transform: scale(1.03);
+.wor-card_label {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 1rem;
+  text-align: center;
+  color: #fff;
+  background: radial-gradient(ellipse at center, rgb(0 0 0 / 0.5) 0%, rgb(0 0 0 / 0.12) 62%, transparent 100%);
+  transition: opacity 0.35s ease;
+}
+
+.wor-card_no {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  opacity: 0.85;
+}
+
+.wor-card_cocktail {
+  font-family: var(--font-wordmark);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.2vw, 1.7rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+
+.wor-card_place {
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+}
+
+.wor-card:hover .wor-card_frame,
+.wor-card.is-active .wor-card_frame {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 0.4);
+  z-index: 2;
+}
+
+.wor-card:hover .wor-card_photo,
+.wor-card.is-active .wor-card_photo {
+  inset: 8.33% 8.25%;
+}
+
+.wor-card:hover .wor-card_label,
+.wor-card.is-active .wor-card_label {
+  opacity: 0;
 }
 
 .wor-card_foot {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.wor-card_no {
-  opacity: 0.55;
+.wor-card_price {
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
 }
 
 .wor-buy {
-  padding: 0.65em 1em;
+  padding: 0.6em 1em;
   border: 1px solid var(--wor-line);
   background: transparent;
-  color: var(--wor-ink);
+  color: var(--page-ink);
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -2095,20 +2122,20 @@ html.home-route .section_feature-links {
 }
 
 .wor-buy:hover {
-  background: var(--wor-ink);
-  color: var(--wor-bg);
-  border-color: var(--wor-ink);
+  background: var(--page-ink);
+  color: var(--page-bg);
+  border-color: var(--page-ink);
 }
 
 .wor-buy--solid {
-  background: var(--wor-ink);
-  color: var(--wor-bg);
-  border-color: var(--wor-ink);
+  background: var(--page-ink);
+  color: var(--page-bg);
+  border-color: var(--page-ink);
 }
 
 .wor-buy--solid:hover {
   background: transparent;
-  color: var(--wor-ink);
+  color: var(--page-ink);
 }
 
 /* --- Complete set --- */
@@ -2150,6 +2177,25 @@ html.home-route .section_feature-links {
   font-size: 1.3rem;
 }
 
+/* --- Fine-art cross-link --- */
+.wor-aside {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+}
+
+.wor-aside a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--wor-line);
+  padding-bottom: 1px;
+  white-space: nowrap;
+}
+
+.wor-aside a:hover {
+  border-color: var(--page-ink);
+}
+
 /* --- Explore links + footer --- */
 .wor-links {
   display: flex;
@@ -2183,26 +2229,6 @@ html.home-route .section_feature-links {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   opacity: 0.7;
-}
-
-/* --- Lightbox --- */
-.wor-lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 9600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4vmin;
-  background: rgb(6 6 7 / 0.94);
-  cursor: zoom-out;
-}
-
-.wor-lightbox img {
-  max-width: 92vw;
-  max-height: 92vh;
-  object-fit: contain;
-  box-shadow: 0 30px 80px rgb(0 0 0 / 0.5);
 }
 
 @media screen and (max-width: 900px) {
