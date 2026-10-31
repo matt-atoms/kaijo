@@ -1856,7 +1856,7 @@ html.home-route .section_feature-links {
 .wor-meta,
 .wor-h2,
 .wor-card_no,
-.wor-card_foot,
+.wor-card_price,
 .wor-set_price,
 .wor-buy,
 .wor-cta,
@@ -2016,9 +2016,10 @@ html.home-route .section_feature-links {
   margin: 0;
 }
 
-/* The frame is the "paper": a white sheet. The photo fills it at rest and, on hover (desktop) or
-   tap (.is-active, mobile), insets to reveal 16.7x25-on-20x30 white borders — a print mockup — while
-   the sheet lifts forward. */
+/* The frame is the "paper": a white sheet filled edge-to-edge by the photo at rest — a clean 2:3
+   frame, no borders. On hover (desktop) or tap (.is-active, mobile) the photo scales down to the
+   exact 16.7x25-on-20x30 proportions — the whole image stays visible and white borders appear —
+   while the sheet lifts forward. */
 .wor-card_frame {
   position: relative;
   display: block;
@@ -2037,68 +2038,66 @@ html.home-route .section_feature-links {
 .wor-card_photo {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  transition: inset 0.45s cubic-bezier(0.22, 0.61, 0.19, 1);
-}
-
-.wor-card_label {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-  padding: 1rem;
-  text-align: center;
-  color: #fff;
-  background: radial-gradient(ellipse at center, rgb(0 0 0 / 0.5) 0%, rgb(0 0 0 / 0.12) 62%, transparent 100%);
-  transition: opacity 0.35s ease;
-}
-
-.wor-card_no {
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  opacity: 0.85;
-}
-
-.wor-card_cocktail {
-  font-family: var(--font-wordmark);
-  font-weight: 700;
-  font-size: clamp(1.1rem, 2.2vw, 1.7rem);
-  line-height: 1.02;
-  text-transform: uppercase;
-}
-
-.wor-card_place {
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-  opacity: 0.85;
+  transform-origin: center;
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.19, 1);
 }
 
 .wor-card:hover .wor-card_frame,
 .wor-card.is-active .wor-card_frame {
-  transform: translateY(-6px) scale(1.04);
-  box-shadow: 0 24px 60px rgb(0 0 0 / 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 22px 55px rgb(0 0 0 / 0.28);
   z-index: 2;
 }
 
+/* 16.7/20 = 0.835 across, 25/30 = 0.8333 down → the white borders the exhibition prints carry. */
 .wor-card:hover .wor-card_photo,
 .wor-card.is-active .wor-card_photo {
-  inset: 8.33% 8.25%;
+  transform: scale(0.835, 0.8333);
 }
 
-.wor-card:hover .wor-card_label,
-.wor-card.is-active .wor-card_label {
-  opacity: 0;
-}
-
+/* Number + cocktail name small, below the image. */
 .wor-card_foot {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.75rem;
+}
+
+.wor-card_meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.wor-card_title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.wor-card_no {
+  margin-right: 0.5em;
+  font-size: 0.82em;
+  font-weight: 400;
+  opacity: 0.5;
+}
+
+.wor-card_place {
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  opacity: 0.6;
+}
+
+.wor-card_buy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .wor-card_price {
